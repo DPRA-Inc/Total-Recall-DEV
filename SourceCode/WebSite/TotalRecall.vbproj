@@ -278,6 +278,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
+    <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
+    <Compile Include="API Services\ServiceWrapper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -296,6 +299,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="QuickHandler.ashx.vb">
+      <DependentUpon>QuickHandler.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +376,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="packages.config" />
+    <Content Include="QuickHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
