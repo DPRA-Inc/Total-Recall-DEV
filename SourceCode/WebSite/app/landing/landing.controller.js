@@ -3,27 +3,31 @@
 function landingcontroller($http) {
     var vm = this;
 
-    vm.PageTitle = 'Welcome to Shop Aware!';
-    vm.PeopleListing = {};
-       
-    vm.GetPersonList = function () {
+    vm.shoppingList = {};
+           
+    vm.AddToList = function (itemToAdd) {
 
-        var serviceUrl = 'QuickHandler.ashx?Command=person';
+        var item;
 
-        $http({
-            method: 'GET',
-            url: serviceUrl,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-        }).
-            success(function (data, status, headers, config) {
-                if (data == undefined || data == "null") return;
+        item.
+        vm.shoppingList.push(itemToAdd);
+
+        //var serviceUrl = 'QuickHandler.ashx?Command=person';
+
+        //$http({
+        //    method: 'GET',
+        //    url: serviceUrl,
+        //    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        //}).
+        //    success(function (data, status, headers, config) {
+        //        if (data == undefined || data == "null") return;
 
 
-                callback(data);
-            }).
-            error(function (data, status, headers, config) {
-                $log.warn(data, status, headers, config)
-            });
+        //        callback(data);
+        //    }).
+        //    error(function (data, status, headers, config) {
+        //        $log.warn(data, status, headers, config)
+        //    });
 
 	    //var data = landingservice.GetPeopleListing(function (value) {
 
