@@ -1,40 +1,36 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller)
 
-function landingcontroller($http) {
+function landingcontroller($http, landingservice) {
     var vm = this;
 
-    vm.shoppingList = {};
+    vm.textValue = null;
+    vm.shoppingList = [];
            
-    vm.AddToList = function (itemToAdd) {
+    vm.AddToList = function() {
+        var value = vm.textValue;
 
-        var item;
+        // Make the new item to be added to our list.
+        var item = [];
 
-        item.
-        vm.shoppingList.push(itemToAdd);
+        item.KeyWord = value;
+        item.Count = 0;
+        item.Type = "";
+        item.Description_1 = "";
+        item.Description_2 = "";
+        item.Regions = {};
+        item.IsNationWide = false;
 
-        //var serviceUrl = 'QuickHandler.ashx?Command=person';
+        vm.shoppingList.push(item);
 
-        //$http({
-        //    method: 'GET',
-        //    url: serviceUrl,
-        //    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-        //}).
-        //    success(function (data, status, headers, config) {
-        //        if (data == undefined || data == "null") return;
+        var data = landingservice.GetIssues(value,
+            function (result) {
 
 
-        //        callback(data);
-        //    }).
-        //    error(function (data, status, headers, config) {
-        //        $log.warn(data, status, headers, config)
-        //    });
 
-	    //var data = landingservice.GetPeopleListing(function (value) {
 
-	    //    this.PeopleListing = value;
-            
-	    //});
-	}
+            }
+        );
+    }
 
 };
 

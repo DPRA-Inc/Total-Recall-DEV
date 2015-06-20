@@ -13,9 +13,9 @@
                     <p></p>
 
                     <div class="input-group">
-                        <input type="text" placeholder="Search" class="input-lg form-control" />
+                        <input data-ng-model="vm.textValue" type="text" placeholder="Search" class="input-lg form-control" />
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-lg btn-primary">
+                            <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </span>
