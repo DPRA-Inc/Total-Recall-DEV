@@ -1,4 +1,5 @@
 ﻿
+
 #Region " Imports "
 
 Imports Newtonsoft.Json.Linq ' OpenSource
@@ -11,11 +12,208 @@ Public Class WrapperOpenFDA
 
     Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
 
+        Dim results As List(Of RecallSearchResultData)
+
+        'Dim results As New List(Of RecallSearchResultData)
+
+        '_fda = New OpenFDA
+        'Dim filterType As FDAFilterTypes = FDAFilterTypes.RecallReason
+        'Dim maxresultsize As Integer = 0
+
+        'Dim resultCount As Integer
+        'Dim RecallResultList As List(Of ResultRecall)
+        'For Each kwGroup In keyWordList
+
+        '    Dim filterList As New List(Of String)
+        '    Dim xx As String() = kwGroup.Split(",")
+        '    For Each itm In xx
+        '        filterList.Add(itm)
+        '    Next
+
+
+        '    ''Dim maxResultSize As Integer = 25
+        '    'Dim endPointType As OpenFDAApiEndPoints
+        '    'Dim apiUrl As String = String.Empty
+        '    'Dim searchResults As String
+        '    'Dim srMetaData As MetaResults
+
+        '    RecallResultList = New List(Of ResultRecall)
+        '    resultCount = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize, RecallResultList)
+        '    'Dim recallData As RecallSearchResultData = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize)
+
+        '    For Each itm As ResultRecall In RecallResultList
+
+        '        itm.KeyWord = kwGroup
+        '        'masterRecallResultList.Add(itm)
+        '        Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+        '                                                           .Type = itm.product_type,
+        '                                                           .Count = resultCount,
+        '                                                           .Description_1 = itm.product_description,
+        '                                                           .Description_2 = itm.reason_for_recall}
+
+        '        recallData_AddPropertyInfo(recallData, itm)
+
+        '        'If itm.distribution_pattern.ToLower.Contains("nationwide") Then
+        '        '    recallData.isNationWide = True
+        '        'End If
+
+        '        'If Not String.IsNullOrEmpty(itm.state) Then
+        '        '    recallData.Regions.Add(itm.state)
+        '        'End If
+
+        '        'Dim items As Array
+        '        'items = System.Enum.GetValues(GetType(enumStates))
+        '        ''Dim item As String
+        '        'Dim tmpState As enumStates
+        '        'For Each item In items
+
+        '        '    tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
+        '        '    If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
+        '        '        itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
+        '        '        recallData.isNationWide Then
+
+        '        '        recallData.Regions.Add(tmpState.ToString)
+
+        '        '    End If
+
+        '        'Next
+
+        '        results.Add(recallData)
+
+        '    Next
+
+        '    RecallResultList = New List(Of ResultRecall)
+        '    resultCount = ExecuteSearch(OpenFDAApiEndPoints.DrugRecall, filterType, filterList, maxresultsize, RecallResultList)
+
+        '    For Each itm As ResultRecall In RecallResultList
+
+        '        itm.KeyWord = kwGroup
+        '        'masterRecallResultList.Add(itm)
+        '        Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+        '                                                           .Type = itm.product_type,
+        '                                                           .Count = resultCount,
+        '                                                           .Description_1 = itm.product_description,
+        '                                                           .Description_2 = itm.reason_for_recall}
+
+        '        recallData_AddPropertyInfo(recallData, itm)
+
+        '        'If itm.distribution_pattern.ToLower.Contains("nationwide") Then
+        '        '    recallData.isNationWide = True
+        '        'End If
+
+        '        'If Not String.IsNullOrEmpty(itm.state) Then
+        '        '    recallData.Regions.Add(itm.state)
+        '        'End If
+
+        '        'Dim items As Array
+        '        'items = System.Enum.GetValues(GetType(enumStates))
+        '        ''Dim item As String
+        '        'Dim tmpState As enumStates
+        '        'For Each item In items
+
+        '        '    tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
+        '        '    If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
+        '        '        itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
+        '        '        recallData.isNationWide Then
+
+        '        '        recallData.Regions.Add(tmpState.ToString)
+
+        '        '    End If
+
+        '        'Next
+
+        '        results.Add(recallData)
+
+        '    Next
+
+        'Next
+
+        results = GetRecallInfo(keyWordList, 0)
+
+        Return results
+
+    End Function
+
+    Public Function GetRecallsDetail(ByVal keyWord As String) As List(Of RecallSearchResultData)
+
+        Dim results As List(Of RecallSearchResultData)
+
+        'Dim results As New List(Of RecallSearchResultData)
+
+        '_fda = New OpenFDA
+        'Dim filterType As FDAFilterTypes = FDAFilterTypes.RecallReason
+        'Dim maxresultsize As Integer = 100
+
+        'Dim resultCount As Integer
+        'Dim RecallResultList As List(Of ResultRecall)
+        'Dim keyWordList As New List(Of String)
+        'keyWordList.Add(keyWord)
+
+        'For Each kwGroup In keyWordList
+
+        '    Dim filterList As New List(Of String)
+        '    Dim xx As String() = kwGroup.Split(",")
+        '    For Each itm In xx
+        '        filterList.Add(itm)
+        '    Next
+
+        '    RecallResultList = New List(Of ResultRecall)
+        '    resultCount = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize, RecallResultList)
+        '    'Dim recallData As RecallSearchResultData = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize)
+
+        '    For Each itm As ResultRecall In RecallResultList
+
+        '        itm.KeyWord = kwGroup
+        '        'masterRecallResultList.Add(itm)
+        '        Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+        '                                                           .Type = itm.product_type,
+        '                                                           .Count = resultCount,
+        '                                                           .Description_1 = itm.product_description,
+        '                                                           .Description_2 = itm.reason_for_recall}
+
+        '        recallData_AddPropertyInfo(recallData, itm)
+
+
+        '        results.Add(recallData)
+
+        '    Next
+
+        '    RecallResultList = New List(Of ResultRecall)
+        '    resultCount = ExecuteSearch(OpenFDAApiEndPoints.DrugRecall, filterType, filterList, maxresultsize, RecallResultList)
+
+        '    For Each itm As ResultRecall In RecallResultList
+
+        '        itm.KeyWord = kwGroup
+        '        'masterRecallResultList.Add(itm)
+        '        Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+        '                                                           .Type = itm.product_type,
+        '                                                           .Count = resultCount,
+        '                                                           .Description_1 = itm.product_description,
+        '                                                           .Description_2 = itm.reason_for_recall}
+
+        '        recallData_AddPropertyInfo(recallData, itm)
+
+        '        results.Add(recallData)
+
+        '    Next
+
+        'Next
+
+        Dim keyWordList As New List(Of String)
+        keyWordList.Add(keyWord)
+
+        results = GetRecallInfo(keyWordList, 100)
+
+        Return results
+
+    End Function
+
+    Private Function GetRecallInfo(ByVal keyWordList As List(Of String), ByVal maxresultsize As Integer) As List(Of RecallSearchResultData)
+
         Dim results As New List(Of RecallSearchResultData)
 
         _fda = New OpenFDA
         Dim filterType As FDAFilterTypes = FDAFilterTypes.RecallReason
-        Dim maxresultsize As Integer = 0
 
         Dim resultCount As Integer
         Dim RecallResultList As List(Of ResultRecall)
@@ -27,109 +225,83 @@ Public Class WrapperOpenFDA
                 filterList.Add(itm)
             Next
 
+            Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
 
-            ''Dim maxResultSize As Integer = 25
-            'Dim endPointType As OpenFDAApiEndPoints
-            'Dim apiUrl As String = String.Empty
-            'Dim searchResults As String
-            'Dim srMetaData As MetaResults
+            For Each endPoint In endPointList
 
-            RecallResultList = New List(Of ResultRecall)
-            resultCount = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize, RecallResultList)
-            'Dim recallData As RecallSearchResultData = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize)
+                RecallResultList = New List(Of ResultRecall)
+                resultCount = ExecuteSearch(endPoint, filterType, filterList, maxresultsize, RecallResultList)
 
-            For Each itm As ResultRecall In RecallResultList
+                For Each itm As ResultRecall In RecallResultList
 
-                itm.KeyWord = kwGroup
-                'masterRecallResultList.Add(itm)
-                Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
-                                                                   .Type = itm.product_type,
-                                                                   .Count = resultCount,
-                                                                   .Description_1 = itm.product_description,
-                                                                   .Description_2 = itm.reason_for_recall}
+                    Dim itmClassification As enumClassification
+                    Select Case itm.classification
+                        Case "Class I"
+                            itmClassification = enumClassification.Class_I
+                        Case "Class II"
+                            itmClassification = enumClassification.Class_II
+                        Case "Class III"
+                            itmClassification = enumClassification.Class_III
+                    End Select
 
-                recallData_AddPropertyInfo(recallData, itm)
+                    itm.KeyWord = kwGroup
 
-                'If itm.distribution_pattern.ToLower.Contains("nationwide") Then
-                '    recallData.isNationWide = True
-                'End If
+                    Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+                                                                       .Type = itm.product_type,
+                                                                       .Count = resultCount,
+                                                                       .Classification = String.Format("{0}  -  {1}", itm.classification, GetEnumDescription(itmClassification)),
+                                                                       .Description_1 = itm.product_description,
+                                                                       .Description_2 = itm.reason_for_recall}
 
-                'If Not String.IsNullOrEmpty(itm.state) Then
-                '    recallData.Regions.Add(itm.state)
-                'End If
+                    recallData_AddPropertyInfo(recallData, itm)
 
-                'Dim items As Array
-                'items = System.Enum.GetValues(GetType(enumStates))
-                ''Dim item As String
-                'Dim tmpState As enumStates
-                'For Each item In items
+                    results.Add(recallData)
 
-                '    tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
-                '    If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
-                '        itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
-                '        recallData.isNationWide Then
-
-                '        recallData.Regions.Add(tmpState.ToString)
-
-                '    End If
-
-                'Next
-
-                results.Add(recallData)
+                Next
 
             Next
 
-            RecallResultList = New List(Of ResultRecall)
-            resultCount = ExecuteSearch(OpenFDAApiEndPoints.DrugRecall, filterType, filterList, maxresultsize, RecallResultList)
+            'RecallResultList = New List(Of ResultRecall)
+            'resultCount = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize, RecallResultList)
 
-            For Each itm As ResultRecall In RecallResultList
+            'For Each itm As ResultRecall In RecallResultList
 
-                itm.KeyWord = kwGroup
-                'masterRecallResultList.Add(itm)
-                Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
-                                                                   .Type = itm.product_type,
-                                                                   .Count = resultCount,
-                                                                   .Description_1 = itm.product_description,
-                                                                   .Description_2 = itm.reason_for_recall}
+            '    itm.KeyWord = kwGroup
+            '    Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+            '                                                       .Type = itm.product_type,
+            '                                                       .Count = resultCount,
+            '                                                       .Description_1 = itm.product_description,
+            '                                                       .Description_2 = itm.reason_for_recall}
 
-                recallData_AddPropertyInfo(recallData, itm)
+            '    recallData_AddPropertyInfo(recallData, itm)
 
-                'If itm.distribution_pattern.ToLower.Contains("nationwide") Then
-                '    recallData.isNationWide = True
-                'End If
+            '    results.Add(recallData)
 
-                'If Not String.IsNullOrEmpty(itm.state) Then
-                '    recallData.Regions.Add(itm.state)
-                'End If
+            'Next
 
-                'Dim items As Array
-                'items = System.Enum.GetValues(GetType(enumStates))
-                ''Dim item As String
-                'Dim tmpState As enumStates
-                'For Each item In items
+            'RecallResultList = New List(Of ResultRecall)
+            'resultCount = ExecuteSearch(OpenFDAApiEndPoints.DrugRecall, filterType, filterList, maxresultsize, RecallResultList)
 
-                '    tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
-                '    If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
-                '        itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
-                '        recallData.isNationWide Then
+            'For Each itm As ResultRecall In RecallResultList
 
-                '        recallData.Regions.Add(tmpState.ToString)
+            '    itm.KeyWord = kwGroup
+            '    Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+            '                                                       .Type = itm.product_type,
+            '                                                       .Count = resultCount,
+            '                                                       .Description_1 = itm.product_description,
+            '                                                       .Description_2 = itm.reason_for_recall}
 
-                '    End If
+            '    recallData_AddPropertyInfo(recallData, itm)
 
-                'Next
+            '    results.Add(recallData)
 
-                results.Add(recallData)
-
-            Next
+            'Next
 
         Next
 
         Return results
 
-
     End Function
-
 
     Private Function ExecuteSearch(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef RecallResultList As List(Of ResultRecall)) As Integer
 
@@ -286,8 +458,6 @@ Public Class OpenFDA
 
     End Function
 
-
-
     Function ExecuteExact(url As String) As String
 
         Dim result As String = String.Empty
@@ -349,7 +519,6 @@ Public Class OpenFDA
         Return result
     End Function
 
-
     Public Function Execute(ByVal url As String) As String
 
         Dim result As String = String.Empty
@@ -387,7 +556,8 @@ Public Class OpenFDA
             'o.GetValue("meta").dump()
             _meta = jo.GetValue("meta")
             Try
-                _results = jo.PropertyValues("results")
+                '_results = jo.PropertyValues("results")
+                _results = jo.GetValue("results")
             Catch ex As Exception
 
             End Try
@@ -450,42 +620,56 @@ Public Class OpenFDA
 
         Dim tmp As String = String.Empty
 
+        Select Case type
+            Case FDAFilterTypes.Date
 
-        If type = FDAFilterTypes.Date Then
 
-            If filters.Count = 1 Then
+                If filters.Count = 1 Then
 
-            Else
-                Dim minDate As Nullable(Of Date) = Nothing
-                Dim maxDate As Nullable(Of Date) = Nothing
+                    Dim tmpDate As DateTime = DateTime.ParseExact(filters(0), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+                    tmp = String.Format("{0:yyyyMMdd}", tmpDate) 'tmpDate.ToString("yyyyMMdd")
 
-                For Each itm In filters
-                    Dim itmDate As Date = DateTime.ParseExact(itm, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-                    If itmDate < minDate Or minDate Is Nothing Then
-                        minDate = itmDate
-                    End If
-                    If itmDate > maxDate Or maxDate Is Nothing Then
-                        maxDate = itmDate
-                    End If
-                Next
-                tmp = String.Format("{0}+TO+{1}", minDate.ToString("yyyyMMdd"), maxDate.ToString("yyyyMMdd"))
-            End If
+                Else
 
-        Else
+                    Dim minDate As Nullable(Of DateTime) = Nothing
+                    Dim maxDate As Nullable(Of DateTime) = Nothing
 
-            Dim tmpItm As String
-            For Each itm In filters
-                tmpItm = itm.Replace(" ", "+")
-                If tmpItm.Contains("+") Then
-                    tmpItm = """" & tmpItm & """"
+                    For Each itm In filters
+
+                        Dim itmDate As DateTime = DateTime.ParseExact(itm, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+                        If itmDate < minDate Or minDate Is Nothing Then
+                            minDate = itmDate
+                        End If
+                        If itmDate > maxDate Or maxDate Is Nothing Then
+                            maxDate = itmDate
+                        End If
+
+                    Next
+
+
+                    Dim dtMin As String = String.Format("{0:yyyyMMdd}", minDate) 'minDate.ToString("yyyyMMdd")
+                    Dim dtMax As String = String.Format("{0:yyyyMMdd}", maxDate) ' maxDate.ToString("yyyyMMdd")
+
+                    tmp = String.Format("[{0}+TO+{1}]", dtMin, dtMax)
+
                 End If
-                tmp += tmpItm & "+"
-            Next
-            If Not String.IsNullOrEmpty(tmp) Then
-                tmp = tmp.Substring(0, tmp.Length - 1)
-            End If
 
-        End If
+            Case Else
+
+                Dim tmpItm As String
+                For Each itm In filters
+                    tmpItm = itm.Replace(" ", "+")
+                    If tmpItm.Contains("+") Then
+                        tmpItm = """" & tmpItm & """"
+                    End If
+                    tmp += tmpItm & "+"
+                Next
+                If Not String.IsNullOrEmpty(tmp) Then
+                    tmp = tmp.Substring(0, tmp.Length - 1)
+                End If
+
+        End Select
+       
 
 
         Select Case endpointType
@@ -506,6 +690,13 @@ Public Class OpenFDA
                         param += "+"
                         param += "product_description:(" & tmp & ")"
                         'param += "code_info:" & tmp
+
+                    Case FDAFilterTypes.Date
+                        param += "("
+                        param += "report_date:" & tmp & ""
+                        param += "+"
+                        param += "recall_initiation_date:" & tmp & ""
+                        param += ")"
 
 
                 End Select
@@ -625,7 +816,7 @@ Public Enum enumStates
     <System.ComponentModel.Description("Indiana")>
     [IN]
     <System.ComponentModel.Description("Iowa")>
-    IA
+	IA
     <System.ComponentModel.Description("Kansas")>
     KS
     <System.ComponentModel.Description("Kentucky")>
@@ -830,6 +1021,19 @@ End Enum
 '5 = Unknown
 '6 = Not applicable
 
+Public Enum enumClassification
+
+    <System.ComponentModel.Description("Dangerous or defective products that predictably could cause serious health problems or death")>
+    <System.ComponentModel.DefaultValue("Class I")>
+    Class_I
+    <System.ComponentModel.Description("Products that might cause a temporary health problem, or pose only a slight threat of a serious nature")>
+    <System.ComponentModel.DefaultValue("Class II")>
+    Class_II
+    <System.ComponentModel.Description("Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws")>
+    <System.ComponentModel.DefaultValue("Class III")>
+    Class_III
+
+End Enum
 
 'The unit for drugcumulativedosagenumb
 Public Enum enumDrugCumulativeDosageUnit
@@ -1059,6 +1263,7 @@ Public Class RecallSearchResultData
     Public Property KeyWord As String
     Public Property Count As Integer
     Public Property Type As String
+    Public Property Classification As String
     Public Property Description_1 As String
     Public Property Description_2 As String
     Public Property Regions As New HashSet(Of String)
