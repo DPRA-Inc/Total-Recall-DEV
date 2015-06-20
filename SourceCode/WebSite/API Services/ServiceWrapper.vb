@@ -80,16 +80,9 @@ Public NotInheritable Class ServiceWrapper
 
         Dim response As String = String.Empty
 
-        'if (context.Request.QueryString["Method"].ToUpper() == "SENDMAILFORGOTPASSWORD")
-        '{
-        '    string user = context.Request.QueryString["user"];
-
-        '    return ForgotPassword(user).ToString();
-        '}
-
         Select Case context.Request.QueryString("Command").ToUpper()
-            Case "REGISTER"
-                'return ServiceWrapper.Register(requestBuffer);
+            Case "GETISSUES"
+                'return ServiceWrapper.GetIssues(requestBuffer);
 
                 'case "EXECUTEBUSINESS":
                 '    return ServiceWrapper.ExecuteBusiness(context, requestBuffer);
