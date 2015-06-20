@@ -1,6 +1,6 @@
 ﻿angular.module('TotalRecall').factory('landingservice', LandingService);
 
-function LandingService() {
+function LandingService($http) {
 
     var service = {
         GetIssues: GetIssues
@@ -17,18 +17,16 @@ function LandingService() {
         $http({
             method: 'POST',
             url: serviceUrl,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+            data: searchItem         
         }).
             success(function (data, status, headers, config) {
                 if (data == undefined || data == "null") return;
-
 
                 callback(data);
             }).
             error(function (data, status, headers, config) {
                 $log.warn(data, status, headers, config)
-            });
-
+            });                 
     }
 
         

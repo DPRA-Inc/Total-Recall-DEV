@@ -79,9 +79,17 @@ Public NotInheritable Class ServiceWrapper
     Private Shared Function HandlePOSTs(context As HttpContext, requestBuffer As Byte()) As String
 
         Dim response As String = String.Empty
+        Dim buffer As String
+
+        Using s As New System.IO.MemoryStream(requestBuffer)
+            Using sr As New System.IO.StreamReader(s)
+                buffer = sr.ReadToEnd
+            End Using
+        End Using
 
         Select Case context.Request.QueryString("Command").ToUpper()
             Case "GETISSUES"
+                ServiceWrapper.GetIssues(buffer)
                 'Testing
                 'return ServiceWrapper.GetIssues(requestBuffer);
 
@@ -98,6 +106,18 @@ Public NotInheritable Class ServiceWrapper
         Return Nothing
 
     End Function
+
+    Private Shared Function GetIssues(item As String) As List(Of RecallSearchResultData)
+
+        Dim wrapper As New WrapperOpenFDA
+
+        Dim result = wrapper.GetRecallsSummary(New List(Of String)({item}))
+
+
+        Return result
+
+    End Function
+
 
 End Class
 
