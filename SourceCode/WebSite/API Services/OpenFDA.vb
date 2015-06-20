@@ -5,6 +5,195 @@ Imports Newtonsoft.Json.Linq ' OpenSource
 
 #End Region
 
+Public Class WrapperOpenFDA
+
+    Private _fda As OpenFDA
+
+    Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
+
+        Dim results As New List(Of RecallSearchResultData)
+
+        _fda = New OpenFDA
+        Dim filterType As FDAFilterTypes = FDAFilterTypes.RecallReason
+        Dim maxresultsize As Integer = 0
+
+        Dim resultCount As Integer
+        Dim RecallResultList As List(Of ResultRecall)
+        For Each kwGroup In keyWordList
+
+            Dim filterList As New List(Of String)
+            Dim xx As String() = kwGroup.Split(",")
+            For Each itm In xx
+                filterList.Add(itm)
+            Next
+
+
+            ''Dim maxResultSize As Integer = 25
+            'Dim endPointType As OpenFDAApiEndPoints
+            'Dim apiUrl As String = String.Empty
+            'Dim searchResults As String
+            'Dim srMetaData As MetaResults
+
+            RecallResultList = New List(Of ResultRecall)
+            resultCount = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize, RecallResultList)
+            'Dim recallData As RecallSearchResultData = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize)
+
+            For Each itm As ResultRecall In RecallResultList
+
+                itm.KeyWord = kwGroup
+                'masterRecallResultList.Add(itm)
+                Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+                                                                   .Type = itm.product_type,
+                                                                   .Count = resultCount,
+                                                                   .Description_1 = itm.product_description,
+                                                                   .Description_2 = itm.reason_for_recall}
+
+                recallData_AddPropertyInfo(recallData, itm)
+
+                'If itm.distribution_pattern.ToLower.Contains("nationwide") Then
+                '    recallData.isNationWide = True
+                'End If
+
+                'If Not String.IsNullOrEmpty(itm.state) Then
+                '    recallData.Regions.Add(itm.state)
+                'End If
+
+                'Dim items As Array
+                'items = System.Enum.GetValues(GetType(enumStates))
+                ''Dim item As String
+                'Dim tmpState As enumStates
+                'For Each item In items
+
+                '    tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
+                '    If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
+                '        itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
+                '        recallData.isNationWide Then
+
+                '        recallData.Regions.Add(tmpState.ToString)
+
+                '    End If
+
+                'Next
+
+                results.Add(recallData)
+
+            Next
+
+            RecallResultList = New List(Of ResultRecall)
+            resultCount = ExecuteSearch(OpenFDAApiEndPoints.DrugRecall, filterType, filterList, maxresultsize, RecallResultList)
+
+            For Each itm As ResultRecall In RecallResultList
+
+                itm.KeyWord = kwGroup
+                'masterRecallResultList.Add(itm)
+                Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+                                                                   .Type = itm.product_type,
+                                                                   .Count = resultCount,
+                                                                   .Description_1 = itm.product_description,
+                                                                   .Description_2 = itm.reason_for_recall}
+
+                recallData_AddPropertyInfo(recallData, itm)
+
+                'If itm.distribution_pattern.ToLower.Contains("nationwide") Then
+                '    recallData.isNationWide = True
+                'End If
+
+                'If Not String.IsNullOrEmpty(itm.state) Then
+                '    recallData.Regions.Add(itm.state)
+                'End If
+
+                'Dim items As Array
+                'items = System.Enum.GetValues(GetType(enumStates))
+                ''Dim item As String
+                'Dim tmpState As enumStates
+                'For Each item In items
+
+                '    tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
+                '    If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
+                '        itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
+                '        recallData.isNationWide Then
+
+                '        recallData.Regions.Add(tmpState.ToString)
+
+                '    End If
+
+                'Next
+
+                results.Add(recallData)
+
+            Next
+
+        Next
+
+        Return results
+
+
+    End Function
+
+
+    Private Function ExecuteSearch(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef RecallResultList As List(Of ResultRecall)) As Integer
+
+        'Dim fda As New OpenFDA
+        Dim apiUrl As String = String.Empty
+        Dim searchResults As String
+        Dim srMetaData As MetaResults
+        Dim tmpRecallResultList As New List(Of ResultRecall)
+
+        _fda.AddSearchFilter(endPointType, filterType, filterList)
+        apiUrl = _fda.buildUrl(endPointType, maxresultsize)
+        searchResults = _fda.Execute(apiUrl)
+
+        srMetaData = MetaResults.cnvJsonData(searchResults)
+        If srMetaData.total > 0 Then
+
+            tmpRecallResultList = ResultRecall.cnvJsonDataToList(searchResults)
+            If tmpRecallResultList.Count > 0 Then
+
+                For Each itm As ResultRecall In tmpRecallResultList
+                    RecallResultList.Add(itm)
+                Next
+
+            End If
+
+        End If
+
+        'Return tmpRecallResultList.Count > 0
+        Return srMetaData.total
+
+    End Function
+
+    Private Sub recallData_AddPropertyInfo(ByRef recallData As RecallSearchResultData, ByVal itm As ResultRecall)
+
+        If itm.distribution_pattern.ToLower.Contains("nationwide") Then
+            recallData.isNationWide = True
+        End If
+
+        If Not String.IsNullOrEmpty(itm.state) Then
+            recallData.Regions.Add(itm.state)
+        End If
+
+        Dim items As Array
+        items = System.Enum.GetValues(GetType(enumStates))
+        'Dim item As String
+        Dim tmpState As enumStates
+        For Each item In items
+
+            tmpState = DirectCast([Enum].Parse(GetType(enumStates), item), enumStates)
+            If itm.distribution_pattern.Contains(tmpState.ToString) OrElse
+                itm.distribution_pattern.Contains(GetEnumDescription(tmpState)) OrElse
+                recallData.isNationWide Then
+
+                recallData.Regions.Add(tmpState.ToString)
+
+            End If
+
+        Next
+
+    End Sub
+
+End Class
+
+
 Public Class OpenFDA
 
     Public Shared HostURL As String = "https://api.fda.gov/"
@@ -17,7 +206,10 @@ Public Class OpenFDA
     Private _meta As JObject
     Private _results As JObject
 
+    Private _keyWords As New HashSet(Of String)
+
     Private endPointType As OpenFDAApiEndPoints
+
 
     Public Function GetOpenFDAEndPoint(endpoint As OpenFDAApiEndPoints) As String
 
@@ -32,7 +224,7 @@ Public Class OpenFDA
 
     End Function
 
-    Function buildUrl(ByVal endPointType As OpenFDAApiEndPoints, Optional ByVal limit As Integer = 0) As String
+    Function buildUrl(ByVal endPointType As OpenFDAApiEndPoints, Optional ByVal limit As Integer = 0, Optional ByVal ongoingOnly As Boolean = True) As String
 
         Dim uri As Uri
         Dim sb As New System.Text.StringBuilder
@@ -46,8 +238,14 @@ Public Class OpenFDA
         sb.Append(hostUrl)
 
         If Not String.IsNullOrEmpty(_search) Then
+
             sb.Append("&search=")
             sb.Append(_search)
+
+            If ongoingOnly Then
+                sb.Append("+AND+status=ongoing")
+            End If
+
         End If
 
         '' NOTE: if count is passed then Limit does not do anything
@@ -86,6 +284,69 @@ Public Class OpenFDA
 
         Return uri.ToString
 
+    End Function
+
+
+
+    Function ExecuteExact(url As String) As String
+
+        Dim result As String = String.Empty
+
+        Dim webClient = New Net.WebClient()
+
+        webClient.Headers.Clear()
+
+        Try
+            result = webClient.DownloadString(url)
+            _resultSet = result
+
+        Catch ex As Net.WebException
+            Debug.Write(ex.Message)
+
+            'ex.dump("Net.WebException")
+            'ex.Message.dump("")
+            ''ex.response.statusCode.dump()
+            ''ex.response.statusDescription.dump()
+            'webClient.dump()
+
+        Catch ex As Exception
+            Debug.Write(ex.Message)
+
+        End Try
+
+
+        If Not String.IsNullOrEmpty(result) Then
+
+            Dim jo As JObject = JObject.Parse(result)
+            'jo.dump()
+            'jo.Children.Count.dump("children")
+            'jo.GetValue("meddta").dump()
+            'o.GetValue("meta").dump()
+            _meta = jo.GetValue("meta")
+            Try
+                _results = jo.PropertyValues("results")
+            Catch ex As Exception
+
+            End Try
+            'jo.Property("meta").dump("prop")
+
+
+            'Dim tags As List(Of Newtonsoft.Json.Linq.JToken) = jo.SelectToken("meta").Children().ToList
+            ' tags.Dump()
+            ''for each i as object in jo.Properties("meta")
+            ''	i.tostring.dump()
+            ''next
+            ''for each i in jo.PropertyValues("meta")
+            ''	i.dump()
+            ''next
+            'jo("meta").dump("MetaData")
+            'jo("meta")("results")("skip").dump("skip")
+            'jo("meta")("results")("limit").dump("limit")
+            'jo("meta")("results")("total").dump("total")
+
+        End If
+
+        Return result
     End Function
 
 
@@ -158,11 +419,25 @@ Public Class OpenFDA
         _search = String.Empty
     End Sub
 
-    Public Function AddSearchFilter(ByVal type As FDAFilterTypes, ByVal filters As List(Of String)) As String
+    Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String)) As String
+
+        ' Add Filter to KeyWord List
+        Dim keyword As String = String.Empty
+        For Each itm In filters
+            keyword += itm.ToLower & ","
+        Next
+        If Not String.IsNullOrEmpty(keyword) Then
+            keyword = keyword.Substring(0, keyword.Length - 1)
+        End If
+
+        If Not _keyWords.Contains(keyword) Then
+            _keyWords.Add(keyword)
+        End If
+
 
         Dim param As String = String.Empty
 
-        Dim endpointType As OpenFDAApiEndPoints = OpenFDAApiEndPoints.FoodRecall
+        'Dim endpointType As OpenFDAApiEndPoints = OpenFDAApiEndPoints.FoodRecall
 
         ' desc     -- product_Description, Reason_For_Recall, Code_Info
         ' Location -- Distribution_Pattern & State & Country
@@ -175,16 +450,41 @@ Public Class OpenFDA
 
         Dim tmp As String = String.Empty
 
-        Dim tmpItm As String
-        For Each itm In filters
-            tmpItm = itm.Replace(" ", "+")
-            If tmpItm.Contains("+") Then
-                tmpItm = """" & tmpItm & """"
+
+        If type = FDAFilterTypes.Date Then
+
+            If filters.Count = 1 Then
+
+            Else
+                Dim minDate As Nullable(Of Date) = Nothing
+                Dim maxDate As Nullable(Of Date) = Nothing
+
+                For Each itm In filters
+                    Dim itmDate As Date = DateTime.ParseExact(itm, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+                    If itmDate < minDate Or minDate Is Nothing Then
+                        minDate = itmDate
+                    End If
+                    If itmDate > maxDate Or maxDate Is Nothing Then
+                        maxDate = itmDate
+                    End If
+                Next
+                tmp = String.Format("{0}+TO+{1}", minDate.ToString("yyyyMMdd"), maxDate.ToString("yyyyMMdd"))
             End If
-            tmp += tmpItm & "+"
-        Next
-        If String.IsNullOrEmpty(tmp) Then
-            tmp = tmp.Substring(0, tmp.Length - 1)
+
+        Else
+
+            Dim tmpItm As String
+            For Each itm In filters
+                tmpItm = itm.Replace(" ", "+")
+                If tmpItm.Contains("+") Then
+                    tmpItm = """" & tmpItm & """"
+                End If
+                tmp += tmpItm & "+"
+            Next
+            If Not String.IsNullOrEmpty(tmp) Then
+                tmp = tmp.Substring(0, tmp.Length - 1)
+            End If
+
         End If
 
 
@@ -289,9 +589,115 @@ Public Class OpenFDA
         Return metaData
 
     End Function
+
 End Class
 
 #Region " Enumerations "
+
+Public Enum enumStates
+
+    <System.ComponentModel.Description("Alabama")>
+    AL
+    <System.ComponentModel.Description("Alaska")>
+    AK
+    <System.ComponentModel.Description("Arizona")>
+    AZ
+    <System.ComponentModel.Description("Arkansas")>
+    AR
+    <System.ComponentModel.Description("California")>
+    CA
+    <System.ComponentModel.Description("Colorado")>
+    CO
+    <System.ComponentModel.Description("Connecticut")>
+    CT
+    <System.ComponentModel.Description("Delaware")>
+    DE
+    <System.ComponentModel.Description("Florida")>
+    FL
+    <System.ComponentModel.Description("Georgia")>
+    GA
+    <System.ComponentModel.Description("Hawaii")>
+    HI
+    <System.ComponentModel.Description("Idaho")>
+    ID
+    <System.ComponentModel.Description("Illinois")>
+    IL
+    <System.ComponentModel.Description("Indiana")>
+    [IN]
+    <System.ComponentModel.Description("Iowa")>
+    IA
+    <System.ComponentModel.Description("Kansas")>
+    KS
+    <System.ComponentModel.Description("Kentucky")>
+    KY
+    <System.ComponentModel.Description("Louisiana")>
+    LA
+    <System.ComponentModel.Description("Maine")>
+    [ME]
+    <System.ComponentModel.Description("Maryland")>
+    MD
+    <System.ComponentModel.Description("Massachusetts")>
+    MA
+    <System.ComponentModel.Description("Michigan")>
+    MI
+    <System.ComponentModel.Description("Minnesota")>
+    MN
+    <System.ComponentModel.Description("Mississippi")>
+    MS
+    <System.ComponentModel.Description("Missouri")>
+    MO
+    <System.ComponentModel.Description("Montana")>
+    MT
+    <System.ComponentModel.Description("Nebraska")>
+    NE
+    <System.ComponentModel.Description("Nevada")>
+    NV
+    <System.ComponentModel.Description("New Hampshire")>
+    NH
+    <System.ComponentModel.Description("New Jersey")>
+    NJ
+    <System.ComponentModel.Description("New Mexico")>
+    NM
+    <System.ComponentModel.Description("New York")>
+    NY
+    <System.ComponentModel.Description("North Carolina")>
+    NC
+    <System.ComponentModel.Description("North Dakota")>
+    ND
+    <System.ComponentModel.Description("Ohio")>
+    OH
+    <System.ComponentModel.Description("Oklahoma")>
+    OK
+    <System.ComponentModel.Description("Oregon")>
+    [OR]
+    <System.ComponentModel.Description("Pennsylvania")>
+    PA
+    <System.ComponentModel.Description("Rhode Island")>
+    RI
+    <System.ComponentModel.Description("South Carolina")>
+    SC
+    <System.ComponentModel.Description("South Dakota")>
+    SD
+    <System.ComponentModel.Description("Tennessee")>
+    TN
+    <System.ComponentModel.Description("Texas")>
+    TX
+    <System.ComponentModel.Description("Utah")>
+    UT
+    <System.ComponentModel.Description("Vermont")>
+    VT
+    <System.ComponentModel.Description("Virginia")>
+    VA
+    <System.ComponentModel.Description("Washington")>
+    WA
+    <System.ComponentModel.Description("West Virginia")>
+    WV
+    <System.ComponentModel.Description("Wisconsin")>
+    WI
+    <System.ComponentModel.Description("Wyoming")>
+    WY
+
+End Enum
 
 Public Enum FDAFilterTypes
 
@@ -329,11 +735,14 @@ Public Enum OpenFDAApiEndPoints
 End Enum
 
 'An encoded value for the category of individual submitting the report.
-Public Enum PrimarySourceQualification
+Public Enum enumPrimarySourceQualification
 
     Physician = 1
     Pharmacist = 2
+
+    <System.ComponentModel.Description("Other Health Professional")>
     OtherHealthProfessional = 3
+
     Lawyer = 4
 
     <System.ComponentModel.Description("Consumer or non-health professional")>
@@ -373,7 +782,14 @@ End Enum
 '804 = Day
 '805 = Hour
 
+'The sex of the patient.
+Public Enum enumPatientSex
 
+    Unknown = 0
+    Male = 1
+    Female = 2
+
+End Enum
 'patient.patientsex
 'string
 'The sex of the patient.
@@ -382,7 +798,28 @@ End Enum
 '2 = Female
 
 
+'Actions taken with the drug
+Public Enum enumActionDrug
 
+    <System.ComponentModel.Description("Drug Withdrawn")>
+        DrugWithdrawn = 1
+
+    <System.ComponentModel.Description("Dose Reduced")>
+        DoseReduced = 2
+
+    <System.ComponentModel.Description("Dose Increased")>
+        DoseIncreased = 3
+
+    <System.ComponentModel.Description("Dose not changed")>
+        DoseNotChanged = 4
+
+    <System.ComponentModel.Description("Unknown")>
+        Unknown = 5
+
+    <System.ComponentModel.Description("Not Applicable")>
+        NotApplicable = 6
+
+End Enum
 'patient.drug.actiondrug
 'string
 'Actions taken with the drug
@@ -394,6 +831,23 @@ End Enum
 '6 = Not applicable
 
 
+'The unit for drugcumulativedosagenumb
+Public Enum enumDrugCumulativeDosageUnit
+
+    <System.ComponentModel.Description("kg kilogram(s)")>
+        kilogram = 1
+
+    <System.ComponentModel.Description("G gram(s)")>
+        gram = 2
+
+    <System.ComponentModel.Description("Mg milligram(s)")>
+        milligram = 3
+
+    <System.ComponentModel.Description("μg microgram(s)")>
+        microgram = 4
+
+End Enum
+
 'patient.drug.drugcumulativedosageunit
 'string
 'The unit for drugcumulativedosagenumb
@@ -403,6 +857,24 @@ End Enum
 '004 = μg microgram(s)
 
 
+Public Enum enumDrugIntervalDosageDefinition
+
+    Year = 801
+    Month = 802
+    Week = 803
+    Day = 804
+    Hour = 805
+    Minute = 806
+    <System.ComponentModel.Description("Trimester")>
+    Trimester_807 = 807
+    Cyclical = 810
+    <System.ComponentModel.Description("Trimester")>
+    Trimester_811 = 811
+    <System.ComponentModel.Description("As Necessary")>
+        AsNecessary = 812
+    Total = 813
+
+End Enum
 'patient.drug.drugintervaldosagedefinition
 'string
 'The unit for the interval in patient.drug.drugintervaldosageunitnumb.
@@ -419,6 +891,14 @@ End Enum
 '813 = Total
 
 
+'Whether the reaction occured on a readministration of the drug.
+Public Enum enumDrugRecurreAdministration
+
+    Yes = 1
+    No = 2
+    Unknown = 3
+
+End Enum
 'patient.drug.drugrecurreadministration
 'string
 'Whether the reaction occured on a readministration of the drug.
@@ -506,6 +986,18 @@ End Enum
 '066 = Urethral
 '067 = Vaginal
 
+
+'Reported role of the drug in the adverse event.
+Public Enum enumDrugCharacterization
+
+    <System.ComponentModel.Description("Suspect drug")>
+        SuspectDrug = 1
+    <System.ComponentModel.Description("Concomitant drug")>
+        ConcomitantDrug = 2
+    <System.ComponentModel.Description("Interacting drug")>
+        InteractingDrug = 3
+
+End Enum
 'patient.drug.drugcharacterization
 'Reported role of the drug in the adverse event.
 '1 = Suspect drug
@@ -514,6 +1006,16 @@ End Enum
 
 
 
+Public Enum enumDrugTreatmentDurationUnit
+
+    Year = 801
+    Month = 802
+    Week = 803
+    Day = 804
+    Hour = 805
+    Minute = 806
+
+End Enum
 'patient.drug.drugtreatmentdurationunit
 'The unit for patient.drug.drugtreatmentduration
 '801 = Year
@@ -523,7 +1025,22 @@ End Enum
 '805 = Hour
 '806 = Minute
 
+Public Enum enumReactionOutcome
 
+    <System.ComponentModel.Description("Recovered/resolved")>
+    RecoveredResolved = 1
+    <System.ComponentModel.Description("Recovering/resolving")>
+    RecoveringResolving = 2
+    <System.ComponentModel.Description("Not recovered/not resolved")>
+    NotRecoveredNotResolved = 3
+    <System.ComponentModel.Description("Recovered/resolved with sequelae")>
+    RecoveredResolvedWithSequelae = 4
+    <System.ComponentModel.Description("Fatal")>
+    Fatal = 5
+    <System.ComponentModel.Description("Unknown")>
+    Unknown = 6
+
+End Enum
 'patient.reaction.reactionoutcome
 'Outcome of the reaction or event at the time of last observation.
 '1 = Recovered/resolved.
@@ -538,6 +1055,17 @@ End Enum
 
 #Region " Data Objects "
 
+Public Class RecallSearchResultData
+    Public Property KeyWord As String
+    Public Property Count As Integer
+    Public Property Type As String
+    Public Property Description_1 As String
+    Public Property Description_2 As String
+
+    Public Property Regions As New HashSet(Of String)
+    Public Property isNationWide As Boolean = False
+
+End Class
 
 Public Class MetaResults
 
@@ -547,9 +1075,17 @@ Public Class MetaResults
 
     Public Shared Function cnvJsonData(jsondata As String) As MetaResults
 
-        Dim jo As JObject = JObject.Parse(jsondata)
+        Dim result As MetaResults = Nothing
+        If String.IsNullOrEmpty(jsondata) Then
+            result = New MetaResults
+        Else
 
-        Return cnvJsonData(jo)
+            Dim jo As JObject = JObject.Parse(jsondata)
+            result = cnvJsonData(jo)
+
+        End If
+
+        Return result
 
     End Function
 
@@ -577,6 +1113,8 @@ End Class
 
 
 Public Class ResultRecall
+
+    Public Property KeyWord As String = String.Empty
 
     Public Property city As String
     Public Property classification As String
@@ -644,6 +1182,374 @@ End Class
 
 
 Public Class AdverseDrugEvent
+    Public Property companynumb As String
+    Public Property duplicate As String
+    Public Property fulfillexpeditecriteria As String
+    Public Property receivedateformat As String
+    Public Property receiver As Object
+    Public Property reportduplicate As Object
+    Public Property seriousnesslifethreatening As String
+    Public Property reporttype As String
+    Public Property receiptdateformat As String
+    Public Property receivedate As String
+    Public Property sender As Object
+    Public Property patient As PatientData
+    Public Property receiptdate As String
+    Public Property safetyreportversion As String
+    Public Property safetyreportid As String
+    Public Property primarysource As Object
+    Public Property primarysourcecountry As String
+    Public Property transmissiondate As String
+    Public Property transmissiondateformat As String
+    Public Property occurcountry As String
+
+
+    Public Property serious As String
+    '    serious
+    'string
+    '1 = The adverse event resulted in death, a life threatening condition, hospitalization, disability, congenital anomali, or other serious condition.
+    '2 = The adverse event did not result in any of the above.
+
+    Public Property seriousnessdeath As String ' boolean 1=True - death occured
+    'seriousnessdeath
+    'string
+    'This value is 1 if the adverse event resulted in death, and absent otherwise.
+
+    Public Property seriousnessother As String
+    'seriousnessother
+    'string
+    'This value is 1 if the adverse event resulted in some other serious condition, and absent otherwise.
+
+    Public Property seriousnesshospitalization As String
+    'seriousnesshospitalization
+    'string
+    'This value is 1 if the adverse event resulted in a hospitalization, and absent otherwise.
+
+
+    Public Property seriousnesscongenitalanomali As String
+    'seriousnesscongenitalanomali
+    'string
+    'This value is 1 if the adverse event resulted in a congenital anomali, and absent otherwise.
+
+    Public Property seriousnessdisabling As String
+    'seriousnessdisabling
+    'string
+    'This value is 1 if the adverse event resulted in disability, and absent otherwise.
+    Public Property seriousnseriousnesslifethreateningessother As String
+    'seriousnesslifethreatening
+    'string
+    'This value is 1 if the adverse event resulted in a life threatening condition, and absent otherwise.
+
+
+
+    Public Shared Function cnvJsonDataToList(jsondata As JObject) As List(Of AdverseDrugEvent)
+
+        Dim result As New List(Of AdverseDrugEvent)
+        For Each obj In jsondata.GetValue("results")
+            Dim tmp As New AdverseDrugEvent
+
+            tmp.companynumb = obj("companynumb")
+            tmp.safetyreportid = obj("safetyreportid")
+            tmp.fulfillexpeditecriteria = obj("fulfillexpeditecriteria")
+            tmp.receivedateformat = obj("receivedateformat")
+            tmp.receiptdateformat = obj("receiptdateformat")
+            tmp.primarysource = obj("primarysource")
+            tmp.receivedate = obj("receivedate")
+            tmp.occurcountry = obj("occurcountry")
+
+
+            tmp.serious = obj("serious")
+            tmp.seriousnesscongenitalanomali = obj("seriousnesscongenitalanomali")
+            tmp.seriousnessdeath = obj("seriousnessdeath")
+            tmp.seriousnessdisabling = obj("seriousnessdisabling")
+            tmp.seriousnesshospitalization = obj("seriousnesshospitalization")
+            tmp.seriousnesslifethreatening = obj("seriousnesslifethreatening")
+            tmp.seriousnessother = obj("seriousnessother")
+
+            tmp.safetyreportid = obj("safetyreportid")
+            tmp.safetyreportversion = obj("safetyreportversion")
+
+
+            tmp.patient = PatientData.convertJsonDate(obj("patient"))
+
+            result.Add(tmp)
+
+        Next
+
+        Return result
+
+    End Function
+
+    Public Shared Function cnvJsonDataToList(jsondata As String) As List(Of AdverseDrugEvent)
+
+        Dim jo As JObject = JObject.Parse(jsondata)
+
+        Return cnvJsonDataToList(jo)
+
+    End Function
+
+End Class
+
+Public Class PatientData
+
+
+    Public Property patientsex As enumPatientSex
+
+    'The age of the patient when the event first occured
+    Public Property patientonsetage As String
+
+    'The unit of measurement for the patient.patientonsetage field
+    Public Property patientonsetageunit As String
+
+    'The weight of the patient expressed in kilograms.
+    Public Property patientweight As String
+
+    'If the patient died, this section contains information about the death.
+    'Public Property patientdeath As List(Of String)
+    'patient.patientdeath
+    'patient.patientdeath.patientdeathdate
+    'patient.patientdeath.patientdeathdateformat
+
+    Public Property drug As List(Of DrugData)
+    Public Property reaction As List(Of ReactionData)
+
+    Shared Function convertJsonDate(jToken As JToken) As PatientData
+
+        Dim data As New PatientData
+
+        If IsJTokenValid(jToken) Then
+
+            data.patientonsetage = jToken("patientonsetage")
+            data.patientonsetageunit = jToken("patientonsetageunit")
+            '        patient.patientonsetageunit()
+            'string
+            'The unit of measurement for the patient.patientonsetage field.
+            '800 = Decade
+            '801 = Year
+            '802 = Month
+            '803 = Week
+            '804 = Day
+            '805 = Hour
+
+
+            Integer.TryParse(jToken("patientsex"), data.patientsex)
+
+            'data.patientsex = jToken("patientsex")
+            '        patient.patientsex()
+            'string
+            'The sex of the patient.
+            '0 = Unknown
+            '1 = Male
+            '2 = Female
+
+            data.patientweight = jToken("patientweight") ' KiloGrams
+            'data.patientdeath = jToken("patientdeath")
+            '        patient.patientdeath()
+            '        List()
+            'If the patient died, this section contains information about the death.
+            '            patient.patientdeath.patientdeathdate()
+            'string
+            'Date that the patient died.
+            '            patient.patientdeath.patientdeathdateformat()
+            'string
+            'Identifies the encoding format of the tient.patientdeath.patientdeathdate field. Always set to 102 (YYYYMMDD).
+
+            data.drug = DrugData.convertJsonData(jToken("drug"))
+            data.reaction = ReactionData.convertJsonData(jToken("reaction"))
+
+        End If
+
+        Return data
+
+    End Function
+
+
+End Class
+Public Class DrugData
+
+    Public Property ActionDrug As enumActionDrug
+    Public Property DrugCumulativeDosageNumb As String
+    Public Property DrugCumulativeDosageUnit As enumDrugCumulativeDosageUnit
+
+    Public Property DrugTreatmentDuration As String
+    Public Property DrugTreatmentDurationUnit As enumDrugTreatmentDurationUnit
+    Public Property DrugIntervalDosageUnitNumb As String
+
+
+    Public Property DrugIntervalDosageDefinition As enumDrugIntervalDosageDefinition
+
+    Public Property DrugRecurreAdministration As enumdrugrecurreadministration
+    Public Property DrugAdditional As String
+
+    Public Property DrugAuthorizationNumb As String
+
+    Public Property DrugDosageForm As String
+
+    Public Property DrugCharacterization As enumDrugCharacterization
+    Public Property Drugadministrationroute As String
+    Public Property DrugDosageText As String
+    Public Property DrugStartDate As String
+    Public Property DrugEndDate As String
+    Public Property DrugStartDateFormat As String
+    Public Property DrugEndDateFormat As String
+    'Public Property drugcharacterization As String
+    'Public Property medicinalproduct As String
+
+    Public Property DrugIndication As String
+    Public Property MedicinalProduct As String
+
+    Public Property OpenFDA As OpenFdaData
+
+    Shared Function convertJsonData(jToken As JToken) As List(Of DrugData)
+
+        Dim data As New List(Of DrugData)
+
+        If IsJTokenValid(jToken) Then
+
+            For Each drug In jToken
+
+                Dim obj As New DrugData
+
+                Integer.TryParse(drug("actiondrug"), obj.ActionDrug)
+                Integer.TryParse(drug("drugrecurreadministration"), obj.DrugRecurreAdministration)
+
+                obj.DrugIntervalDosageUnitNumb = drug("drugintervaldosageunitnumb")
+                Integer.TryParse(drug("drugintervaldosagedefinition"), obj.DrugIntervalDosageDefinition)
+
+                obj.DrugTreatmentDuration = drug("drugtreatmentduration")
+                Integer.TryParse(drug("drugtreatmentdurationunit"), obj.DrugTreatmentDurationUnit)
+
+                obj.DrugCumulativeDosageNumb = drug("drugcumulativedosagenumb")
+                Integer.TryParse(drug("drugcumulativedosageunit"), obj.DrugCumulativeDosageUnit)
+
+
+                Integer.TryParse(drug("drugcharacterization"), obj.DrugCharacterization)
+
+                obj.DrugAdditional = drug("drugadditional")
+
+
+
+                obj.DrugAuthorizationNumb = drug("drugauthorizationnumb")
+
+                obj.DrugIndication = drug("drugindication")
+                obj.MedicinalProduct = drug("medicinalproduct")
+                obj.Drugadministrationroute = drug("drugadministrationroute")
+                obj.DrugDosageText = drug("drugdosagetext")
+
+                obj.DrugStartDate = drug("drugstartdate")
+                obj.DrugStartDateFormat = drug("drugstartdateformat")
+                obj.DrugEndDate = drug("drugenddate")
+                obj.DrugEndDateFormat = drug("drugenddateformat")
+
+                obj.DrugDosageForm = drug("drugdosageform")
+
+
+                'obj.drugcharacterization = drug("drugcharacterization")
+                'obj.medicinalproduct = drug("medicinalproduct")
+
+                obj.OpenFDA = OpenFdaData.convertJsonData(drug("openfda"))
+
+                data.Add(obj)
+
+            Next
+
+        End If
+        Return data
+
+    End Function
+
+End Class
+
+Public Class OpenFdaData
+
+    Public Property application_number As New List(Of String)
+    Public Property brand_name As New List(Of String)
+    Public Property generic_name As New List(Of String)
+    Public Property manufacturer_name As New List(Of String)
+    Public Property nui As List(Of String)
+    Public Property package_ndc As List(Of String)
+    Public Property pharm_class_cs As List(Of String)
+    Public Property pharm_class_epc As List(Of String)
+    Public Property product_ndc As List(Of String)
+    Public Property product_type As List(Of String)
+    Public Property route As New List(Of String)
+    Public Property rxcui As List(Of String)
+    Public Property spl_id As List(Of String)
+    Public Property spl_set_id As List(Of String)
+    Public Property substance_name As List(Of String)
+    Public Property unii As List(Of String)
+
+
+    Shared Function convertJsonData(jToken As JToken) As OpenFdaData
+
+        Dim data As New OpenFdaData
+
+        If IsJTokenValid(jToken) Then
+
+            'For Each itm In jToken("application_number")
+            'Next
+            For Each itm In jToken("brand_name")
+                data.brand_name.Add(itm)
+            Next
+            For Each itm In jToken("generic_name")
+                data.generic_name.Add(itm)
+            Next
+            For Each itm In jToken("manufacturer_name")
+                data.manufacturer_name.Add(itm)
+            Next
+            For Each itm In jToken("route")
+                data.route.Add(itm)
+            Next
+
+            'For Each reaction In jToken
+
+            '    Dim obj As New ReactionData
+
+            '    obj.ReactionMedDrapt = reaction("reactionmeddrapt")
+            '    obj.ReactionMeddraversionPt = reaction("reactionmeddraversionpt")
+            '    Integer.TryParse(reaction("reactionoutcome"), obj.ReactionOutcome)
+
+            '    data.Add(obj)
+
+            'Next
+        End If
+
+        Return data
+
+    End Function
+
+
+End Class
+
+Public Class ReactionData
+
+    Public Property ReactionMedDrapt As String
+    Public Property ReactionMeddraversionPt As String
+    Public Property ReactionOutcome As enumReactionOutcome
+
+    Shared Function convertJsonData(jToken As JToken) As List(Of ReactionData)
+
+        Dim data As New List(Of ReactionData)
+
+        If IsJTokenValid(jToken) Then
+
+            For Each reaction In jToken
+
+                Dim obj As New ReactionData
+
+                obj.ReactionMedDrapt = reaction("reactionmeddrapt")
+                obj.ReactionMeddraversionPt = reaction("reactionmeddraversionpt")
+                Integer.TryParse(reaction("reactionoutcome"), obj.ReactionOutcome)
+
+                data.Add(obj)
+
+            Next
+
+        End If
+
+        Return data
+
+    End Function
 
 End Class
 
