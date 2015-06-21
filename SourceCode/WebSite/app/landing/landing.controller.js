@@ -15,19 +15,31 @@ function landingcontroller($http, landingservice) {
         item.KeyWord = value;
         item.Count = 0;
         item.Type = "";
-        item.Description_1 = "";
-        item.Description_2 = "";
-        item.Regions = {};
-        item.IsNationWide = false;
-
+        item.ServiceData = null;
+        item.IsLoading = true;
+        item.ShowCount = false;
         vm.shoppingList.push(item);
 
         var data = landingservice.GetIssues(value,
-            function (result) {
+            function (results) {
+                
+                // Search for the Keyword in our list.
+                vm.shoppingList.forEach(function (product) {
+
+                    results.forEach(function (result) {
+
+                        if (product.KeyWord === result.KeyWord) {
+                            product.Count = result.Count;
+                            product.ShowCount = true;
+
+                            // Here we need to identify the Alert Types.
 
 
-
-
+                            product.ServiceData = result;
+                            product.IsLoading = false;
+                        }
+                    });
+                });
             }
         );
     }

@@ -376,7 +376,7 @@ Public Class OpenFDA
 
     Private _resultSet As String
     Private _meta As JObject
-    Private _results As JObject
+    Private _results As JArray
 
     Private _keyWords As New HashSet(Of String)
 
@@ -669,7 +669,7 @@ Public Class OpenFDA
                 End If
 
         End Select
-       
+
 
 
         Select Case endpointType
@@ -816,7 +816,7 @@ Public Enum enumStates
     <System.ComponentModel.Description("Indiana")>
     [IN]
     <System.ComponentModel.Description("Iowa")>
-	IA
+    IA
     <System.ComponentModel.Description("Kansas")>
     KS
     <System.ComponentModel.Description("Kentucky")>

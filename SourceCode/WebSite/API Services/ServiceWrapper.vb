@@ -89,16 +89,8 @@ Public NotInheritable Class ServiceWrapper
 
         Select Case context.Request.QueryString("Command").ToUpper()
             Case "GETISSUES"
-                ServiceWrapper.GetIssues(buffer)
-                'Testing
-                'return ServiceWrapper.GetIssues(requestBuffer);
-
-                'case "EXECUTEBUSINESS":
-                '    return ServiceWrapper.ExecuteBusiness(context, requestBuffer);
-
-                'case "EXECUTEBUSINESSMULTIPART":
-                '    return ServiceWrapper.ExecuteBusinessMultipart(context, requestBuffer);
-
+                Dim value As String = JsonConvert.SerializeObject(ServiceWrapper.GetIssues(buffer))
+                Return value
 
 
         End Select
