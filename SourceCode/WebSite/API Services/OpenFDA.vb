@@ -415,7 +415,10 @@ Public Class OpenFDA
             sb.Append(_search)
 
             If ongoingOnly Then
-                sb.Append("+AND+status=ongoing")
+                If Not String.IsNullOrEmpty(_search) Then
+                    sb.Append("+AND")
+                End If
+                sb.Append("+status=ongoing")
             End If
 
         End If
@@ -446,8 +449,10 @@ Public Class OpenFDA
                 _limit = 100
             End If
 
-            sb.Append("&limit=")
-            sb.Append(_limit)
+            If _limit > 1 Then
+                sb.Append("&limit=")
+                sb.Append(_limit)
+            End If
 
         End If
 
@@ -589,6 +594,22 @@ Public Class OpenFDA
         _search = String.Empty
     End Sub
 
+    Sub SearchOnFieldByValue(searchField As String, searchFieldValue As String)
+
+        searchFieldValue = searchFieldValue.Replace(" ", "+")
+        If searchFieldValue.Contains("+") Then
+            searchFieldValue = """" & searchFieldValue & """"
+        End If
+
+        _search = String.Format("{0}:{1}", searchField, searchFieldValue)
+
+    End Sub
+
+    Sub SearchFieldExists(searchField As String)
+        SearchOnFieldByValue("_exists_", searchField)
+    End Sub
+
+
     Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String)) As String
 
         ' Add Filter to KeyWord List
@@ -669,7 +690,7 @@ Public Class OpenFDA
                 End If
 
         End Select
-       
+
 
 
         Select Case endpointType
@@ -781,6 +802,7 @@ Public Class OpenFDA
 
     End Function
 
+
 End Class
 
 #Region " Enumerations "
@@ -816,7 +838,7 @@ Public Enum enumStates
     <System.ComponentModel.Description("Indiana")>
     [IN]
     <System.ComponentModel.Description("Iowa")>
-	IA
+    IA
     <System.ComponentModel.Description("Kansas")>
     KS
     <System.ComponentModel.Description("Kentucky")>
@@ -903,23 +925,27 @@ Public Enum OpenFDAApiEndPoints
 
     '<System.ComponentModel.Description("drug/event")>
     '<System.ComponentModel.DisplayNameAttribute("drug/event")>
+    <System.ComponentModel.Description("Drug Event")>
     <System.ComponentModel.DefaultValueAttribute("drug/event")>
     DrugEvent
 
+    <System.ComponentModel.Description("Drug Label")>
     <System.ComponentModel.DefaultValueAttribute("drug/label")>
     DrugLabel
 
+    <System.ComponentModel.Description("Drug Recall")>
     <System.ComponentModel.DefaultValueAttribute("drug/enforcement")>
     DrugRecall
 
-
+    <System.ComponentModel.Description("Device Event")>
     <System.ComponentModel.DefaultValueAttribute("device/event")>
     DeviceEvent
 
+    <System.ComponentModel.Description("Device Recall")>
     <System.ComponentModel.DefaultValueAttribute("device/enforcement")>
     DeviceRecall
 
-
+    <System.ComponentModel.Description("Food Recall")>
     <System.ComponentModel.DefaultValueAttribute("food/enforcement")>
     FoodRecall
 
