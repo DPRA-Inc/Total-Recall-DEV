@@ -1,36 +1,48 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller)
 
-function landingcontroller($http) {
+function landingcontroller($http, landingservice) {
     var vm = this;
 
-    vm.PageTitle = 'Welcome to Shop Aware!';
-    vm.PeopleListing = {};
-       
-    vm.GetPersonList = function () {
+    vm.textValue = null;
+    vm.shoppingList = [];
+           
+    vm.AddToList = function() {
+        var value = vm.textValue;
 
-        var serviceUrl = 'QuickHandler.ashx?Command=person';
+        // Make the new item to be added to our list.
+        var item = [];
 
-        $http({
-            method: 'GET',
-            url: serviceUrl,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-        }).
-            success(function (data, status, headers, config) {
-                if (data == undefined || data == "null") return;
+        item.KeyWord = value;
+        item.Count = 0;
+        item.Type = "";
+        item.ServiceData = null;
+        item.IsLoading = true;
+        item.ShowCount = false;
+        vm.shoppingList.push(item);
+
+        var data = landingservice.GetIssues(value,
+            function (results) {
+                
+                // Search for the Keyword in our list.
+                vm.shoppingList.forEach(function (product) {
+
+                    results.forEach(function (result) {
+
+                        if (product.KeyWord === result.KeyWord) {
+                            product.Count = result.Count;
+                            product.ShowCount = true;
+
+                            // Here we need to identify the Alert Types.
 
 
-                callback(data);
-            }).
-            error(function (data, status, headers, config) {
-                $log.warn(data, status, headers, config)
-            });
-
-	    //var data = landingservice.GetPeopleListing(function (value) {
-
-	    //    this.PeopleListing = value;
-            
-	    //});
-	}
+                            product.ServiceData = result;
+                            product.IsLoading = false;
+                        }
+                    });
+                });
+            }
+        );
+    }
 
 };
 

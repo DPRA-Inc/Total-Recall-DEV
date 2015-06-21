@@ -79,24 +79,18 @@ Public NotInheritable Class ServiceWrapper
     Private Shared Function HandlePOSTs(context As HttpContext, requestBuffer As Byte()) As String
 
         Dim response As String = String.Empty
+        Dim buffer As String
 
-        'if (context.Request.QueryString["Method"].ToUpper() == "SENDMAILFORGOTPASSWORD")
-        '{
-        '    string user = context.Request.QueryString["user"];
-
-        '    return ForgotPassword(user).ToString();
-        '}
+        Using s As New System.IO.MemoryStream(requestBuffer)
+            Using sr As New System.IO.StreamReader(s)
+                buffer = sr.ReadToEnd
+            End Using
+        End Using
 
         Select Case context.Request.QueryString("Command").ToUpper()
-            Case "REGISTER"
-                'return ServiceWrapper.Register(requestBuffer);
-
-                'case "EXECUTEBUSINESS":
-                '    return ServiceWrapper.ExecuteBusiness(context, requestBuffer);
-
-                'case "EXECUTEBUSINESSMULTIPART":
-                '    return ServiceWrapper.ExecuteBusinessMultipart(context, requestBuffer);
-
+            Case "GETISSUES"
+                Dim value As String = JsonConvert.SerializeObject(ServiceWrapper.GetIssues(buffer))
+                Return value
 
 
         End Select
@@ -104,6 +98,18 @@ Public NotInheritable Class ServiceWrapper
         Return Nothing
 
     End Function
+
+    Private Shared Function GetIssues(item As String) As List(Of RecallSearchResultData)
+
+        Dim wrapper As New WrapperOpenFDA
+
+        Dim result = wrapper.GetRecallsSummary(New List(Of String)({item}))
+
+
+        Return result
+
+    End Function
+
 
 End Class
 

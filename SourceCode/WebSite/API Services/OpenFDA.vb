@@ -202,7 +202,7 @@ Public Class OpenFDA
 
     Private _resultSet As String
     Private _meta As JObject
-    Private _results As JObject
+    Private _results As JArray
 
     Private _keyWords As New HashSet(Of String)
 
@@ -1118,7 +1118,6 @@ Public Class RecallSearchResultData
     Public Property Classification As String
     Public Property Description_1 As String
     Public Property Description_2 As String
-
     Public Property Regions As New HashSet(Of String)
     Public Property isNationWide As Boolean = False
 
