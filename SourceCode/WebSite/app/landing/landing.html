@@ -1,9 +1,9 @@
-<div class="wrapper wrapper-content animated fadeInDown" data-ng-controller="landingcontroller as vm">
+<div class="wrapper wrapper-content" data-ng-controller="landingcontroller as vm">
     <div class="imgsection">
         <div class="imagesection" style="background-image: url('Assests/TritychHome.fw.png')">
             <div class="col-md-1"></div>
 
-            <div class="col-md-8 searchbox">
+            <div class="col-md-8 searchbox animated bounceIn">
 
                 <div class="col-md-6">
                     <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
@@ -42,33 +42,32 @@
     </div>
 
     <div class="col-md-6">
-        <div class="ibox float-e-margins">
+        <div class="ibox animated bounceInLeft">
+            <div class="ibox-content">
 
-            <div class="ibox-title">
-                <h2>Shopping List</h2>
-            </div>
+                <h1>Shopping List</h1>
 
-            <div class="ibox-content no-padding">
-                <ul class="list-group" data-ng-repeat="item in vm.shoppingList">
-                    <li class="list-group-item">
-                        <span class="badge badge-primary ng-hide" data-ng-show="item.IsLoading">
-                            <i class="fa fa-spinner fa-spin"></i>
-                        </span>
+                <ul class="sortable-list connectList agile-list" ng-model="todoList">
 
-                        <span class="badge ng-hide" data-ng-show="item.ShowCount">
-                            {{item.Count}}
-                        </span>
+                    <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
 
-                        <h3>                                                                                    
-                            {{item.KeyWord}}
-                        </h3>
+                        <div class="pull-right" ng-show="item.IsLoading">
+                            <h1><i class="fa fa-spinner fa-spin"></i></h1>
+                        </div>
+
+                        <div class="pull-right" ng-show="item.HasInfo">
+                            <div class="label-warning"><h3>{{item.RecallCount}}</h3></div>
+                        </div>
+
+                        <h3>{{item.KeyWord}}</h3>
+
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 animated bounceInRight">
         <h2>News Ticker Goes here!!</h2>
 
 

@@ -1,6 +1,6 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller)
 
-function landingcontroller($http, landingservice) {
+function landingcontroller($location, landingservice) {
     var vm = this;
 
     vm.textValue = null;
@@ -12,13 +12,22 @@ function landingcontroller($http, landingservice) {
         // Make the new item to be added to our list.
         var item = [];
 
-        item.KeyWord = value;
-        item.Count = 0;
-        item.Type = "";
-        item.ServiceData = null;
-        item.IsLoading = true;
-        item.ShowCount = false;
+        item.KeyWord = value; // Product name
+        item.ServiceData = null; // Holds the original Data from the Service.
+        item.Rank = 'success'; // How Bad is it, Color Code.
+        item.RecallCount = 0; // Number of Recalls.
+        item.EventCount = 0; // Amount of Events.
+        item.HealthCount = 0; // Amount of Health Events.
+        item.IsLoading = true; // Indicates we are waiting on Return From Service.
+        item.HasInfo = false; // Indicates there is some info to show.
+        item.HasRecalls = false;
         vm.shoppingList.push(item);
+
+        // Differnt Ranks.
+        //Rank: 'warning'
+        //Rank: 'success',
+        //Rank: 'info',
+        //Rank: 'danger',
 
         var data = landingservice.GetIssues(value,
             function (results) {
@@ -26,17 +35,28 @@ function landingcontroller($http, landingservice) {
                 // Search for the Keyword in our list.
                 vm.shoppingList.forEach(function (product) {
 
+                    if (results.length == 0) {
+                        product.IsLoading = false;
+                        product.HasInfo = false;
+                    }
+
                     results.forEach(function (result) {
 
-                        if (product.KeyWord === result.KeyWord) {
-                            product.Count = result.Count;
-                            product.ShowCount = true;
+                        if (product.KeyWord === result.KeyWord) {                            
+                            product.RecallCount = "R-" + result.Count;                        
 
-                            // Here we need to identify the Alert Types.
-
-
+                            if (result.Count > 10) item.Rank = 'info';
+                            if (result.Count > 15) item.Rank = 'warning';
+                            if (result.Count >= 20) item.Rank = 'danger';
+                            
+                            if (result.Count > 0) product.HasRecalls = true;                               
+                                
+                            // Here we need to identify the Alert Types.                            
                             product.ServiceData = result;
                             product.IsLoading = false;
+
+                            if (result.Count > 0) product.HasInfo = true;
+
                         }
                     });
                 });
@@ -44,29 +64,16 @@ function landingcontroller($http, landingservice) {
         );
     }
 
+    vm.ViewProductDetails = function (product) {
+
+        GlobalsModule.SelectedProduct = product;
+
+        $location.path('/index/product');
+
+
+    }
+
 };
 
 
 
-//function landingcontroller() {
-
-//	this.userName = 'UserName goes here';
-//	this.helloText = 'Landing Page';
-//	this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
-
-//	/**
-// * alerts - used for dynamic alerts in Notifications and Tooltips view
-// */
-//	this.alerts = [
-//        { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-//        { type: 'success', msg: 'Well done! You successfully read this important alert message.' },
-//        { type: 'info', msg: 'OK, You are done a great job man.' }
-//	];
-
-//	this.GetPersonList = function () {
-//		this.alerts.push({ msg: 'Another alert!' });
-//	};
-
-
-
-//};

@@ -1,4 +1,58 @@
+
 <div class="wrapper wrapper-content animated fadeInDown" data-ng-controller="productcontroller as vm">
+    <div class="row">
+        <div class="col-lg-9">            
+            <ol class="breadcrumb">
+                <li>
+                    <a href="landing.html">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Product Details</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>Search Results: {{vm.ProductName}}</h1>
+    </div>
+
+    <h1 data-ng-show="vm.Product.IsLoading" class="text-center m-b-lg m-t-lg">
+        <i class="fa fa-spinner fa-spin"></i>
+        Loading More Information...
+    </h1>
+
+    <div class="ibox float-e-margins animated bounceInLeft" ng-hide="vm.Product.HasRecalls">
+
+        <div class="ibox-title">
+            <h3><i>RECALLS</i></h3>
+        </div>
+
+        <div class="ibox-content no-padding">
+            <ul class="list-group" data-ng-repeat="item in vm.shoppingList">
+                <li class="list-group-item" data-ng-click="vm.ViewProductDetails(item)">
+                    <span class="badge badge-primary ng-hide" data-ng-show="item.IsLoading">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </span>
+
+                    <span class="badge ng-hide" data-ng-show="item.ShowCount">
+                        {{item.Count}}
+                    </span>
+
+                    <h3>
+                        {{item.KeyWord}}
+                    </h3>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6 animated bounceInRight">
+        <h2>News Ticker Goes here!!</h2>
+
+
+
+    </div>
 
 
 </div>
