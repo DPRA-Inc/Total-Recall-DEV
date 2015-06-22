@@ -1,4 +1,6 @@
-﻿Public Class SiteExceptionInfo
+﻿Imports TotalRecall.ENUMS
+
+Public Class SiteExceptionInfo
     Inherits WebBusinessInfo
 
     Public Property Type() As String
@@ -16,6 +18,7 @@
     End Sub
 
     Public Shared Function Fill(errorMessage As String, errorType As ErrorTypes) As SiteExceptionInfo
+
         Dim x As New SiteExceptionInfo()
 
         x.ErrorMessage = errorMessage
@@ -27,19 +30,7 @@
 
 End Class
 
-Public Class ValidationError
-    Inherits WebBusinessInfo
 
-    Public Property PropertyName() As String
-    Public Property [Error]() As String
 
-End Class
 
-Public Enum ErrorTypes As Byte
-    [Error] = 0
-    General = 1
-    Fatal = 2
-    Validation = 3
-    Warning = 4
-End Enum
 

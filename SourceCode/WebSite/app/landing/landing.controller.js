@@ -23,6 +23,7 @@ function landingcontroller($location, landingservice) {
         item.ClassIICount = 0;
         item.ClassIIICount = 0;
         item.EventCount = 0;
+
         vm.shoppingList.push(item);
 
         // Differnt Ranks.
