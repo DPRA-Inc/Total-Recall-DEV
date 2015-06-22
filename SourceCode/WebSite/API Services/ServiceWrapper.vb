@@ -103,10 +103,10 @@ Public NotInheritable Class ServiceWrapper
 
     Private Shared Function GetIssues(item As String) As SearchSummary
 
-        Dim wrapper As New WrapperOpenFDA
-        'Dim result = wrapper.GetSearchSummary(item)
-        'Return result
-        Return New SearchSummary()
+        Dim wrapper As New ShopAwareService
+        Dim result = wrapper.GetItemCountByRegion(item, "TN")
+
+        Return result
 
     End Function
 
