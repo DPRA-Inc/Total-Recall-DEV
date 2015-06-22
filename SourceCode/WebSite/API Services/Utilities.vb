@@ -1,37 +1,56 @@
 ﻿Module Utilities
 
-    Public Function AddBS(ByVal str As String) As String
+#Region " Public Methods "
 
-        If str.Length = 0 Then
-            'DO Nothing
-        ElseIf Not str.Substring(str.Length - 1, 1) = "\" Then
-            str += "\"
+    ''' <summary>
+    ''' Fixes String values
+    ''' </summary>
+    ''' <param name="path"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function AddBackSlash(ByVal path As String) As String
+
+        If Not String.IsNullOrEmpty(path) AndAlso Not path.Substring(path.Length - 1, 1) = "\" Then
+            path += "\"
         End If
 
-        Return str
+        Return path
 
     End Function
 
-    Public Function AddFS(ByVal str As String) As String
-
-        If str.Length = 0 Then
-            'DO Nothing
-        ElseIf Not str.Substring(str.Length - 1, 1) = "/" Then
-            str += "/"
+    ''' <summary>
+    ''' Fixes String values
+    ''' </summary>
+    ''' <param name="url"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function AddForwardSlash(ByVal url As String) As String
+        
+        If Not String.IsNullOrEmpty(url) AndAlso Not path.Substring(url.Length - 1, 1) = "\" Then
+            url += "/"
         End If
 
-        Return str
+        Return url
 
     End Function
 
+#End Region
 
+#Region " JSON Helper methods "
+
+    ''' <summary>
+    ''' Checks for token validity
+    ''' </summary>
+    ''' <param name="jToken"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function IsJTokenValid(ByVal jToken As Newtonsoft.Json.Linq.JToken) As Boolean
 
         Dim result As Boolean = False
 
         If jToken IsNot Nothing Then
 
-            If Not String.IsNullOrEmpty(jToken) Then
+            If Not String.IsNullOrEmpty(jToken.ToString) Then
                 result = True
             End If
 
@@ -42,16 +61,22 @@
     End Function
 
 
+#End Region
 
-    'DefaultProperty <DefaultProperty("MyProperty")> _ Public Class MyControl
-    '<DefaultValue(False)> _Public Property MyProperty() As Boolean '  https://msdn.microsoft.com/en-us/library/system.componentmodel.defaultvalueattribute%28v=vs.110%29.aspx
-    ' <Description("Demonstrates DisplayNameAttribute."), _ DisplayName("RenamedProperty")> _ Public ReadOnly Property MisnamedProperty() As Boolean  ' https://msdn.microsoft.com/en-us/library/system.componentmodel.displaynameattribute%28v=vs.110%29.aspx
+#Region " Enumeration Helper methods "
 
+    ''' <summary>
+    ''' Enumeration: Returns Description
+    ''' </summary>
+    ''' <param name="EnumConstant"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetEnumDescription(ByVal EnumConstant As [Enum]) As String
 
         Dim result As String = String.Empty
 
         Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
+
         If fi IsNot Nothing Then
 
             Dim aattr() As System.ComponentModel.DescriptionAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DescriptionAttribute), False), System.ComponentModel.DescriptionAttribute())
@@ -68,6 +93,12 @@
 
     End Function
 
+    ''' <summary>
+    ''' Enumeration: Returns Display Name
+    ''' </summary>
+    ''' <param name="EnumConstant"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetEnumDisplayName(ByVal EnumConstant As [Enum]) As String
 
         Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
@@ -81,6 +112,12 @@
 
     End Function
 
+    ''' <summary>
+    ''' Enumeration: Returns Default Value
+    ''' </summary>
+    ''' <param name="EnumConstant"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetEnumDefault(ByVal EnumConstant As [Enum]) As String
 
         Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
@@ -93,5 +130,7 @@
         End If
 
     End Function
+
+#End Region
 
 End Module
