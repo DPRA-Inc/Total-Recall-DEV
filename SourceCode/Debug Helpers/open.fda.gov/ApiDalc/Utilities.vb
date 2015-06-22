@@ -75,7 +75,7 @@
     ''' <param name="EnumConstant"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetEnumDescription(ByVal EnumConstant As [Enum]) As String
+    Public Function GetEnumDescription(ByVal enumConstant As [Enum]) As String
 
         Dim result As String = String.Empty
 
@@ -103,7 +103,7 @@
     ''' <param name="EnumConstant"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetEnumDisplayName(ByVal EnumConstant As [Enum]) As String
+    Public Function GetEnumDisplayName(ByVal enumConstant As [Enum]) As String
 
         Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
         Dim aattr() As System.ComponentModel.DisplayNameAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DisplayNameAttribute), False), System.ComponentModel.DisplayNameAttribute())
@@ -122,7 +122,7 @@
     ''' <param name="EnumConstant"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetEnumDefault(ByVal EnumConstant As [Enum]) As String
+    Public Function GetEnumDefaultValue(ByVal enumConstant As [Enum]) As String
 
         Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
         Dim aattr() As System.ComponentModel.DefaultValueAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DefaultValueAttribute), False), System.ComponentModel.DefaultValueAttribute())

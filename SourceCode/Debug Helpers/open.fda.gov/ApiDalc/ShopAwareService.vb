@@ -11,7 +11,7 @@ Public Class ShopAwareService
 #Region " Public Methods "
 
 
-    Public Function GetItemClassificationCountByRegion(ByVal keyWord As String, ByVal state As String) As List(Of SearchSummary)
+    Public Function GetItemCountByRegion(ByVal keyWord As String, ByVal state As String) As List(Of SearchSummary)
 
         Dim results As List(Of SearchSummary) = Nothing
 

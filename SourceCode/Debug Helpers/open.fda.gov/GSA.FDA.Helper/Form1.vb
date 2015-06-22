@@ -341,7 +341,7 @@ Public Class Form1
                 For Each item In items
 
                     tmpEnum = DirectCast([Enum].Parse(GetType(enumClassification), item), enumClassification)
-                    cbSerchTypeOptions.Items.Add(GetEnumDefault(tmpEnum))
+                    cbSerchTypeOptions.Items.Add(GetEnumDefaultValue(tmpEnum))
 
                     'If itm.distribution_pattern.Contains(tmpEnum.ToString) OrElse
                     '    itm.distribution_pattern.Contains(GetEnumDescription(tmpEnum)) OrElse
@@ -1188,6 +1188,25 @@ Public Class Form1
 
     Private Sub spMaxResultSize_2_ValueChanged(sender As Object, e As EventArgs) Handles spMaxResultSize_2.ValueChanged
         btSearch_2_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+
+        Dim wrapper As New ShopAwareService
+        'Dim ShoppingList As New List(Of String)
+
+        For Each item In lbShoppingList.Items
+
+            Dim results As List(Of SearchSummary) = wrapper.GetItemCountByRegion(item, "TN")
+            'ShoppingList.Add(item)
+        Next
+
+
+
+        'PopulateTree_ShoppingList_RecallSearch(results)
+
+
     End Sub
 
 #End Region

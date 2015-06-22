@@ -74,6 +74,7 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbEndPoints_2 = New System.Windows.Forms.ComboBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.spMaxResultSize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -276,6 +277,7 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button2)
         Me.TabPage2.Controls.Add(Me.Label6)
         Me.TabPage2.Controls.Add(Me.Label5)
         Me.TabPage2.Controls.Add(Me.Label4)
@@ -595,6 +597,16 @@ Partial Class Form1
         Me.cbEndPoints_2.Size = New System.Drawing.Size(121, 21)
         Me.cbEndPoints_2.TabIndex = 22
         '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.Location = New System.Drawing.Point(751, 74)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(118, 23)
+        Me.Button2.TabIndex = 40
+        Me.Button2.Text = "FrontPage"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -668,5 +680,6 @@ Partial Class Form1
     Friend WithEvents lbSpecifyRecordFetch As System.Windows.Forms.Label
     Friend WithEvents spSpecifyRecordFetch As System.Windows.Forms.NumericUpDown
     Friend WithEvents cknToLineFeed As System.Windows.Forms.CheckBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 
 End Class
