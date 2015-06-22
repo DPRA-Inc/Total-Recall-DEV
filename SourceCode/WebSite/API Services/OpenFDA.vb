@@ -376,7 +376,7 @@ Public Class OpenFDA
 
     Private _resultSet As String
     Private _meta As JObject
-    Private _results As JObject
+    Private _results As Object 'JObject
 
     Private _keyWords As New HashSet(Of String)
 
