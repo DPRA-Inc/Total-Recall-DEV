@@ -300,6 +300,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API Services\BusinessObjects\SearchResult.vb" />
+    <Compile Include="API Services\BusinessObjects\SearchSummary.vb" />
     <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
     <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
     <Compile Include="API Services\OpenFDA.vb" />
