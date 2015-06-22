@@ -713,7 +713,7 @@ Public Class Form1
 
     Private Sub btCheckShoppingListForRecalls_Click(sender As Object, e As EventArgs) Handles btCheckShoppingListForRecalls.Click
 
-        Dim wrapper As New WrapperOpenFDA
+        Dim wrapper As New ShopAwareService
         Dim ShoppingList As New List(Of String)
 
         For Each item In lbShoppingList.Items
@@ -781,7 +781,7 @@ Public Class Form1
 
     Private Sub btGetRecallDetails_Click(sender As Object, e As EventArgs) Handles btGetRecallDetails.Click
 
-        Dim wrapper As New WrapperOpenFDA
+        Dim wrapper As New ShopAwareService
 
         'Dim ShoppingList As New List(Of String)
 

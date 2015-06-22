@@ -107,7 +107,7 @@
     </Compile>
     <Compile Include="OpenFDA.vb" />
     <Compile Include="Utilities.vb" />
-    <Compile Include="WrapperOpenFDA.vb" />
+    <Compile Include="ShopAwareService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
