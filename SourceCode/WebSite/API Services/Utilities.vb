@@ -26,7 +26,7 @@
     ''' <remarks></remarks>
     Public Function AddForwardSlash(ByVal url As String) As String
         
-        If Not String.IsNullOrEmpty(url) AndAlso Not path.Substring(url.Length - 1, 1) = "\" Then
+        If Not String.IsNullOrEmpty(url) AndAlso Not url.Substring(url.Length - 1, 1) = "\" Then
             url += "/"
         End If
 
