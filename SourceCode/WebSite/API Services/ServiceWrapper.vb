@@ -99,13 +99,10 @@ Public NotInheritable Class ServiceWrapper
 
     End Function
 
-    Private Shared Function GetIssues(item As String) As List(Of RecallSearchResultData)
+    Private Shared Function GetIssues(item As String) As SearchSummary
 
         Dim wrapper As New WrapperOpenFDA
-
-        Dim result = wrapper.GetRecallsSummary(New List(Of String)({item}))
-
-
+        Dim result = wrapper.GetSearchSummary(item)
         Return result
 
     End Function
