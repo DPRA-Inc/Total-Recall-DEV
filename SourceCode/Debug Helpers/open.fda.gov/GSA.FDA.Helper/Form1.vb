@@ -655,8 +655,8 @@ Public Class Form1
 
                 'cNode.Nodes.Add("cnt: " & citm.Count)
                 cNode.Nodes.Add("Classification: " & citm.Classification)
-                cNode.Nodes.Add("Description_1: " & citm.Description_1)
-                cNode.Nodes.Add("Description_2: " & citm.Description_2)
+                cNode.Nodes.Add("Description_1: " & citm.ProductDescription)
+                cNode.Nodes.Add("Description_2: " & citm.ReasonForRecall)
                 cNode.Nodes.Add("Nationwide: " & citm.IsNationWide)
 
                 Dim stList As String = String.Empty
@@ -1199,7 +1199,7 @@ Public Class Form1
         Dim results As New List(Of SearchSummary)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchSummary As SearchSummary = wrapper.GetItemCountByRegion(item, "TN")
+            Dim mySearchSummary As SearchSummary = wrapper.GetSearchSummary(item, "TN")
             results.Add(mySearchSummary)
 
         Next

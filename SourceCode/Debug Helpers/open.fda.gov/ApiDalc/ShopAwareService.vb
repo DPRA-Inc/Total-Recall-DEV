@@ -11,7 +11,14 @@ Public Class ShopAwareService
 #Region " Public Methods "
 
 
-    Public Function GetItemCountByRegion(ByVal keyWord As String, ByVal state As String) As SearchSummary
+    ''' <summary>
+    ''' This Gets a count of Issues. The count is based on Classifications (Class I, Class II, Class III) and drug event
+    ''' </summary>
+    ''' <param name="keyWord"></param>
+    ''' <param name="state"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetSearchSummary(ByVal keyWord As String, ByVal state As String) As SearchSummary
 
         Dim results As SearchSummary = Nothing
 
@@ -21,7 +28,22 @@ Public Class ShopAwareService
 
     End Function
 
+    Public Function GetSearchResult() As SearchResult
 
+        Dim results As SearchResult = Nothing
+
+        'results = GetRecallInfoCounts(keyWord, state)
+
+        Return results
+
+    End Function
+
+    ''' <summary>
+    ''' This gets the Top recall result for the KeyWord
+    ''' </summary>
+    ''' <param name="keyWordList"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
 
         Dim results As List(Of RecallSearchResultData)
@@ -32,6 +54,12 @@ Public Class ShopAwareService
 
     End Function
 
+    ''' <summary>
+    ''' Returns the 
+    ''' </summary>
+    ''' <param name="keyWord"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetRecallsDetail(ByVal keyWord As String) As List(Of RecallSearchResultData)
 
         Dim results As List(Of RecallSearchResultData)
@@ -49,13 +77,16 @@ Public Class ShopAwareService
 
 #Region " Private Methods "
 
-
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
+
+        'TODO: Need to query Drug/Events
 
         _fda = New OpenFDA
 
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FDAFilterTypes
+        filterType = FDAFilterTypes.RecallReason
+
         Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
         Const maxresultsize As Integer = 0
 
@@ -91,16 +122,18 @@ Public Class ShopAwareService
 
         _fda = New OpenFDA
 
-        Dim filterType As FDAFilterTypes = FDAFilterTypes.RecallReason
+        Dim filterType As FDAFilterTypes
+        filterType = FDAFilterTypes.RecallReason
 
         Dim resultCount As Integer
-        Dim RecallResultList As List(Of ResultRecall)
+        Dim recallResultList As New List(Of ResultRecall)
 
         For Each kwGroup In keyWordList
 
             Dim filterList As New List(Of String)
-            Dim xx As String() = kwGroup.Split(",")
-            For Each itm In xx
+            Dim kwGroupArray As String() = kwGroup.Split(",")
+
+            For Each itm In kwGroupArray
                 filterList.Add(itm)
             Next
 
@@ -133,8 +166,8 @@ Public Class ShopAwareService
                                                                        .Type = itm.Product_Type,
                                                                        .Count = resultCount,
                                                                        .Classification = String.Format("{0}  -  {1}", itm.Classification, GetEnumDescription(itmClassification)),
-                                                                       .Description_1 = itm.Product_Description,
-                                                                       .Description_2 = itm.Reason_For_Recall}
+                                                                       .ProductDescription = itm.Product_Description,
+                                                                       .ReasonForRecall = itm.Reason_For_Recall}
 
                     RecallData_AddPropertyInfo(recallData, itm)
 
@@ -144,41 +177,6 @@ Public Class ShopAwareService
 
             Next
 
-            'RecallResultList = New List(Of ResultRecall)
-            'resultCount = ExecuteSearch(OpenFDAApiEndPoints.FoodRecall, filterType, filterList, maxresultsize, RecallResultList)
-
-            'For Each itm As ResultRecall In RecallResultList
-
-            '    itm.KeyWord = kwGroup
-            '    Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
-            '                                                       .Type = itm.product_type,
-            '                                                       .Count = resultCount,
-            '                                                       .Description_1 = itm.product_description,
-            '                                                       .Description_2 = itm.reason_for_recall}
-
-            '    recallData_AddPropertyInfo(recallData, itm)
-
-            '    results.Add(recallData)
-
-            'Next
-
-            'RecallResultList = New List(Of ResultRecall)
-            'resultCount = ExecuteSearch(OpenFDAApiEndPoints.DrugRecall, filterType, filterList, maxresultsize, RecallResultList)
-
-            'For Each itm As ResultRecall In RecallResultList
-
-            '    itm.KeyWord = kwGroup
-            '    Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
-            '                                                       .Type = itm.product_type,
-            '                                                       .Count = resultCount,
-            '                                                       .Description_1 = itm.product_description,
-            '                                                       .Description_2 = itm.reason_for_recall}
-
-            '    recallData_AddPropertyInfo(recallData, itm)
-
-            '    results.Add(recallData)
-
-            'Next
 
         Next
 
@@ -229,10 +227,10 @@ Public Class ShopAwareService
 
         Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
 
-
         _fda.AddSearchFilter(endPointType, filterType, filterList)
         apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
         apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
+
         Dim searchResults As String = _fda.Execute(apiUrl)
 
         If Not String.IsNullOrEmpty(searchResults) Then
@@ -240,14 +238,11 @@ Public Class ShopAwareService
             Dim jo As JObject = JObject.Parse(searchResults)
 
             Dim countResults As JArray = jo("results")
-            'Dim countResults_1 As JObject = jo("results")
 
             Dim termCountFound As Boolean = False
 
             Dim termCount As Integer
             For Each itm In countResults
-
-                ' termCount = Integer.TryParse(itm("count"), termCount)
 
                 termCount = itm("count")
 
@@ -275,11 +270,9 @@ Public Class ShopAwareService
 
         End If
 
-
         Return searchSummary
 
     End Function
-
 
     Private Sub RecallData_AddPropertyInfo(ByRef recallData As RecallSearchResultData, ByVal itm As ResultRecall)
 
@@ -295,7 +288,6 @@ Public Class ShopAwareService
 
         items = System.Enum.GetValues(GetType(EnumStates))
 
-        'Dim item As String
         Dim tmpState As EnumStates
 
         For Each item In items

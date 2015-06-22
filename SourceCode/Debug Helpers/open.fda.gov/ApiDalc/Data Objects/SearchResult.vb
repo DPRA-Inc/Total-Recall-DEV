@@ -1,4 +1,5 @@
-﻿Public Class SearchResult
+﻿
+Public Class SearchResult
 
     Public Property Keyword As String
 
