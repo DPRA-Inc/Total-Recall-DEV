@@ -1,14 +1,14 @@
 ﻿#Region " Imports "
 
-Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Newtonsoft.Json.Linq
+Imports NUnit.Framework
 
 #End Region
 
-<TestClass()>
+<TestFixture()>
 Public Class Utilities
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddBackSlash_PathIsNothing_ReturnNothing()
 
         Dim resultNullParameter = ApiDalc.Utilities.AddBackslash(Nothing)
@@ -17,7 +17,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddBackSlash_PathIsEmpty_ReturnBackslash()
 
         Dim resultEmptyParameter = ApiDalc.Utilities.AddBackslash(String.Empty)
@@ -26,7 +26,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddBackSlash_PathWithOutBackslash_ReturnPathWithBackslash()
 
         Dim exceptedNonNullValue = "c:\folder\"
@@ -36,7 +36,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddBackSlash_PathWithBackslash_ReturnPathWithBackslash()
 
         Dim exceptedNonNullValue = "c:\folder\"
@@ -46,7 +46,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddForwardSlash_PathIsNothing_ReturnNothing()
 
         Dim resultNullParameter = ApiDalc.Utilities.AddForwardSlash(Nothing)
@@ -55,7 +55,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddForwardSlash_PathIsEmpty_ReturnForwardslash()
 
         Dim resultEmptyParameter = ApiDalc.Utilities.AddForwardSlash(String.Empty)
@@ -64,7 +64,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddForwardkSlash_PathWithOutForwardslash_ReturnPathWithForwardslash()
 
         Dim exceptedValue = "http://localhost/"
@@ -74,7 +74,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub AddForwardSlash_PathWithForwardslash_ReturnPathWithBackslash()
 
         Dim exceptedValue = "http://localhost/"
@@ -84,7 +84,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub IsJTokenValid_TokenIsNothing_ReturnNotValid()
 
         Dim isValid = ApiDalc.Utilities.IsJTokenValid(Nothing)
@@ -93,7 +93,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub IsJTokenValid_TokenIsValid_ReturnIsValid()
 
         Dim json = "{""color"":""yellow"",""size"":""medium""}"
@@ -104,7 +104,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub GetEnumDescription_EnumIsNothing_ReturnEmptyString()
 
         Dim result = ApiDalc.GetEnumDescription(Nothing)
@@ -113,7 +113,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub GetEnumDescription_EnumWithDescription_ReturnDescription()
 
         Dim expectedValue = "Dangerous or defective products that predictably could cause serious health problems or death"
@@ -123,7 +123,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub GetEnumDescription_EnumWithOutDescription_ReturnEnumName()
 
         Dim expectedValue = "Class2"
@@ -133,7 +133,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub GetEnumDefaultValue_EnumIsNothing_ReturnEmptyString()
 
         Dim result = ApiDalc.GetEnumDefaultValue(Nothing)
@@ -142,7 +142,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub GetEnumDefaultValue_EnumWithDefaultValue_ReturnCorrectValue()
 
         Dim expectedValue = "1"
@@ -152,7 +152,7 @@ Public Class Utilities
 
     End Sub
 
-    <TestMethod()>
+    <TestCase()>
     Public Sub GetEnumDefaultValue_EnumWithOutDefaultValue_TheEnumEndIsReturned()
 
         Dim expectedValue = "Class2"
