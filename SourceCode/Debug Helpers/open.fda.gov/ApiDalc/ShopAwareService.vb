@@ -11,9 +11,9 @@ Public Class ShopAwareService
 #Region " Public Methods "
 
 
-    Public Function GetItemCountByRegion(ByVal keyWord As String, ByVal state As String) As List(Of SearchSummary)
+    Public Function GetItemCountByRegion(ByVal keyWord As String, ByVal state As String) As SearchSummary
 
-        Dim results As List(Of SearchSummary) = Nothing
+        Dim results As SearchSummary = Nothing
 
         results = GetRecallInfoCounts(keyWord, state)
 
@@ -50,27 +50,38 @@ Public Class ShopAwareService
 #Region " Private Methods "
 
 
-    Private Function GetRecallInfoCounts(keyWord As String, state As String) As List(Of SearchSummary)
+    Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
         _fda = New OpenFDA
 
+        Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FDAFilterTypes
-        Dim searchSummaryList As New List(Of SearchSummary)
         Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
         Const maxresultsize As Integer = 0
 
         Dim filterList As New List(Of String)
         filterList.Add(keyWord)
 
-        Dim recallResultList As List(Of ResultRecall)
+        'Dim recallResultList As List(Of ResultRecall)
+
         For Each endPoint In endPointList
 
             'recallResultList = New List(Of ResultRecall)
-            Dim resultCount As Integer = ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, "classification", recallResultList)
-            Debug.Write("Test")
+            Dim endpointSearchSummary As SearchSummary = ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, "classification")
+
+            If endpointSearchSummary IsNot Nothing Then
+                
+                searchSummaryForKeyword.ClassICount += endpointSearchSummary.ClassICount
+                searchSummaryForKeyword.ClassIICount += endpointSearchSummary.ClassIICount
+                searchSummaryForKeyword.ClassIIICount += endpointSearchSummary.ClassIIICount
+
+                ' searchSummaryForKeyword.EventCount += endpointSearchSummary.EventCount
+
+            End If
+
         Next
 
-        Return searchSummaryList
+        Return searchSummaryForKeyword
 
     End Function
 
@@ -208,7 +219,7 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Function ExecuteSearchCounts(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal cntField As String, ByRef recallResultList As List(Of ResultRecall)) As Integer
+    Private Function ExecuteSearchCounts(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal cntField As String) As SearchSummary
 
         'Dim fda As New OpenFDA
         Dim apiUrl As String = String.Empty
@@ -216,39 +227,56 @@ Public Class ShopAwareService
         Dim srMetaData As MetaResults
         Dim tmpRecallResultList As New List(Of ResultRecall)
 
+        Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
+
+
         _fda.AddSearchFilter(endPointType, filterType, filterList)
         apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
         apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
         Dim searchResults As String = _fda.Execute(apiUrl)
 
-        Dim jo As JObject = JObject.Parse(searchResults)
+        If Not String.IsNullOrEmpty(searchResults) Then
 
-        Dim countResults As JArray = jo("results")
-        'Dim countResults_1 As JObject = jo("results")
+            Dim jo As JObject = JObject.Parse(searchResults)
 
-        For Each itm In countResults
+            Dim countResults As JArray = jo("results")
+            'Dim countResults_1 As JObject = jo("results")
 
-            Debug.Write(itm)
-        Next
+            Dim termCountFound As Boolean = False
 
-        'srMetaData = MetaResults.cnvJsonData(searchResults)
-        'If srMetaData.total > 0 Then
+            Dim termCount As Integer
+            For Each itm In countResults
 
-        '    tmpRecallResultList = ResultRecall.cnvJsonDataToList(searchResults)
-        '    If tmpRecallResultList.Count > 0 Then
+                ' termCount = Integer.TryParse(itm("count"), termCount)
 
-        '        For Each itm As ResultRecall In tmpRecallResultList
-        '            recallResultList.Add(itm)
-        '        Next
+                termCount = itm("count")
 
-        '    End If
+                Select Case itm("term")
+                    Case "Class I"
+                        searchSummary.ClassICount = termCount
+                        termCountFound = True
 
-        'End If
+                    Case "Class II"
+                        searchSummary.ClassIICount = termCount
+                        termCountFound = True
 
-        ''Return tmpRecallResultList.Count > 0
-        'Return srMetaData.total
 
-        Return 0
+                    Case "Class III"
+                        searchSummary.ClassIIICount = termCount
+                        termCountFound = True
+
+                End Select
+
+            Next
+
+            If Not termCountFound Then
+                searchSummary = Nothing
+            End If
+
+        End If
+
+
+        Return searchSummary
 
     End Function
 

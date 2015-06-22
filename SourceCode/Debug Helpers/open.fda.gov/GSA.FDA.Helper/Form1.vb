@@ -1196,14 +1196,25 @@ Public Class Form1
         Dim wrapper As New ShopAwareService
         'Dim ShoppingList As New List(Of String)
 
+        Dim results As New List(Of SearchSummary)
         For Each item In lbShoppingList.Items
 
-            Dim results As List(Of SearchSummary) = wrapper.GetItemCountByRegion(item, "TN")
-            'ShoppingList.Add(item)
+            Dim mySearchSummary As SearchSummary = wrapper.GetItemCountByRegion(item, "TN")
+            results.Add(mySearchSummary)
+
         Next
 
+        Debug.WriteLine("")
 
+        TreeView2.Nodes.Clear()
+        For Each itm In results
+            Dim parentNode As TreeNode = TreeView2.Nodes.Add(itm.Keyword)
+            parentNode.Nodes.Add(String.Format("Class I: ({0})", itm.ClassICount))
+            parentNode.Nodes.Add(String.Format("Class II: ({0})", itm.ClassIICount))
+            parentNode.Nodes.Add(String.Format("Class III: ({0})", itm.ClassIIICount))
 
+            parentNode.Nodes.Add(String.Format("Event: ({0})", itm.EventCount))
+        Next
         'PopulateTree_ShoppingList_RecallSearch(results)
 
 
