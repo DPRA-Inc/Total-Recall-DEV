@@ -88,7 +88,6 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="API Services\Enumerations\Reference.txt" />
     <Content Include="app\globals\dataService.js" />
     <Content Include="app\globals\globals.js" />
     <Content Include="app\landing\landing.controller.js" />
@@ -301,35 +300,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API Services\BusinessObjects\AdverseDrugEvent.vb" />
-    <Compile Include="API Services\BusinessObjects\DrugData.vb" />
-    <Compile Include="API Services\BusinessObjects\MetaResults.vb" />
-    <Compile Include="API Services\BusinessObjects\OpenFdaData.vb" />
-    <Compile Include="API Services\BusinessObjects\PatientData.vb" />
-    <Compile Include="API Services\BusinessObjects\ReactionData.vb" />
-    <Compile Include="API Services\BusinessObjects\RecallSearchResultData.vb" />
-    <Compile Include="API Services\BusinessObjects\ResultRecall.vb" />
-    <Compile Include="API Services\BusinessObjects\SearchResult.vb" />
-    <Compile Include="API Services\BusinessObjects\SearchSummary.vb" />
     <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
     <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
-    <Compile Include="API Services\Enumerations\EnumActionDrug.vb" />
-    <Compile Include="API Services\Enumerations\EnumClassification.vb" />
-    <Compile Include="API Services\Enumerations\EnumDrugCharacterization.vb" />
-    <Compile Include="API Services\Enumerations\EnumDrugCumulativeDosageUnit.vb" />
-    <Compile Include="API Services\Enumerations\EnumDrugIntervalDosageDefinition.vb" />
-    <Compile Include="API Services\Enumerations\EnumDrugRecurreAdministration.vb" />
-    <Compile Include="API Services\Enumerations\EnumDrugTreatmentDurationUnit.vb" />
-    <Compile Include="API Services\Enumerations\EnumPatientSex.vb" />
-    <Compile Include="API Services\Enumerations\EnumPrimarySourceQualification.vb" />
-    <Compile Include="API Services\Enumerations\EnumReactionOutcome.vb" />
-    <Compile Include="API Services\Enumerations\EnumStates.vb" />
-    <Compile Include="API Services\Enumerations\FDAFilterTypes.vb" />
-    <Compile Include="API Services\Enumerations\OpenFDAApiEndPoints.vb" />
-    <Compile Include="API Services\OpenFDA.vb" />
     <Compile Include="API Services\ServiceWrapper.vb" />
-    <Compile Include="API Services\Utilities.vb" />
-    <Compile Include="API Services\WrapperOpenFDA.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -432,6 +405,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Debug Helpers\open.fda.gov\ApiDalc\ApiDalc.vbproj">
+      <Project>{8c8e24de-d766-4abe-a176-c282040e3898}</Project>
+      <Name>ApiDalc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

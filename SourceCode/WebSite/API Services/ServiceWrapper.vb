@@ -1,5 +1,7 @@
-﻿Imports Newtonsoft.Json
+﻿
+Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
+Imports ApiDalc
 
 Public NotInheritable Class ServiceWrapper
 
@@ -102,8 +104,9 @@ Public NotInheritable Class ServiceWrapper
     Private Shared Function GetIssues(item As String) As SearchSummary
 
         Dim wrapper As New WrapperOpenFDA
-        Dim result = wrapper.GetSearchSummary(item)
-        Return result
+        'Dim result = wrapper.GetSearchSummary(item)
+        'Return result
+        Return New SearchSummary()
 
     End Function
 
