@@ -20,7 +20,7 @@ function ProductService($http) {
             data: searchItem         
         }).
             success(function (data, status, headers, config) {
-                if (data == undefined || data == "null") return;
+                if (!angular.isObject(data)) return;
 
                 callback(data);
             }).
