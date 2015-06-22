@@ -25,13 +25,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         })
         .state('index.landing', {
             url: "/landing",
-            templateUrl: "APP/Landing/landing.html",
+            templateUrl: "app/Landing/landing.html",
             data: { pageTitle: 'Landing Page' }
         })
-        .state('index.people', {
-            url: "/people",
-            templateUrl: "app/people/people.html",
-            data: { pageTitle: 'Poeple view' }
+        .state('index.product', {
+            url: "/product",
+            templateUrl: "app/product/product.html",
+            data: { pageTitle: 'product view' }
         })
 }
 angular

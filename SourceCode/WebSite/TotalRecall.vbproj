@@ -96,6 +96,9 @@
     <Content Include="app\notify\notify.controller.js" />
     <Content Include="app\notify\notify.html" />
     <Content Include="app\notify\notify.service.js" />
+    <Content Include="app\product\product.controller.js" />
+    <Content Include="app\product\product.html" />
+    <Content Include="app\product\product.service.js" />
     <Content Include="Assests\18369589-Supermarket-Shelves-Full-With-Different-Natural-Fruit-Juice-Bottles-And-Cartons-Stock-Photo.jpg" />
     <Content Include="Assests\FootCast.jpg" />
     <Content Include="Assests\frozenFood.jpg" />
