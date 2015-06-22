@@ -12,15 +12,17 @@ function landingcontroller($location, landingservice) {
         // Make the new item to be added to our list.
         var item = [];
 
-        item.KeyWord = value; // Product name
-        item.ServiceData = null; // Holds the original Data from the Service.
+        item.Keyword = value; // Product name        
         item.Rank = 'success'; // How Bad is it, Color Code.
-        item.RecallCount = 0; // Number of Recalls.
-        item.EventCount = 0; // Amount of Events.
-        item.HealthCount = 0; // Amount of Health Events.
         item.IsLoading = true; // Indicates we are waiting on Return From Service.
-        item.HasInfo = false; // Indicates there is some info to show.
-        item.HasRecalls = false;
+        item.HasClassI = false; // Indicates there is some Class I Data to show.
+        item.HasClassII = false;
+        item.HasClassIII = false;
+        item.HasEvents = false;
+        item.ClassICount = 0; 
+        item.ClassIICount = 0;
+        item.ClassIIICount = 0;
+        item.EventCount = 0;
         vm.shoppingList.push(item);
 
         // Differnt Ranks.
@@ -30,35 +32,41 @@ function landingcontroller($location, landingservice) {
         //Rank: 'danger',
 
         var data = landingservice.GetIssues(value,
-            function (results) {
+            function (result) {
                 
                 // Search for the Keyword in our list.
                 vm.shoppingList.forEach(function (product) {
 
-                    if (results.length == 0) {
-                        product.IsLoading = false;
-                        product.HasInfo = false;
-                    }
+                    product.Rank = "";
 
-                    results.forEach(function (result) {
+                    if (product.Keyword == result.Keyword) {
 
-                        if (product.KeyWord === result.KeyWord) {                            
-                            product.RecallCount = "R-" + result.Count;                        
-
-                            if (result.Count > 10) item.Rank = 'info';
-                            if (result.Count > 15) item.Rank = 'warning';
-                            if (result.Count >= 20) item.Rank = 'danger';
-                            
-                            if (result.Count > 0) product.HasRecalls = true;                               
-                                
-                            // Here we need to identify the Alert Types.                            
-                            product.ServiceData = result;
-                            product.IsLoading = false;
-
-                            if (result.Count > 0) product.HasInfo = true;
-
+                        if (result.EventCount > 0) {
+                            product.HasEvents = true;
+                            product.EventCount = result.EventCount;
+                            product.Rank = "success";
                         }
-                    });
+                            
+                        if (result.ClassIIICount > 0) {
+                            product.HasClassIII = true;
+                            product.ClassIIICount = result.ClassIIICount;
+                            product.Rank = "info";
+                        }
+
+                        if (result.ClassIICount > 0) {
+                            product.HasClassII = true;
+                            product.ClassIICount = result.ClassIICount;
+                            product.Rank = "warning";
+                        }
+
+                        if (result.ClassICount > 0) {
+                            product.HasClassI = true;
+                            product.ClassICount = result.ClassICount;
+                            product.Rank = "danger";
+                        }
+
+                        product.IsLoading = false;
+                    }                                     
                 });
             }
         );
@@ -67,9 +75,7 @@ function landingcontroller($location, landingservice) {
     vm.ViewProductDetails = function (product) {
 
         GlobalsModule.SelectedProduct = product;
-
         $location.path('/index/product');
-
 
     }
 

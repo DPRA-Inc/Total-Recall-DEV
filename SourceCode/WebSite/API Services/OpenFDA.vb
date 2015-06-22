@@ -10,6 +10,20 @@ Public Class WrapperOpenFDA
 
     Private _fda As OpenFDA
 
+    Public Function GetSearchSummary(item As String) As SearchSummary
+
+        Dim summary As New SearchSummary
+
+        summary.ClassICount = 1
+        summary.ClassIICount = 12
+        summary.ClassIIICount = 23
+        summary.EventCount = 4
+        summary.Keyword = item
+
+        Return summary
+
+    End Function
+
     Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
 
         Dim results As List(Of RecallSearchResultData)
