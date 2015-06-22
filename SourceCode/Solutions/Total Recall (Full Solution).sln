@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TotalRecall", "..\WebSite\T
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ApiDalc", "..\Debug Helpers\open.fda.gov\ApiDalc\ApiDalc.vbproj", "{8C8E24DE-D766-4ABE-A176-C282040E3898}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TotalRecall.Tests", "..\TotalRecall.Tests\TotalRecall.Tests.vbproj", "{68A6CCB3-9A7F-4ABD-B35C-A85EE63751BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8C8E24DE-D766-4ABE-A176-C282040E3898}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C8E24DE-D766-4ABE-A176-C282040E3898}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C8E24DE-D766-4ABE-A176-C282040E3898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A6CCB3-9A7F-4ABD-B35C-A85EE63751BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A6CCB3-9A7F-4ABD-B35C-A85EE63751BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A6CCB3-9A7F-4ABD-B35C-A85EE63751BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A6CCB3-9A7F-4ABD-B35C-A85EE63751BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

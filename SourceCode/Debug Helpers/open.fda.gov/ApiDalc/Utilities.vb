@@ -1,4 +1,4 @@
-﻿Module Utilities
+﻿Public Module Utilities
 
 #Region " Public Methods "
 
@@ -8,11 +8,9 @@
     ''' <param name="str"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function AddBS(ByVal str As String) As String
+    Public Function AddBackslash(ByVal str As String) As String
 
-        If str.Length = 0 Then
-            'DO Nothing
-        ElseIf Not str.Substring(str.Length - 1, 1) = "\" Then
+        If str IsNot Nothing AndAlso Not str.EndsWith("\") Then
             str += "\"
         End If
 
@@ -26,11 +24,9 @@
     ''' <param name="str"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function AddFS(ByVal str As String) As String
+    Public Function AddForwardSlash(ByVal str As String) As String
 
-        If str.Length = 0 Then
-            'DO Nothing
-        ElseIf Not str.Substring(str.Length - 1, 1) = "/" Then
+        If str IsNot Nothing AndAlso Not str.EndsWith("/") Then
             str += "/"
         End If
 
@@ -79,16 +75,20 @@
 
         Dim result As String = String.Empty
 
-        Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
+        If enumConstant IsNot Nothing Then
 
-        If fi IsNot Nothing Then
+            Dim fi As System.Reflection.FieldInfo = enumConstant.GetType().GetField(enumConstant.ToString())
 
-            Dim aattr() As System.ComponentModel.DescriptionAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DescriptionAttribute), False), System.ComponentModel.DescriptionAttribute())
+            If fi IsNot Nothing Then
 
-            If aattr.Length > 0 Then
-                result = aattr(0).Description
-            Else
-                result = (EnumConstant.ToString())
+                Dim aattr() As System.ComponentModel.DescriptionAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DescriptionAttribute), False), System.ComponentModel.DescriptionAttribute())
+
+                If aattr.Length > 0 Then
+                    result = aattr(0).Description
+                Else
+                    result = enumConstant.ToString()
+                End If
+
             End If
 
         End If
@@ -105,14 +105,22 @@
     ''' <remarks></remarks>
     Public Function GetEnumDisplayName(ByVal enumConstant As [Enum]) As String
 
-        Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
-        Dim aattr() As System.ComponentModel.DisplayNameAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DisplayNameAttribute), False), System.ComponentModel.DisplayNameAttribute())
+        Dim displayName = String.Empty
 
-        If aattr.Length > 0 Then
-            Return aattr(0).DisplayName
-        Else
-            Return EnumConstant.ToString()
+        If Not enumConstant Is Nothing Then
+
+            Dim fi As System.Reflection.FieldInfo = enumConstant.GetType().GetField(enumConstant.ToString())
+            Dim aattr() As System.ComponentModel.DisplayNameAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DisplayNameAttribute), False), System.ComponentModel.DisplayNameAttribute())
+
+            If aattr.Length > 0 Then
+                displayName = aattr(0).DisplayName
+            Else
+                displayName = enumConstant.ToString()
+            End If
+
         End If
+
+        Return displayName
 
     End Function
 
@@ -124,14 +132,22 @@
     ''' <remarks></remarks>
     Public Function GetEnumDefaultValue(ByVal enumConstant As [Enum]) As String
 
-        Dim fi As System.Reflection.FieldInfo = EnumConstant.GetType().GetField(EnumConstant.ToString())
-        Dim aattr() As System.ComponentModel.DefaultValueAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DefaultValueAttribute), False), System.ComponentModel.DefaultValueAttribute())
+        Dim defaultValue = String.Empty
 
-        If aattr.Length > 0 Then
-            Return aattr(0).Value.ToString
-        Else
-            Return EnumConstant.ToString()
+        If enumConstant IsNot Nothing Then
+
+            Dim fi As System.Reflection.FieldInfo = enumConstant.GetType().GetField(enumConstant.ToString())
+            Dim aattr() As System.ComponentModel.DefaultValueAttribute = DirectCast(fi.GetCustomAttributes(GetType(System.ComponentModel.DefaultValueAttribute), False), System.ComponentModel.DefaultValueAttribute())
+
+            If aattr.Length > 0 Then
+                defaultValue = aattr(0).Value.ToString
+            Else
+                defaultValue = enumConstant.ToString()
+            End If
+
         End If
+
+        Return defaultValue
 
     End Function
 

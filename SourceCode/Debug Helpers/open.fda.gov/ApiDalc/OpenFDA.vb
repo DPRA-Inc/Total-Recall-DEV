@@ -42,7 +42,7 @@ Public Class OpenFDA
 
         Dim endPT As String = GetEnumDefaultValue(endpoint)
 
-        result = AddFS(HostURL) & endPT & ".json?"
+        result = AddForwardSlash(HostURL) & endPT & ".json?"
 
         Return result
 
