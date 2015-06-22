@@ -1,6 +1,5 @@
 /**
- * TotalRecall - Responsive Admin Theme
- * 2.0
+ * TotalRecall
  *
  * Custom scripts
  */
