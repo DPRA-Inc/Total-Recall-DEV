@@ -16,7 +16,6 @@ Public Class ShopAwareService
 
 #End Region
 
-
 #Region " Constructors "
 
     Public Sub New()
@@ -349,9 +348,9 @@ Public Class ShopAwareService
 
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
-        'TODO: Need to query Drug/Events
-
         _fda = New OpenFda(_restClient)
+
+        'TODO: Need to query Drug/Events
 
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FdaFilterTypes
@@ -389,9 +388,10 @@ Public Class ShopAwareService
 
     Private Function GetRecallInfo(ByVal keyWord As String, state As String, resultSize As Integer) As List(Of ResultRecall)
 
+        _fda = New OpenFda(_restClient)
+
         resultSize = 100
 
-        _fda = New OpenFda(_restClient)
         Dim apiUrl As String = String.Empty
         Dim searchResults As String
         Dim resultList As New List(Of ResultRecall)
@@ -465,7 +465,6 @@ Public Class ShopAwareService
                 Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
 
                 Dim skipValue As Integer = 0
-                'apiUrl += "&skip=0" ' This is th First 100
                 If dataSetSize > 0 Then
 
                     Do
@@ -474,18 +473,8 @@ Public Class ShopAwareService
                         If Not String.IsNullOrEmpty(searchResults) Then
 
                             Dim result As List(Of ResultRecall) = ResultRecall.CnvJsonDataToList(searchResults)
-
                             resultList.AddRange(result)
-                            'For Each tmpItm In result
 
-                            '    'If resultList.Count < resultSize Then
-                            '    resultList.Add(tmpItm)
-                            '    'Else
-                            '    '    Exit For
-                            '    'End If
-
-                            'Next
-                            Debug.Write("")
                         End If
 
                         If pageLimit > 0 Then
@@ -504,20 +493,17 @@ Public Class ShopAwareService
 
         Next
 
-
         Return resultList
 
-
         'tmpRecallResultList = ResultRecall.CnvJsonDataToList(searchResults)
-
 
     End Function
 
     Private Function GetRecallInfo(ByVal keyWordList As List(Of String), ByVal maxresultsize As Integer) As List(Of RecallSearchResultData)
 
-        Dim results As New List(Of RecallSearchResultData)
-
         _fda = New OpenFda(_restClient)
+
+        Dim results As New List(Of RecallSearchResultData)
 
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
@@ -567,13 +553,11 @@ Public Class ShopAwareService
                                                                        .ReasonForRecall = itm.Reason_For_Recall}
 
                     RecallData_AddPropertyInfo(recallData, itm)
-
                     results.Add(recallData)
 
                 Next
 
             Next
-
 
         Next
 
@@ -583,7 +567,6 @@ Public Class ShopAwareService
 
     Private Function ExecuteSearch(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
 
-        'Dim fda As New OpenFDA
         Dim apiUrl As String = String.Empty
         Dim searchResults As String
         Dim srMetaData As MetaResults
@@ -612,7 +595,6 @@ Public Class ShopAwareService
 
         End If
 
-        'Return tmpRecallResultList.Count > 0
         Return srMetaData.Total
 
     End Function
@@ -687,9 +669,8 @@ Public Class ShopAwareService
         items = System.Enum.GetValues(GetType(States))
 
         Dim tmpState As States
-        'Dim item As String
 
-        For Each item In items
+        For Each item As String In items
 
             tmpState = DirectCast([Enum].Parse(GetType(States), item), States)
 
@@ -792,15 +773,13 @@ Public Class ShopAwareService
 
     End Function
 
-#End Region
-
     Private Sub addSearchResultItemToClassificication(searchResultList As List(Of SearchResultItem), tmpSearchResultItem As SearchResultItem, maxResultSetSize As Integer)
 
+        Dim itmDate As DateTime
+        Dim newItemDate As DateTime
 
-        Dim newItemDate As DateTime '= DateTime.ParseExact(tmpSearchResultItem., "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
         DateTime.TryParse(tmpSearchResultItem.DateStarted, newItemDate)
 
-        Dim itmDate As DateTime
         If searchResultList.Count = 0 Then
             searchResultList.Add(tmpSearchResultItem)
         Else
@@ -813,22 +792,11 @@ Public Class ShopAwareService
 
                 If newItemDate > itmDate Then
 
-                    'searchResultLocal.ClassI.(ndx, tmpSearchResultItem)
                     searchResultList.Insert(ndx, tmpSearchResultItem)
                     itemAdded = True
                     Exit For
 
-                    'Else
-                    '    If searchResultLocal.ClassI.Count > maxResultSetSize Then
-                    '    Else
-                    '        searchResultLocal.ClassI.Add(tmpSearchResultItem)
-                    '    End If
-                    '    itemAdded = True
                 End If
-
-                'If itemAdded Then
-                '    Exit For
-                'End If
 
             Next
 
@@ -839,5 +807,7 @@ Public Class ShopAwareService
         End If
 
     End Sub
+
+#End Region
 
 End Class
