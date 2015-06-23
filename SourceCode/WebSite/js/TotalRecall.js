@@ -44,6 +44,7 @@ $(document).ready(function () {
         fix_height();
     });
 
+
 });
 
 // Minimalize menu when screen is less than 768px

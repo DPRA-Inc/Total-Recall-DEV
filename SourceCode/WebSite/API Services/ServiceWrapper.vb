@@ -107,6 +107,12 @@ Public NotInheritable Class ServiceWrapper
                 Dim value As String = JsonConvert.SerializeObject(ServiceWrapper.GetIssues(buffer))
                 Return value
 
+            Case "GETSEARCHRESULT"
+
+                Dim value As String = JsonConvert.SerializeObject(ServiceWrapper.GetSearchResult(buffer))
+                Return value
+
+
         End Select
 
         Return Nothing
@@ -115,13 +121,26 @@ Public NotInheritable Class ServiceWrapper
 
     Private Shared Function GetIssues(item As String) As SearchSummary
 
+        Dim info As String() = Split(item, "|")
+
         Dim wrapper As New ShopAwareService
-        Dim result = wrapper.GetItemCountByRegion(item, "TN")
+        Dim result = wrapper.GetSearchSummary(info(0), info(1))
 
         Return result
 
     End Function
 
+    Private Shared Function GetSearchResult(item As String) As SearchResult
+
+        'Dim info As String() = Split(item, "|")
+
+        'Dim wrapper As New ShopAwareService
+        'Dim result = wrapper.GetSearchResult(info(0), info(1))
+
+        'Return result
+
+
+    End Function
 
 End Class
 

@@ -6,13 +6,34 @@ function landingcontroller($location, landingservice) {
     vm.textValue = null;
     vm.shoppingList = [];
            
+    LoadPageInfo();
+
+    //********************************
+
+    function LoadPageInfo() {
+
+        // Here, lets go ahead and ping the service once. 
+        // this make all searches 10x faster as there will be no loadup time.
+        landingservice.GetIssues("TEST|TN",
+            function (result) {
+
+                // Do nothing.  Just warm it up!
+
+
+            }
+        );
+
+    }
+
+
     vm.AddToList = function() {
         var value = vm.textValue;
+        var region = "TN";
 
         // Make the new item to be added to our list.
         var item = [];
 
-        item.Keyword = value; // Product name        
+        item.Keyword = value; // Product name
         item.Rank = 'success'; // How Bad is it, Color Code.
         item.IsLoading = true; // Indicates we are waiting on Return From Service.
         item.HasClassI = false; // Indicates there is some Class I Data to show.
@@ -32,7 +53,9 @@ function landingcontroller($location, landingservice) {
         //Rank: 'info',
         //Rank: 'danger',
 
-        var data = landingservice.GetIssues(value,
+        var searchStr = value + "|" + region;
+
+        var data = landingservice.GetIssues(searchStr,
             function (result) {
                 
                 // Search for the Keyword in our list.
