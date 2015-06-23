@@ -752,7 +752,6 @@ Public Class Form1
     End Sub
 
 
-
     Private Sub lbShoppingList_DoubleClick(sender As Object, e As EventArgs) Handles lbShoppingList.DoubleClick
 
         Dim lb As ListBox = CType(sender, ListBox)

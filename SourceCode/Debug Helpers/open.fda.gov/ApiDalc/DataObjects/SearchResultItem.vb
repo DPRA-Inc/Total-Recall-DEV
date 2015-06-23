@@ -26,6 +26,14 @@ Namespace DataObjects
 
         Public Property Voluntary As String 'voluntary_mandated
 
+        Public Property RecallingFirm As String 'recalling_firm
+        Public Property RecallNumber As String 'recall_number
+        Public Property EventId As String 'event_id
+        Public Property ProductQuantity As String ' product_quantity
+        Public Property Country As String ' country
+        Public Property ReportDate As String ' report_date
+        Public Property CodeInfo As String ' code_info
+
 
     End Class
 

@@ -315,6 +315,8 @@ Public Class OpenFda
 
         keyWord = RemoveSpecialCharactersFromKeyword(keyWord)
 
+        keyWord = keyWord.Replace(" ", "+")
+
         If keyWord.Contains("+") Then
             keyWord = """" & keyWord & """"
         End If
