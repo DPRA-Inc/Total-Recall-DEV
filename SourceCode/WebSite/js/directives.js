@@ -3,13 +3,13 @@
  */
 function pageTitle($rootScope, $timeout) {
     return {
-        link: function(scope, element) {
-            var listener = function(event, toState, toParams, fromState, fromParams) {
+        link: function (scope, element) {
+            var listener = function (event, toState, toParams, fromState, fromParams) {
                 // Default title - load on Dashboard 1
                 var title = 'TotalRecall | Responsive Admin Theme';
                 // Create your own title pattern
                 if (toState.data && toState.data.pageTitle) title = 'TotalRecall | ' + toState.data.pageTitle;
-                $timeout(function() {
+                $timeout(function () {
                     element.text(title);
                 });
             };
@@ -24,9 +24,9 @@ function pageTitle($rootScope, $timeout) {
 function sideNavigation($timeout) {
     return {
         restrict: 'A',
-        link: function(scope, element) {
+        link: function (scope, element) {
             // Call the metsiMenu plugin and plug it to sidebar navigation
-            $timeout(function(){
+            $timeout(function () {
                 element.metisMenu();
             });
         }
@@ -56,7 +56,7 @@ function iboxTools($timeout) {
                     ibox.find('[id^=map-]').resize();
                 }, 50);
             },
-                // Function for close ibox
+            // Function for close ibox
                 $scope.closebox = function () {
                     var ibox = $element.closest('div.ibox');
                     ibox.remove();
@@ -83,7 +83,7 @@ function minimalizaSidebar($timeout) {
                         function () {
                             $('#side-menu').fadeIn(500);
                         }, 100);
-                } else if ($('body').hasClass('fixed-sidebar')){
+                } else if ($('body').hasClass('fixed-sidebar')) {
                     $('#side-menu').hide();
                     setTimeout(
                         function () {
@@ -98,6 +98,23 @@ function minimalizaSidebar($timeout) {
     };
 };
 
+/**
+ * ngEnter - Added to a input text box to execute a function on pressing enter.
+ */
+function ngEnter() {
+    return {
+        link: function (scope, elements, attrs) {
+            elements.bind('keydown keypress', function (event) {
+                radif (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter);
+                    });
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+};
 
 
 /**
@@ -110,3 +127,4 @@ angular
     .directive('sideNavigation', sideNavigation)
     .directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
+    .directive('ngEnter', ngEnter);
