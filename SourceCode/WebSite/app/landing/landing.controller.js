@@ -9,7 +9,7 @@ function landingcontroller($location, landingservice) {
 
     vm.shoppingList = GlobalsModule.ShoppingList;
            
-    LoadPageInfo();
+    if (vm.shoppingList.length == 0) LoadPageInfo();
 
     //********************************
 
@@ -109,10 +109,11 @@ function landingcontroller($location, landingservice) {
 
     vm.ViewProductDetails = function (product) {
        
+        // set our shopping list to use later.
         GlobalsModule.ShoppingList = vm.shoppingList;
 
         if (!product.IsClean) {
-            GlobalsModule.SelectedProduct = product;
+            GlobalsModule.SearchSummary = product;
             $location.path('/index/product');
         }
     }

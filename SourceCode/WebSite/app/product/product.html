@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        <h1>Search Results: <strong>{{vm.ProductName}}</strong></h1>
+        <h1>Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong></h1>
     </div>
 
     <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
@@ -23,22 +23,24 @@
 
     <div class="col-md-6 animated bounceInLeft" ng-hide="vm.DataLoading">
 
-        <div class="ibox float-e-margins" ng-show="vm.Product.HasClassI">
+        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassI">
 
             <div class="ibox-content no-padding">
                 <h2><strong><i>CLASS I</i></strong></h2>
 
-                <small>Top results</small>
+                <small>{{vm.SearchResult.ClassIDescription}}</small>
 
                 <ul>
 
-                    <li class="danger-element" ng-repeat="item in vm.Details.ClassI">
+                    <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassI">
                         <div class="hr-line-dashed"></div>
 
                         <div class="search-result">
+                            <p><strong>{{item.ProductDescription}}</strong></p>
+
                             <p>{{item.Content}}</p>
 
-                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
                             <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
@@ -52,19 +54,21 @@
 
         </div>
 
-        <div class="ibox float-e-margins" ng-show="vm.Product.HasClassII">
+        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassII">
 
             <div class="ibox-content no-padding">
                 <h2><strong><i>CLASS II</i></strong></h2>
 
-                <small>Top results</small>
+                <small>{{vm.SearchResult.ClassIIDescription}}</small>
 
                 <ul>
 
-                    <li class="danger-element" ng-repeat="item in vm.Details.ClassII">
+                    <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassII">
                         <div class="hr-line-dashed"></div>
 
                         <div class="search-result">
+                            <p><strong>{{item.ProductDescription}}</strong></p>
+
                             <p>{{item.Content}}</p>
 
                             <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
@@ -81,19 +85,21 @@
 
         </div>
 
-        <div class="ibox float-e-margins" ng-show="vm.Product.HasClassIII">
+        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassIII">
 
             <div class="ibox-content no-padding">
                 <h2><strong><i>CLASS III</i></strong></h2>
 
-                <small>Top results</small>
+                <small>{{vm.SearchResult.ClassIIIDescription}}</small>
 
                 <ul>
 
-                    <li class="danger-element" ng-repeat="item in vm.Details.ClassIII">
+                    <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassIII">
                         <div class="hr-line-dashed"></div>
 
                         <div class="search-result">
+                            <p><strong>{{item.ProductDescription}}</strong></p>
+
                             <p>{{item.Content}}</p>
 
                             <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
@@ -117,7 +123,7 @@
     <div id="map" class="col-md-6 animated bounceInright map">
         <div id="popup"></div>
 
-        <script type="text/javascript">
+        <!--<script type="text/javascript">
 
             var map = new ol.Map({
                 layers: [rasterLayer, vectorLayer],
@@ -186,7 +192,9 @@
 
             //centerMapOnAllObjects();
 
-        </script>
+        </script>-->
+
+        <div data-ng-init="vm.SetupMap(map, popup)"></div>
 
 
     </div>

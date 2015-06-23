@@ -88,7 +88,6 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\globals\dataService.js" />
     <Content Include="app\globals\globals.js" />
     <Content Include="app\landing\landing.controller.js" />
     <Content Include="app\landing\landing.html" />
@@ -96,6 +95,7 @@
     <Content Include="app\notify\notify.controller.js" />
     <Content Include="app\notify\notify.html" />
     <Content Include="app\notify\notify.service.js" />
+    <Content Include="app\product\productFullDetails.modal.html" />
     <Content Include="app\product\product.controller.js" />
     <Content Include="app\product\product.html" />
     <Content Include="app\product\product.service.js" />
