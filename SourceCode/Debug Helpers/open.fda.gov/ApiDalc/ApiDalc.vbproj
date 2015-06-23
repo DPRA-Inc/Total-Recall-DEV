@@ -77,6 +77,7 @@
     <Compile Include="DataObjects\RecallSearchResultData.vb" />
     <Compile Include="DataObjects\ResultRecall.vb" />
     <Compile Include="DataObjects\SearchResult.vb" />
+    <Compile Include="DataObjects\SearchResultItem.vb" />
     <Compile Include="DataObjects\SearchSummary.vb" />
     <Compile Include="Enumerations\ActionDrug.vb" />
     <Compile Include="Enumerations\Classification.vb" />
@@ -85,6 +86,7 @@
     <Compile Include="Enumerations\DrugIntervalDosageDefinition.vb" />
     <Compile Include="Enumerations\DrugRecurreAdministration.vb" />
     <Compile Include="Enumerations\DrugTreatmentDurationUnit.vb" />
+    <Compile Include="Enumerations\FilterCompairType.vb" />
     <Compile Include="Enumerations\PatientSex.vb" />
     <Compile Include="Enumerations\PrimarySourceQualification.vb" />
     <Compile Include="Enumerations\ReactionOutcome.vb" />

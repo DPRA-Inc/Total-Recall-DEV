@@ -6,6 +6,8 @@ Imports System.Net
 Imports System.Net.Http
 Imports System.Web.Http
 Imports ApiDalc
+Imports ApiDalc.DataObjects
+Imports ApiDalc.Enumerations
 
 #End Region
 
@@ -62,7 +64,7 @@ Namespace Controllers
             Dim msg As HttpResponseMessage = Nothing
 
             Dim fda As New OpenFDA
-            Dim filterType As FDAFilterTypes = FDAFilterTypes.RecallReason
+            Dim filterType As FdaFilterTypes = FDAFilterTypes.RecallReason
 
 
             Dim masterRecallResultList As New List(Of ResultRecall)

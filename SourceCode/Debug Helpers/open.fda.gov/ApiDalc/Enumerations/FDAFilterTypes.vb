@@ -1,4 +1,5 @@
-﻿Namespace Enumerations
+﻿
+Namespace Enumerations
 
     ''' <summary>
     ''' FDA Filter Types

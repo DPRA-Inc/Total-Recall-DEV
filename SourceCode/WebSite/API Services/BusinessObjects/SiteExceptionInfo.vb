@@ -1,4 +1,4 @@
-﻿Imports TotalRecall.ENUMS
+﻿Imports TotalRecall.Enumerations
 
 Public Class SiteExceptionInfo
     Inherits WebBusinessInfo

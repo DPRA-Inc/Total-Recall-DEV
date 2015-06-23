@@ -33,7 +33,7 @@ Public Class OpenFda
 
 #Region " Public Methods "
 
-    Public Function GetOpenFDAEndPoint(endpoint As OpenFdaApiEndPoints) As String
+    Friend Function GetOpenFdaEndPoint(endpoint As OpenFdaApiEndPoints) As String
 
         _endPointType = endpoint
 
@@ -52,7 +52,7 @@ Public Class OpenFda
         Dim uri As Uri
         Dim sb As New System.Text.StringBuilder
         'Dim hostUrl As String = GetOpenFDAEndPoint(OpenFDAApiEndPoints.FoodRecall)
-        Dim hostUrl As String = GetOpenFDAEndPoint(endPointType)
+        Dim hostUrl As String = GetOpenFdaEndPoint(endPointType)
 
         'If Not String.IsNullOrEmpty(_search) Then
         '    _search = "&search=" & _search
@@ -258,7 +258,9 @@ Public Class OpenFda
 
     End Function
 
-    Public Sub ResetSearch()
+#Region " Search "
+
+    Friend Sub ResetSearch()
         _search = String.Empty
     End Sub
 
@@ -278,7 +280,33 @@ Public Class OpenFda
         SearchOnFieldByValue("_exists_", searchField)
     End Sub
 
-    Public Function AddSearchFilter(ByVal endpointType As OpenFdaApiEndPoints, ByVal type As FdaFilterTypes, ByVal filters As List(Of String)) As String
+
+    Public Sub AddSearchFilter(endPointType As OpenFDAApiEndPoints, endpointField As String, keyWord As String, operationCompairType As FilterCompairType)
+
+        keyWord = keyWord.Replace(" ", "+")
+
+        If keyWord.Contains("+") Then
+            keyWord = """" & keyWord & """"
+        End If
+
+        Dim param As String = String.Format("{0}:({1})", endpointField, keyWord)
+
+        If Not String.IsNullOrEmpty(_search) Then
+
+            If operationCompairType = FilterCompairType.Or Then
+                _search += "+"
+            Else
+                _search += "+AND+"
+            End If
+
+        End If
+
+        _search += param
+
+    End Sub
+
+
+    Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String), Optional ByVal operationCompairType As FilterCompairType = FilterCompairType.Or) As String
 
         ' Add Filter to KeyWord List
         Dim keyword As String = String.Empty
@@ -294,7 +322,7 @@ Public Class OpenFda
         If Not _keyWords.Contains(keyword) Then
             _keyWords.Add(keyword)
         End If
-        
+
         Dim param As String = String.Empty
 
         'Dim endpointType As OpenFDAApiEndPoints = OpenFDAApiEndPoints.FoodRecall
@@ -416,19 +444,28 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(param) Then
 
             If Not String.IsNullOrEmpty(_search) Then
-                _search += "+"
-            End If
 
+                If operationCompairType = FilterCompairType.Or Then
+                    _search += "+"
+                Else
+                    _search += "+AND+"
+                End If
+
+            End If
             _search += param
             '_search += "(" & param & ")"
-
         End If
 
         Return param
 
     End Function
 
-    Public Function AddResultLimit(ByVal limit As Integer) As String
+#End Region
+
+
+#Region " Limits "
+
+    Friend Function AddResultLimit(ByVal limit As Integer) As String
 
         Dim parm As String = String.Empty
 
@@ -451,7 +488,13 @@ Public Class OpenFda
 
     End Function
 
-    Public Function GetMetaResults() As MetaResults
+#End Region
+
+#Region " Count "
+
+#End Region
+
+    Friend Function GetMetaResults() As MetaResults
 
         Dim metaData As New MetaResults
 

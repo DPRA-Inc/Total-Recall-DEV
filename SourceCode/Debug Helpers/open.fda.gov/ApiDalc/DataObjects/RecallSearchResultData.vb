@@ -12,8 +12,8 @@
         Public Property Count As Integer
         Public Property Type As String
         Public Property Classification As String
-        Public Property Description_1 As String
-        Public Property Description_2 As String
+        Public Property ProductDescription As String
+        Public Property ReasonForRecall As String
 
         Public Property Regions As New HashSet(Of String)
         Public Property IsNationWide As Boolean = False

@@ -1,5 +1,8 @@
 ﻿
 Imports ApiDalc
+Imports ApiDalc.Enumerations
+Imports ApiDalc.DataObjects
+
 
 Public Class Form1
 
@@ -55,7 +58,7 @@ Public Class Form1
         'Populate EndPointTypes
         cbEndPoints.Items.Clear()
 
-        For Each itm In [Enum].GetValues(GetType(OpenFDAApiEndPoints))
+        For Each itm In [Enum].GetValues(GetType(OpenFdaApiEndPoints))
             cbEndPoints.Items.Add(itm.ToString())
             cbEndPoints_2.Items.Add(itm.ToString())
         Next
@@ -335,12 +338,12 @@ Public Class Form1
                 sb.AppendLine("Class III = violate FDA labeling or manufacturing laws...")
 
                 Dim items As Array
-                items = System.Enum.GetValues(GetType(enumClassification))
+                items = System.Enum.GetValues(GetType(Classification))
                 'Dim item As String
-                Dim tmpEnum As enumClassification
+                Dim tmpEnum As Classification
                 For Each item In items
 
-                    tmpEnum = DirectCast([Enum].Parse(GetType(enumClassification), item), enumClassification)
+                    tmpEnum = DirectCast([Enum].Parse(GetType(Classification), item), Classification)
                     cbSerchTypeOptions.Items.Add(GetEnumDefaultValue(tmpEnum))
 
                     'If itm.distribution_pattern.Contains(tmpEnum.ToString) OrElse
@@ -364,14 +367,14 @@ Public Class Form1
                 cbSerchTypeOptions.Items.Clear()
 
                 Dim items As Array
-                items = System.Enum.GetValues(GetType(EnumStates))
+                items = System.Enum.GetValues(GetType(States))
                 'Dim item As String
-                Dim tmpEnum As EnumStates
+                Dim tmpEnum As States
 
                 cbSerchTypeOptions.Items.Add("Nationwide")
                 For Each item In items
 
-                    tmpEnum = DirectCast([Enum].Parse(GetType(EnumStates), item), EnumStates)
+                    tmpEnum = DirectCast([Enum].Parse(GetType(States), item), States)
                     cbSerchTypeOptions.Items.Add(tmpEnum.ToString)
 
                     'If itm.distribution_pattern.Contains(tmpEnum.ToString) OrElse
@@ -655,8 +658,8 @@ Public Class Form1
 
                 'cNode.Nodes.Add("cnt: " & citm.Count)
                 cNode.Nodes.Add("Classification: " & citm.Classification)
-                cNode.Nodes.Add("Description_1: " & citm.Description_1)
-                cNode.Nodes.Add("Description_2: " & citm.Description_2)
+                cNode.Nodes.Add("Description_1: " & citm.ProductDescription)
+                cNode.Nodes.Add("Description_2: " & citm.ReasonForRecall)
                 cNode.Nodes.Add("Nationwide: " & citm.IsNationWide)
 
                 Dim stList As String = String.Empty
@@ -1199,7 +1202,7 @@ Public Class Form1
         Dim results As New List(Of SearchSummary)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchSummary As SearchSummary = wrapper.GetItemCountByRegion(item, "TN")
+            Dim mySearchSummary As SearchSummary = wrapper.GetSearchSummary(item, "TN")
             results.Add(mySearchSummary)
 
         Next
@@ -1221,5 +1224,36 @@ Public Class Form1
     End Sub
 
 #End Region
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+
+        Dim wrapper As New ShopAwareService
+        'Dim ShoppingList As New List(Of String)
+
+        Dim results As New List(Of SearchResult)
+        For Each item In lbShoppingList.Items
+
+            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, "CA")
+            results.Add(mySearchResult)
+
+        Next
+
+        Debug.WriteLine("")
+
+        'TreeView2.Nodes.Clear()
+        'For Each itm In results
+        '    Dim parentNode As TreeNode = TreeView2.Nodes.Add(itm.Keyword)
+        '    parentNode.Nodes.Add(String.Format("Class I: ({0})", itm.ClassICount))
+        '    parentNode.Nodes.Add(String.Format("Class II: ({0})", itm.ClassIICount))
+        '    parentNode.Nodes.Add(String.Format("Class III: ({0})", itm.ClassIIICount))
+
+        '    parentNode.Nodes.Add(String.Format("Event: ({0})", itm.EventCount))
+        'Next
+        ''PopulateTree_ShoppingList_RecallSearch(results)
+
+
+
+    End Sub
 
 End Class
