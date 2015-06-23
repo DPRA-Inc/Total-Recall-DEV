@@ -80,6 +80,7 @@ Public Class ShopAwareService
             'TODO convert distribution list to list of string.
             ' ------------------------------------------------------------
 
+            Dim itmDate As DateTime = Nothing
             Select Case itm.Classification
 
                 Case "Class I"
@@ -87,7 +88,27 @@ Public Class ShopAwareService
                     If searchResultLocal.ClassI.Count < maxResultSetSize Then
                         'searchResultLocal.ClassI.Add(itm)
                         If searchResultLocal.ClassI.Count < maxResultSetSize Then
-                            searchResultLocal.ClassI.Add(tmpSearchResultItem)
+
+                            If searchResultLocal.ClassI.Count = 0 Then
+                                searchResultLocal.ClassI.Add(tmpSearchResultItem)
+                            Else
+
+                                For ndx As Integer = 0 To searchResultLocal.ClassI.Count - 1
+                                    DateTime.TryParse(searchResultLocal.ClassI(ndx).DateStarted, itmDate)
+                                    'itmDate = DateTime.ParseExact(searchResultLocal.ClassI(ndx).DateStarted, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
+                                    If tmpDate > itmDate Then
+
+                                        searchResultLocal.ClassI.Insert(ndx, tmpSearchResultItem)
+                                        Exit For
+
+                                    End If
+
+                                Next
+
+                            End If
+                            ' searchResultLocal.ClassI.Add(tmpSearchResultItem)
+
                         End If
 
                     End If
@@ -97,7 +118,27 @@ Public Class ShopAwareService
                     If searchResultLocal.ClassII.Count < maxResultSetSize Then
                         'searchResultLocal.ClassII.Add(itm)
                         If searchResultLocal.ClassII.Count < maxResultSetSize Then
-                            searchResultLocal.ClassII.Add(tmpSearchResultItem)
+
+                            If searchResultLocal.ClassII.Count = 0 Then
+                                searchResultLocal.ClassII.Add(tmpSearchResultItem)
+                            Else
+
+                                For ndx As Integer = 0 To searchResultLocal.ClassII.Count - 1
+                                    DateTime.TryParse(searchResultLocal.ClassII(ndx).DateStarted, itmDate)
+                                    'itmDate = DateTime.ParseExact(searchResultLocal.ClassII(ndx).DateStarted, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
+                                    If tmpDate > itmDate Then
+
+                                        searchResultLocal.ClassII.Insert(ndx, tmpSearchResultItem)
+                                        Exit For
+
+                                    End If
+
+                                Next
+
+                            End If
+                            ' searchResultLocal.ClassII.Add(tmpSearchResultItem)
+
                         End If
 
                     End If
@@ -107,7 +148,27 @@ Public Class ShopAwareService
                     If searchResultLocal.ClassIII.Count < maxResultSetSize Then
                         'searchResultLocal.ClassIII.Add(itm)
                         If searchResultLocal.ClassIII.Count < maxResultSetSize Then
-                            searchResultLocal.ClassIII.Add(tmpSearchResultItem)
+
+                            If searchResultLocal.ClassIII.Count = 0 Then
+                                searchResultLocal.ClassIII.Add(tmpSearchResultItem)
+                            Else
+
+                                For ndx As Integer = 0 To searchResultLocal.ClassIII.Count - 1
+                                    DateTime.TryParse(searchResultLocal.ClassIII(ndx).DateStarted, itmDate)
+                                    'itmDate = DateTime.ParseExact(searchResultLocal.ClassIII(ndx).DateStarted, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
+                                    If tmpDate > itmDate Then
+
+                                        searchResultLocal.ClassIII.Insert(ndx, tmpSearchResultItem)
+                                        Exit For
+
+                                    End If
+
+                                Next
+
+                            End If
+                            ' searchResultLocal.ClassIII.Add(tmpSearchResultItem)
+
                         End If
 
                     End If
