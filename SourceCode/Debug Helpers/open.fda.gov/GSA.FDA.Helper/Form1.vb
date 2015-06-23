@@ -1241,7 +1241,7 @@ Public Class Form1
 
                 classNode = parentNode_2.Nodes.Add("Class I")
                 For Each nd In itm.ClassI
-                    classNode.Nodes.Add(nd.ProductDescription)
+                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
                 Next
             End If
 
@@ -1249,7 +1249,7 @@ Public Class Form1
 
                 classNode = parentNode_2.Nodes.Add("Class II")
                 For Each nd In itm.ClassII
-                    classNode.Nodes.Add(nd.ProductDescription)
+                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
                 Next
             End If
 
@@ -1258,7 +1258,7 @@ Public Class Form1
 
                 classNode = parentNode_2.Nodes.Add("Class III")
                 For Each nd In itm.ClassIII
-                    classNode.Nodes.Add(nd.ProductDescription)
+                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
                 Next
             End If
 
