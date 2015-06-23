@@ -141,7 +141,6 @@ Public NotInheritable Class ServiceWrapper
 
     End Function
 
-    Private Shared Function Get
 
 
 
