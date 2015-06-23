@@ -182,40 +182,40 @@ Public Class ShopAwareService
 
     End Function
 
-    ''' <summary>
-    ''' This gets the Top recall result for the KeyWord
-    ''' </summary>
-    ''' <param name="keyWordList"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
+    ' ''' <summary>
+    ' ''' This gets the Top recall result for the KeyWord
+    ' ''' </summary>
+    ' ''' <param name="keyWordList"></param>
+    ' ''' <returns></returns>
+    ' ''' <remarks></remarks>
+    'Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
 
-        Dim results As List(Of RecallSearchResultData)
+    '    Dim results As List(Of RecallSearchResultData)
 
-        results = GetRecallInfo(keyWordList, 0)
+    '    results = GetRecallInfo(keyWordList, 0)
 
-        Return results
+    '    Return results
 
-    End Function
+    'End Function
 
-    ''' <summary>
-    ''' Returns the 
-    ''' </summary>
-    ''' <param name="keyWord"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function GetRecallsDetail(ByVal keyWord As String) As List(Of RecallSearchResultData)
+    ' ''' <summary>
+    ' ''' Returns the 
+    ' ''' </summary>
+    ' ''' <param name="keyWord"></param>
+    ' ''' <returns></returns>
+    ' ''' <remarks></remarks>
+    'Public Function GetRecallsDetail(ByVal keyWord As String) As List(Of RecallSearchResultData)
 
-        Dim results As List(Of RecallSearchResultData)
-        Dim keyWordList As New List(Of String)
+    '    Dim results As List(Of RecallSearchResultData)
+    '    Dim keyWordList As New List(Of String)
 
-        keyWordList.Add(keyWord)
+    '    keyWordList.Add(keyWord)
 
-        results = GetRecallInfo(keyWordList, 100)
+    '    results = GetRecallInfo(keyWordList, 100)
 
-        Return results
+    '    Return results
 
-    End Function
+    'End Function
 
 #End Region
 
@@ -362,9 +362,9 @@ Public Class ShopAwareService
 
                     End Select
 
-                    itm.KeyWord = kwGroup
+                    'itm.KeyWord = kwGroup
 
-                    Dim recallData As New RecallSearchResultData With {.KeyWord = kwGroup,
+                    Dim recallData As New RecallSearchResultData With {.KeyWord = itm.KeyWord,
                                                                        .Type = itm.Product_Type,
                                                                        .Count = resultCount,
                                                                        .Classification = String.Format("{0}  -  {1}", itm.Classification, GetEnumDescription(itmClassification)),
@@ -407,7 +407,10 @@ Public Class ShopAwareService
             If tmpRecallResultList.Count > 0 Then
 
                 For Each itm As ResultRecall In tmpRecallResultList
+
+                    itm.KeyWord = filterList(0)
                     recallResultList.Add(itm)
+
                 Next
 
             End If
