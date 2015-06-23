@@ -71,7 +71,7 @@
 
                             <p>{{item.Content}}</p>
 
-                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
                             <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
@@ -102,7 +102,7 @@
 
                             <p>{{item.Content}}</p>
 
-                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
                             <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
@@ -120,83 +120,10 @@
 
     </div>
 
-    <div id="map" class="col-md-6 animated bounceInright map">
-        <div id="popup"></div>
+    <h1>TEsting The Map Goes Here</h1>
+    <div id="map" class="col-md-6 animated bounceInright">
 
-        <!--<script type="text/javascript">
-
-            var map = new ol.Map({
-                layers: [rasterLayer, vectorLayer],
-                target: document.getElementById('map'),
-                proj: new ol.proj.Projection({
-                    code: 'EPSG:4326'
-                }),
-                view: view
-            });
-
-            var element = document.getElementById('popup');
-
-            var popup = new ol.Overlay({
-                element: element,
-                positioning: 'bottom-center',
-                stopEvent: false
-            });
-            map.addOverlay(popup);
-
-            // display popup on click
-            map.on('click', function (evt) {
-                var feature = map.forEachFeatureAtPixel(evt.pixel,
-                    function (feature, layer) {
-                        return feature;
-                    });
-                if (feature) {
-                    var geometry = feature.getGeometry();
-                    var coord = geometry.getCoordinates();
-                    popup.setPosition(coord);
-                    $(element).popover({
-                        'placement': 'top',
-                        'html': true,
-                        'content': feature.get('name')
-                    });
-                    $(element).popover('show');
-                } else {
-                    $(element).popover('destroy');
-                }
-            });
-
-            // change mouse cursor when over marker
-            map.on('pointermove', function (e) {
-                try {
-
-                    if (e.dragging) {
-                        $(element).popover('destroy');
-                        return;
-                    }
-                    var pixel = map.getEventPixel(e.originalEvent);
-                    var hit = map.hasFeatureAtPixel(pixel);
-                    map.getTarget().style.cursor = hit ? 'pointer' : '';
-                } catch (ex) {
-                };
-
-            });
-
-
-            //vm.SetupMap();
-
-            // ******************* code to add icons to the map once the map is instantiated
-
-           
-
-            //vectorSource.addFeature(createIcon(36, -84, 'Knoxville, TN', 'assests/mapicon/1.png'));
-            //vectorSource.addFeature(createIcon(35, -85.3, 'Chattanooga, TN', 'assests/mapicon/1.png'));
-
-            //centerMapOnAllObjects();
-
-        </script>-->
-
-        <div data-ng-init="vm.SetupMap(map, popup)"></div>
-
-
+       
     </div>
 
 

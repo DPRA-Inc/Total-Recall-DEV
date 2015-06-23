@@ -121,6 +121,7 @@ function ngEnter() {
  *
  * Pass all functions into module
  */
+
 angular
     .module('TotalRecall')
     .directive('pageTitle', pageTitle)
