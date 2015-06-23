@@ -15,21 +15,21 @@ Namespace DataObjects
 
 #Region " Public Properties "
 
-        Public Property ActionDrug As EnumActionDrug
+        Public Property ActionDrug As ActionDrug
 
         Public Property DrugCumulativeDosageNumb As String
 
-        Public Property DrugCumulativeDosageUnit As EnumDrugCumulativeDosageUnit
+        Public Property DrugCumulativeDosageUnit As DrugCumulativeDosageUnit
 
         Public Property DrugTreatmentDuration As String
 
-        Public Property DrugTreatmentDurationUnit As EnumDrugTreatmentDurationUnit
+        Public Property DrugTreatmentDurationUnit As DrugTreatmentDurationUnit
 
         Public Property DrugIntervalDosageUnitNumb As String
 
-        Public Property DrugIntervalDosageDefinition As EnumDrugIntervalDosageDefinition
+        Public Property DrugIntervalDosageDefinition As DrugIntervalDosageDefinition
 
-        Public Property DrugRecurreAdministration As EnumDrugRecurreAdministration
+        Public Property DrugRecurreAdministration As DrugRecurreAdministration
 
         Public Property DrugAdditional As String
 
@@ -37,7 +37,7 @@ Namespace DataObjects
 
         Public Property DrugDosageForm As String
 
-        Public Property DrugCharacterization As EnumDrugCharacterization
+        Public Property DrugCharacterization As DrugCharacterization
 
         Public Property Drugadministrationroute As String
 

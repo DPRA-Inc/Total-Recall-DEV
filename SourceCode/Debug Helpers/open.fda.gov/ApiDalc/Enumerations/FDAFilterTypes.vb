@@ -4,7 +4,7 @@
     ''' FDA Filter Types
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum FDAFilterTypes
+    Public Enum FdaFilterTypes
 
         RecallReason
         Classification

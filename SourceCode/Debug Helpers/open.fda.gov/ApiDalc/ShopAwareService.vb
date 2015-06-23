@@ -116,17 +116,17 @@ Public Class ShopAwareService
 
                 For Each itm As ResultRecall In RecallResultList
 
-                    Dim itmClassification As EnumClassification
+                    Dim itmClassification As Classification
 
                     Select Case itm.Classification
                         Case "Class I"
-                            itmClassification = EnumClassification.Class_I
+                            itmClassification = Classification.Class_I
 
                         Case "Class II"
-                            itmClassification = EnumClassification.Class_II
+                            itmClassification = Classification.Class_II
 
                         Case "Class III"
-                            itmClassification = EnumClassification.Class_III
+                            itmClassification = Classification.Class_III
 
                     End Select
 
@@ -290,14 +290,14 @@ Public Class ShopAwareService
 
         Dim items As Array
 
-        items = System.Enum.GetValues(GetType(EnumStates))
+        items = System.Enum.GetValues(GetType(States))
 
         'Dim item As String
-        Dim tmpState As EnumStates
+        Dim tmpState As States
 
         For Each item In items
 
-            tmpState = DirectCast([Enum].Parse(GetType(EnumStates), item), EnumStates)
+            tmpState = DirectCast([Enum].Parse(GetType(States), item), States)
 
             If itm.Distribution_Pattern.Contains(tmpState.ToString) OrElse
                 itm.Distribution_Pattern.Contains(GetEnumDescription(tmpState)) OrElse

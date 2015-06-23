@@ -15,7 +15,7 @@ Namespace DataObjects
 
 #Region " Public Properties "
 
-        Public Property PatientSex As EnumPatientSex
+        Public Property PatientSex As PatientSex
 
         'The age of the patient when the event first occured
         Public Property PatientOnSetAge As String

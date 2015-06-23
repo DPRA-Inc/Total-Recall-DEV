@@ -6,7 +6,7 @@ Namespace Enumerations
     ''' State list
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumStates
+    Public Enum States
 
         <Description("Alabama")>
         AL

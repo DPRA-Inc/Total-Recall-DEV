@@ -6,7 +6,7 @@ Namespace Enumerations
     ''' Reaction Outcomes
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumReactionOutcome
+    Public Enum ReactionOutcome
 
         <Description("Recovered/resolved")>
         RecoveredResolved = 1

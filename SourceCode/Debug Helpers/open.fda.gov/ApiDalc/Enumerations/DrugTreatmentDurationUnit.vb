@@ -4,7 +4,7 @@
     ''' Drug Treatment Duration
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumDrugTreatmentDurationUnit
+    Public Enum DrugTreatmentDurationUnit
 
         Year = 801
         Month = 802

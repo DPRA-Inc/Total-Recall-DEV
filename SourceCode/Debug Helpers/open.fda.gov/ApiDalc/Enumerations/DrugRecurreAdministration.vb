@@ -1,9 +1,9 @@
 ﻿Namespace Enumerations
     ''' <summary>
-    ''' Whether the reaction occured on a readministration of the drug.
+    ''' Whether the reaction occurred on a re-administration of the drug.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumDrugRecurreAdministration
+    Public Enum DrugRecurreAdministration
 
         Yes = 1
         No = 2

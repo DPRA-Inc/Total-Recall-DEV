@@ -17,7 +17,7 @@ Namespace DataObjects
 
         Public Property ReactionMedDrapt As String
         Public Property ReactionMeddraversionPt As String
-        Public Property ReactionOutcome As EnumReactionOutcome
+        Public Property ReactionOutcome As ReactionOutcome
 
 #End Region
 

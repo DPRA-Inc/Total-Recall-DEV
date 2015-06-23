@@ -6,7 +6,7 @@ Namespace Enumerations
     ''' open.fda.gov API Endpoints
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum OpenFDAApiEndPoints
+    Public Enum OpenFdaApiEndPoints
 
         '<Description("drug/event")>
         '<DisplayNameAttribute("drug/event")>

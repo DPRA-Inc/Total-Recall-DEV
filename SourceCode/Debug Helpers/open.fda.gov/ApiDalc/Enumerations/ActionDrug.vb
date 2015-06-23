@@ -5,7 +5,7 @@ Namespace Enumerations
     ''' Actions taken with the drug
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumActionDrug
+    Public Enum ActionDrug
 
         <Description("Drug Withdrawn")>
         DrugWithdrawn = 1

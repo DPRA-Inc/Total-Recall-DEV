@@ -5,7 +5,7 @@ Namespace Enumerations
     ''' Recall Classification Levels
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumClassification
+    Public Enum Classification
 
         <Description("Dangerous or defective products that predictably could cause serious health problems or death")>
         <DefaultValue("Class I")>

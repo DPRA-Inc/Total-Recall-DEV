@@ -6,12 +6,14 @@ Namespace Enumerations
     ''' Reported role of the drug in the adverse event.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumDrugCharacterization
+    Public Enum DrugCharacterization
 
         <Description("Suspect drug")>
         SuspectDrug = 1
+
         <Description("Concomitant drug")>
         ConcomitantDrug = 2
+
         <Description("Interacting drug")>
         InteractingDrug = 3
 

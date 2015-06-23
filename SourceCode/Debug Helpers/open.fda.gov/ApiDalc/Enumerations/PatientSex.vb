@@ -4,7 +4,7 @@
     ''' The sex of the patient.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumPatientSex
+    Public Enum PatientSex
 
         Unknown = 0
         Male = 1

@@ -6,9 +6,10 @@ Namespace Enumerations
     ''' An encoded value for the category of individual submitting the report
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum EnumPrimarySourceQualification
+    Public Enum PrimarySourceQualification
 
         Physician = 1
+
         Pharmacist = 2
 
         <Description("Other Health Professional")>
