@@ -69,6 +69,10 @@ function landingcontroller($location, landingservice) {
 
                     if (product.Keyword == result.Keyword) {
 
+                        product.ClassIDescription = result.ClassIDescription;
+                        product.ClassIIDescription = result.ClassIIDescription;
+                        product.ClassIIIDescription = result.ClassIIIDescription;
+
                         if (result.EventCount > 0) {
                             product.HasEvents = true;
                             product.EventCount = result.EventCount;
