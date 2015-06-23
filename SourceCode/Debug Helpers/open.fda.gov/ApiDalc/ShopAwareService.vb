@@ -66,7 +66,7 @@ Public Class ShopAwareService
             
             Dim tmpDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
-                                                                  .DateStarted = tmpDate,
+                                                                  .DateStarted = tmpDate.ToShortDateString(),
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
                                                                   .DistributionPattern = itm.Distribution_Pattern,
                                                                   .ProductDescription = itm.Product_Description,
