@@ -3,6 +3,7 @@
 Imports Newtonsoft.Json.Linq
 Imports ApiDalc.DataObjects
 Imports ApiDalc.Enumerations
+Imports System.ComponentModel
 
 #End Region
 
@@ -53,13 +54,15 @@ Public Class ShopAwareService
         Const maxResultSetSize As Integer = 3
 
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
-        Dim mapList As New HashSet(Of String)
+        Dim mapList As New Dictionary(Of String, SearchResultMapData)
 
         'Dim searchSummaryLocal = GetRecallInfoCounts(keyWord, state)
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
 
         For Each itm As ResultRecall In tmp
+
+            ProcessResultRecordForMapData(itm, mapList)
 
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
@@ -75,10 +78,6 @@ Public Class ShopAwareService
                                                                   .Status = itm.Status,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
-
-            ' ------------------------------------------------------------
-            'TODO convert distribution list to list of string.
-            ' ------------------------------------------------------------
 
             Select Case itm.Classification
 
@@ -115,6 +114,8 @@ Public Class ShopAwareService
             End Select
 
         Next
+
+        searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
 
         Return searchResultLocal
 
@@ -166,10 +167,11 @@ Public Class ShopAwareService
         _fda = New OpenFda(_restClient)
 
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
-        Dim filterType As FDAFilterTypes
-        filterType = FDAFilterTypes.RecallReason
+        Dim filterType As FdaFilterTypes
+        filterType = FdaFilterTypes.RecallReason
 
         Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
+
         Const maxresultsize As Integer = 0
 
         Dim filterList As New List(Of String)
@@ -261,8 +263,8 @@ Public Class ShopAwareService
 
         _fda = New OpenFda(_restClient)
 
-        Dim filterType As FDAFilterTypes
-        filterType = FDAFilterTypes.RecallReason
+        Dim filterType As FdaFilterTypes
+        filterType = FdaFilterTypes.RecallReason
 
         Dim resultCount As Integer
         Dim recallResultList As New List(Of ResultRecall)
@@ -323,7 +325,7 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Function ExecuteSearch(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
+    Private Function ExecuteSearch(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
 
         'Dim fda As New OpenFDA
         Dim apiUrl As String = String.Empty
@@ -443,6 +445,93 @@ Public Class ShopAwareService
         Next
 
     End Sub
+
+    Private Sub ProcessResultRecordForMapData(data As ResultRecall, ByRef list As Dictionary(Of String, SearchResultMapData))
+
+        Dim check As String = data.Distribution_Pattern
+        Dim states As List(Of String) = System.Enum.GetNames(GetType(States)).ToList
+        Dim nationwide As Boolean = False
+
+        Try
+
+            If check.ToLower.Contains("nationwide") Then
+                nationwide = True
+            End If
+
+            For Each state As String In states
+
+                Dim stEnum As Reflection.FieldInfo = GetType(States).GetField(state)
+                Dim stateName As DescriptionAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DescriptionAttribute), False)(0), DescriptionAttribute)
+                Dim stateCoords As DefaultValueAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DefaultValueAttribute), False)(0), DefaultValueAttribute)
+                Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(";").ToList
+
+                If check.Contains(state) Or nationwide Then
+
+                    Dim listCheck As SearchResultMapData = Nothing
+
+                    If list.ContainsKey(state) Then
+                        listCheck = list(state)
+                    Else
+
+                        listCheck = New SearchResultMapData With {.State = state, .Latitude = coordPair(0), .Longitude = coordPair(1)}
+                        list.Add(state, listCheck)
+
+                    End If
+
+                    Dim tooltip As String = String.Concat(data.Product_Type, " {0}")
+
+                    Select Case data.Classification.ToLower
+
+                        Case "class i"
+
+                            tooltip = String.Format(tooltip, " Class-1")
+                            listCheck.IconSet = (listCheck.IconSet Or IconSet.Class1)
+
+                        Case "class ii"
+
+                            tooltip = String.Format(tooltip, " Class-2")
+                            listCheck.IconSet = (listCheck.IconSet Or IconSet.Class2)
+
+                        Case "class iii"
+
+                            tooltip = String.Format(tooltip, " Class-3")
+                            listCheck.IconSet = (listCheck.IconSet Or IconSet.Class3)
+
+                    End Select
+
+                    If Not listCheck.Tooltip.Contains(tooltip) Then
+
+                        If listCheck.Tooltip.Length > 0 Then
+                            listCheck.Tooltip += ", "
+                        End If
+
+                        listCheck.Tooltip += tooltip
+
+                    End If
+
+                    list(state) = listCheck
+
+                End If
+
+            Next
+
+        Catch ex As Exception
+            Throw
+        End Try
+
+    End Sub
+
+    Private Function ConvertDictionaryMapObjectsToSearchResult(mapList As Dictionary(Of String, SearchResultMapData)) As List(Of SearchResultMapData)
+
+        Dim result As New List(Of SearchResultMapData)
+
+        For Each mapData As KeyValuePair(Of String, SearchResultMapData) In mapList
+            result.Add(mapData.Value)
+        Next
+
+        Return result
+
+    End Function
 
 #End Region
 
