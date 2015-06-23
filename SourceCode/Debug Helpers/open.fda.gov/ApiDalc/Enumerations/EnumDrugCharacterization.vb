@@ -1,18 +1,20 @@
-﻿#Region " Public Enumerations "
+﻿Imports System.ComponentModel
 
-''' <summary>
-''' Reported role of the drug in the adverse event.
-''' </summary>
-''' <remarks></remarks>
-Public Enum EnumDrugCharacterization
+Namespace Enumerations
 
-    <System.ComponentModel.Description("Suspect drug")>
+    ''' <summary>
+    ''' Reported role of the drug in the adverse event.
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum EnumDrugCharacterization
+
+        <Description("Suspect drug")>
         SuspectDrug = 1
-    <System.ComponentModel.Description("Concomitant drug")>
+        <Description("Concomitant drug")>
         ConcomitantDrug = 2
-    <System.ComponentModel.Description("Interacting drug")>
+        <Description("Interacting drug")>
         InteractingDrug = 3
 
-End Enum
+    End Enum
 
-#End Region
+End Namespace

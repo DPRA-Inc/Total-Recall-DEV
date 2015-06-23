@@ -1,37 +1,39 @@
-﻿#Region " Public Enumerations "
+﻿Imports System.ComponentModel
 
-''' <summary>
-''' open.fda.gov API Endpoints
-''' </summary>
-''' <remarks></remarks>
-Public Enum OpenFDAApiEndPoints
+Namespace Enumerations
 
-    '<System.ComponentModel.Description("drug/event")>
-    '<System.ComponentModel.DisplayNameAttribute("drug/event")>
-    <System.ComponentModel.Description("Drug Event")>
-    <System.ComponentModel.DefaultValueAttribute("drug/event")>
-    DrugEvent
+    ''' <summary>
+    ''' open.fda.gov API Endpoints
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum OpenFDAApiEndPoints
 
-    <System.ComponentModel.Description("Drug Label")>
-    <System.ComponentModel.DefaultValueAttribute("drug/label")>
-    DrugLabel
+        '<Description("drug/event")>
+        '<DisplayNameAttribute("drug/event")>
+        <Description("Drug Event")>
+        <DefaultValueAttribute("drug/event")>
+        DrugEvent
 
-    <System.ComponentModel.Description("Drug Recall")>
-    <System.ComponentModel.DefaultValueAttribute("drug/enforcement")>
-    DrugRecall
+        <Description("Drug Label")>
+        <DefaultValueAttribute("drug/label")>
+        DrugLabel
 
-    <System.ComponentModel.Description("Device Event")>
-    <System.ComponentModel.DefaultValueAttribute("device/event")>
-    DeviceEvent
+        <Description("Drug Recall")>
+        <DefaultValueAttribute("drug/enforcement")>
+        DrugRecall
 
-    <System.ComponentModel.Description("Device Recall")>
-    <System.ComponentModel.DefaultValueAttribute("device/enforcement")>
-    DeviceRecall
+        <Description("Device Event")>
+        <DefaultValueAttribute("device/event")>
+        DeviceEvent
 
-    <System.ComponentModel.Description("Food Recall")>
-    <System.ComponentModel.DefaultValueAttribute("food/enforcement")>
-    FoodRecall
+        <Description("Device Recall")>
+        <DefaultValueAttribute("device/enforcement")>
+        DeviceRecall
 
-End Enum
+        <Description("Food Recall")>
+        <DefaultValueAttribute("food/enforcement")>
+        FoodRecall
 
-#End Region
+    End Enum
+
+End Namespace

@@ -1,5 +1,7 @@
 ﻿#Region " Imports "
 
+Imports ApiDalc.DataObjects
+Imports ApiDalc.Enumerations
 Imports Newtonsoft.Json.Linq ' OpenSource
 
 #End Region

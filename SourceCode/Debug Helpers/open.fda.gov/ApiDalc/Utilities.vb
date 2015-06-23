@@ -34,10 +34,6 @@
 
     End Function
 
-#End Region
-
-#Region " JSON Helper methods "
-
     ''' <summary>
     ''' Checks for token validity
     ''' </summary>
@@ -59,11 +55,6 @@
         Return result
 
     End Function
-
-
-#End Region
-
-#Region " Enumeration Helper methods "
 
     ''' <summary>
     ''' Enumeration: Returns Description

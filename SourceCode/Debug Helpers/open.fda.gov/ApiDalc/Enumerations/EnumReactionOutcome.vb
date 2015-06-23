@@ -1,24 +1,26 @@
-﻿#Region " Public Enumerations "
+﻿Imports System.ComponentModel
 
-''' <summary>
-''' Reaction Outcomes
-''' </summary>
-''' <remarks></remarks>
-Public Enum EnumReactionOutcome
+Namespace Enumerations
 
-    <System.ComponentModel.Description("Recovered/resolved")>
-    RecoveredResolved = 1
-    <System.ComponentModel.Description("Recovering/resolving")>
-    RecoveringResolving = 2
-    <System.ComponentModel.Description("Not recovered/not resolved")>
-    NotRecoveredNotResolved = 3
-    <System.ComponentModel.Description("Recovered/resolved with sequelae")>
-    RecoveredResolvedWithSequelae = 4
-    <System.ComponentModel.Description("Fatal")>
-    Fatal = 5
-    <System.ComponentModel.Description("Unknown")>
-    Unknown = 6
+    ''' <summary>
+    ''' Reaction Outcomes
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum EnumReactionOutcome
 
-End Enum
+        <Description("Recovered/resolved")>
+        RecoveredResolved = 1
+        <Description("Recovering/resolving")>
+        RecoveringResolving = 2
+        <Description("Not recovered/not resolved")>
+        NotRecoveredNotResolved = 3
+        <Description("Recovered/resolved with sequelae")>
+        RecoveredResolvedWithSequelae = 4
+        <Description("Fatal")>
+        Fatal = 5
+        <Description("Unknown")>
+        Unknown = 6
 
-#End Region
+    End Enum
+
+End Namespace

@@ -21,6 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>ApiDalc.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -67,16 +68,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data Objects\AdverseDrugEvent.vb" />
-    <Compile Include="Data Objects\DrugData.vb" />
-    <Compile Include="Data Objects\MetaResults.vb" />
-    <Compile Include="Data Objects\OpenFdaData.vb" />
-    <Compile Include="Data Objects\PatientData.vb" />
-    <Compile Include="Data Objects\ReactionData.vb" />
-    <Compile Include="Data Objects\RecallSearchResultData.vb" />
-    <Compile Include="Data Objects\ResultRecall.vb" />
-    <Compile Include="Data Objects\SearchResult.vb" />
-    <Compile Include="Data Objects\SearchSummary.vb" />
+    <Compile Include="DataObjects\AdverseDrugEvent.vb" />
+    <Compile Include="DataObjects\DrugData.vb" />
+    <Compile Include="DataObjects\MetaResults.vb" />
+    <Compile Include="DataObjects\OpenFdaData.vb" />
+    <Compile Include="DataObjects\PatientData.vb" />
+    <Compile Include="DataObjects\ReactionData.vb" />
+    <Compile Include="DataObjects\RecallSearchResultData.vb" />
+    <Compile Include="DataObjects\ResultRecall.vb" />
+    <Compile Include="DataObjects\SearchResult.vb" />
+    <Compile Include="DataObjects\SearchSummary.vb" />
     <Compile Include="Enumerations\EnumActionDrug.vb" />
     <Compile Include="Enumerations\EnumClassification.vb" />
     <Compile Include="Enumerations\EnumDrugCharacterization.vb" />

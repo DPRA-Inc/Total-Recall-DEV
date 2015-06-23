@@ -1,22 +1,24 @@
-﻿#Region " Public Enumerations "
+﻿Imports System.ComponentModel
 
-''' <summary>
-''' An encoded value for the category of individual submitting the report
-''' </summary>
-''' <remarks></remarks>
-Public Enum EnumPrimarySourceQualification
+Namespace Enumerations
 
-    Physician = 1
-    Pharmacist = 2
+    ''' <summary>
+    ''' An encoded value for the category of individual submitting the report
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum EnumPrimarySourceQualification
 
-    <System.ComponentModel.Description("Other Health Professional")>
-    OtherHealthProfessional = 3
+        Physician = 1
+        Pharmacist = 2
 
-    Lawyer = 4
+        <Description("Other Health Professional")>
+        OtherHealthProfessional = 3
 
-    <System.ComponentModel.Description("Consumer or non-health professional")>
-    Consumer = 5
+        Lawyer = 4
 
-End Enum
+        <Description("Consumer or non-health professional")>
+        Consumer = 5
 
-#End Region
+    End Enum
+
+End Namespace

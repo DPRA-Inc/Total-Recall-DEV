@@ -1,23 +1,27 @@
-﻿#Region " Public Enumerations "
+﻿Imports System.ComponentModel
 
-''' <summary>
-''' The unit for drugcumulativedosagenumb
-''' </summary>
-''' <remarks></remarks>
-Public Enum EnumDrugCumulativeDosageUnit
+Namespace Enumerations
 
-    <System.ComponentModel.Description("kg kilogram(s)")>
-        kilogram = 1
+    ''' <summary>
+    ''' The unit for drugcumulativedosagenumb
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum EnumDrugCumulativeDosageUnit
 
-    <System.ComponentModel.Description("G gram(s)")>
-        gram = 2
+        <Description("kg kilogram(s)")>
+            kilogram = 1
 
-    <System.ComponentModel.Description("Mg milligram(s)")>
-        milligram = 3
+        <Description("G gram(s)")>
+            gram = 2
 
-    <System.ComponentModel.Description("μg microgram(s)")>
-        microgram = 4
+        <Description("Mg milligram(s)")>
+            milligram = 3
 
-End Enum
+        <Description("μg microgram(s)")>
+            microgram = 4
 
-#End Region
+    End Enum
+
+End Namespace
+
+
