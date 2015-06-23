@@ -3,6 +3,7 @@
 Imports ApiDalc.DataObjects
 Imports ApiDalc.Enumerations
 Imports Newtonsoft.Json.Linq ' OpenSource
+Imports System.Text.RegularExpressions
 
 #End Region
 
@@ -281,7 +282,19 @@ Public Class OpenFda
         _search = String.Empty
     End Sub
 
+    Private Function RemoveSpecialCharactersFromKeyword(ByVal keyword As String) As String
+
+        Dim tmpitm = Regex.Replace(keyword, "\s+", " ")
+        tmpitm = Regex.Replace(tmpitm, "[\^\[\-\$\{\*\(\\\+\)\|\?\<\>!@#%&;]", " ")
+        keyword = Regex.Replace(tmpitm, " {2,}", " ")
+
+        Return keyword
+
+    End Function
+
     Public Sub SearchOnFieldByValue(searchField As String, searchFieldValue As String)
+
+        searchFieldValue = RemoveSpecialCharactersFromKeyword(searchFieldValue)
 
         searchFieldValue = searchFieldValue.Replace(" ", "+")
 
@@ -299,6 +312,8 @@ Public Class OpenFda
 
 
     Public Sub AddSearchFilter(endPointType As OpenFDAApiEndPoints, endpointField As String, keyWord As String, operationCompairType As FilterCompairType)
+
+        keyWord = RemoveSpecialCharactersFromKeyword(keyWord)
 
         keyWord = keyWord.Replace(" ", "+")
 
@@ -327,6 +342,10 @@ Public Class OpenFda
 
         ' Add Filter to KeyWord List
         Dim keyword As String = String.Empty
+
+        For indx As Integer = 0 To filters.Count - 1
+            filters(indx) = RemoveSpecialCharactersFromKeyword(filters(indx))
+        Next
 
         For Each itm In filters
             keyword += itm.ToLower & ","

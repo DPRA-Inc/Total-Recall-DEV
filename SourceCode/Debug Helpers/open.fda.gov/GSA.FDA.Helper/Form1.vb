@@ -716,16 +716,16 @@ Public Class Form1
 
     Private Sub btCheckShoppingListForRecalls_Click(sender As Object, e As EventArgs) Handles btCheckShoppingListForRecalls.Click
 
-        Dim wrapper As New ShopAwareService
-        Dim ShoppingList As New List(Of String)
+        'Dim wrapper As New ShopAwareService
+        'Dim ShoppingList As New List(Of String)
 
-        For Each item In lbShoppingList.Items
-            ShoppingList.Add(item)
-        Next
+        'For Each item In lbShoppingList.Items
+        '    ShoppingList.Add(item)
+        'Next
 
-        Dim results As List(Of RecallSearchResultData) = wrapper.GetRecallsSummary(ShoppingList)
+        'Dim results As List(Of RecallSearchResultData) = wrapper.GetRecallsSummary(ShoppingList)
 
-        PopulateTree_ShoppingList_RecallSearch(results)
+        'PopulateTree_ShoppingList_RecallSearch(results)
 
 
     End Sub
@@ -750,7 +750,6 @@ Public Class Form1
         End If
 
     End Sub
-
 
 
     Private Sub lbShoppingList_DoubleClick(sender As Object, e As EventArgs) Handles lbShoppingList.DoubleClick
@@ -784,17 +783,17 @@ Public Class Form1
 
     Private Sub btGetRecallDetails_Click(sender As Object, e As EventArgs) Handles btGetRecallDetails.Click
 
-        Dim wrapper As New ShopAwareService
+        'Dim wrapper As New ShopAwareService
 
-        'Dim ShoppingList As New List(Of String)
+        ''Dim ShoppingList As New List(Of String)
 
-        'For Each item In lbShoppingList.Items
-        '    ShoppingList.Add(item)
-        'Next
+        ''For Each item In lbShoppingList.Items
+        ''    ShoppingList.Add(item)
+        ''Next
 
-        Dim results As List(Of RecallSearchResultData) = wrapper.GetRecallsDetail(tbShopItem.Text)
+        'Dim results As List(Of RecallSearchResultData) = wrapper.GetRecallsDetail(tbShopItem.Text)
 
-        PopulateTree_ShoppingList_RecallSearch(results, True)
+        'PopulateTree_ShoppingList_RecallSearch(results, True)
 
     End Sub
 

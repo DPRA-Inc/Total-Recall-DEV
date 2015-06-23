@@ -20,14 +20,22 @@ Public Class RestClient
 
             If ex.Response IsNot Nothing AndAlso TypeOf ex.Response Is HttpWebResponse Then
 
+                Dim openFdaWebApiStatusCode As HttpStatusCode = DirectCast(ex.Response, System.Net.HttpWebResponse).StatusCode
+
                 If DirectCast(ex.Response, System.Net.HttpWebResponse).StatusCode = HttpStatusCode.NotFound Then
                     throwException = False
                 End If
 
+                Select Case openFdaWebApiStatusCode
+                    Case HttpStatusCode.BadRequest ' 400 Bad Request.  
+                        'Throw (New Exception("Bad Request to OpenFda's WebApi"))
+
+                End Select
+
             End If
 
             If throwException Then
-                Throw
+                Throw New Exception(ex.Message)
             End If
 
         Catch ex As Exception
