@@ -1,6 +1,6 @@
 ﻿angular.module('TotalRecall').controller('productcontroller', ProductController)
 
-function ProductController($http, productservice) {
+function ProductController($http, $modal, productservice) {
     var vm = this;
            
     vm.Product = GlobalsModule.SelectedProduct;
@@ -27,9 +27,6 @@ function ProductController($http, productservice) {
                         item.ShowMoreInformation = false;
                     });
 
-                    
-
-
                 }
 
                 vm.Details = result;
@@ -38,13 +35,27 @@ function ProductController($http, productservice) {
         );       
     }
 
+    vm.SetupMap = function() {
 
+        //vm.Details.MapObjects.forEach(function (obj) {
+
+        //    vectorSource.addFeature(createIcon(obj.Latitude, obj.Longitude, obj.Tooltip, obj.Image));
+
+        //});
+
+        //vectorSource.addFeature(createIcon(36, -84, 'Knoxville, TN', 'images/check.png'));
+        //vectorSource.addFeature(createIcon(35, -85.3, 'Chattanooga, TN', 'images/check.png'));
+
+        //centerMapOnAllObjects();
+
+
+    }
 
     vm.ShowMoreInformation = function (item) {
-
-        item.ShowMoreInformation = true;
-      
-
+        var modalInstance = $modal.open({
+            templateUrl: 'fulldetails.html',
+            controller: ModalInstanceCtrl
+        });
 
     }
 

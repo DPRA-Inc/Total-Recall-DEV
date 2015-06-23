@@ -20,7 +20,7 @@ Public Class SearchResultMapData
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Property Tooltip As String = "undefined"
+    Public Property Tooltip As String = String.Empty
 
     ''' <summary>
     ''' Bitwise Icon Set 
@@ -36,7 +36,11 @@ Public Class SearchResultMapData
     ''' <value>string</value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Property Image As String = String.Empty
+    Public ReadOnly Property Image As String
+        Get
+            Return String.Format("Assets/mapIcon/{0}.png", CInt(Me.IconSet))
+        End Get
+    End Property
 
     ''' <summary>
     ''' Latitude Value of State
