@@ -105,7 +105,7 @@ function ngEnter() {
     return {
         link: function (scope, elements, attrs) {
             elements.bind('keydown keypress', function (event) {
-                radif (event.which === 13) {
+                if (event.which === 13) {
                     scope.$apply(function () {
                         scope.$eval(attrs.ngEnter);
                     });
