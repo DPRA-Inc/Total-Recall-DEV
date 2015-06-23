@@ -25,50 +25,32 @@
 
         <div class="ibox float-e-margins animated bounceInLeft" ng-show="vm.Product.HasClassI">
 
-            <div class="ibox-title">
-                <h3><i>CLASS I RECALLS</i></h3>
-            </div>
-
             <div class="ibox-content no-padding">
 
-                <ul class="sortable-list connectList agile-list" ng-model="todoList">
+                <h2>
+                    <span class="text-navy">Class I Recalls</span> {{vm.Product.ClassICount}} results found for: 
+                </h2>
+
+                <div class="hr-line-dashed"></div>
+
+                <ul>
 
                     <li class="danger-element" ng-repeat="item in vm.Details.ClassI">
-                        {{item.Content}}                        
-                        <div class="agile-detail">
-                            <a href="#" class="pull-right btn btn-xs btn-white" ng-click="vm.GetMoreInformation(item)">More Information</a>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="search-result">
+                            <p>
+                                {{item.Content}}
+                            </p>
+                            
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+                            
                             <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                            
                             <div ng-show="item.ShowMoreInformation">
                                 Testing the More Information Area
                             </div>
-                        </div>
 
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-        <div class="ibox float-e-margins animated bounceInLeft" ng-show="vm.Product.HasClassII">
-
-            <div class="ibox-title">
-                <h3><i>CLASS II RECALLS</i></h3>
-            </div>
-
-            <div class="ibox-content no-padding">
-
-                <ul class="sortable-list connectList agile-list" ng-model="todoList">
-
-                    <li class="danger-element" ng-repeat="item in vm.Details.ClassII">
-                        {{item.Content}}
-                        <div class="agile-detail">
-                            <a href="#" class="pull-right btn btn-xs btn-white" ng-click="vm.GetMoreInformation(item)">More Information</a>
-                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
-                            <div ng-show="item.ShowMoreInformation">
-                                Testing the More Information Area
-                            </div>
                         </div>
 
                     </li>

@@ -50,7 +50,7 @@ Public Class ShopAwareService
 
     Public Function GetSearchResult(ByVal keyWord As String, ByVal state As String) As SearchResult
 
-        Const maxResultSetSize As Integer = 10
+        Const maxResultSetSize As Integer = 3
 
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
 
