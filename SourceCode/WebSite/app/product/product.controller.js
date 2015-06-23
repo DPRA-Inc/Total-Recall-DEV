@@ -18,7 +18,7 @@ function ProductController($http, $modal, productservice) {
 
     function LoadPageInfo() {
 
-        var productName = vm.ProductName;
+        var productName = vm.SearchSummary.Keyword;
         var region = "TN";
 
         productservice.GetSearchResult(productName, region,
@@ -32,6 +32,7 @@ function ProductController($http, $modal, productservice) {
 
                 }
 
+                GlobalsModule.SearchResult = result;
                 vm.SearchResult = result;
                 vm.DataLoading = false;
             }            
@@ -114,6 +115,7 @@ function ProductController($http, $modal, productservice) {
     }
 
     vm.ShowMoreInformation = function (item) {
+
 
         GlobalsModule.SearchResultItem = item;
 
