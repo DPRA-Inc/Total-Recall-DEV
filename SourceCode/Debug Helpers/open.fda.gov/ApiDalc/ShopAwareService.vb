@@ -215,6 +215,8 @@ Public Class ShopAwareService
 
                 Dim filterList As New List(Of String)({state})
 
+                _fda.ResetSearch()
+
                 _fda.AddSearchFilter(endPointType, "reason_for_recall", keyWord, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, FDAFilterTypes.Region, filterList) ', EnumFilterCompairType.And)

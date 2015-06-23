@@ -1202,12 +1202,11 @@ Public Class Form1
         Dim results As New List(Of SearchSummary)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchSummary As SearchSummary = wrapper.GetSearchSummary(item, "TN")
+            Dim mySearchSummary As SearchSummary = wrapper.GetSearchSummary(item, tbRegion.Text)
             results.Add(mySearchSummary)
 
         Next
 
-        Debug.WriteLine("")
 
         TreeView2.Nodes.Clear()
         For Each itm In results
@@ -1234,7 +1233,7 @@ Public Class Form1
         Dim results As New List(Of SearchResult)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, "TN")
+            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, tbRegion.Text)
             results.Add(mySearchResult)
 
         Next
