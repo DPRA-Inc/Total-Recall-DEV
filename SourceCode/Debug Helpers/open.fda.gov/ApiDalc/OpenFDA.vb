@@ -204,7 +204,7 @@ Public Class OpenFda
         '_resultSet = (New RestClient).Execute(url)
 
 
-        Dim result As String = (New RestClient).Execute(url)
+        Dim result As String = _restClient.Execute(url)
 
         '_resultSet = String.Empty
 
@@ -423,16 +423,16 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.Region
                         'param += "country:" & tmp
-                        param += "state:(" & tmp & ")"
+                        param += "(state:(" & tmp & ")"
                         param += "+"
-                        param += "distribution_pattern:(Nationwide+" & tmp & ")"
+                        param += "distribution_pattern:(Nationwide+" & tmp & "))"
 
                         'TODO = Have a lookup to convert list of stateCodes to list of StateNames
 
                     Case FdaFilterTypes.RecallReason
-                        param += "reason_for_recall:(" & tmp & ")"
+                        param += "(reason_for_recall:(" & tmp & ")"
                         param += "+"
-                        param += "product_description:(" & tmp & ")"
+                        param += "product_description:(" & tmp & "))"
                         'param += "code_info:" & tmp
 
                     Case FdaFilterTypes.Date

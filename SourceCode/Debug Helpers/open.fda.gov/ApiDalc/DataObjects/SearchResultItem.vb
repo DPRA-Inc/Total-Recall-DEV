@@ -9,7 +9,7 @@ Namespace DataObjects
 
     Public Class SearchResultItem
 
-        Public Property DateStarted As Date 'recall_initiation_date
+        Public Property DateStarted As String 'recall_initiation_date
 
         Public Property Content As String ' reason_for_recall  + code_info
 

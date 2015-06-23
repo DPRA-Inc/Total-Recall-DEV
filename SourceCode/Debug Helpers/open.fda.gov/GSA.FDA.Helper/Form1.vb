@@ -1202,12 +1202,11 @@ Public Class Form1
         Dim results As New List(Of SearchSummary)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchSummary As SearchSummary = wrapper.GetSearchSummary(item, "TN")
+            Dim mySearchSummary As SearchSummary = wrapper.GetSearchSummary(item, tbRegion.Text)
             results.Add(mySearchSummary)
 
         Next
 
-        Debug.WriteLine("")
 
         TreeView2.Nodes.Clear()
         For Each itm In results
@@ -1221,39 +1220,53 @@ Public Class Form1
         'PopulateTree_ShoppingList_RecallSearch(results)
 
 
-    End Sub
 
-#End Region
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-
-
-        Dim wrapper As New ShopAwareService
+        ' Dim wrapper As New ShopAwareService
         'Dim ShoppingList As New List(Of String)
 
-        Dim results As New List(Of SearchResult)
+        Dim results_2 As New List(Of SearchResult)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, "TN")
-            results.Add(mySearchResult)
+            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, tbRegion.Text)
+            results_2.Add(mySearchResult)
 
         Next
 
-        Debug.WriteLine("")
+        For Each itm In results_2
 
-        'TreeView2.Nodes.Clear()
-        'For Each itm In results
-        '    Dim parentNode As TreeNode = TreeView2.Nodes.Add(itm.Keyword)
-        '    parentNode.Nodes.Add(String.Format("Class I: ({0})", itm.ClassICount))
-        '    parentNode.Nodes.Add(String.Format("Class II: ({0})", itm.ClassIICount))
-        '    parentNode.Nodes.Add(String.Format("Class III: ({0})", itm.ClassIIICount))
+            Dim parentNode_2 As TreeNode = TreeView2.Nodes.Add("Results for: " & itm.Keyword)
+            Dim classNode As TreeNode
 
-        '    parentNode.Nodes.Add(String.Format("Event: ({0})", itm.EventCount))
-        'Next
-        ''PopulateTree_ShoppingList_RecallSearch(results)
+            If itm.ClassI.Count > 0 Then
+
+                classNode = parentNode_2.Nodes.Add("Class I")
+                For Each nd In itm.ClassI
+                    classNode.Nodes.Add(nd.ProductDescription)
+                Next
+            End If
+
+            If itm.ClassII.Count > 0 Then
+
+                classNode = parentNode_2.Nodes.Add("Class II")
+                For Each nd In itm.ClassII
+                    classNode.Nodes.Add(nd.ProductDescription)
+                Next
+            End If
 
 
+            If itm.ClassIII.Count > 0 Then
+
+                classNode = parentNode_2.Nodes.Add("Class III")
+                For Each nd In itm.ClassIII
+                    classNode.Nodes.Add(nd.ProductDescription)
+                Next
+            End If
+
+
+        Next
 
     End Sub
+
+#End Region
 
 End Class

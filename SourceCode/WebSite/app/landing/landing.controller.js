@@ -4,7 +4,10 @@ function landingcontroller($location, landingservice) {
     var vm = this;
 
     vm.textValue = null;
-    vm.shoppingList = [];
+
+    if (!angular.isObject(GlobalsModule.ShoppingList)) GlobalsModule.ShoppingList = [];
+
+    vm.shoppingList = GlobalsModule.ShoppingList;
            
     LoadPageInfo();
 
@@ -48,6 +51,8 @@ function landingcontroller($location, landingservice) {
 
         vm.shoppingList.push(item);
 
+        vm.textValue = "";
+
         // Differnt Ranks.
         //Rank: 'warning'
         //Rank: 'success',
@@ -61,8 +66,6 @@ function landingcontroller($location, landingservice) {
                 
                 // Search for the Keyword in our list.
                 vm.shoppingList.forEach(function (product) {
-
-                    product.Rank = "";
 
                     if (product.Keyword == result.Keyword) {
 
@@ -98,11 +101,16 @@ function landingcontroller($location, landingservice) {
                     }                                     
                 });
             }
+
+            
+
         );
     }
 
     vm.ViewProductDetails = function (product) {
        
+        GlobalsModule.ShoppingList = vm.shoppingList;
+
         if (!product.IsClean) {
             GlobalsModule.SelectedProduct = product;
             $location.path('/index/product');

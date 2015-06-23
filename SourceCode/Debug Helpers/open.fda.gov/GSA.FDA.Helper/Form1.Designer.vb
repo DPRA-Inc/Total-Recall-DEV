@@ -43,6 +43,7 @@ Partial Class Form1
         Me.cbFilterTypes = New System.Windows.Forms.ComboBox()
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tbRegion = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -75,8 +76,6 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbEndPoints_2 = New System.Windows.Forms.ComboBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.spMaxResultSize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -279,8 +278,7 @@ Partial Class Form1
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.Button4)
-        Me.TabPage2.Controls.Add(Me.Button3)
+        Me.TabPage2.Controls.Add(Me.tbRegion)
         Me.TabPage2.Controls.Add(Me.Button2)
         Me.TabPage2.Controls.Add(Me.Label6)
         Me.TabPage2.Controls.Add(Me.Label5)
@@ -303,10 +301,17 @@ Partial Class Form1
         Me.TabPage2.Text = "Shopping List"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'tbRegion
+        '
+        Me.tbRegion.Location = New System.Drawing.Point(695, 62)
+        Me.tbRegion.Name = "tbRegion"
+        Me.tbRegion.Size = New System.Drawing.Size(100, 20)
+        Me.tbRegion.TabIndex = 42
+        '
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(751, 58)
+        Me.Button2.Location = New System.Drawing.Point(695, 88)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(118, 23)
         Me.Button2.TabIndex = 40
@@ -611,26 +616,6 @@ Partial Class Form1
         Me.cbEndPoints_2.Size = New System.Drawing.Size(121, 21)
         Me.cbEndPoints_2.TabIndex = 22
         '
-        'Button3
-        '
-        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(586, 58)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(118, 23)
-        Me.Button3.TabIndex = 41
-        Me.Button3.Text = "GetSearchResult"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(586, 86)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(118, 23)
-        Me.Button4.TabIndex = 42
-        Me.Button4.Text = "SearchResultItem"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -705,7 +690,6 @@ Partial Class Form1
     Friend WithEvents spSpecifyRecordFetch As System.Windows.Forms.NumericUpDown
     Friend WithEvents cknToLineFeed As System.Windows.Forms.CheckBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents tbRegion As System.Windows.Forms.TextBox
 
 End Class

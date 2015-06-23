@@ -12,7 +12,7 @@
 
         Public Property Events As New List(Of SearchResultItem)
 
-        Public Property MapObjects As List(Of SearchResultItem)
+        Public Property MapObjects As List(Of SearchResultMapData)
 
     End Class
 

@@ -5,6 +5,10 @@
     top: 50%;
 }
 
+.big {
+    font-size:16px;
+}
+
 .imagesection {     
     height:400px; 
     width:110%;
@@ -717,9 +721,9 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     color: #fff;
 }
 .btn-primary {
-    background-color: #1ab394;
-    border-color: #1ab394;
-    color: #FFFFFF;
+    background-color: #BFFF00;
+    border-color: #BFFF00;
+    color: black;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -4011,7 +4015,7 @@ body.modal-open {
     color: #006621;
 }
 .search-result p {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 5px;
 }
 /* CONTACTS */
