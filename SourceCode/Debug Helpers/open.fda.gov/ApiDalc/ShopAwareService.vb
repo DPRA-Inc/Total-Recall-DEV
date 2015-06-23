@@ -217,9 +217,9 @@ Public Class ShopAwareService
 
                 _fda.ResetSearch()
 
-                _fda.AddSearchFilter(endPointType, "reason_for_recall", keyWord, FilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
-                _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList) ', EnumFilterCompairType.And)
 
                 apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
