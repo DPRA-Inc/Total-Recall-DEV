@@ -1,34 +1,40 @@
-﻿   
-    function landingservice() {
+﻿angular.module('TotalRecall').factory('landingservice', LandingService);
 
-        var service = {
-            GetPeopleListing: GetPeopleListing
-        };
-       
-        function GetPeopleListing(callback) {
+function LandingService($http) {
 
-            var serviceUrl = 'QuickHandler.ashx?Command=GetPeopleListing';
+    var service = {
+        GetIssues: GetIssues
+    };
 
-            //$http({
-            //    method: 'POST',
-            //    url: serviceUrl,
-            //    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-            //}).
-            //    success(function (data, status, headers, config) {
-            //        if (data == undefined || data == "null") return;
+    return service;
 
+    ///////////////////
 
-            //        callback(data);
-            //    }).
-            //    error(function (data, status, headers, config) {
-            //        $log.warn(data, status, headers, config)
-            //    });
+    function GetIssues(searchItem, callback) {
 
-        }
+        var serviceUrl = 'QuickHandler.ashx?Command=GetIssues';
 
-        return service;
+        $http({
+            method: 'POST',
+            url: serviceUrl,
+            data: searchItem         
+        }).
+            success(function (data, status, headers, config) {
+                if (!angular.isObject(data)) return;
 
+                callback(data);
+            }).
+            error(function (data, status, headers, config) {
+                $log.warn(data, status, headers, config)
+            });                 
     }
 
-    angular.module('TotalRecall').factory('landingservice', landingservice);
+        
+
+}
+
+
+
+
+
 

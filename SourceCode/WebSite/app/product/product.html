@@ -1,0 +1,116 @@
+<div class="wrapper wrapper-content animated fadeInDown" data-ng-controller="productcontroller as vm">
+    <div class="row">
+        <div class="col-lg-9">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Product Details</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>Search Results: <strong>{{vm.ProductName}}</strong></h1>
+    </div>
+
+    <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
+        <i class="fa fa-spinner fa-spin"></i>
+        Loading More Information...
+    </h1>
+
+    <div class="col-md-6 animated bounceInLeft" ng-hide="vm.DataLoading">
+
+        <div class="ibox float-e-margins" ng-show="vm.Product.HasClassI">
+
+            <div class="ibox-content no-padding">
+                <h2><strong><i>CLASS I</i></strong></h2>
+
+                <small>Top results</small>
+
+                <ul>
+
+                    <li class="danger-element" ng-repeat="item in vm.Details.ClassI">
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="search-result">
+                            <p>{{item.Content}}</p>
+
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="ibox float-e-margins" ng-show="vm.Product.HasClassII">
+
+            <div class="ibox-content no-padding">
+                <h2><strong><i>CLASS II</i></strong></h2>
+
+                <small>Top results</small>
+
+                <ul>
+
+                    <li class="danger-element" ng-repeat="item in vm.Details.ClassII">
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="search-result">
+                            <p>{{item.Content}}</p>
+
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="ibox float-e-margins" ng-show="vm.Product.HasClassIII">
+
+            <div class="ibox-content no-padding">
+                <h2><strong><i>CLASS III</i></strong></h2>
+
+                <small>Top results</small>
+
+                <ul>
+
+                    <li class="danger-element" ng-repeat="item in vm.Details.ClassIII">
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="search-result">
+                            <p>{{item.Content}}</p>
+
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation">More Information</div>
+
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

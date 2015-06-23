@@ -1,60 +1,123 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller)
 
-function landingcontroller($http) {
+function landingcontroller($location, landingservice) {
     var vm = this;
 
-    vm.PageTitle = 'Welcome to Shop Aware!';
-    vm.PeopleListing = {};
-       
-    vm.GetPersonList = function () {
+    vm.textValue = null;
 
-        var serviceUrl = 'QuickHandler.ashx?Command=person';
+    if (!angular.isObject(GlobalsModule.ShoppingList)) GlobalsModule.ShoppingList = [];
 
-        $http({
-            method: 'GET',
-            url: serviceUrl,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-        }).
-            success(function (data, status, headers, config) {
-                if (data == undefined || data == "null") return;
+    vm.shoppingList = GlobalsModule.ShoppingList;
+           
+    LoadPageInfo();
+
+    //********************************
+
+    function LoadPageInfo() {
+
+        // Here, lets go ahead and ping the service once. 
+        // this make all searches 10x faster as there will be no loadup time.
+        landingservice.GetIssues("TEST|TN",
+            function (result) {
+
+                // Do nothing.  Just warm it up!
 
 
-                callback(data);
-            }).
-            error(function (data, status, headers, config) {
-                $log.warn(data, status, headers, config)
-            });
+            }
+        );
 
-	    //var data = landingservice.GetPeopleListing(function (value) {
+    }
 
-	    //    this.PeopleListing = value;
+
+    vm.AddToList = function() {
+        var value = vm.textValue;
+        var region = "TN";
+
+        // Make the new item to be added to our list.
+        var item = [];
+
+        item.Keyword = value; // Product name
+        item.Rank = 'success'; // How Bad is it, Color Code.
+        item.IsLoading = true; // Indicates we are waiting on Return From Service.
+        item.HasClassI = false; // Indicates there is some Class I Data to show.
+        item.HasClassII = false;
+        item.HasClassIII = false;
+        item.HasEvents = false;
+        item.ClassICount = 0; 
+        item.ClassIICount = 0;
+        item.ClassIIICount = 0;
+        item.EventCount = 0;
+        item.IsClean = true;
+
+        vm.shoppingList.push(item);
+
+        vm.textValue = "";
+
+        // Differnt Ranks.
+        //Rank: 'warning'
+        //Rank: 'success',
+        //Rank: 'info',
+        //Rank: 'danger',
+
+        var searchStr = value + "|" + region;
+
+        var data = landingservice.GetIssues(searchStr,
+            function (result) {
+                
+                // Search for the Keyword in our list.
+                vm.shoppingList.forEach(function (product) {
+
+                    if (product.Keyword == result.Keyword) {
+
+                        if (result.EventCount > 0) {
+                            product.HasEvents = true;
+                            product.EventCount = result.EventCount;
+                            product.IsClean = false;
+                            product.Rank = "success";
+                        }
+                            
+                        if (result.ClassIIICount > 0) {
+                            product.HasClassIII = true;
+                            product.ClassIIICount = result.ClassIIICount;
+                            product.IsClean = false;
+                            product.Rank = "info";
+                        }
+
+                        if (result.ClassIICount > 0) {
+                            product.HasClassII = true;
+                            product.ClassIICount = result.ClassIICount;
+                            product.IsClean = false;
+                            product.Rank = "warning";
+                        }
+
+                        if (result.ClassICount > 0) {
+                            product.HasClassI = true;
+                            product.ClassICount = result.ClassICount;
+                            product.IsClean = false;
+                            product.Rank = "danger";
+                        }
+
+                        product.IsLoading = false;
+                    }                                     
+                });
+            }
+
             
-	    //});
-	}
+
+        );
+    }
+
+    vm.ViewProductDetails = function (product) {
+       
+        GlobalsModule.ShoppingList = vm.shoppingList;
+
+        if (!product.IsClean) {
+            GlobalsModule.SelectedProduct = product;
+            $location.path('/index/product');
+        }
+    }
 
 };
 
 
 
-//function landingcontroller() {
-
-//	this.userName = 'UserName goes here';
-//	this.helloText = 'Landing Page';
-//	this.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects and dev environment for these projects.';
-
-//	/**
-// * alerts - used for dynamic alerts in Notifications and Tooltips view
-// */
-//	this.alerts = [
-//        { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-//        { type: 'success', msg: 'Well done! You successfully read this important alert message.' },
-//        { type: 'info', msg: 'OK, You are done a great job man.' }
-//	];
-
-//	this.GetPersonList = function () {
-//		this.alerts.push({ msg: 'Another alert!' });
-//	};
-
-
-
-//};

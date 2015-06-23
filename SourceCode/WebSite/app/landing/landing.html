@@ -1,15 +1,99 @@
-<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="landingcontroller as vm">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="text-center m-t-lg">
-                <h1>
-                    {{vm.PageTitle}}
-                </h1>
-                <small>
-                    {{globals.ApplicationDescription}}
-                </small>
-                <button type="button" class="btn btn-primary btn-lg" ng-click="vm.GetPersonList()">Test1</button>
+<div data-ng-controller="landingcontroller as vm">
+    <div class="row imagesection" style="background-image: url('Assests/TritychHome.fw.png')">
+        <div class="col-md-6 col-md-offset-1 searchbox animated bounceIn">
+
+            <div class="col-md-6">
+                <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
+                <p></p>
+                <i class="h4"><b>What would you like to add to your shopping list?</b></i>
+
+                <p></p>
+
+                <div class="input-group">
+                    <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
+                <p></p>
+                <i class="h4 center-inarea">
+                    Have you ever wondered if the items you buy are safe?
+                    <b>ShopAware.gov</b> allows you to check your shopping list
+                    against current recalls, drug interactions or other events
+                    that could affect the health of your family.
+                </i>
+                <p></p>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="ibox animated bounceInLeft">
+            <div class="ibox-content">
+
+                <h1>Shopping List</h1>
+
+                <ul class="sortable-list connectList agile-list" ng-model="todoList">
+
+                    <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
+
+                        <div class="pull-right" ng-show="item.IsLoading">
+                            <h1><i class="fa fa-spinner fa-spin"></i></h1>
+                        </div>
+
+                        <div class="pull-right">
+
+                            <div class="badge badge-danger" ng-show="item.HasClassI">
+                                <h4><i class="fa fa-drupal"></i></h4>
+                            </div>
+
+                            <div class="badge badge-warning" ng-show="item.HasClassII">
+                                <h4><i class="fa fa-warning"></i> </h4>
+                            </div>
+
+                            <div class="badge badge-info" ng-show="item.HasClassIII">
+                                <h4>-<i class="fa fa-info"></i>-</h4>
+                            </div>
+
+                            <div class="badge badge-success" ng-show="item.HasEvents">
+                                <h4><i class="fa fa-gavel"></i></h4>
+                            </div>
+
+                            <div ng-show="item.IsClean">
+                                <h3><i class="fa fa-check"></i></h3>
+                            </div>
+
+                        </div>
+
+                        <h3>{{item.Keyword}}</h3>
+
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+
+    <div class="col-md-6 animated bounceInRight">
+        <h2>News Ticker Goes here!!</h2>
+
+
+
+    </div>
+
+
+
 </div>
+
+
+
+
+
+

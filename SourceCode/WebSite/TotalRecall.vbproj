@@ -96,6 +96,28 @@
     <Content Include="app\notify\notify.controller.js" />
     <Content Include="app\notify\notify.html" />
     <Content Include="app\notify\notify.service.js" />
+    <Content Include="app\product\product.controller.js" />
+    <Content Include="app\product\product.html" />
+    <Content Include="app\product\product.service.js" />
+    <Content Include="Assests\18369589-Supermarket-Shelves-Full-With-Different-Natural-Fruit-Juice-Bottles-And-Cartons-Stock-Photo.jpg" />
+    <Content Include="Assests\FootCast.jpg" />
+    <Content Include="Assests\frozenFood.jpg" />
+    <Content Include="Assests\fruit.jpg" />
+    <Content Include="Assests\fruit200.jpg" />
+    <Content Include="Assests\Fruit350.jpg" />
+    <Content Include="Assests\fruitLONG.fw.png" />
+    <Content Include="Assests\mapSample.fw.png" />
+    <Content Include="Assests\mapSample550.fw.png" />
+    <Content Include="Assests\medicalDevice.jpg" />
+    <Content Include="Assests\Prescription-drugs-bottles-selective-focus-crop-and-resize-615x320.jpg" />
+    <Content Include="Assests\prescription-drugs2.jpg" />
+    <Content Include="Assests\shelveLONG.jpg" />
+    <Content Include="Assests\ShopAware1.fw.png" />
+    <Content Include="Assests\ShopAware1A.fw.png" />
+    <Content Include="Assests\ShopAware2.fw.png" />
+    <Content Include="Assests\ShopAware3.fw.png" />
+    <Content Include="Assests\ShopAware4.fw.png" />
+    <Content Include="Assests\TritychHome.fw.png" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
@@ -271,16 +293,15 @@
     <Content Include="views\common\content.html" />
     <Content Include="views\common\footer.html" />
     <Content Include="views\common\ibox_tools.html" />
-    <Content Include="views\common\navigation.html" />
-    <Content Include="views\common\topnavbar.html" />
     <Content Include="views\common\top_navigation.html" />
     <Content Include="views\minor.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
+    <Compile Include="API Services\BusinessObjects\ValidationError.vb" />
     <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
-    <Compile Include="API Services\OpenFDA.vb" />
+    <Compile Include="API Services\Enumerations\ErrorTypes.vb" />
     <Compile Include="API Services\ServiceWrapper.vb" />
     <Compile Include="API Services\Utilities.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -385,6 +406,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Debug Helpers\open.fda.gov\ApiDalc\ApiDalc.vbproj">
+      <Project>{8c8e24de-d766-4abe-a176-c282040e3898}</Project>
+      <Name>ApiDalc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
