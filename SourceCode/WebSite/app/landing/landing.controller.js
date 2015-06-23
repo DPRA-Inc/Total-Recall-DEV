@@ -31,7 +31,7 @@ function landingcontroller($location, landingservice) {
 
     vm.AddToList = function () {
 
-        var disallowedChars = /\W+/g;
+        var disallowedChars = /[^a-zA-Z0-9 :]/g;
 
         if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").length > 0) {
 
