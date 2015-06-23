@@ -290,59 +290,58 @@ Public Class ShopAwareService
 
                 _fda.ResetSearch()
 
-                
-                Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-                Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
+                'Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+                'Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
 
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-                _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+                '_fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
                 apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
                 searchResults = _fda.Execute(apiUrl)
 
-                Dim dataSetSize As Integer = _fda.GetMetaResults().Total()
+                'Dim dataSetSize As Integer = _fda.GetMetaResults().Total()
 
-                If dataSetSize = 0 Then
+                'If dataSetSize = 0 Then
 
-                    _fda.ResetSearch()
+                '    _fda.ResetSearch()
 
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+                '    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
+                '    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
+                '    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
-                    apiUrl = _fda.BuildUrl(endPointType, resultSize)
+                '    apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
-                    searchResults = _fda.Execute(apiUrl)
+                '    searchResults = _fda.Execute(apiUrl)
 
-                    dataSetSize = _fda.GetMetaResults().Total()
+                '    dataSetSize = _fda.GetMetaResults().Total()
 
-                End If
+                'End If
 
-                'Check SearchResults  meta.Results.Total
-                ' if count is 0 then remove Date range and try again
-                Dim isPagingRequired As Boolean = False
+                ''Check SearchResults  meta.Results.Total
+                '' if count is 0 then remove Date range and try again
+                'Dim isPagingRequired As Boolean = False
 
-                If dataSetSize > 100 Then
-                    isPagingRequired = True
-                End If
+                'If dataSetSize > 100 Then
+                '    isPagingRequired = True
+                'End If
 
-                'Do
-                '    '    [ statements ]
-                '    '    [ Continue Do ]
-                '    '    [ statements ]
-                '    '    [ Exit Do ]
-                '    '    [ statements ]
-                '    'Loop { While | Until } condition
-                'Loop(ispagingrequired
-                '    )
+                ''Do
+                ''    '    [ statements ]
+                ''    '    [ Continue Do ]
+                ''    '    [ statements ]
+                ''    '    [ Exit Do ]
+                ''    '    [ statements ]
+                ''    'Loop { While | Until } condition
+                ''Loop(ispagingrequired
+                ''    )
 
-                'Do
-                '    'Debug.Write(index.ToString & " ")
-                '    'index += 1
-                'Loop Until Not isPagingRequired
+                ''Do
+                ''    'Debug.Write(index.ToString & " ")
+                ''    'index += 1
+                ''Loop Until Not isPagingRequired
 
 
             If Not String.IsNullOrEmpty(searchResults) Then
