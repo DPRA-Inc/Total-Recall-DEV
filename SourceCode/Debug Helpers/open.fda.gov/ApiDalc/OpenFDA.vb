@@ -10,33 +10,30 @@ Imports Newtonsoft.Json.Linq ' OpenSource
 ''' Open FDA
 ''' </summary>
 ''' <remarks></remarks>
-Public Class OpenFDA
+Public Class OpenFda
 
 #Region " Public Properties "
 
-    Public Shared Property HostURL As String = "https://api.fda.gov/"
+    Public Shared Property HostUrl As String = "https://api.fda.gov/"
 
 #End Region
 
-#Region " Private Members "
+#Region " Member Variables "
 
     Private _search As String
     Private _count As String
     Private _limit As Integer = 0
-
     Private _resultSet As String
     Private _meta As JObject
     Private _results As Object 'JObject
-
     Private _keyWords As New HashSet(Of String)
-
-    Private _endPointType As OpenFDAApiEndPoints
+    Private _endPointType As OpenFdaApiEndPoints
 
 #End Region
 
 #Region " Public Methods "
 
-    Public Function GetOpenFDAEndPoint(endpoint As OpenFDAApiEndPoints) As String
+    Public Function GetOpenFDAEndPoint(endpoint As OpenFdaApiEndPoints) As String
 
         _endPointType = endpoint
 
@@ -44,13 +41,13 @@ Public Class OpenFDA
 
         Dim endPT As String = GetEnumDefaultValue(endpoint)
 
-        result = AddForwardSlash(HostURL) & endPT & ".json?"
+        result = AddForwardSlash(HostUrl) & endPT & ".json?"
 
         Return result
 
     End Function
 
-    Public Function BuildUrl(ByVal endPointType As OpenFDAApiEndPoints, Optional ByVal limit As Integer = 0, Optional ByVal ongoingOnly As Boolean = True) As String
+    Public Function BuildUrl(ByVal endPointType As OpenFdaApiEndPoints, Optional ByVal limit As Integer = 0, Optional ByVal ongoingOnly As Boolean = True) As String
 
         Dim uri As Uri
         Dim sb As New System.Text.StringBuilder
@@ -191,7 +188,9 @@ Public Class OpenFDA
     Public Function Execute(ByVal url As String) As String
 
         Dim result As String = String.Empty
+
         _resultSet = String.Empty
+
         'Dim res As String = GetOpenFDAEndPoint(OpenFDAApiEndPoints.DrugEvent)
         Dim webClient = New Net.WebClient()
 
@@ -259,8 +258,6 @@ Public Class OpenFDA
 
     End Function
 
-#Region " Search "
-
     Public Sub ResetSearch()
         _search = String.Empty
     End Sub
@@ -281,8 +278,7 @@ Public Class OpenFDA
         SearchOnFieldByValue("_exists_", searchField)
     End Sub
 
-
-    Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String)) As String
+    Public Function AddSearchFilter(ByVal endpointType As OpenFdaApiEndPoints, ByVal type As FdaFilterTypes, ByVal filters As List(Of String)) As String
 
         ' Add Filter to KeyWord List
         Dim keyword As String = String.Empty
@@ -298,8 +294,7 @@ Public Class OpenFDA
         If Not _keyWords.Contains(keyword) Then
             _keyWords.Add(keyword)
         End If
-
-
+        
         Dim param As String = String.Empty
 
         'Dim endpointType As OpenFDAApiEndPoints = OpenFDAApiEndPoints.FoodRecall
@@ -317,7 +312,7 @@ Public Class OpenFDA
 
         Select Case type
 
-            Case FDAFilterTypes.Date
+            Case FdaFilterTypes.Date
 
 
                 If filters.Count = 1 Then
@@ -375,15 +370,13 @@ Public Class OpenFDA
 
         End Select
 
-
-
         Select Case endpointType
 
-            Case OpenFDAApiEndPoints.DeviceRecall, OpenFDAApiEndPoints.DrugRecall, OpenFDAApiEndPoints.FoodRecall
+            Case OpenFdaApiEndPoints.DeviceRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.FoodRecall
 
                 Select Case type
 
-                    Case FDAFilterTypes.Region
+                    Case FdaFilterTypes.Region
                         'param += "country:" & tmp
                         param += "state:(" & tmp & ")"
                         param += "+"
@@ -391,13 +384,13 @@ Public Class OpenFDA
 
                         'TODO = Have a lookup to convert list of stateCodes to list of StateNames
 
-                    Case FDAFilterTypes.RecallReason
+                    Case FdaFilterTypes.RecallReason
                         param += "reason_for_recall:(" & tmp & ")"
                         param += "+"
                         param += "product_description:(" & tmp & ")"
                         'param += "code_info:" & tmp
 
-                    Case FDAFilterTypes.Date
+                    Case FdaFilterTypes.Date
                         param += "("
                         param += "report_date:" & tmp & ""
                         param += "+"
@@ -407,10 +400,10 @@ Public Class OpenFDA
 
                 End Select
 
-            Case OpenFDAApiEndPoints.DeviceEvent, OpenFDAApiEndPoints.DeviceEvent
+            Case OpenFdaApiEndPoints.DeviceEvent, OpenFdaApiEndPoints.DeviceEvent
                 'TBD
 
-            Case OpenFDAApiEndPoints.DrugLabel
+            Case OpenFdaApiEndPoints.DrugLabel
                 'TBD
 
             Case Else
@@ -435,11 +428,6 @@ Public Class OpenFDA
 
     End Function
 
-#End Region
-
-
-#Region " Limits "
-
     Public Function AddResultLimit(ByVal limit As Integer) As String
 
         Dim parm As String = String.Empty
@@ -463,13 +451,8 @@ Public Class OpenFDA
 
     End Function
 
-#End Region
-
-#Region " Count "
-
-#End Region
-
     Public Function GetMetaResults() As MetaResults
+
         Dim metaData As New MetaResults
 
         If _meta IsNot Nothing Then
