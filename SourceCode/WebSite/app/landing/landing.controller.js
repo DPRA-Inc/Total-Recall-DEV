@@ -1,4 +1,4 @@
-﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller)
+﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller);
 
 function landingcontroller($location, landingservice) {
     var vm = this;
@@ -29,8 +29,13 @@ function landingcontroller($location, landingservice) {
     }
 
 
-    vm.AddToList = function() {
-        var value = vm.textValue;
+    vm.AddToList = function () {
+
+        var disallowedChars = /\W+/g;
+
+        if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").length > 0) {
+
+            var value = vm.textValue.replace(disallowedChars, "");
         var region = "TN";
 
         // Make the new item to be added to our list.
@@ -67,7 +72,7 @@ function landingcontroller($location, landingservice) {
                 // Search for the Keyword in our list.
                 vm.shoppingList.forEach(function (product) {
 
-                    if (product.Keyword == result.Keyword) {
+                        if (product.Keyword === result.Keyword) {
 
                         if (result.EventCount > 0) {
                             product.HasEvents = true;
@@ -101,10 +106,8 @@ function landingcontroller($location, landingservice) {
                     }                                     
                 });
             }
-
-            
-
         );
+    }
     }
 
     vm.ViewProductDetails = function (product) {
