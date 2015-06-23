@@ -8,9 +8,9 @@ Imports ApiDalc.Enumerations
 
 Public Class ShopAwareService
 
-#Region " Private Members "
+#Region " Member Variables "
 
-    Private _fda As OpenFDA
+    Private _fda As OpenFda
 
 #End Region
 
