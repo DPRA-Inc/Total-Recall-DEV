@@ -12,6 +12,8 @@
 
         Public Property Events As New List(Of SearchResultItem)
 
+        Public Property MapObjects As List(Of String)
+
     End Class
 
 End Namespace

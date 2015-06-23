@@ -44,6 +44,7 @@ function landingcontroller($location, landingservice) {
         item.ClassIICount = 0;
         item.ClassIIICount = 0;
         item.EventCount = 0;
+        item.IsClean = true;
 
         vm.shoppingList.push(item);
 
@@ -68,24 +69,28 @@ function landingcontroller($location, landingservice) {
                         if (result.EventCount > 0) {
                             product.HasEvents = true;
                             product.EventCount = result.EventCount;
+                            product.IsClean = false;
                             product.Rank = "success";
                         }
                             
                         if (result.ClassIIICount > 0) {
                             product.HasClassIII = true;
                             product.ClassIIICount = result.ClassIIICount;
+                            product.IsClean = false;
                             product.Rank = "info";
                         }
 
                         if (result.ClassIICount > 0) {
                             product.HasClassII = true;
                             product.ClassIICount = result.ClassIICount;
+                            product.IsClean = false;
                             product.Rank = "warning";
                         }
 
                         if (result.ClassICount > 0) {
                             product.HasClassI = true;
                             product.ClassICount = result.ClassICount;
+                            product.IsClean = false;
                             product.Rank = "danger";
                         }
 
@@ -97,10 +102,11 @@ function landingcontroller($location, landingservice) {
     }
 
     vm.ViewProductDetails = function (product) {
-
-        GlobalsModule.SelectedProduct = product;
-        $location.path('/index/product');
-
+       
+        if (!product.IsClean) {
+            GlobalsModule.SelectedProduct = product;
+            $location.path('/index/product');
+        }
     }
 
 };

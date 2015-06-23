@@ -132,15 +132,18 @@ Public NotInheritable Class ServiceWrapper
 
     Private Shared Function GetSearchResult(item As String) As SearchResult
 
-        'Dim info As String() = Split(item, "|")
+        Dim info As String() = Split(item, "|")
 
-        'Dim wrapper As New ShopAwareService
-        'Dim result = wrapper.GetSearchResult(info(0), info(1))
+        Dim wrapper As New ShopAwareService
+        Dim result = wrapper.GetSearchResult(info(0), info(1))
 
-        'Return result
-
+        Return result
 
     End Function
+
+    Private Shared Function Get
+
+
 
 End Class
 

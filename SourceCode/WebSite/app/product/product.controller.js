@@ -21,7 +21,11 @@ function ProductController($http, productservice) {
         productservice.GetSearchResult(productName, region,
             function (result) {
 
-                if (result == null) {
+                if (result != null) {
+
+                    result.ClassI.forEach(function (item) {
+                        item.ShowMoreInformation = false;
+                    });
 
                     
 
@@ -36,7 +40,7 @@ function ProductController($http, productservice) {
 
 
 
-    vm.GetMoreInformation = function (item) {
+    vm.ShowMoreInformation = function (item) {
 
         item.ShowMoreInformation = true;
       
