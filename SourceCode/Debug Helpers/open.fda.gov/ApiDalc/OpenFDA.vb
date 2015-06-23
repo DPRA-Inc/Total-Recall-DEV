@@ -204,7 +204,7 @@ Public Class OpenFda
         '_resultSet = (New RestClient).Execute(url)
 
 
-        Dim result As String = (New RestClient).Execute(url)
+        Dim result As String = _restClient.Execute(url)
 
         '_resultSet = String.Empty
 
