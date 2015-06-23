@@ -5,6 +5,10 @@
     top: 50%;
 }
 
+.big {
+    font-size:16px;
+}
+
 .imagesection {     
     height:400px; 
     width:110%;
@@ -4011,7 +4015,7 @@ body.modal-open {
     color: #006621;
 }
 .search-result p {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 5px;
 }
 /* CONTACTS */
