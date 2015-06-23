@@ -1,16 +1,17 @@
-﻿#Region " Public Enumerations "
+﻿
+Namespace Enumerations
 
-''' <summary>
-''' FDA Filter Types
-''' </summary>
-''' <remarks></remarks>
-Public Enum FDAFilterTypes
+    ''' <summary>
+    ''' FDA Filter Types
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum FdaFilterTypes
 
-    RecallReason
-    Classification
-    Region
-    [Date]
+        RecallReason
+        Classification
+        Region
+        [Date]
 
-End Enum
+    End Enum
 
-#End Region
+End Namespace

@@ -1,5 +1,5 @@
 ﻿
-Namespace ENUMS
+Namespace Enumerations
 
     Public Enum ErrorTypes As Byte
         [Error] = 0

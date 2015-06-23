@@ -2,6 +2,7 @@
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports ApiDalc
+Imports ApiDalc.DataObjects
 
 Public NotInheritable Class ServiceWrapper
 
