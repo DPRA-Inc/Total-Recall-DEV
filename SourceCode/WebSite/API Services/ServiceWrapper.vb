@@ -124,7 +124,7 @@ Public NotInheritable Class ServiceWrapper
         Dim info As String() = Split(item, "|")
 
         Dim wrapper As New ShopAwareService
-        Dim result = wrapper.GetItemCountByRegion(info(0), info(1))
+        Dim result = wrapper.GetSearchSummary(info(0), info(1))
 
         Return result
 
