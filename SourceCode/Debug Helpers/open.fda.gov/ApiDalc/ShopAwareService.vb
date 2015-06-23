@@ -11,7 +11,7 @@ Public Class ShopAwareService
 #Region " Member Variables "
 
     Private _fda As OpenFda
-    Private _restClient As RestClient
+    Private _restClient As IRestClient
 
 #End Region
 
