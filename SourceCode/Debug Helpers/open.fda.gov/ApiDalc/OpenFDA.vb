@@ -28,8 +28,22 @@ Public Class OpenFda
     Private _results As Object 'JObject
     Private _keyWords As New HashSet(Of String)
     Private _endPointType As OpenFdaApiEndPoints
+    Private _restClient As IRestClient
 
 #End Region
+
+#Region " Constructors "
+
+    Public Sub New()
+        _restClient = New RestClient
+    End Sub
+
+    Public Sub New(restClient As IRestClient)
+        _restClient = restClient
+    End Sub
+
+#End Region
+
 
 #Region " Public Methods "
 
@@ -187,33 +201,36 @@ Public Class OpenFda
 
     Public Function Execute(ByVal url As String) As String
 
-        Dim result As String = String.Empty
+        '_resultSet = (New RestClient).Execute(url)
 
-        _resultSet = String.Empty
 
-        'Dim res As String = GetOpenFDAEndPoint(OpenFDAApiEndPoints.DrugEvent)
-        Dim webClient = New Net.WebClient()
+        Dim result As String = (New RestClient).Execute(url)
 
-        webClient.Headers.Clear()
+        '_resultSet = String.Empty
 
-        Try
+        ''Dim res As String = GetOpenFDAEndPoint(OpenFDAApiEndPoints.DrugEvent)
+        'Dim webClient = New Net.WebClient()
 
-            result = webClient.DownloadString(url)
-            _resultSet = result
+        'webClient.Headers.Clear()
 
-        Catch ex As Net.WebException
+        'Try
 
-            Debug.Write(ex.Message)
+        '    result = webClient.DownloadString(url)
+        '    _resultSet = result
 
-            'ex.dump("Net.WebException")
-            'ex.Message.dump("")
-            ''ex.response.statusCode.dump()
-            ''ex.response.statusDescription.dump()
-            'webClient.dump()
+        'Catch ex As Net.WebException
 
-        Catch ex As Exception
-            Debug.Write(ex.Message)
-        End Try
+        '    Debug.Write(ex.Message)
+
+        '    'ex.dump("Net.WebException")
+        '    'ex.Message.dump("")
+        '    ''ex.response.statusCode.dump()
+        '    ''ex.response.statusDescription.dump()
+        '    'webClient.dump()
+
+        'Catch ex As Exception
+        '    Debug.Write(ex.Message)
+        'End Try
 
 
         If Not String.IsNullOrEmpty(result) Then

@@ -11,6 +11,20 @@ Public Class ShopAwareService
 #Region " Member Variables "
 
     Private _fda As OpenFda
+    Private _restClient As RestClient
+
+#End Region
+
+
+#Region " Constructors "
+
+    Public Sub New()
+        _restClient = New RestClient
+    End Sub
+
+    Public Sub New(restClient As IRestClient)
+        _restClient = restClient
+    End Sub
 
 #End Region
 
@@ -148,7 +162,7 @@ Public Class ShopAwareService
 
         'TODO: Need to query Drug/Events
 
-        _fda = New OpenFDA
+        _fda = New OpenFda(_restClient)
 
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FDAFilterTypes
@@ -186,7 +200,7 @@ Public Class ShopAwareService
     Private Function GetRecallInfo(ByVal keyWord As String, state As String, resultSize As Integer) As List(Of ResultRecall)
 
 
-        _fda = New OpenFDA
+        _fda = New OpenFda(_restClient)
         Dim apiUrl As String = String.Empty
         Dim searchResults As String
         Dim resultList As New List(Of ResultRecall)
@@ -242,7 +256,7 @@ Public Class ShopAwareService
 
         Dim results As New List(Of RecallSearchResultData)
 
-        _fda = New OpenFDA
+        _fda = New OpenFda(_restClient)
 
         Dim filterType As FDAFilterTypes
         filterType = FDAFilterTypes.RecallReason
