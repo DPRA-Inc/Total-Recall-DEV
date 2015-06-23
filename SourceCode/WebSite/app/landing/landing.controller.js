@@ -1,4 +1,4 @@
-﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller)
+﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller);
 
 function landingcontroller($location, landingservice) {
     var vm = this;
@@ -8,7 +8,7 @@ function landingcontroller($location, landingservice) {
     if (!angular.isObject(GlobalsModule.ShoppingList)) GlobalsModule.ShoppingList = [];
 
     vm.shoppingList = GlobalsModule.ShoppingList;
-           
+
     LoadPageInfo();
 
     //********************************
@@ -29,86 +29,89 @@ function landingcontroller($location, landingservice) {
     }
 
 
-    vm.AddToList = function() {
-        var value = vm.textValue;
-        var region = "TN";
+    vm.AddToList = function () {
 
-        // Make the new item to be added to our list.
-        var item = [];
+        var disallowedChars = /\W+/g;
 
-        item.Keyword = value; // Product name
-        item.Rank = 'success'; // How Bad is it, Color Code.
-        item.IsLoading = true; // Indicates we are waiting on Return From Service.
-        item.HasClassI = false; // Indicates there is some Class I Data to show.
-        item.HasClassII = false;
-        item.HasClassIII = false;
-        item.HasEvents = false;
-        item.ClassICount = 0; 
-        item.ClassIICount = 0;
-        item.ClassIIICount = 0;
-        item.EventCount = 0;
-        item.IsClean = true;
+        if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").length > 0) {
 
-        vm.shoppingList.push(item);
+            var value = vm.textValue.replace(disallowedChars, "");
+            var region = "TN";
 
-        vm.textValue = "";
+            // Make the new item to be added to our list.
+            var item = [];
 
-        // Differnt Ranks.
-        //Rank: 'warning'
-        //Rank: 'success',
-        //Rank: 'info',
-        //Rank: 'danger',
+            item.Keyword = value; // Product name
+            item.Rank = 'success'; // How Bad is it, Color Code.
+            item.IsLoading = true; // Indicates we are waiting on Return From Service.
+            item.HasClassI = false; // Indicates there is some Class I Data to show.
+            item.HasClassII = false;
+            item.HasClassIII = false;
+            item.HasEvents = false;
+            item.ClassICount = 0;
+            item.ClassIICount = 0;
+            item.ClassIIICount = 0;
+            item.EventCount = 0;
+            item.IsClean = true;
 
-        var searchStr = value + "|" + region;
+            vm.shoppingList.push(item);
 
-        var data = landingservice.GetIssues(searchStr,
-            function (result) {
-                
-                // Search for the Keyword in our list.
-                vm.shoppingList.forEach(function (product) {
+            vm.textValue = "";
 
-                    if (product.Keyword == result.Keyword) {
+            // Differnt Ranks.
+            //Rank: 'warning'
+            //Rank: 'success',
+            //Rank: 'info',
+            //Rank: 'danger',
 
-                        if (result.EventCount > 0) {
-                            product.HasEvents = true;
-                            product.EventCount = result.EventCount;
-                            product.IsClean = false;
-                            product.Rank = "success";
+            var searchStr = value + "|" + region;
+
+            var data = landingservice.GetIssues(searchStr,
+                function (result) {
+
+                    // Search for the Keyword in our list.
+                    vm.shoppingList.forEach(function (product) {
+
+                        if (product.Keyword === result.Keyword) {
+
+                            if (result.EventCount > 0) {
+                                product.HasEvents = true;
+                                product.EventCount = result.EventCount;
+                                product.IsClean = false;
+                                product.Rank = "success";
+                            }
+
+                            if (result.ClassIIICount > 0) {
+                                product.HasClassIII = true;
+                                product.ClassIIICount = result.ClassIIICount;
+                                product.IsClean = false;
+                                product.Rank = "info";
+                            }
+
+                            if (result.ClassIICount > 0) {
+                                product.HasClassII = true;
+                                product.ClassIICount = result.ClassIICount;
+                                product.IsClean = false;
+                                product.Rank = "warning";
+                            }
+
+                            if (result.ClassICount > 0) {
+                                product.HasClassI = true;
+                                product.ClassICount = result.ClassICount;
+                                product.IsClean = false;
+                                product.Rank = "danger";
+                            }
+
+                            product.IsLoading = false;
                         }
-                            
-                        if (result.ClassIIICount > 0) {
-                            product.HasClassIII = true;
-                            product.ClassIIICount = result.ClassIIICount;
-                            product.IsClean = false;
-                            product.Rank = "info";
-                        }
-
-                        if (result.ClassIICount > 0) {
-                            product.HasClassII = true;
-                            product.ClassIICount = result.ClassIICount;
-                            product.IsClean = false;
-                            product.Rank = "warning";
-                        }
-
-                        if (result.ClassICount > 0) {
-                            product.HasClassI = true;
-                            product.ClassICount = result.ClassICount;
-                            product.IsClean = false;
-                            product.Rank = "danger";
-                        }
-
-                        product.IsLoading = false;
-                    }                                     
-                });
-            }
-
-            
-
-        );
+                    });
+                }
+            );
+        }
     }
 
     vm.ViewProductDetails = function (product) {
-       
+
         GlobalsModule.ShoppingList = vm.shoppingList;
 
         if (!product.IsClean) {
