@@ -38,7 +38,7 @@ Public Class SearchResultMapData
     ''' <remarks></remarks>
     Public ReadOnly Property Image As String
         Get
-            Return String.Format("images/{0}.png", Me.IconSet)
+            Return String.Format("Assets/mapIcon/{0}.png", Me.IconSet)
         End Get
     End Property
 
