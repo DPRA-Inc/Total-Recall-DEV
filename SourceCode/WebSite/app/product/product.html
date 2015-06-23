@@ -1,10 +1,9 @@
-
 <div class="wrapper wrapper-content animated fadeInDown" data-ng-controller="productcontroller as vm">
     <div class="row">
-        <div class="col-lg-9">            
+        <div class="col-lg-9">
             <ol class="breadcrumb">
                 <li>
-                    <a href="landing.html">Home</a>
+                    <a href="index.html">Home</a>
                 </li>
                 <li class="active">
                     <strong>Product Details</strong>
@@ -14,35 +13,72 @@
     </div>
 
     <div class="row">
-        <h1>Search Results: {{vm.ProductName}}</h1>
+        <h1>Search Results: <strong>{{vm.ProductName}}</strong></h1>
     </div>
 
-    <h1 data-ng-show="vm.Product.IsLoading" class="text-center m-b-lg m-t-lg">
+    <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
         <i class="fa fa-spinner fa-spin"></i>
         Loading More Information...
     </h1>
 
-    <div class="ibox float-e-margins animated bounceInLeft" ng-hide="vm.Product.HasRecalls">
+    <div class="col-md-6" ng-hide="vm.DataLoading">        
 
-        <div class="ibox-title">
-            <h3><i>RECALLS</i></h3>
+        <div class="ibox float-e-margins animated bounceInLeft" ng-show="vm.Product.HasClassI">
+
+            <div class="ibox-title">
+                <h3><i>CLASS I RECALLS</i></h3>
+            </div>
+
+            <div class="ibox-content no-padding">
+
+                <ul class="sortable-list connectList agile-list" ng-model="todoList">
+
+                    <li class="danger-element" ng-repeat="item in vm.Details.ClassI">
+                        {{item.Content}}                        
+                        <div class="agile-detail">
+                            <a href="#" class="pull-right btn btn-xs btn-white" ng-click="vm.GetMoreInformation(item)">More Information</a>
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                            <div ng-show="item.ShowMoreInformation">
+                                Testing the More Information Area
+                            </div>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
         </div>
 
-        <div class="ibox-content no-padding">
-            <ul class="list-group" data-ng-repeat="item in vm.Product">
-                <li class="list-group-item">
-                    {{vm.Product.Description_1}}
-                </li>
-            </ul>
+        <div class="ibox float-e-margins animated bounceInLeft" ng-show="vm.Product.HasClassII">
+
+            <div class="ibox-title">
+                <h3><i>CLASS II RECALLS</i></h3>
+            </div>
+
+            <div class="ibox-content no-padding">
+
+                <ul class="sortable-list connectList agile-list" ng-model="todoList">
+
+                    <li class="danger-element" ng-repeat="item in vm.Details.ClassII">
+                        {{item.Content}}
+                        <div class="agile-detail">
+                            <a href="#" class="pull-right btn btn-xs btn-white" ng-click="vm.GetMoreInformation(item)">More Information</a>
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                            <div ng-show="item.ShowMoreInformation">
+                                Testing the More Information Area
+                            </div>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
         </div>
-    </div>
-
-    <div class="col-md-6 animated bounceInRight">
-        <h2>News Ticker Goes here!!</h2>
-
 
 
     </div>
-
-
 </div>

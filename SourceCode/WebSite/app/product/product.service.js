@@ -3,24 +3,25 @@
 function ProductService($http) {
 
     var service = {
-        GetMoreInformation: GetMoreInformation
+        GetSearchResult: GetSearchResult
     };
 
     return service;
 
     ///////////////////
 
-    function GetMoreInformation(searchItem, callback) {
+    function GetSearchResult(product, region, callback) {
 
-        var serviceUrl = 'QuickHandler.ashx?Command=GetMoreInformation';
+        var searchStr = product + "|" + region;
+        var serviceUrl = 'QuickHandler.ashx?Command=GetSearchResult';
 
         $http({
             method: 'POST',
             url: serviceUrl,
-            data: searchItem         
+            data: searchStr
         }).
             success(function (data, status, headers, config) {
-                if (!angular.isObject(data)) return;
+                if (!angular.isObject(data)) callback(null);
 
                 callback(data);
             }).

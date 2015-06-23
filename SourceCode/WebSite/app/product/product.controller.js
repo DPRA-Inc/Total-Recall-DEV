@@ -4,11 +4,44 @@ function ProductController($http, productservice) {
     var vm = this;
            
     vm.Product = GlobalsModule.SelectedProduct;
-    vm.ProductName = GlobalsModule.SelectedProduct.KeyWord;
+    vm.ProductName = vm.Product.Keyword;
     vm.DataLoading = true;
+    
+    vm.Details = null;
 
-    vm.GetMoreInformation = function() {
+    LoadPageInfo();
+
+    //*******************************************
+
+    function LoadPageInfo() {
+
+        var productName = vm.ProductName;
+        var region = "TN";
+
+        productservice.GetSearchResult(productName, region,
+            function (result) {
+
+                if (result == null) {
+
+                    
+
+
+                }
+
+                vm.Details = result;
+                vm.DataLoading = false;
+            }            
+        );       
+    }
+
+
+
+    vm.GetMoreInformation = function (item) {
+
+        item.ShowMoreInformation = true;
       
+
+
     }
 
 };

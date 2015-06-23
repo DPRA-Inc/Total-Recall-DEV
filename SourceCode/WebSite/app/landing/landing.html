@@ -1,44 +1,38 @@
-<div class="wrapper wrapper-content" data-ng-controller="landingcontroller as vm">
-    <div class="imgsection">
-        <div class="imagesection" style="background-image: url('Assests/TritychHome.fw.png')">
-            <div class="col-md-1"></div>
+<div data-ng-controller="landingcontroller as vm">
+    <div class="row imagesection" style="background-image: url('Assests/TritychHome.fw.png')">
+        <div class="col-md-6 col-md-offset-1 searchbox animated bounceIn">
 
-            <div class="col-md-8 searchbox animated bounceIn">
+            <div class="col-md-6">
+                <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
+                <p></p>
+                <i class="h4"><b>What would you like to add to your shopping list?</b></i>
 
-                <div class="col-md-6">
-                    <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
-                    <p></p>
-                    <i class="h4"><b>What would you like to add to your shopping list?</b></i>
+                <p></p>
 
-                    <p></p>
-
-                    <div class="input-group">
-                        <input data-ng-model="vm.textValue" type="text" placeholder="Search" class="input-lg form-control" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </span>
-                    </div>
-
+                <div class="input-group">
+                    <input data-ng-model="vm.textValue" type="text" placeholder="Search" class="input-lg form-control" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </span>
                 </div>
-
-                <div class="col-md-6">
-                    <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
-                    <p></p>
-                    <i class="h4 center-inarea">
-                        Have you ever wondered if the items you buy are safe?
-                        <b>ShopAware.gov</b> allows you to check your shopping list
-                        against current recalls, drug interactions or other events
-                        that could affect the health of your family.
-                    </i>
-                    <p></p>
-                </div>
-
             </div>
 
-        </div>
+            <div class="col-md-6">
+                <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
+                <p></p>
+                <i class="h4 center-inarea">
+                    Have you ever wondered if the items you buy are safe?
+                    <b>ShopAware.gov</b> allows you to check your shopping list
+                    against current recalls, drug interactions or other events
+                    that could affect the health of your family.
+                </i>
+                <p></p>
+            </div>
 
+            
+        </div>
     </div>
 
     <div class="col-md-6">
@@ -52,14 +46,14 @@
                     <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
 
                         <div class="pull-right" ng-show="item.IsLoading">
-                            <h1><i class="fa fa-spinner fa-spin"></i></h1>                          
+                            <h1><i class="fa fa-spinner fa-spin"></i></h1>
                         </div>
 
                         <div class="pull-right">
 
-                            <div class="badge badge-danger"  ng-show="item.HasClassI">
+                            <div class="badge badge-danger" ng-show="item.HasClassI">
                                 <h4><i class="fa fa-drupal"></i></h4>
-                            </div> 
+                            </div>
 
                             <div class="badge badge-warning" ng-show="item.HasClassII">
                                 <h4><i class="fa fa-warning"></i> </h4>
@@ -72,9 +66,9 @@
                             <div class="badge badge-success" ng-show="item.HasEvents">
                                 <h4><i class="fa fa-gavel"></i></h4>
                             </div>
-                                                                                                  
+
                         </div>
-                       
+
                         <h3>{{item.Keyword}}</h3>
 
                     </li>
@@ -90,4 +84,12 @@
 
     </div>
 
+
+
 </div>
+
+
+
+
+
+

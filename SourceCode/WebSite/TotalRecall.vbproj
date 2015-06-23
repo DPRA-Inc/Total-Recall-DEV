@@ -293,8 +293,6 @@
     <Content Include="views\common\content.html" />
     <Content Include="views\common\footer.html" />
     <Content Include="views\common\ibox_tools.html" />
-    <Content Include="views\common\navigation.html" />
-    <Content Include="views\common\topnavbar.html" />
     <Content Include="views\common\top_navigation.html" />
     <Content Include="views\minor.html" />
     <Content Include="Web.config" />

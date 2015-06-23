@@ -5,10 +5,39 @@
     top: 50%;
 }
 
+.imagesection {     
+    height:400px; 
+    width:110%;
+    margin-top:-3px;
+    background-repeat: repeat-x;
+}
+
 .searchbox {
     margin-top: 100px;
     height:130px;
     background-color: #BFDFFF;
+}
+
+.appBar-header {
+    background-color: #0085B2;
+    height: 105px;
+}
+
+.appBar-title {    
+    color: ghostwhite;
+    font-size: 42px;
+    padding: 10px 0px 0px 60px    
+}
+.appBar-description {
+    color: #BFFF00;
+    font-size: 16px;
+    padding: 10px 0px 0px 70px   
+}
+
+.appBar-aboutUS {
+    color: #BFFF00;
+    font-size: 24px;
+    padding: 30px 0px 0px 60px 
 }
 
 .navbar-title1 {
@@ -33,7 +62,6 @@
 
 .navbar-subtext {
     float: left;
-    height: 30px;
     padding: 0px 60px;
     font-size: 16px;
     font-weight:600;
@@ -96,10 +124,7 @@
     border-width: 1px 0px;        
 }
 
-.imagesection {     
-    height:500px; 
-    background-repeat: repeat-x;
-}
+
 
 h1,
 h2,
