@@ -67,8 +67,9 @@ Public Class ShopAwareService
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
-
+            
             Dim tmpDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = tmpDate.ToShortDateString(),
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
@@ -76,6 +77,13 @@ Public Class ShopAwareService
                                                                   .ProductDescription = itm.Product_Description,
                                                                   .State = itm.State,
                                                                   .Status = itm.Status,
+                                                                  .Country = itm.Country,
+                                                                  .RecallNumber = itm.Recall_Number,
+                                                                  .ProductQuantity = itm.Product_Quantity,
+                                                                  .EventId = itm.Event_Id,
+                                                                  .RecallingFirm = itm.Recalling_Firm,
+                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
+                                                                  .CodeInfo = itm.Code_info,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
 
