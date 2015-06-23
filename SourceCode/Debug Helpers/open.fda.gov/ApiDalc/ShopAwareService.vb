@@ -170,11 +170,8 @@ Public Class ShopAwareService
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
 
-<<<<<<< HEAD
-        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall})
-=======
         Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
->>>>>>> origin/product
+
         Const maxresultsize As Integer = 0
 
         Dim filterList As New List(Of String)
@@ -211,11 +208,7 @@ Public Class ShopAwareService
         Dim searchResults As String
         Dim resultList As New List(Of ResultRecall)
 
-<<<<<<< HEAD
-        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall})
-=======
         Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
->>>>>>> origin/product
 
         Dim classificationList As New List(Of String)({"Class I", "Class II", "Class III"})
 
@@ -285,11 +278,7 @@ Public Class ShopAwareService
                 filterList.Add(itm)
             Next
 
-<<<<<<< HEAD
-            Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall})
-=======
             Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
->>>>>>> origin/product
 
             For Each endPoint In endPointList
 
