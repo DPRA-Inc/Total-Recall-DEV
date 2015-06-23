@@ -1234,7 +1234,7 @@ Public Class Form1
         Dim results As New List(Of SearchResult)
         For Each item In lbShoppingList.Items
 
-            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, "CA")
+            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, "TN")
             results.Add(mySearchResult)
 
         Next

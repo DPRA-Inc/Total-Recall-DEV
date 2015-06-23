@@ -93,6 +93,7 @@
     <Compile Include="Enumerations\States.vb" />
     <Compile Include="Enumerations\FdaFilterTypes.vb" />
     <Compile Include="Enumerations\OpenFdaApiEndPoints.vb" />
+    <Compile Include="IRestClient.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -109,6 +110,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="OpenFda.vb" />
+    <Compile Include="RestClient.vb" />
     <Compile Include="Utilities.vb" />
     <Compile Include="ShopAwareService.vb" />
   </ItemGroup>
