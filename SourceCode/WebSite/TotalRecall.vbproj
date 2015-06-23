@@ -303,7 +303,6 @@
     <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
     <Compile Include="API Services\Enumerations\ErrorTypes.vb" />
     <Compile Include="API Services\ServiceWrapper.vb" />
-    <Compile Include="API Services\Utilities.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
