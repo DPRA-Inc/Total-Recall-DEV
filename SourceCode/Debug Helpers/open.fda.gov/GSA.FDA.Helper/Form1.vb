@@ -1,5 +1,8 @@
 ﻿
 Imports ApiDalc
+Imports ApiDalc.Enumerations
+Imports ApiDalc.DataObjects
+
 
 Public Class Form1
 
@@ -55,7 +58,7 @@ Public Class Form1
         'Populate EndPointTypes
         cbEndPoints.Items.Clear()
 
-        For Each itm In [Enum].GetValues(GetType(OpenFDAApiEndPoints))
+        For Each itm In [Enum].GetValues(GetType(OpenFdaApiEndPoints))
             cbEndPoints.Items.Add(itm.ToString())
             cbEndPoints_2.Items.Add(itm.ToString())
         Next
@@ -335,12 +338,12 @@ Public Class Form1
                 sb.AppendLine("Class III = violate FDA labeling or manufacturing laws...")
 
                 Dim items As Array
-                items = System.Enum.GetValues(GetType(enumClassification))
+                items = System.Enum.GetValues(GetType(Classification))
                 'Dim item As String
-                Dim tmpEnum As enumClassification
+                Dim tmpEnum As Classification
                 For Each item In items
 
-                    tmpEnum = DirectCast([Enum].Parse(GetType(enumClassification), item), enumClassification)
+                    tmpEnum = DirectCast([Enum].Parse(GetType(Classification), item), Classification)
                     cbSerchTypeOptions.Items.Add(GetEnumDefaultValue(tmpEnum))
 
                     'If itm.distribution_pattern.Contains(tmpEnum.ToString) OrElse
@@ -364,14 +367,14 @@ Public Class Form1
                 cbSerchTypeOptions.Items.Clear()
 
                 Dim items As Array
-                items = System.Enum.GetValues(GetType(EnumStates))
+                items = System.Enum.GetValues(GetType(States))
                 'Dim item As String
-                Dim tmpEnum As EnumStates
+                Dim tmpEnum As States
 
                 cbSerchTypeOptions.Items.Add("Nationwide")
                 For Each item In items
 
-                    tmpEnum = DirectCast([Enum].Parse(GetType(EnumStates), item), EnumStates)
+                    tmpEnum = DirectCast([Enum].Parse(GetType(States), item), States)
                     cbSerchTypeOptions.Items.Add(tmpEnum.ToString)
 
                     'If itm.distribution_pattern.Contains(tmpEnum.ToString) OrElse

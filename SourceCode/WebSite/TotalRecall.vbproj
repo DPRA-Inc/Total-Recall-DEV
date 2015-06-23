@@ -303,7 +303,7 @@
     <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
     <Compile Include="API Services\BusinessObjects\ValidationError.vb" />
     <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
-    <Compile Include="API Services\ENUMS.vb" />
+    <Compile Include="API Services\Enumerations\ErrorTypes.vb" />
     <Compile Include="API Services\ServiceWrapper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

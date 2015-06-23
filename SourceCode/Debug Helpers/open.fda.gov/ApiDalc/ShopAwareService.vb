@@ -1,10 +1,16 @@
-﻿Imports Newtonsoft.Json.Linq
+﻿#Region " Imports "
+
+Imports Newtonsoft.Json.Linq
+Imports ApiDalc.DataObjects
+Imports ApiDalc.Enumerations
+
+#End Region
 
 Public Class ShopAwareService
 
-#Region " Private Members "
+#Region " Member Variables "
 
-    Private _fda As OpenFDA
+    Private _fda As OpenFda
 
 #End Region
 
@@ -162,7 +168,7 @@ Public Class ShopAwareService
             Dim endpointSearchSummary As SearchSummary = ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, "classification")
 
             If endpointSearchSummary IsNot Nothing Then
-                
+
                 searchSummaryForKeyword.ClassICount += endpointSearchSummary.ClassICount
                 searchSummaryForKeyword.ClassIICount += endpointSearchSummary.ClassIICount
                 searchSummaryForKeyword.ClassIIICount += endpointSearchSummary.ClassIIICount
@@ -195,8 +201,8 @@ Public Class ShopAwareService
 
                 Dim filterList As New List(Of String)({state})
 
-                _fda.AddSearchFilter(endPointType, "reason_for_recall", keyWord, EnumFilterCompairType.And)
-                _fda.AddSearchFilter(endPointType, "classification", cc, EnumFilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, "reason_for_recall", keyWord, FilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, FDAFilterTypes.Region, filterList) ', EnumFilterCompairType.And)
 
                 apiUrl = _fda.BuildUrl(endPointType, resultSize)
@@ -262,17 +268,17 @@ Public Class ShopAwareService
 
                 For Each itm As ResultRecall In recallResultList
 
-                    Dim itmClassification As EnumClassification
+                    Dim itmClassification As Classification
 
                     Select Case itm.Classification
                         Case "Class I"
-                            itmClassification = EnumClassification.Class_I
+                            itmClassification = Classification.Class_I
 
                         Case "Class II"
-                            itmClassification = EnumClassification.Class_II
+                            itmClassification = Classification.Class_II
 
                         Case "Class III"
-                            itmClassification = EnumClassification.Class_III
+                            itmClassification = Classification.Class_III
 
                     End Select
 
@@ -335,15 +341,13 @@ Public Class ShopAwareService
 
     Private Function ExecuteSearchCounts(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal cntField As String) As SearchSummary
 
-        'Dim fda As New OpenFDA
         Dim apiUrl As String = String.Empty
-        'Dim searchResults As String
-        Dim srMetaData As MetaResults
         Dim tmpRecallResultList As New List(Of ResultRecall)
 
         Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
 
         _fda.AddSearchFilter(endPointType, filterType, filterList)
+
         apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
         apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
 
@@ -352,12 +356,11 @@ Public Class ShopAwareService
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-
             Dim countResults As JArray = jo("results")
 
             Dim termCountFound As Boolean = False
-
             Dim termCount As Integer
+
             For Each itm In countResults
 
                 termCount = itm("count")
@@ -402,13 +405,14 @@ Public Class ShopAwareService
 
         Dim items As Array
 
-        items = System.Enum.GetValues(GetType(EnumStates))
+        items = System.Enum.GetValues(GetType(States))
 
-        Dim tmpState As EnumStates
+        Dim tmpState As States
+        'Dim item As String
 
         For Each item In items
 
-            tmpState = DirectCast([Enum].Parse(GetType(EnumStates), item), EnumStates)
+            tmpState = DirectCast([Enum].Parse(GetType(States), item), States)
 
             If itm.Distribution_Pattern.Contains(tmpState.ToString) OrElse
                 itm.Distribution_Pattern.Contains(GetEnumDescription(tmpState)) OrElse
