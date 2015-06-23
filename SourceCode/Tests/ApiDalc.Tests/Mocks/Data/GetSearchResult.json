@@ -1,0 +1,83 @@
+﻿{
+  "meta": {
+    "disclaimer": "openFDA is a beta research project and not for clinical use. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated.",
+    "license": "http://open.fda.gov/license",
+    "last_updated": "2015-05-31",
+    "results": {
+      "skip": 0,
+      "limit": 3,
+      "total": 8
+    }
+  },
+  "results": [
+    {
+      "recall_number": "F-1576-2013",
+      "reason_for_recall": "Potential for nuts and/or nut and egg residue may be present in some of the dark and milk chocolate covered raisins.",
+      "status": "Ongoing",
+      "distribution_pattern": "240 stores and  10 See's licensees nationwide and 6 international retail stores.",
+      "product_quantity": "4,700 lb.",
+      "recall_initiation_date": "20130614",
+      "state": "CA",
+      "event_id": "65474",
+      "product_type": "Food",
+      "product_description": "See's Dark  Raisins:\n\nIngredients: Raisins, Sugar,chocolate, cocoa butter, butter (milk), vanilla, soy lecithin,  Dextrin, Confectionery glaze.  May contain traces of eggs, tree nuts and peanuts.\n\nSold in Net Wt. 8 oz (227 g) clear plastic packages or purchased by customer at counter in See's Stores.  UPC 7 37666 08305 3\n\nManufactured by: See's Candy Shops Incorporated\nSo. San Francisco, CA 04080",
+      "country": "US",
+      "city": "South San Francisco",
+      "recalling_firm": "See's Candies Inc.",
+      "report_date": "20130703",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class I",
+      "code_info": "All lots.",
+      "@id": "510c97cb1ddd74defab6067033ea2a72d9a352b38e96719a7c318f89b8e8d28a",
+      "openfda": {},
+      "initial_firm_notification": "Press Release"
+    },
+    {
+      "recall_number": "F-0218-2014",
+      "reason_for_recall": "Terri Lynn Inc. \"Deluxe Mixed Nuts No Peanuts\" was found to have undeclared peanuts inside the bag.",
+      "status": "Ongoing",
+      "distribution_pattern": "US: Nationwide (AK, CT, FL, GA, IA, IL, IN, KS, MD, MI, MT, NC, NJ, NV, OH, PA, WI, WV)",
+      "product_quantity": "12-oz.: 56 bags (7 cases); 30-lb: 5 cases; and 35-lb.: 51.24 cases",
+      "recall_initiation_date": "20130812",
+      "state": "IL",
+      "event_id": "65994",
+      "product_type": "Food",
+      "product_description": "Mixed nuts in a plastic bag labeled in part: Deluxe Mixed Nuts with Macadamia; NET WT. 12 OZ. (340 g), 30 LB, 35 LB; P.O. BOX 5118 ELGIN, IL 60121",
+      "country": "US",
+      "city": "Elgin",
+      "recalling_firm": "Terri Lynn Inc.",
+      "report_date": "20131127",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class I",
+      "code_info": "12-oz.: Item Number: 09720; Best Buy Date: 12-29-14; Lot Number: MO-0551140; 30-lb: Item Number: 20062; Julian Code: 3203; Lot Number: MO-00554485; 35-lb: Item Number: 96004; Lot Number: MO-00550823",
+      "@id": "5171ae3a8a93fe5c427d97cca4804b07233b899c65dd85313282f27847b3eaaa",
+      "openfda": {},
+      "initial_firm_notification": "Two or more of the following: Email, Fax, Letter, Press Release, Telephone, Visit"
+    },
+    {
+      "recall_number": "F-0028-2013",
+      "reason_for_recall": "Pine nuts may contain peanuts",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "870 lbs.",
+      "recall_initiation_date": "20120821",
+      "state": "NJ",
+      "event_id": "63164",
+      "product_type": "Food",
+      "product_description": "Organic Pine Nuts (Raw, No Shell)\n1 lb.Nuts.com\nNutsOnline, 125 Moen Street, Cranford, NJ 07016 800-558-8881",
+      "country": "US",
+      "city": "Cranford",
+      "recalling_firm": "Newark Nut Stores, Inc.",
+      "report_date": "20121017",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class I",
+      "code_info": "Lot 97368",
+      "@id": "5703ea705bc0f505ff695b8d70548a0e36b4a8e5ba2703f3dadbceb0faf30ecd",
+      "openfda": {},
+      "initial_firm_notification": "E-Mail"
+    }
+  ]
+}
