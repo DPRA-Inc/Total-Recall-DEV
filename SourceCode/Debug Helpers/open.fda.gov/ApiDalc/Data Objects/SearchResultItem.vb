@@ -7,6 +7,7 @@ Public Class SearchResultItem
 
     Public Property Status As String ' status
 
+    Public Property DistributionPattern As String  '"distribution_pattern
     Public Property DistributionList As New List(Of String)  '"distribution_pattern
 
     Public Property State As String

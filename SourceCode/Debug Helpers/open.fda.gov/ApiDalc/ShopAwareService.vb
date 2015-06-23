@@ -48,9 +48,10 @@ Public Class ShopAwareService
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = tmpDate,
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
-                                                                  .Status = itm.Status,
-                                                                  .State = itm.State,
+                                                                  .DistributionPattern = itm.Distribution_Pattern,
                                                                   .ProductDescription = itm.Product_Description,
+                                                                  .State = itm.State,
+                                                                  .Status = itm.Status,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
 
