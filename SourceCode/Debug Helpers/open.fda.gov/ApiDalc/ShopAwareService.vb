@@ -28,13 +28,73 @@ Public Class ShopAwareService
 
     End Function
 
-    Public Function GetSearchResult() As SearchResult
+    Public Function GetSearchResult(ByVal keyWord As String, ByVal state As String) As SearchResult
 
-        Dim results As SearchResult = Nothing
+        Const maxResultSetSize As Integer = 10
 
-        'results = GetRecallInfoCounts(keyWord, state)
+        Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
 
-        Return results
+        'Dim searchSummaryLocal = GetRecallInfoCounts(keyWord, state)
+
+        Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
+
+        For Each itm As ResultRecall In tmp
+
+            ' ------------------------------------------------------------
+            'TODO convert itm (ResultRecall) to SearchResultItem
+            ' ------------------------------------------------------------
+            
+            Dim tmpDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
+                                                                  .DateStarted = tmpDate,
+                                                                  .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
+                                                                  .Status = itm.Status,
+                                                                  .State = itm.State,
+                                                                  .ProductDescription = itm.Product_Description,
+                                                                  .Voluntary = itm.Voluntary_Mandated}
+
+
+            ' ------------------------------------------------------------
+            'TODO convert distribution list to list of string.
+            ' ------------------------------------------------------------
+
+            Select Case itm.Classification
+
+                Case "Class I"
+
+                    If searchResultLocal.ClassI.Count < maxResultSetSize Then
+                        'searchResultLocal.ClassI.Add(itm)
+                        If searchResultLocal.ClassI.Count < maxResultSetSize Then
+                            searchResultLocal.ClassI.Add(tmpSearchResultItem)
+                        End If
+
+                    End If
+
+                Case "Class II"
+
+                    If searchResultLocal.ClassII.Count < maxResultSetSize Then
+                        'searchResultLocal.ClassII.Add(itm)
+                        If searchResultLocal.ClassII.Count < maxResultSetSize Then
+                            searchResultLocal.ClassII.Add(tmpSearchResultItem)
+                        End If
+
+                    End If
+
+                Case "Class III"
+
+                    If searchResultLocal.ClassIII.Count < maxResultSetSize Then
+                        'searchResultLocal.ClassIII.Add(itm)
+                        If searchResultLocal.ClassIII.Count < maxResultSetSize Then
+                            searchResultLocal.ClassIII.Add(tmpSearchResultItem)
+                        End If
+
+                    End If
+
+            End Select
+
+        Next
+
+        Return searchResultLocal
 
     End Function
 
@@ -116,6 +176,61 @@ Public Class ShopAwareService
 
     End Function
 
+    Private Function GetRecallInfo(ByVal keyWord As String, state As String, resultSize As Integer) As List(Of ResultRecall)
+
+
+        _fda = New OpenFDA
+        Dim apiUrl As String = String.Empty
+        Dim searchResults As String
+        Dim resultList As New List(Of ResultRecall)
+
+        Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
+
+        Dim classificationList As New List(Of String)({"Class I", "Class II", "Class III"})
+
+        For Each endPointType In endPointList
+
+            For Each cc In classificationList
+
+                Dim filterList As New List(Of String)({state})
+
+                _fda.AddSearchFilter(endPointType, "reason_for_recall", keyWord, EnumFilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, "classification", cc, EnumFilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, FDAFilterTypes.Region, filterList) ', EnumFilterCompairType.And)
+
+                apiUrl = _fda.BuildUrl(endPointType, resultSize)
+
+                searchResults = _fda.Execute(apiUrl)
+
+                If Not String.IsNullOrEmpty(searchResults) Then
+
+                    Dim result As List(Of ResultRecall) = ResultRecall.CnvJsonDataToList(searchResults)
+
+                    For Each tmpItm In result
+
+                        'If resultList.Count < resultSize Then
+                        resultList.Add(tmpItm)
+                        'Else
+                        '    Exit For
+                        'End If
+
+                    Next
+
+                End If
+
+            Next
+
+        Next
+
+
+        Return resultList
+
+
+        'tmpRecallResultList = ResultRecall.CnvJsonDataToList(searchResults)
+
+
+    End Function
+
     Private Function GetRecallInfo(ByVal keyWordList As List(Of String), ByVal maxresultsize As Integer) As List(Of RecallSearchResultData)
 
         Dim results As New List(Of RecallSearchResultData)
@@ -141,10 +256,10 @@ Public Class ShopAwareService
 
             For Each endPoint In endPointList
 
-                RecallResultList = New List(Of ResultRecall)
-                resultCount = ExecuteSearch(endPoint, filterType, filterList, maxresultsize, RecallResultList)
+                recallResultList = New List(Of ResultRecall)
+                resultCount = ExecuteSearch(endPoint, filterType, filterList, maxresultsize, recallResultList)
 
-                For Each itm As ResultRecall In RecallResultList
+                For Each itm As ResultRecall In recallResultList
 
                     Dim itmClassification As EnumClassification
 
@@ -184,7 +299,7 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Function ExecuteSearch(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef RecallResultList As List(Of ResultRecall)) As Integer
+    Private Function ExecuteSearch(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
 
         'Dim fda As New OpenFDA
         Dim apiUrl As String = String.Empty
@@ -205,7 +320,7 @@ Public Class ShopAwareService
             If tmpRecallResultList.Count > 0 Then
 
                 For Each itm As ResultRecall In tmpRecallResultList
-                    RecallResultList.Add(itm)
+                    recallResultList.Add(itm)
                 Next
 
             End If

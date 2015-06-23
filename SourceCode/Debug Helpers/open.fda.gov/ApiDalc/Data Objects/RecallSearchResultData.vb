@@ -10,6 +10,7 @@ Public Class RecallSearchResultData
     Public Property Count As Integer
     Public Property Type As String
     Public Property Classification As String
+
     Public Property ProductDescription As String
     Public Property ReasonForRecall As String
 

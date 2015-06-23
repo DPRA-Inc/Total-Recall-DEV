@@ -34,7 +34,7 @@ Public Class OpenFDA
 
 #Region " Public Methods "
 
-    Public Function GetOpenFDAEndPoint(endpoint As OpenFDAApiEndPoints) As String
+    Friend Function GetOpenFDAEndPoint(endpoint As OpenFDAApiEndPoints) As String
 
         _endPointType = endpoint
 
@@ -259,7 +259,7 @@ Public Class OpenFDA
 
 #Region " Search "
 
-    Public Sub ResetSearch()
+    Friend Sub ResetSearch()
         _search = String.Empty
     End Sub
 
@@ -280,7 +280,32 @@ Public Class OpenFDA
     End Sub
 
 
-    Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String)) As String
+    Public Sub AddSearchFilter(endPointType As OpenFDAApiEndPoints, endpointField As String, keyWord As String, operationCompairType As EnumFilterCompairType)
+
+        keyWord = keyWord.Replace(" ", "+")
+
+        If keyWord.Contains("+") Then
+            keyWord = """" & keyWord & """"
+        End If
+
+        Dim param As String = String.Format("{0}:({1})", endpointField, keyWord)
+
+        If Not String.IsNullOrEmpty(_search) Then
+
+            If operationCompairType = EnumFilterCompairType.Or Then
+                _search += "+"
+            Else
+                _search += "+AND+"
+            End If
+
+        End If
+
+        _search += param
+
+    End Sub
+
+
+    Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String), Optional ByVal operationCompairType As EnumFilterCompairType = EnumFilterCompairType.Or) As String
 
         ' Add Filter to KeyWord List
         Dim keyword As String = String.Empty
@@ -421,12 +446,16 @@ Public Class OpenFDA
         If Not String.IsNullOrEmpty(param) Then
 
             If Not String.IsNullOrEmpty(_search) Then
-                _search += "+"
-            End If
 
+                If operationCompairType = EnumFilterCompairType.Or Then
+                    _search += "+"
+                Else
+                    _search += "+AND+"
+                End If
+
+            End If
             _search += param
             '_search += "(" & param & ")"
-
         End If
 
         Return param
@@ -438,7 +467,7 @@ Public Class OpenFDA
 
 #Region " Limits "
 
-    Public Function AddResultLimit(ByVal limit As Integer) As String
+    Friend Function AddResultLimit(ByVal limit As Integer) As String
 
         Dim parm As String = String.Empty
 
@@ -467,7 +496,7 @@ Public Class OpenFDA
 
 #End Region
 
-    Public Function GetMetaResults() As MetaResults
+    Friend Function GetMetaResults() As MetaResults
         Dim metaData As New MetaResults
 
         If _meta IsNot Nothing Then

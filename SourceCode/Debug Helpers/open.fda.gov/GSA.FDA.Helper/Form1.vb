@@ -1222,4 +1222,35 @@ Public Class Form1
 
 #End Region
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+
+        Dim wrapper As New ShopAwareService
+        'Dim ShoppingList As New List(Of String)
+
+        Dim results As New List(Of SearchResult)
+        For Each item In lbShoppingList.Items
+
+            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, "CA")
+            results.Add(mySearchResult)
+
+        Next
+
+        Debug.WriteLine("")
+
+        'TreeView2.Nodes.Clear()
+        'For Each itm In results
+        '    Dim parentNode As TreeNode = TreeView2.Nodes.Add(itm.Keyword)
+        '    parentNode.Nodes.Add(String.Format("Class I: ({0})", itm.ClassICount))
+        '    parentNode.Nodes.Add(String.Format("Class II: ({0})", itm.ClassIICount))
+        '    parentNode.Nodes.Add(String.Format("Class III: ({0})", itm.ClassIIICount))
+
+        '    parentNode.Nodes.Add(String.Format("Event: ({0})", itm.EventCount))
+        'Next
+        ''PopulateTree_ShoppingList_RecallSearch(results)
+
+
+
+    End Sub
+
 End Class
