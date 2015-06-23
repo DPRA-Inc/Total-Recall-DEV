@@ -11,7 +11,7 @@ Public Class ShopAwareService
 #Region " Member Variables "
 
     Private _fda As OpenFda
-    Private _restClient As RestClient
+    Private _restClient As IRestClient
 
 #End Region
 
@@ -53,6 +53,7 @@ Public Class ShopAwareService
         Const maxResultSetSize As Integer = 3
 
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
+        Dim mapList As New HashSet(Of String)
 
         'Dim searchSummaryLocal = GetRecallInfoCounts(keyWord, state)
 
@@ -63,7 +64,7 @@ Public Class ShopAwareService
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
-            
+
             Dim tmpDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = tmpDate.ToShortDateString(),
@@ -168,7 +169,7 @@ Public Class ShopAwareService
         Dim filterType As FDAFilterTypes
         filterType = FDAFilterTypes.RecallReason
 
-        Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
+        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
         Const maxresultsize As Integer = 0
 
         Dim filterList As New List(Of String)
@@ -205,7 +206,7 @@ Public Class ShopAwareService
         Dim searchResults As String
         Dim resultList As New List(Of ResultRecall)
 
-        Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
+        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
 
         Dim classificationList As New List(Of String)({"Class I", "Class II", "Class III"})
 
@@ -275,7 +276,7 @@ Public Class ShopAwareService
                 filterList.Add(itm)
             Next
 
-            Dim endPointList As New List(Of OpenFDAApiEndPoints)({OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall})
+            Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
 
             For Each endPoint In endPointList
 
