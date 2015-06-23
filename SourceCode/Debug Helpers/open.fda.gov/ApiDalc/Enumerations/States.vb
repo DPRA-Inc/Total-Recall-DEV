@@ -9,6 +9,9 @@ Namespace Enumerations
     Public Enum States
 
         'AS 	14.2417 	-170.7197
+        'MP 	14.8058 	145.5505
+        'PR 	18.2766 	-66.3350
+        'VI 	18.0001 	-64.8199
 
         <DefaultValue("32.7990;-86.8073")>
         <Description("Alabama")>
@@ -86,131 +89,131 @@ Namespace Enumerations
         <System.ComponentModel.Description("Louisiana")>
         LA
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("44.6074,-69.3977")>
         <Description("Maine")>
         [ME]
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("39.0724,-76.7902")>
         <Description("Maryland")>
         MD
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("42.2373,-71.5314")>
         <Description("Massachusetts")>
         MA
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("43.3504,-84.5603")>
         <Description("Michigan")>
         MI
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("45.7326,-93.9196")>
         <Description("Minnesota")>
         MN
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("32.7673,-89.6812")>
         <Description("Mississippi")>
         MS
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("38.4623,-92.3020")>
         <Description("Missouri")>
         MO
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("46.9048,-110.3261")>
         <Description("Montana")>
         MT
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("41.1289,-98.2883")>
         <Description("Nebraska")>
         NE
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("38.4199,-117.1219")>
         <Description("Nevada")>
         NV
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("43.4108,-71.5653")>
         <Description("New Hampshire")>
         NH
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("40.3140,-74.5089")>
         <Description("New Jersey")>
         NJ
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("34.8375,-106.2371")>
         <Description("New Mexico")>
         NM
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("42.1497,-74.9384")>
         <Description("New York")>
         NY
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("35.6411,-79.8431")>
         <Description("North Carolina")>
         NC
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("47.5362,-99.7930")>
         <Description("North Dakota")>
         ND
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("40.3736,-82.7755")>
         <Description("Ohio")>
         OH
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("35.5376,-96.9247")>
         <Description("Oklahoma")>
         OK
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("44.5672,-122.1269")>
         <Description("Oregon")>
         [OR]
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("40.5773,-77.2640")>
         <Description("Pennsylvania")>
         PA
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("41.6772,-71.5101")>
         <Description("Rhode Island")>
         RI
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("33.8191,-80.9066")>
         <Description("South Carolina")>
         SC
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("44.2853,-99.4632")>
         <Description("South Dakota")>
         SD
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("35.7449,-86.7489")>
         <Description("Tennessee")>
         TN
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("31.1060,-97.6475")>
         <Description("Texas")>
         TX
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("40.1135,-111.8535")>
         <Description("Utah")>
         UT
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("44.0407,-72.7093")>
         <Description("Vermont")>
         VT
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("37.7680,-78.2057")>
         <Description("Virginia")>
         VA
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("47.3917,-121.5708")>
         <Description("Washington")>
         WA
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("38.4680,-80.9696")>
         <Description("West Virginia")>
         WV
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("44.2563,-89.6385")>
         <Description("Wisconsin")>
         WI
 
-        <DefaultValue("LatLon")>
+        <DefaultValue("42.7475,-107.2085")>
         <Description("Wyoming")>
         WY
 
