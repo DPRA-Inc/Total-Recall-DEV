@@ -233,6 +233,7 @@ Public Class OpenFda
         '    Debug.Write(ex.Message)
         'End Try
 
+        _meta = New JObject()
 
         If Not String.IsNullOrEmpty(result) Then
 
