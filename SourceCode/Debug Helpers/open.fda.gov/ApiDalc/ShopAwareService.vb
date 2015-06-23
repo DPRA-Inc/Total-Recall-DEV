@@ -179,7 +179,7 @@ Public Class ShopAwareService
         For Each endPoint In endPointList
 
             'recallResultList = New List(Of ResultRecall)
-            Dim endpointSearchSummary As SearchSummary = ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, "classification")
+            Dim endpointSearchSummary As SearchSummary = ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, state, "classification")
 
             If endpointSearchSummary IsNot Nothing Then
 
@@ -219,7 +219,7 @@ Public Class ShopAwareService
 
                 _fda.AddSearchFilter(endPointType, "reason_for_recall", keyWord, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
-                _fda.AddSearchFilter(endPointType, FDAFilterTypes.Region, filterList) ', EnumFilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList) ', EnumFilterCompairType.And)
 
                 apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
@@ -355,14 +355,15 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Function ExecuteSearchCounts(endPointType As OpenFDAApiEndPoints, filterType As FDAFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal cntField As String) As SearchSummary
+    Private Function ExecuteSearchCounts(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal state As String, ByVal cntField As String) As SearchSummary
 
         Dim apiUrl As String = String.Empty
         Dim tmpRecallResultList As New List(Of ResultRecall)
 
         Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
 
-        _fda.AddSearchFilter(endPointType, filterType, filterList)
+        _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
+        _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
 
         apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
         apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
