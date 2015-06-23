@@ -53,6 +53,7 @@ Public Class ShopAwareService
         Const maxResultSetSize As Integer = 3
 
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
+        Dim mapList As New HashSet(Of String)
 
         'Dim searchSummaryLocal = GetRecallInfoCounts(keyWord, state)
 
@@ -63,7 +64,7 @@ Public Class ShopAwareService
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
-            
+
             Dim tmpDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = tmpDate.ToShortDateString(),
