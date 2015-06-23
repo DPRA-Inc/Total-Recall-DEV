@@ -6,6 +6,8 @@
 ''' <remarks></remarks>
 Public Enum EnumStates
 
+    'AS 	14.2417 	-170.7197
+
     <System.ComponentModel.DefaultValue("32.7990;-86.8073")>
     <System.ComponentModel.Description("Alabama")>
     AL
@@ -22,59 +24,63 @@ Public Enum EnumStates
     <System.ComponentModel.Description("Arkansas")>
     AR
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("36.1700,-119.7462")>
     <System.ComponentModel.Description("California")>
     CA
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("39.0646,-105.3272")>
     <System.ComponentModel.Description("Colorado")>
     CO
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("41.5834,-72.7622")>
     <System.ComponentModel.Description("Connecticut")>
     CT
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("38.8964,-77.0262")>
+    <System.ComponentModel.Description("District of Columbia")>
+    DC
+
+    <System.ComponentModel.DefaultValue("39.3498,-75.5148")>
     <System.ComponentModel.Description("Delaware")>
     DE
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("27.8333,-81.7170")>
     <System.ComponentModel.Description("Florida")>
     FL
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("32.9866,-83.6487")>
     <System.ComponentModel.Description("Georgia")>
     GA
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("21.1098,-157.5311")>
     <System.ComponentModel.Description("Hawaii")>
     HI
 
-    <System.ComponentModel.DefaultValue("LatLon")>
-    <System.ComponentModel.Description("Idaho")>
-    ID
-
-    <System.ComponentModel.DefaultValue("LatLon")>
-    <System.ComponentModel.Description("Illinois")>
-    IL
-
-    <System.ComponentModel.DefaultValue("LatLon")>
-    <System.ComponentModel.Description("Indiana")>
-    [IN]
-
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("42.0046,-93.2140")>
     <System.ComponentModel.Description("Iowa")>
     IA
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("44.2394,-114.5103")>
+    <System.ComponentModel.Description("Idaho")>
+    ID
+
+    <System.ComponentModel.DefaultValue("40.3363,-89.0022")>
+    <System.ComponentModel.Description("Illinois")>
+    IL
+
+    <System.ComponentModel.DefaultValue("39.8647,-86.2604")>
+    <System.ComponentModel.Description("Indiana")>
+    [IN]
+
+    <System.ComponentModel.DefaultValue("38.5111,-96.8005")>
     <System.ComponentModel.Description("Kansas")>
     KS
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("37.6690,-84.6514")>
     <System.ComponentModel.Description("Kentucky")>
     KY
 
-    <System.ComponentModel.DefaultValue("LatLon")>
+    <System.ComponentModel.DefaultValue("31.1801,-91.8749")>
     <System.ComponentModel.Description("Louisiana")>
     LA
 
