@@ -1143,6 +1143,7 @@ button.dim:active:before {
 .badge-primary {
     background-color: #BFFF00;
     color: #FFFFFF;
+    cursor:pointer;
 }
 .label-success,
 .badge-success {
