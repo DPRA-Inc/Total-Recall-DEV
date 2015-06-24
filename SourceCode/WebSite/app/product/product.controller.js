@@ -37,12 +37,8 @@ function ProductController($scope, $http, $modal, productservice)
     vm.SearchResult = GlobalsModule.SearchResult;
 
     if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
-<<<<<<< HEAD
-    vm.SearchResultItem = GlobalsModule.SearchResultItem
-
-=======
     vm.SearchResultItem = GlobalsModule.SearchResultItem;
->>>>>>> 51febd49bae65487bdd977e91c6e5f323308c932
+
     if (GlobalsModule.SearchResult.length === 0) LoadPageInfo();
 
     //*******************************************
