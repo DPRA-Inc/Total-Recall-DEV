@@ -45,13 +45,37 @@
 
                     <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
 
-                        <div class="pull-right center-inarea">
-                            <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
-                            <img src="../../img/identifiers/R1.png" ng-show="item.HasClassI" />
-                            <img src="../../img/identifiers/R2.png" ng-show="item.HasClassII" /> 
-                            <img src="../../img/identifiers/R3.png" ng-show="item.HasClassIII" /> 
-                            <img src="../../img/identifiers/E.png" ng-show="item.HasEvents" /> 
-                        </div>
+
+                        <table style="width:100%;" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="middle">
+                                    <h3>{{item.Keyword}}</h3>
+                                </td>
+                                <td>
+                                    <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
+                                </td>
+                                <td valign="middle">
+                                    <div class="pull-right center-inarea">
+                                        <img src="../../img/identifiers/R1.png" ng-show="item.HasClassI" alt="Dangerous or defective products that predictably could cause serious health problems or death" />
+                                        <img src="../../img/identifiers/R2.png" ng-show="item.HasClassII" alt="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature" />
+                                        <img src="../../img/identifiers/R3.png" ng-show="item.HasClassIII" alt="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws" />
+                                        <img src="../../img/identifiers/E.png" ng-show="item.HasEvents" alt="An event" />
+                                        <div class="badge badge-success" ng-show="item.IsClean">
+                                            <h3>
+                                                <i class="fa fa-check"></i>
+                                            </h3>
+                                        </div>
+                                        <div class="badge badge-white">
+                                            <h3>
+                                                <i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        
 
                             <!--<div ng-show="item.HasClassI">
                     
@@ -82,7 +106,7 @@
 
                  
 
-                        <h3>{{item.Keyword}}</h3>
+                        
 
                     </li>
                 </ul>
