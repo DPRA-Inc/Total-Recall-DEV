@@ -86,7 +86,7 @@
         </div>
 
         <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassIII">
-
+           
             <div class="ibox-content no-padding">
                 <h2><strong><i>CLASS III</i></strong></h2>
 
@@ -120,14 +120,15 @@
 
     </div>
 
-    <h1>TEsting The Map Goes Here</h1>
-    <div id="map" class="col-md-6 animated bounceInright">
+    <div id="mapPlaceholder" class="col-md-6 animated bounceInright">
 
-       
+        <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
+
+            <ol-layer ol-layer-properties="osm"></ol-layer>
+            <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
+
+        </openlayers>
+
     </div>
-
-
-
-
 
 </div>
