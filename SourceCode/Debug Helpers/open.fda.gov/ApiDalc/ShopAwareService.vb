@@ -8,6 +8,7 @@ Imports System.ComponentModel
 #End Region
 
 Public Class ShopAwareService
+    Public Property OpenFdaApiHits As Integer
 
 #Region " Member Variables "
 
@@ -20,6 +21,7 @@ Public Class ShopAwareService
 
     Public Sub New()
         _restClient = New RestClient
+
     End Sub
 
     Public Sub New(restClient As IRestClient)
@@ -59,6 +61,8 @@ Public Class ShopAwareService
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
 
+        'Const testNewCode As Boolean = True
+
         For Each itm As ResultRecall In tmp
 
             ProcessResultRecordForMapData(itm, mapList)
@@ -91,9 +95,16 @@ Public Class ShopAwareService
 
                 Case "Class I"
 
+                    'If testNewCode Then
+                    searchResultLocal.ClassI.Add(tmpSearchResultItem)
+                    'Else
+                    '    addSearchResultItemToClassificication(searchResultLocal.ClassI, tmpSearchResultItem, maxResultSetSize)
+                    'End If
+
+
+
                     'If searchResultLocal.ClassI.Count < maxResultSetSize Then
                     'searchResultLocal.ClassI.Add(itm)
-                    addSearchResultItemToClassificication(searchResultLocal.ClassI, tmpSearchResultItem, maxResultSetSize)
 
                     'If searchResultLocal.ClassI.Count = 0 Then
                     '    searchResultLocal.ClassI.Add(tmpSearchResultItem)
@@ -165,7 +176,12 @@ Public Class ShopAwareService
 
                 Case "Class II"
 
-                    addSearchResultItemToClassificication(searchResultLocal.ClassII, tmpSearchResultItem, maxResultSetSize)
+                    'If testNewCode Then
+                    searchResultLocal.ClassII.Add(tmpSearchResultItem)
+                    'Else
+                    '    addSearchResultItemToClassificication(searchResultLocal.ClassII, tmpSearchResultItem, maxResultSetSize)
+                    'End If
+
 
                     'If searchResultLocal.ClassII.Count = 0 Then
                     '    searchResultLocal.ClassII.Add(tmpSearchResultItem)
@@ -227,7 +243,11 @@ Public Class ShopAwareService
 
                 Case "Class III"
 
-                    addSearchResultItemToClassificication(searchResultLocal.ClassIII, tmpSearchResultItem, maxResultSetSize)
+                    'If testNewCode Then
+                    searchResultLocal.ClassIII.Add(tmpSearchResultItem)
+                    'Else
+                    '    addSearchResultItemToClassificication(searchResultLocal.ClassIII, tmpSearchResultItem, maxResultSetSize)
+                    'End If
 
                     'If searchResultLocal.ClassIII.Count = 0 Then
                     '    searchResultLocal.ClassIII.Add(tmpSearchResultItem)
@@ -291,16 +311,58 @@ Public Class ShopAwareService
 
         searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
 
+        'Dim sw As New Stopwatch
+        'sw.Start()
+
+        'Dim tmpLinqResults = (From el In searchResultLocal.ClassI Select el Order By CDate(el.ReportDate) Descending).ToList()
+        'sw.Stop()
+        'Debug.Write(sw.Elapsed)
+
         If searchResultLocal.ClassI.Count > maxResultSetSize Then
-            searchResultLocal.ClassI.RemoveRange(maxResultSetSize, searchResultLocal.ClassI.Count - maxResultSetSize)
+
+            'If testNewCode Then
+
+            Dim tmpLinqResults = (From el In searchResultLocal.ClassI Select el Order By CDate(el.ReportDate) Descending).ToList()
+            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+
+            searchResultLocal.ClassI.Clear()
+            searchResultLocal.ClassI.AddRange(tmpLinqResults)
+
+            'Else
+            '    searchResultLocal.ClassI.RemoveRange(maxResultSetSize, searchResultLocal.ClassI.Count - maxResultSetSize)
+            'End If
+
         End If
 
         If searchResultLocal.ClassII.Count > maxResultSetSize Then
-            searchResultLocal.ClassII.RemoveRange(maxResultSetSize, searchResultLocal.ClassII.Count - maxResultSetSize)
+
+            'If testNewCode Then
+
+            Dim tmpLinqResults = (From el In searchResultLocal.ClassII Select el Order By CDate(el.ReportDate) Descending).ToList()
+            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+
+            searchResultLocal.ClassII.Clear()
+            searchResultLocal.ClassII.AddRange(tmpLinqResults)
+            'Else
+            '    searchResultLocal.ClassII.RemoveRange(maxResultSetSize, searchResultLocal.ClassII.Count - maxResultSetSize)
+            'End If
+
         End If
 
         If searchResultLocal.ClassIII.Count > maxResultSetSize Then
-            searchResultLocal.ClassIII.RemoveRange(maxResultSetSize, searchResultLocal.ClassIII.Count - maxResultSetSize)
+
+            'If testNewCode Then
+
+            Dim tmpLinqResults = (From el In searchResultLocal.ClassIII Select el Order By CDate(el.ReportDate) Descending).ToList()
+            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+
+            searchResultLocal.ClassIII.Clear()
+            searchResultLocal.ClassIII.AddRange(tmpLinqResults)
+
+            'Else
+            '    searchResultLocal.ClassIII.RemoveRange(maxResultSetSize, searchResultLocal.ClassIII.Count - maxResultSetSize)
+            'End If
+
         End If
 
         Return searchResultLocal
@@ -388,6 +450,8 @@ Public Class ShopAwareService
 
     Private Function GetRecallInfo(ByVal keyWord As String, state As String, resultSize As Integer) As List(Of ResultRecall)
 
+        OpenFdaApiHits = 0
+
         _fda = New OpenFda(_restClient)
 
         resultSize = 100
@@ -406,38 +470,63 @@ Public Class ShopAwareService
 
                 Dim filterList As New List(Of String)({state})
 
+                'Limit first query to a 1 year window
+
+                Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+                Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
                 _fda.ResetSearch()
-
-                'Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-                'Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
-
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-                '_fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
                 apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
                 searchResults = _fda.Execute(apiUrl)
+                OpenFdaApiHits += 1
 
                 Dim dataSetSize As Integer = _fda.GetMetaResults().Total()
+                
+                ' If there was not data in the 1 yr window the get all results.
+                ' Check a 2 yr window for results.
+                If dataSetSize = 0 Then
 
 
-                'If dataSetSize = 0 Then
+                    'beginDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+                    endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
 
-                '    _fda.ResetSearch()
+                    _fda.ResetSearch()
+                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
+                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
+                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+                    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
-                '    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
-                '    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-                '    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+                    apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
-                '    apiUrl = _fda.BuildUrl(endPointType, resultSize)
+                    searchResults = _fda.Execute(apiUrl)
+                    OpenFdaApiHits += 1
 
-                '    searchResults = _fda.Execute(apiUrl)
+                    dataSetSize = _fda.GetMetaResults().Total()
 
-                '    dataSetSize = _fda.GetMetaResults().Total()
+                End If
 
-                'End If
+                ' If there was not data in the 2 yr window the get all results.
+                If dataSetSize = 0 Then
+
+                    _fda.ResetSearch()
+                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
+                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
+                    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+
+                    apiUrl = _fda.BuildUrl(endPointType, resultSize)
+
+                    searchResults = _fda.Execute(apiUrl)
+                    OpenFdaApiHits += 1
+
+                    dataSetSize = _fda.GetMetaResults().Total()
+
+                End If
 
                 ''Check SearchResults  meta.Results.Total
                 '' if count is 0 then remove Date range and try again
@@ -462,7 +551,13 @@ Public Class ShopAwareService
                 ''    'index += 1
                 ''Loop Until Not isPagingRequired
 
+                ' if total records int the Search request exceeds the max of 100 records per request
+                ' then page through the data
+                ' LIMIT the number of page request to a MAX of 5
                 Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+                If pageLimit > 5 Then
+                    pageLimit = 5
+                End If
 
                 Dim skipValue As Integer = 0
                 If dataSetSize > 0 Then
@@ -482,6 +577,7 @@ Public Class ShopAwareService
                             skipValue += 100
                             Dim newApiUrl As String = apiUrl.Replace("&limit=100", String.Format("&limit=100&skip={0}", skipValue))
                             searchResults = _fda.Execute(apiUrl)
+                            OpenFdaApiHits += 1
 
                         End If
 

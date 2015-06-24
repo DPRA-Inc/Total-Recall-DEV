@@ -1193,7 +1193,8 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
+        Dim elapsedTime As New Stopwatch
+        elapsedTime.Start()
 
         Dim wrapper As New ShopAwareService
         'Dim ShoppingList As New List(Of String)
@@ -1207,6 +1208,8 @@ Public Class Form1
         Next
 
 
+        elapsedTime.Stop()
+
         TreeView2.Nodes.Clear()
         For Each itm In results
             Dim parentNode As TreeNode = TreeView2.Nodes.Add(itm.Keyword)
@@ -1215,10 +1218,13 @@ Public Class Form1
             parentNode.Nodes.Add(String.Format("Class III: ({0})", itm.ClassIIICount))
 
             parentNode.Nodes.Add(String.Format("Event: ({0})", itm.EventCount))
+
+            parentNode.Nodes.Add(String.Format("Elapsed Time: {0}", elapsedTime.Elapsed))
+            parentNode.Expand()
         Next
         'PopulateTree_ShoppingList_RecallSearch(results)
 
-
+        elapsedTime = Stopwatch.StartNew()
 
         ' Dim wrapper As New ShopAwareService
         'Dim ShoppingList As New List(Of String)
@@ -1230,6 +1236,8 @@ Public Class Form1
             results_2.Add(mySearchResult)
 
         Next
+
+        elapsedTime.Stop()
 
         For Each itm In results_2
 
@@ -1260,9 +1268,13 @@ Public Class Form1
                     classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
                 Next
             End If
-
+            
+            parentNode_2.Nodes.Add(String.Format("Hits to the api: {0}", wrapper.OpenFdaApiHits))
+            parentNode_2.Nodes.Add(String.Format("Elapsed Time: {0}", elapsedTime.Elapsed))
+            parentNode_2.Expand()
 
         Next
+
 
     End Sub
 
