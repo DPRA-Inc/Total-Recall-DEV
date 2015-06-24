@@ -14,19 +14,19 @@ function ProductController($scope, $http, $modal, productservice)
         center: {
             lat: 39.50,
             lon: -98.35,
-            zoom: 2
+            zoom: 3
         },
         defaults: {
             interactions: {
                 mouseWheelZoom: true
             },
             controls: {
-                zoom: false,
-                rotate: false,
-                attribution: false
+                zoom: true,
+                rotate: true,
+                attribution: true
             }
         },
-        mapquest: {
+        osm: {
             source: {
                 type: 'OSM'
             }
@@ -48,14 +48,6 @@ function ProductController($scope, $http, $modal, productservice)
         var productName = vm.SearchSummary.Keyword;
         var region = "TN";
 
-        //icon: {
-        //        anchor: [0.5, 0.5],
-        //        anchorXUnits: 'fraction',
-        //        anchorYUnits: 'fraction',
-        //        opacity: 0.85,
-        //        src: 'img/mapIcon/' + mapIcon + '.png'
-        //}
-
         productservice.GetSearchResult(productName, region,
             function (result)
             {
@@ -73,16 +65,16 @@ function ProductController($scope, $http, $modal, productservice)
                     result.MapObjects.forEach(function (mapItem)
                     {
 
-                        //  var transLoc = ol.proj.transform([mapItem.Longitude, mapItem.Latitude], 'EPSG:4326', 'EPSG:3857');
-
                         vm.Markers.push(
                            {
                                lat: parseFloat(mapItem.Latitude),
                                lon: parseFloat(mapItem.Longitude),
                                label: {
+
                                    message: '',
                                    show: false,
                                    showOnMouseOver: true
+
                                },
                                style: {
                                    image: {

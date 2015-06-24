@@ -58,6 +58,12 @@ Public Class SearchResultMapData
     ''' <remarks></remarks>
     Public Property Longitude As String = "0"
 
+    ''' <summary>
+    ''' Icon Style for OL3.angularjs
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public ReadOnly Property icon As IconStyle
         Get
 

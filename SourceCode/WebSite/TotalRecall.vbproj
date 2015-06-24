@@ -196,7 +196,6 @@
     <Content Include="js\jquery\jquery-ui-1.10.4.min.js" />
     <Content Include="js\jquery\jquery-ui.custom.min.js" />
     <Content Include="js\jquery\moment.min.js" />
-    <Content Include="js\map\mapIcons.js" />
     <Content Include="js\map\ol.js" />
     <Content Include="js\ngstorage\ngStorage.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.min.js" />
