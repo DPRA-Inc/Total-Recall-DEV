@@ -1,7 +1,11 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller);
 
-function landingcontroller($location, $localStorage, landingservice) {
+function landingcontroller($location, $localStorage, landingservice, feedLoader) {
     var vm = this;
+    
+    vm.feeds = [];
+
+    vm.IsRSSLoading = true;
 
     vm.textValue = null;
 
@@ -65,9 +69,7 @@ function landingcontroller($location, $localStorage, landingservice) {
             item.IsLoading = false; // Set false here so it saves the cart with the right value.
 
             vm.shoppingList.push(item);
-
-            $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
-
+            
             item.IsLoading = true; // Set to true to show that information about the item is loading.
 
             vm.textValue = "";
@@ -124,6 +126,8 @@ function landingcontroller($location, $localStorage, landingservice) {
 
                             product.IsLoading = false;
                         }
+
+                        $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
                     });
                 }
             );
@@ -148,6 +152,16 @@ function landingcontroller($location, $localStorage, landingservice) {
             GlobalsModule.SearchSummary = product;
             $location.path('/index/product');
         }
+    }
+
+    vm.StartRSS = function () {
+
+        
+        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function(res){
+            vm.feeds = res.data.responseData.feed.entries;
+            vm.IsRSSLoading = false;
+        });
+           
     }
 
 };

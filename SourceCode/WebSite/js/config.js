@@ -1,12 +1,7 @@
 /**
  */
-function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/index/landing");
-
-    $ocLazyLoadProvider.config({
-        // Set to true if you want to see what and when is dynamically loaded
-        debug: false
-    });
 
     // Tags: ROUTING, ADD PAGE
     $stateProvider

@@ -12,7 +12,7 @@ function ProductController($http, $modal, productservice) {
     if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
     vm.SearchResultItem = GlobalsModule.SearchResultItem
 
-    if (GlobalsModule.SearchResult.length == 0) LoadPageInfo();
+    if (GlobalsModule.SearchResult.length === 0) LoadPageInfo();
 
     //*******************************************
 

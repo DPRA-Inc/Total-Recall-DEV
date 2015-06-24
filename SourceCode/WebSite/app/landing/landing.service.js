@@ -2,8 +2,11 @@
 
 function LandingService($http) {
 
+    this.Feeds = [];
+
     var service = {
-        GetIssues: GetIssues
+        GetIssues: GetIssues,
+        SetupRSSFeed: SetupRSSFeed
     };
 
     return service;
@@ -29,7 +32,28 @@ function LandingService($http) {
             });                 
     }
 
-        
+    function SetupRSSFeed() {
+            
+    //    if (Feeds.length === 0) {
+
+    //        for (var i = 0; i < GlobalsModule.RSSFeeds.length; i++) {
+
+    //            FeedLoader.fetch({ q: feedSources[i].url, num: 10 }, {}, function (data) {
+    //                var feed = data.responseData.feed;
+    //                feeds.push(feed);
+    //            });
+
+    //        }
+        }
+
+
+
+
+
+
+    //}
+    
+
 
 }
 

@@ -93,6 +93,7 @@
     <Content Include="app\landing\landing.controller.js" />
     <Content Include="app\landing\landing.html" />
     <Content Include="app\landing\landing.service.js" />
+    <Content Include="app\landing\rss.service.js" />
     <Content Include="app\notify\notify.controller.js" />
     <Content Include="app\notify\notify.html" />
     <Content Include="app\notify\notify.service.js" />
