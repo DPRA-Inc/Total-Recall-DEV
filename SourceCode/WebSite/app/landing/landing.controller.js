@@ -66,7 +66,6 @@ function landingcontroller($location, $localStorage, landingservice, feedLoader)
             item.ClassIIICount = 0;
             item.EventCount = 0;
             item.IsClean = true;
-            item.IsLoading = false; // Set false here so it saves the cart with the right value.
 
             vm.shoppingList.push(item);
             

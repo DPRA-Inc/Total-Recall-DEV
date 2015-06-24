@@ -10,7 +10,15 @@
 }
 
 .big {
-    font-size:16px;
+    font-size: 16px;
+}
+
+.bigger {
+    font-size: 18px;
+}
+
+.font-size-button {
+    color: black;
 }
 
 .imagesection {     
@@ -648,7 +656,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     margin-left: 0 !important;
 }
 .top-navigation .wrapper.wrapper-content {
-    padding: 40px;
+    padding: 10px 40px 40px 40px;
 }
 .top-navigation.body-small .wrapper.wrapper-content,
 .body-small .top-navigation .wrapper.wrapper-content {
@@ -1133,7 +1141,7 @@ button.dim:active:before {
 }
 .label-primary,
 .badge-primary {
-    background-color: #1ab394;
+    background-color: #BFFF00;
     color: #FFFFFF;
 }
 .label-success,

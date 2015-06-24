@@ -1,4 +1,4 @@
-(function () {
+(function() {
     angular.module("TotalRecall", [
         "ui.router",                    // Routing
         "ui.bootstrap",                 // Ui Bootstrap
@@ -6,4 +6,3 @@
         "openlayers-directive"
     ]);
 })();
-
