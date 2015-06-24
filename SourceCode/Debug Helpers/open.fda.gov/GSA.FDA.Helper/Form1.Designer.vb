@@ -76,6 +76,11 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbEndPoints_2 = New System.Windows.Forms.ComboBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.TreeView3 = New System.Windows.Forms.TreeView()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.spMaxResultSize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,6 +89,7 @@ Partial Class Form1
         Me.TabPage3.SuspendLayout()
         CType(Me.spSpecifyRecordFetch, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spMaxResultSize_2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -91,6 +97,7 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -616,6 +623,61 @@ Partial Class Form1
         Me.cbEndPoints_2.Size = New System.Drawing.Size(121, 21)
         Me.cbEndPoints_2.TabIndex = 22
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.Button4)
+        Me.TabPage4.Controls.Add(Me.TreeView3)
+        Me.TabPage4.Controls.Add(Me.Button3)
+        Me.TabPage4.Controls.Add(Me.RichTextBox2)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(923, 682)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RichTextBox2.Location = New System.Drawing.Point(3, 87)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.ReadOnly = True
+        Me.RichTextBox2.Size = New System.Drawing.Size(912, 587)
+        Me.RichTextBox2.TabIndex = 25
+        Me.RichTextBox2.Text = ""
+        '
+        'Button3
+        '
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button3.Location = New System.Drawing.Point(722, 45)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(154, 23)
+        Me.Button3.TabIndex = 29
+        Me.Button3.Text = "Report - Ice Cream, TN"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'TreeView3
+        '
+        Me.TreeView3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TreeView3.Location = New System.Drawing.Point(7, 80)
+        Me.TreeView3.Name = "TreeView3"
+        Me.TreeView3.Size = New System.Drawing.Size(909, 523)
+        Me.TreeView3.TabIndex = 32
+        '
+        'Button4
+        '
+        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button4.Location = New System.Drawing.Point(722, 16)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(154, 23)
+        Me.Button4.TabIndex = 33
+        Me.Button4.Text = "DrugEvent - Augmentin"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -635,6 +697,7 @@ Partial Class Form1
         Me.TabPage3.PerformLayout()
         CType(Me.spSpecifyRecordFetch, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.spMaxResultSize_2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -691,5 +754,10 @@ Partial Class Form1
     Friend WithEvents cknToLineFeed As System.Windows.Forms.CheckBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents tbRegion As System.Windows.Forms.TextBox
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents RichTextBox2 As System.Windows.Forms.RichTextBox
+    Friend WithEvents TreeView3 As System.Windows.Forms.TreeView
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 
 End Class

@@ -111,7 +111,19 @@ Public Class ShopAwareService
         Return searchResultLocal
 
     End Function
-    
+
+    Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As Dictionary(Of String, String)
+
+        _fda = New OpenFda(_restClient)
+
+        Dim results As Dictionary(Of String, String)
+
+        results = _fda.GetReportDataRecallReasonByReportDate(keyword, state)
+
+        Return results
+
+    End Function
+
 #End Region
 
 #Region " Private Methods "
@@ -149,6 +161,8 @@ Public Class ShopAwareService
                 ' searchSummaryForKeyword.EventCount += endpointSearchSummary.EventCount
 
             End If
+
+            searchSummaryForKeyword.EventCount = _fda.GetDrugEventsByDrugNameCount(keyWord)
 
         Next
 

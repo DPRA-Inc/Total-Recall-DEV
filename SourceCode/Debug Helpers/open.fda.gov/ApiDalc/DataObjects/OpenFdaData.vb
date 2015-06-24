@@ -64,21 +64,27 @@ Namespace DataObjects
 
                 'For Each itm In jToken("application_number")
                 'Next
-                For Each itm In jToken("brand_name")
-                    data.Brand_Name.Add(itm)
-                Next
+                data.Brand_Name = ConvertJTokenToList(jToken("brand_name"))
+                data.Generic_Name = ConvertJTokenToList(jToken("generic_name"))
+                data.Manufacturer_Name = ConvertJTokenToList(jToken("manufacturer_name"))
+                data.Route = ConvertJTokenToList(jToken("route"))
+                data.Generic_Name = ConvertJTokenToList(jToken("generic_name"))
 
-                For Each itm In jToken("generic_name")
-                    data.Generic_Name.Add(itm)
-                Next
+                'For Each itm In jToken("brand_name")
+                '    data.Brand_Name.Add(itm)
+                'Next
 
-                For Each itm In jToken("manufacturer_name")
-                    data.Manufacturer_Name.Add(itm)
-                Next
+                'For Each itm In jToken("generic_name")
+                '    data.Generic_Name.Add(itm)
+                'Next
 
-                For Each itm In jToken("route")
-                    data.Route.Add(itm)
-                Next
+                'For Each itm In jToken("manufacturer_name")
+                '    data.Manufacturer_Name.Add(itm)
+                'Next
+
+                'For Each itm In jToken("route")
+                '    data.Route.Add(itm)
+                'Next
 
                 'For Each reaction In jToken
 
@@ -99,6 +105,22 @@ Namespace DataObjects
         End Function
 
 #End Region
+
+        Private Shared Function ConvertJTokenToList(jToken As JToken) As List(Of String)
+
+            Dim result As New List(Of String)
+
+            If IsJTokenValid(jToken) Then
+
+                For Each itm In jToken
+                    result.Add(itm)
+                Next
+
+            End If
+
+            Return result
+
+        End Function
 
     End Class
 

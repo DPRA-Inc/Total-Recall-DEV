@@ -1,5 +1,6 @@
 ﻿#Region " Imports "
 
+Imports System.Security.Policy
 Imports ApiDalc.DataObjects
 Imports ApiDalc.Enumerations
 Imports Newtonsoft.Json.Linq ' OpenSource
@@ -277,19 +278,109 @@ Public Class OpenFda
 
     End Function
 
+    Public Function GetReportDataRecallReasonByReportDate(ByVal keyWord As String, ByVal state As String) As Dictionary(Of String, String)
 
-    'Public Function GetDrugEventsByDrugName(ByVal drugName As String) As Object
+        Dim resutls As New Dictionary(Of String, String)
+        Dim reportCount As New Dictionary(Of Date, Integer)
+        Dim url As String = String.Empty
 
-    '    ResetSearch()
-    '    Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
+        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
 
-    '    AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        For Each endPointType In endPointList
+
+            ResetSearch()
+            '  ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, state, "classification")
+            'TODO:  this needs to be same as FrontPage Counts
+            'AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}))
+            'AddCountField("report_date")
+
+            'Dim filterList As New List(Of String) With {keyWord}
+            AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
+            AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
+            AddCountField("report_date")
 
 
-    '    Return Nothing
+            url = BuildUrl(endPointType, 0)
+
+            Dim searchResults As String = Execute(url)
+
+            If Not String.IsNullOrEmpty(searchResults) Then
+
+                Dim jo As JObject = JObject.Parse(searchResults)
+                Dim countResults As JArray = jo("results")
+                Dim tmpDate As DateTime '= DateTime.ParseExact(filters(0), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
+                For Each itm In countResults
+
+                    tmpDate = DateTime.ParseExact(itm("time"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
+                    If reportCount.ContainsKey(tmpDate) Then
+                        reportCount(tmpDate) += CInt(itm("count"))
+                    Else
+                        reportCount.Add(tmpDate, CInt(itm("count")))
+                    End If
+
+                Next
+
+            End If
+
+        Next
 
 
-    'End Function
+        For Each itm As KeyValuePair(Of Date, Integer) In reportCount
+            resutls.Add(itm.Key.ToString, itm.Value.ToString)
+        Next
+
+        Return resutls
+
+    End Function
+
+    Public Sub AddCountField(ByVal field As String)
+        _count = field
+    End Sub
+
+    Public Function GetDrugEventsByDrugNameCount(ByVal drugName As String) As Integer
+
+        'Dim tmpAdverseDrugEventtList As List(Of AdverseDrugEvent)
+        Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
+
+        Dim dataSetSize As Integer = 0
+
+        ResetSearch()
+        AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        'Dim limit As String = AddResultLimit(100)
+
+        Dim url As String = BuildUrl(OpenFdaApiEndPoints.DrugEvent)
+        Dim results As String = Execute(url)
+
+        If Not String.IsNullOrEmpty(results) Then
+            dataSetSize = GetMetaResults().Total()
+        End If
+
+        Return dataSetSize
+
+    End Function
+    Public Function GetDrugEventsByDrugName(ByVal drugName As String) As Object
+
+        Dim tmpAdverseDrugEventtList As List(Of AdverseDrugEvent)
+        Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
+
+        ResetSearch()
+        AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        Dim limit As String = AddResultLimit(100)
+
+        Dim url As String = BuildUrl(OpenFdaApiEndPoints.DrugEvent)
+        Dim results As String = Execute(url & limit)
+        If Not String.IsNullOrEmpty(results) Then
+
+            Dim dataSetSize As Integer = GetMetaResults().Total()
+            tmpAdverseDrugEventtList = AdverseDrugEvent.CnvJsonDataToList(results)
+
+        End If
+
+        Return Nothing
+
+    End Function
 
 #Region " Search "
 
@@ -540,7 +631,11 @@ Public Class OpenFda
     End Function
 
     Friend Sub ResetSearch()
+
         _search = String.Empty
+        '_limit = String.Empty
+        _count = String.Empty
+
     End Sub
 
 #Region " Limits "
@@ -562,7 +657,7 @@ Public Class OpenFda
 
         End Select
 
-        parm = String.Format("&Limit={0}", limit)
+        parm = String.Format("&limit={0}", limit)
 
         Return parm
 

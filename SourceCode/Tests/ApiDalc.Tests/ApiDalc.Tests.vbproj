@@ -115,6 +115,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Mocks\Data\GetSearchSummary.json" />
     <EmbeddedResource Include="Mocks\Data\GetSearchResult.json" />
+    <None Include="Mocks\Data\DrugEventUrl.json" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

@@ -1280,4 +1280,39 @@ Public Class Form1
 
 #End Region
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Dim fda As New OpenFda
+        Dim results As Dictionary(Of String, String) = fda.GetReportDataRecallReasonByReportDate("Ice Cream", "TN")
+
+        Dim totalCount As String = 0
+
+        RichTextBox2.Visible = False
+        TreeView3.Visible = True
+
+        For Each xx As KeyValuePair(Of String, String) In results
+
+            TreeView3.Nodes.Add(String.Format("{0}  -  ({1})", xx.Key, xx.Value))
+            totalCount += CInt(xx.Value)
+
+        Next
+
+        TreeView3.Nodes.Add(String.Format("Total: {0}", totalCount))
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        Dim fda As New OpenFda
+        Dim drugName As String = "Augmentin"
+        Dim eventCount As Integer = fda.GetDrugEventsByDrugNameCount(drugName)
+
+        fda.GetDrugEventsByDrugName(drugName)
+
+        RichTextBox2.Visible = False
+        TreeView3.Visible = True
+
+        TreeView3.Nodes.Add(String.Format("Drug Event Count '{0}' = {1}", drugName, eventCount))
+    End Sub
+
 End Class
