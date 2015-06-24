@@ -143,9 +143,11 @@
     <Content Include="Assests\ShopAware3.fw.png" />
     <Content Include="Assests\ShopAware4.fw.png" />
     <Content Include="Assests\TritychHome.fw.png" />
+    <Content Include="css\angular-openlayers-directive.css" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\ol.css" />
     <Content Include="css\patterns\congruent_pentagon.png" />
     <Content Include="css\patterns\header-profile-skin-1.png" />
     <Content Include="css\patterns\header-profile-skin-2.png" />
@@ -199,6 +201,7 @@
     <Content Include="js\map\mapIcons.js" />
     <Content Include="js\map\ol.js" />
     <Content Include="js\ngstorage\ngStorage.min.js" />
+    <Content Include="js\openlayers\angular-openlayers-directive.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />

@@ -1,18 +1,26 @@
-﻿angular.module('TotalRecall').controller('productcontroller', ProductController)
+﻿angular.module("TotalRecall").controller('productcontroller', ProductController);
 
-function ProductController($http, $modal, productservice) {
+function ProductController($scope, $http, $modal, productservice) {
     var vm = this;
-           
+
     vm.SearchSummary = GlobalsModule.SearchSummary;
     vm.DataLoading = true;
+
+    // default map configuration
+    angular.extend($scope, {
+        center: {
+            lat: 39.50,
+            lon: -98.35,
+            zoom: 2
+        }
+    });
 
     if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
     vm.SearchResult = GlobalsModule.SearchResult;
 
     if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
-    vm.SearchResultItem = GlobalsModule.SearchResultItem
-
-    if (GlobalsModule.SearchResult.length == 0) LoadPageInfo();
+    vm.SearchResultItem = GlobalsModule.SearchResultItem;
+    if (GlobalsModule.SearchResult.length === 0) LoadPageInfo();
 
     //*******************************************
 
@@ -24,7 +32,7 @@ function ProductController($http, $modal, productservice) {
         productservice.GetSearchResult(productName, region,
             function (result) {
 
-                if (result != null) {
+                if (angular.isObject(result)) {
 
                     result.ClassI.forEach(function (item) {
                         item.ShowMoreInformation = false;
@@ -35,11 +43,11 @@ function ProductController($http, $modal, productservice) {
                 GlobalsModule.SearchResult = result;
                 vm.SearchResult = result;
                 vm.DataLoading = false;
-            }            
-        );       
+            }
+        );
     }
 
-    vm.SetupMap = function() {
+    vm.SetupMap = function () {
 
         //var junk = angular.element('test');
         //var mapControl = angular.element('map');
@@ -112,10 +120,9 @@ function ProductController($http, $modal, productservice) {
         ////});
 
         //centerMapOnAllObjects();
-    }
+    };
 
     vm.ShowMoreInformation = function (item) {
-
 
         GlobalsModule.SearchResultItem = item;
 
@@ -123,9 +130,8 @@ function ProductController($http, $modal, productservice) {
             templateUrl: 'app/product/productFullDetails.modal.html',
             controller: 'productcontroller as vm'
         });
-        
 
-    }
 
+    };
 };
 
