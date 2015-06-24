@@ -10,7 +10,9 @@
                 <p></p>
 
                 <div class="input-group">
-                    <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" ng-enter="vm.AddToList()" />
+                    <a href="#" title="Click to add search term to shopping list.">
+                        <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" ng-enter="vm.AddToList()" />
+                    </a>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
                             <i class="fa fa-plus"></i>
@@ -57,17 +59,17 @@
                                 <td valign="middle">
                                     <div class="pull-right center-inarea">
                                         <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death.">
-                                            <img src="../../img/identifiers/R1.png" ng-show="item.HasClassI" alt="Class 1" />
+                                            <img src="../../img/identifiers/R1.png" ng-show="item.HasClassI" />
                                         </a>
                                         <a href="#" title="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.">
-                                            <img src="../../img/identifiers/R2.png" ng-show="item.HasClassII" alt="Class 2" />
+                                            <img src="../../img/identifiers/R2.png" ng-show="item.HasClassII" />
                                         </a>
                                         <a href="#" title="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.">
 
-                                            <img src="../../img/identifiers/R3.png" ng-show="item.HasClassIII" alt="Class 3" />
+                                            <img src="../../img/identifiers/R3.png" ng-show="item.HasClassIII" />
                                         </a>
                                         <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death.">
-                                            <img src="../../img/identifiers/E.png" ng-show="item.HasEvents" alt="Event" />
+                                            <img src="../../img/identifiers/E.png" ng-show="item.HasEvents" />
                                         </a>
                                         <div class="badge badge-success" ng-show="item.IsClean">
                                             <h3>
