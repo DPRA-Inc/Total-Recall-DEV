@@ -51,6 +51,16 @@ function landingcontroller($location, $localStorage, landingservice, feedLoader)
             var value = vm.textValue.replace(disallowedChars, "");
             var region = "TN";
 
+            // Check for duplicates
+            vm.shoppingList.forEach(function (checkItem)
+            {
+                if (checkItem.Keyword == value)
+                {
+                    alert('Duplicate (todo: change this to ui style timeout message)');
+                    throw new Error('Duplicate');
+                }
+            })
+
             // Make the new item to be added to our list.
             var item = {};
 
@@ -73,18 +83,10 @@ function landingcontroller($location, $localStorage, landingservice, feedLoader)
 
             vm.textValue = "";
 
-            // Differnt Ranks.  use the bootstrap theme codes.
-            //Rank: 'warning'
-            //Rank: 'success',
-            //Rank: 'info',
-            //Rank: 'danger',
-
             var searchStr = value + "|" + region;
 
             var data = landingservice.GetIssues(searchStr,
-                function (result) {
-
-                   
+                function (result) {                                      
 
                     // Search for the Keyword in our list.
                     vm.shoppingList.forEach(function (product) {
