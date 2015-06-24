@@ -38,7 +38,7 @@ Public Class SearchResultMapData
     ''' <remarks></remarks>
     Public ReadOnly Property Image As String
         Get
-            Return String.Format("Assets/mapIcon/{0}.png", CInt(Me.IconSet))
+            Return String.Format("{0}", CInt(Me.IconSet))
         End Get
     End Property
 
@@ -57,6 +57,18 @@ Public Class SearchResultMapData
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Property Longitude As String = "0"
+
+    Public ReadOnly Property icon As IconStyle
+        Get
+
+            Dim ic As New IconStyle
+
+            ic.src = String.Format(ic.src, CInt(Me.IconSet))
+
+            Return ic
+
+        End Get
+    End Property
 
 #End Region
 

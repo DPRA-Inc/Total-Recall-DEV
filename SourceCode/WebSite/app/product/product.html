@@ -120,9 +120,11 @@
 
     </div>
 
-    <h1>TEsting The Map Goes Here</h1>
-    <div id="map" class="col-md-6 animated bounceInright">
-        <openlayers ol-center="center" height="480px" width="100%"></openlayers>
+        <div id="mapPlaceholder" class="col-md-6 animated bounceInright">
+            <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
+                <ol-layer ol-layer-properties="mapquest"></ol-layer>
+                <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
+            </openlayers>
+        </div>
+
     </div>
-    
-</div>
