@@ -198,6 +198,7 @@
     <Content Include="js\jquery\moment.min.js" />
     <Content Include="js\map\mapIcons.js" />
     <Content Include="js\map\ol.js" />
+    <Content Include="js\ngstorage\ngStorage.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />

@@ -46,7 +46,8 @@
                     <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
 
                         <div class="pull-right" ng-show="item.IsLoading">
-                            <h1><i class="fa fa-spinner fa-spin"></i></h1>
+                            <h1><i class="fa fa-spinner fa-spin"></i>
+                            </h1>
                         </div>
 
                         <div class="pull-right">
@@ -68,11 +69,13 @@
                             </div>
 
                             <div class="badge badge-success" ng-show="item.IsClean">
-                                <h3><i class="fa fa-check"></i></h3>
+                                <h3><i class="fa fa-check"></i>
+                                </h3>
                             </div>
 
                             <div class="badge badge-white">
-                                <h3><i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i></h3>
+                                <h3><i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i>
+                                </h3>
                             </div>
 
                         </div>
@@ -87,12 +90,7 @@
 
     <div class="col-md-6 animated bounceInRight">
         <h2>News Ticker Goes here!!</h2>
-
-
-
     </div>
-
-
 
 </div>
 

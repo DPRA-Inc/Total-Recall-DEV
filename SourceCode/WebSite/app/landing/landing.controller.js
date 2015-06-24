@@ -1,11 +1,21 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller);
 
-function landingcontroller($location, landingservice) {
+function landingcontroller($location, $localStorage, landingservice) {
     var vm = this;
 
     vm.textValue = null;
 
-    if (!angular.isObject(GlobalsModule.ShoppingList)) GlobalsModule.ShoppingList = [];
+    if (!angular.isObject(GlobalsModule.ShoppingList)) {
+        if (angular.isString($localStorage.cart)) {
+            try {
+                GlobalsModule.ShoppingList = angular.fromJson($localStorage.cart); // Load from local storage
+            } catch(ex) {
+                GlobalsModule.ShoppingList = [];
+            }
+        } else {
+            GlobalsModule.ShoppingList = [];
+        }
+    }
 
     vm.shoppingList = GlobalsModule.ShoppingList;
 
@@ -28,7 +38,6 @@ function landingcontroller($location, landingservice) {
 
     }
 
-
     vm.AddToList = function () {
 
         var disallowedChars = /[^a-zA-Z0-9 :]/g;
@@ -39,7 +48,7 @@ function landingcontroller($location, landingservice) {
             var region = "TN";
 
             // Make the new item to be added to our list.
-            var item = [];
+            var item = {};
 
             item.Keyword = value; // Product name
             item.Rank = 'success'; // How Bad is it, Color Code.
@@ -53,8 +62,13 @@ function landingcontroller($location, landingservice) {
             item.ClassIIICount = 0;
             item.EventCount = 0;
             item.IsClean = true;
+            item.IsLoading = false; // Set false here so it saves the cart with the right value.
 
             vm.shoppingList.push(item);
+
+            $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
+
+            item.IsLoading = true; // Set to true to show that information about the item is loading.
 
             vm.textValue = "";
 
@@ -114,6 +128,8 @@ function landingcontroller($location, landingservice) {
 
         var itemIndex = vm.shoppingList.indexOf(cartItem);
         vm.shoppingList.splice(itemIndex, 1);
+
+        $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
 
     }
 
