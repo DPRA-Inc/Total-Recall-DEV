@@ -886,7 +886,10 @@ Public Class Form1
         FindAndHighlightText(RichTextBox1, searchFieldValue, Color.Red, False)
         'End If
 
-        FindAndHighlightText(RichTextBox1, searchField, Color.Blue, True)
+        Dim tmpSearchField As String() = searchField.Split(".")
+        For Each fld In tmpSearchField
+            FindAndHighlightText(RichTextBox1, String.Format("""{0}""", fld), Color.Blue, True)
+        Next
 
     End Sub
 
@@ -965,8 +968,33 @@ Public Class Form1
                                                    "patient.reaction.reactionmeddraversionpt",
                                                    "patient.reaction.reactionoutcome",
                                                    "patient.drug.actiondrug",
+                                                   "patient.drug.drugadditional",
+                                                   "patient.drug.drugcumulativedosagenumb",
+                                                   "patient.drug.drugcumulativedosageunit",
                                                    "patient.drug.drugauthorizationnumb",
-                                                   "patient.drug.drugcharacterization"
+                                                   "patient.drug.drugcharacterization",
+                                                   "patient.drug.drugdosageform",
+                                                   "patient.drug.drugintervaldosagedefinition",
+                                                   "patient.drug.drugintervaldosageunitnumb",
+                                                   "patient.drug.drugstructuredosagenumb",
+                                                   "patient.drug.drugstructuredosageunit",
+                                                   "patient.drug.drugadministrationroute",
+                                                   "patient.drug.drugbatchnumb",
+                                                   "patient.drug.drugdoseagetext",
+                                                   "patient.drug.drugenddate",
+                                                   "patient.drug.drugenddateformat",
+                                                   "patient.drug.drugindication",
+                                                   "patient.drug.drugstartdate",
+                                                   "patient.drug.drugstartdateformat",
+                                                   "patient.drug.drugtreatmentduration",
+                                                   "patient.drug.drugtreatmentdurationunit",
+                                                   "patient.drug.medicinalproduct",
+                                                   "patient.drug.openfda.route",
+                                                   "patient.drug.openfda.substance_name",
+                                                   "patient.drug.openfda.product_type",
+                                                   "patient.drug.openfda.generic_name",
+                                                   "patient.drug.openfda.manufacturer_name",
+                                                   "patient.drug.openfda.brand_name"
                                            })
 
             Case OpenFDAApiEndPoints.FoodRecall, OpenFDAApiEndPoints.DrugRecall, OpenFDAApiEndPoints.DeviceRecall

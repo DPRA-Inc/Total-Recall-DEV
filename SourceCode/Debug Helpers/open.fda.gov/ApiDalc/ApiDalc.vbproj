@@ -93,6 +93,8 @@
     <Compile Include="Enumerations\PatientSex.vb" />
     <Compile Include="Enumerations\PrimarySourceQualification.vb" />
     <Compile Include="Enumerations\ReactionOutcome.vb" />
+    <Compile Include="Enumerations\ReceiverType.vb" />
+    <Compile Include="Enumerations\SenderType.vb" />
     <Compile Include="Enumerations\States.vb" />
     <Compile Include="Enumerations\FdaFilterTypes.vb" />
     <Compile Include="Enumerations\OpenFdaApiEndPoints.vb" />
