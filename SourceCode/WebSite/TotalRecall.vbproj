@@ -146,6 +146,7 @@
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\ol.css" />
     <Content Include="css\patterns\congruent_pentagon.png" />
     <Content Include="css\patterns\header-profile-skin-1.png" />
     <Content Include="css\patterns\header-profile-skin-2.png" />
