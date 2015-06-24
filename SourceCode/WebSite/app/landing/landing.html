@@ -1,6 +1,6 @@
 <div data-ng-controller="landingcontroller as vm">
     <div class="row imagesection" style="background-image: url('img/HomeTriptych1920.fw.fixed.jpg'); background-position:center">
-        <div class="col-md-6 col-md-offset-1 searchbox animated bounceIn">
+        <div class="col-md-6 col-md-offset-1 searchbox animated bounceIn" style="padding:25px;">
 
             <div class="col-md-6">
                 <!--Todo: get rid of the <p> and set the correct style to give proper spacing-->
@@ -10,13 +10,13 @@
                 <p></p>
 
                 <div class="input-group">
-                    <a href="#" title="Click to add search term to shopping list.">
-                        <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" ng-enter="vm.AddToList()" />
-                    </a>
+                    <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" ng-enter="vm.AddToList()" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
-                            <i class="fa fa-plus"></i>
-                        </button>
+                        <a href="#" title="Click to add search term to shopping list.">
+                            <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </a>
                     </span>
                 </div>
             </div>
@@ -52,6 +52,7 @@
                             <tr>
                                 <td valign="middle">
                                     <h3>{{item.Keyword}}</h3>
+                                    <!--<h5><a href="#">Suggestions: ice cream</a></h5>-->
                                 </td>
                                 <td>
                                     <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
