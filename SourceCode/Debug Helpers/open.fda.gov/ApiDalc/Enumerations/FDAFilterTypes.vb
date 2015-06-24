@@ -12,6 +12,8 @@ Namespace Enumerations
         Region
         [Date]
 
+        DrugEventDrugName
+
     End Enum
 
 End Namespace

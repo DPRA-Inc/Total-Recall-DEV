@@ -104,49 +104,9 @@ Public Class ShopAwareService
 
         searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
 
-
         LimitResultsOfSearchResultItems(searchResultLocal.ClassI, maxResultSetSize)
-        ''If searchResultLocal.ClassI.Count > maxResultSetSize Then
-        'Dim tmpLinqResults As Object
-
-        'tmpLinqResults = (From el In searchResultLocal.ClassI Select el Order By CDate(el.ReportDate) Descending).ToList()
-
-        'If tmpLinqResults.Count > maxResultSetSize Then
-        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        'End If
-
-        'searchResultLocal.ClassI.Clear()
-        'searchResultLocal.ClassI.AddRange(tmpLinqResults)
-
-        'End If
-
-        'If searchResultLocal.ClassII.Count > maxResultSetSize Then
-
         LimitResultsOfSearchResultItems(searchResultLocal.ClassII, maxResultSetSize)
-        'tmpLinqResults = (From el In searchResultLocal.ClassII Select el Order By CDate(el.ReportDate) Descending).ToList()
-
-        'If tmpLinqResults.Count > maxResultSetSize Then
-        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        'End If
-
-        'searchResultLocal.ClassII.Clear()
-        'searchResultLocal.ClassII.AddRange(tmpLinqResults)
-
-        'End If
-
-        'If searchResultLocal.ClassIII.Count > maxResultSetSize Then
-
         LimitResultsOfSearchResultItems(searchResultLocal.ClassIII, maxResultSetSize)
-        'tmpLinqResults = (From el In searchResultLocal.ClassIII Select el Order By CDate(el.ReportDate) Descending).ToList()
-
-        'If tmpLinqResults.Count > maxResultSetSize Then
-        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        'End If
-
-        'searchResultLocal.ClassIII.Clear()
-        'searchResultLocal.ClassIII.AddRange(tmpLinqResults)
-
-        'End If
 
         Return searchResultLocal
 
@@ -631,7 +591,7 @@ Public Class ShopAwareService
     Private Sub LimitResultsOfSearchResultItems(searchResultItemList As List(Of SearchResultItem), maxResultSetSize As Integer)
 
         'If searchResultLocal.ClassI.Count > maxResultSetSize Then
-        Dim tmpLinqResults = (From el In searchResultItemList Select el Order By CDate(el.ReportDate) Descending).ToList()
+        Dim tmpLinqResults = (From el In searchResultItemList Select el Order By CDate(el.DateStarted) Descending).ToList()
 
         If tmpLinqResults.Count > maxResultSetSize Then
             tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
