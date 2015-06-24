@@ -46,7 +46,6 @@
 
                     <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
 
-
                         <table style="width:100%;" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td valign="middle">
@@ -130,17 +129,37 @@
     </div>
 
     <div class="col-md-6 animated bounceInRight" ng-init="vm.StartRSS()">
-        <h1>Latest FDA News</h1>
 
-        <ul class="rss">
+        <table style="width:100%;">
+            <tr>
+                <td>
+                    <h1>Latest FDA News</h1>
+                </td>
+                <td align="right" style="text-align:right;">
+                    <div class="col-md-6" style="padding-top: 20px">
+                        <ul class="nav nav-pills" role="tablist">
+                            <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
+                            <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
+                            <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
-            <li ng-repeat="feed in vm.feeds">
+        <ul class="rss sortable-list connectList agile-list">
 
-                <h5><a target="_blank" href="{{feed.link}}">{{feed.title}}</a></h5>
+            <li ng-repeat="feed in vm.feeds" ng-click="vm.ViewFeed(feed)">
 
-                <p class="text-left">{{feed.contentSnippet}}</p>
+                <div ng-class="vm.fontSizeClass" style="background-color:#FAFAFA;">
 
-                <span class="small">{{feed.publishedDate}}</span>
+                    <a target="_blank" href="{{feed.link}}">{{feed.title}}</a>
+
+                    <p class="text-left">{{feed.contentSnippet}}</p>
+
+                    <span class="small">{{feed.publishedDate}}</span>
+
+                </div>
 
             </li>
 

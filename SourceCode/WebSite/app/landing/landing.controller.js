@@ -1,8 +1,21 @@
 ﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller);
 
-function landingcontroller($location, $localStorage, landingservice, feedLoader) {
+function landingcontroller($scope, $window, $location, $localStorage, landingservice, feedLoader) {
     var vm = this;
-    
+
+    var fontSizeClass = "";
+
+    if (angular.isString($localStorage.fontSizeClass))
+    {
+        vm.fontSizeClass = $localStorage.fontSizeClass;
+    }
+
+    vm.ChangeFontSize = function (className)
+    {
+        vm.fontSizeClass = className;
+        $localStorage.fontSizeClass = className;
+    }
+
     vm.feeds = [];
 
     vm.IsRSSLoading = true;
@@ -153,6 +166,11 @@ function landingcontroller($location, $localStorage, landingservice, feedLoader)
             GlobalsModule.SearchSummary = product;
             $location.path('/index/product');
         }
+    }
+
+    vm.ViewFeed = function (feed)
+    {
+        $window.open(feed.link);
     }
 
     vm.StartRSS = function () {
