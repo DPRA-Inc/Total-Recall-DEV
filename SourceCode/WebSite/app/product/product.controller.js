@@ -1,8 +1,22 @@
 ﻿angular.module("TotalRecall").controller('productcontroller', ProductController);
 
-function ProductController($scope, $http, $modal, productservice)
+function ProductController($scope, $localStorage, $http, $modal, productservice)
 {
     var vm = this;
+
+    var fontSizeClass = "";
+
+    if (angular.isString($localStorage.fontSizeClass))
+    {
+        vm.fontSizeClass = $localStorage.fontSizeClass;
+    }
+
+    vm.ChangeFontSize = function (className)
+    {
+        vm.fontSizeClass = className;
+        $localStorage.fontSizeClass = className;
+    }
+
 
     vm.SearchSummary = GlobalsModule.SearchSummary;
     vm.DataLoading = true;

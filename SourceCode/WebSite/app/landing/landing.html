@@ -130,26 +130,20 @@
 
     <div class="col-md-6 animated bounceInRight" ng-init="vm.StartRSS()">
 
-        <table style="width:100%;">
-            <tr>
-                <td>
-                    <h1>Latest FDA News</h1>
-                </td>
-                <td align="right" style="text-align:right;">
-                    <div class="col-md-6" style="padding-top: 20px">
-                        <ul class="nav nav-pills" role="tablist">
-                            <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
-                            <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
-                            <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="row">
+            <h1 class="col-md-10">Latest FDA News</h1>
+            <div class="col-md-2" style="padding-top: 20px">
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
+                    <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
+                    <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
+                </ul>
+            </div>
+        </div>
 
         <ul class="rss sortable-list connectList agile-list">
 
-            <li ng-repeat="feed in vm.feeds" ng-click="vm.ViewFeed(feed)">
+            <li ng-repeat="feed in vm.feeds" ng-click="vm.ViewFeed(feed)" class="feed-element">
 
                 <div ng-class="vm.fontSizeClass" style="background-color:#FAFAFA;">
 
