@@ -21,7 +21,6 @@ Public Class ShopAwareService
 
     Public Sub New()
         _restClient = New RestClient
-
     End Sub
 
     Public Sub New(restClient As IRestClient)
@@ -31,7 +30,6 @@ Public Class ShopAwareService
 #End Region
 
 #Region " Public Methods "
-
 
     ''' <summary>
     ''' This Gets a count of Issues. The count is based on Classifications (Class I, Class II, Class III) and drug event
@@ -57,11 +55,7 @@ Public Class ShopAwareService
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
 
-        'Dim searchSummaryLocal = GetRecallInfoCounts(keyWord, state)
-
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
-
-        'Const testNewCode As Boolean = True
 
         For Each itm As ResultRecall In tmp
 
@@ -70,7 +64,7 @@ Public Class ShopAwareService
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
-            
+
             Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
@@ -89,221 +83,20 @@ Public Class ShopAwareService
                                                                   .CodeInfo = itm.Code_info,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
-
             Dim itmDate As DateTime = Nothing
             Select Case itm.Classification
 
                 Case "Class I"
 
-                    'If testNewCode Then
                     searchResultLocal.ClassI.Add(tmpSearchResultItem)
-                    'Else
-                    '    addSearchResultItemToClassificication(searchResultLocal.ClassI, tmpSearchResultItem, maxResultSetSize)
-                    'End If
-
-
-
-                    'If searchResultLocal.ClassI.Count < maxResultSetSize Then
-                    'searchResultLocal.ClassI.Add(itm)
-
-                    'If searchResultLocal.ClassI.Count = 0 Then
-                    '    searchResultLocal.ClassI.Add(tmpSearchResultItem)
-                    'Else
-
-                    '    Dim itemAdded = False
-
-                    '    For ndx As Integer = 0 To searchResultLocal.ClassI.Count - 1
-
-                    '        DateTime.TryParse(searchResultLocal.ClassI(ndx).DateStarted, itmDate)
-
-                    '        If newItemDate > itmDate Then
-
-                    '            'searchResultLocal.ClassI.(ndx, tmpSearchResultItem)
-                    '            searchResultLocal.ClassI.Insert(ndx, tmpSearchResultItem)
-                    '            itemAdded = True
-                    '            Exit For
-
-                    '            'Else
-                    '            '    If searchResultLocal.ClassI.Count > maxResultSetSize Then
-                    '            '    Else
-                    '            '        searchResultLocal.ClassI.Add(tmpSearchResultItem)
-                    '            '    End If
-                    '            '    itemAdded = True
-                    '        End If
-
-                    '        'If itemAdded Then
-                    '        '    Exit For
-                    '        'End If
-
-                    '    Next
-
-                    '    If Not itemAdded AndAlso searchResultLocal.ClassI.Count < maxResultSetSize Then
-                    '        searchResultLocal.ClassI.Add(tmpSearchResultItem)
-                    '    End If
-
-                    '    'If searchResultLocal.ClassI.Count > maxResultSetSize Then
-                    '    '    searchResultLocal.ClassI.RemoveAt(maxResultSetSize)
-                    '    'End If
-
-
-                    '    'If searchResultLocal.ClassI.Count < maxResultSetSize Then
-
-                    '    '    If searchResultLocal.ClassI.Count = 0 Then
-                    '    '        searchResultLocal.ClassI.Add(tmpSearchResultItem)
-                    '    '    Else
-
-                    '    '        For ndx As Integer = 0 To searchResultLocal.ClassI.Count - 1
-                    '    '            DateTime.TryParse(searchResultLocal.ClassI(ndx).DateStarted, itmDate)
-                    '    '            'itmDate = DateTime.ParseExact(searchResultLocal.ClassI(ndx).DateStarted, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-
-                    '    '            If newItemDate > itmDate Then
-
-                    '    '                searchResultLocal.ClassI.Insert(ndx, tmpSearchResultItem)
-                    '    '                Exit For
-
-                    '    '            End If
-
-                    '    '        Next
-
-                    '    '    End If
-                    '    '    ' searchResultLocal.ClassI.Add(tmpSearchResultItem)
-
-                    '    'End If
-
-                    'End If
-
-                    ''End If
 
                 Case "Class II"
 
-                    'If testNewCode Then
                     searchResultLocal.ClassII.Add(tmpSearchResultItem)
-                    'Else
-                    '    addSearchResultItemToClassificication(searchResultLocal.ClassII, tmpSearchResultItem, maxResultSetSize)
-                    'End If
-
-
-                    'If searchResultLocal.ClassII.Count = 0 Then
-                    '    searchResultLocal.ClassII.Add(tmpSearchResultItem)
-                    'Else
-
-                    '    Dim itemAdded = False
-
-                    '    For ndx As Integer = 0 To searchResultLocal.ClassII.Count - 1
-
-                    '        DateTime.TryParse(searchResultLocal.ClassII(ndx).DateStarted, itmDate)
-
-                    '        If newItemDate > itmDate Then
-
-                    '            'searchResultLocal.ClassII.(ndx, tmpSearchResultItem)
-                    '            searchResultLocal.ClassII.Insert(ndx, tmpSearchResultItem)
-                    '            itemAdded = True
-                    '            Exit For
-
-                    '        End If
-
-                    '    Next
-
-                    '    If Not itemAdded AndAlso searchResultLocal.ClassII.Count < maxResultSetSize Then
-                    '        searchResultLocal.ClassII.Add(tmpSearchResultItem)
-                    '    End If
-
-                    'End If
-
-                    ''End If
-
-
-                    ''If searchResultLocal.ClassII.Count < maxResultSetSize Then
-                    ''    'searchResultLocal.ClassII.Add(itm)
-                    ''    If searchResultLocal.ClassII.Count < maxResultSetSize Then
-
-                    ''        If searchResultLocal.ClassII.Count = 0 Then
-                    ''            searchResultLocal.ClassII.Add(tmpSearchResultItem)
-                    ''        Else
-
-                    ''            For ndx As Integer = 0 To searchResultLocal.ClassII.Count - 1
-                    ''                DateTime.TryParse(searchResultLocal.ClassII(ndx).DateStarted, itmDate)
-                    ''                'itmDate = DateTime.ParseExact(searchResultLocal.ClassII(ndx).DateStarted, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-
-                    ''                If newItemDate > itmDate Then
-
-                    ''                    searchResultLocal.ClassII.Insert(ndx, tmpSearchResultItem)
-                    ''                    Exit For
-
-                    ''                End If
-
-                    ''            Next
-
-                    ''        End If
-                    ''        ' searchResultLocal.ClassII.Add(tmpSearchResultItem)
-
-                    ''    End If
-
-                    ''End If
 
                 Case "Class III"
 
-                    'If testNewCode Then
                     searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-                    'Else
-                    '    addSearchResultItemToClassificication(searchResultLocal.ClassIII, tmpSearchResultItem, maxResultSetSize)
-                    'End If
-
-                    'If searchResultLocal.ClassIII.Count = 0 Then
-                    '    searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-                    'Else
-
-                    '    Dim itemAdded = False
-
-                    '    For ndx As Integer = 0 To searchResultLocal.ClassIII.Count - 1
-
-                    '        DateTime.TryParse(searchResultLocal.ClassIII(ndx).DateStarted, itmDate)
-
-                    '        If newItemDate > itmDate Then
-
-                    '            'searchResultLocal.ClassII.(ndx, tmpSearchResultItem)
-                    '            searchResultLocal.ClassIII.Insert(ndx, tmpSearchResultItem)
-                    '            itemAdded = True
-                    '            Exit For
-
-                    '        End If
-
-                    '    Next
-
-                    '    If Not itemAdded AndAlso searchResultLocal.ClassIII.Count < maxResultSetSize Then
-                    '        searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-                    '    End If
-
-                    'End If
-
-
-                    ''If searchResultLocal.ClassIII.Count < maxResultSetSize Then
-                    ''    'searchResultLocal.ClassIII.Add(itm)
-                    ''    If searchResultLocal.ClassIII.Count < maxResultSetSize Then
-
-                    ''        If searchResultLocal.ClassIII.Count = 0 Then
-                    ''            searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-                    ''        Else
-
-                    ''            For ndx As Integer = 0 To searchResultLocal.ClassIII.Count - 1
-                    ''                DateTime.TryParse(searchResultLocal.ClassIII(ndx).DateStarted, itmDate)
-                    ''                'itmDate = DateTime.ParseExact(searchResultLocal.ClassIII(ndx).DateStarted, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-
-                    ''                If newItemDate > itmDate Then
-
-                    ''                    searchResultLocal.ClassIII.Insert(ndx, tmpSearchResultItem)
-                    ''                    Exit For
-
-                    ''                End If
-
-                    ''            Next
-
-                    ''        End If
-                    ''        ' searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-
-                    ''    End If
-
-                    ''End If
 
             End Select
 
@@ -311,99 +104,54 @@ Public Class ShopAwareService
 
         searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
 
-        'Dim sw As New Stopwatch
-        'sw.Start()
 
-        'Dim tmpLinqResults = (From el In searchResultLocal.ClassI Select el Order By CDate(el.ReportDate) Descending).ToList()
-        'sw.Stop()
-        'Debug.Write(sw.Elapsed)
+        LimitResultsOfSearchResultItems(searchResultLocal.ClassI, maxResultSetSize)
+        ''If searchResultLocal.ClassI.Count > maxResultSetSize Then
+        'Dim tmpLinqResults As Object
 
-        If searchResultLocal.ClassI.Count > maxResultSetSize Then
+        'tmpLinqResults = (From el In searchResultLocal.ClassI Select el Order By CDate(el.ReportDate) Descending).ToList()
 
-            'If testNewCode Then
+        'If tmpLinqResults.Count > maxResultSetSize Then
+        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        'End If
 
-            Dim tmpLinqResults = (From el In searchResultLocal.ClassI Select el Order By CDate(el.ReportDate) Descending).ToList()
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        'searchResultLocal.ClassI.Clear()
+        'searchResultLocal.ClassI.AddRange(tmpLinqResults)
 
-            searchResultLocal.ClassI.Clear()
-            searchResultLocal.ClassI.AddRange(tmpLinqResults)
+        'End If
 
-            'Else
-            '    searchResultLocal.ClassI.RemoveRange(maxResultSetSize, searchResultLocal.ClassI.Count - maxResultSetSize)
-            'End If
+        'If searchResultLocal.ClassII.Count > maxResultSetSize Then
 
-        End If
+        LimitResultsOfSearchResultItems(searchResultLocal.ClassII, maxResultSetSize)
+        'tmpLinqResults = (From el In searchResultLocal.ClassII Select el Order By CDate(el.ReportDate) Descending).ToList()
 
-        If searchResultLocal.ClassII.Count > maxResultSetSize Then
+        'If tmpLinqResults.Count > maxResultSetSize Then
+        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        'End If
 
-            'If testNewCode Then
+        'searchResultLocal.ClassII.Clear()
+        'searchResultLocal.ClassII.AddRange(tmpLinqResults)
 
-            Dim tmpLinqResults = (From el In searchResultLocal.ClassII Select el Order By CDate(el.ReportDate) Descending).ToList()
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        'End If
 
-            searchResultLocal.ClassII.Clear()
-            searchResultLocal.ClassII.AddRange(tmpLinqResults)
-            'Else
-            '    searchResultLocal.ClassII.RemoveRange(maxResultSetSize, searchResultLocal.ClassII.Count - maxResultSetSize)
-            'End If
+        'If searchResultLocal.ClassIII.Count > maxResultSetSize Then
 
-        End If
+        LimitResultsOfSearchResultItems(searchResultLocal.ClassIII, maxResultSetSize)
+        'tmpLinqResults = (From el In searchResultLocal.ClassIII Select el Order By CDate(el.ReportDate) Descending).ToList()
 
-        If searchResultLocal.ClassIII.Count > maxResultSetSize Then
+        'If tmpLinqResults.Count > maxResultSetSize Then
+        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        'End If
 
-            'If testNewCode Then
+        'searchResultLocal.ClassIII.Clear()
+        'searchResultLocal.ClassIII.AddRange(tmpLinqResults)
 
-            Dim tmpLinqResults = (From el In searchResultLocal.ClassIII Select el Order By CDate(el.ReportDate) Descending).ToList()
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-
-            searchResultLocal.ClassIII.Clear()
-            searchResultLocal.ClassIII.AddRange(tmpLinqResults)
-
-            'Else
-            '    searchResultLocal.ClassIII.RemoveRange(maxResultSetSize, searchResultLocal.ClassIII.Count - maxResultSetSize)
-            'End If
-
-        End If
+        'End If
 
         Return searchResultLocal
 
     End Function
-
-    ' ''' <summary>
-    ' ''' This gets the Top recall result for the KeyWord
-    ' ''' </summary>
-    ' ''' <param name="keyWordList"></param>
-    ' ''' <returns></returns>
-    ' ''' <remarks></remarks>
-    'Public Function GetRecallsSummary(ByVal keyWordList As List(Of String)) As List(Of RecallSearchResultData)
-
-    '    Dim results As List(Of RecallSearchResultData)
-
-    '    results = GetRecallInfo(keyWordList, 0)
-
-    '    Return results
-
-    'End Function
-
-    ' ''' <summary>
-    ' ''' Returns the 
-    ' ''' </summary>
-    ' ''' <param name="keyWord"></param>
-    ' ''' <returns></returns>
-    ' ''' <remarks></remarks>
-    'Public Function GetRecallsDetail(ByVal keyWord As String) As List(Of RecallSearchResultData)
-
-    '    Dim results As List(Of RecallSearchResultData)
-    '    Dim keyWordList As New List(Of String)
-
-    '    keyWordList.Add(keyWord)
-
-    '    results = GetRecallInfo(keyWordList, 100)
-
-    '    Return results
-
-    'End Function
-
+    
 #End Region
 
 #Region " Private Methods "
@@ -450,10 +198,9 @@ Public Class ShopAwareService
 
     Private Function GetRecallInfo(ByVal keyWord As String, state As String, resultSize As Integer) As List(Of ResultRecall)
 
-        OpenFdaApiHits = 0
-
         _fda = New OpenFda(_restClient)
 
+        OpenFdaApiHits = 0
         resultSize = 100
 
         Dim apiUrl As String = String.Empty
@@ -527,30 +274,7 @@ Public Class ShopAwareService
                     dataSetSize = _fda.GetMetaResults().Total()
 
                 End If
-
-                ''Check SearchResults  meta.Results.Total
-                '' if count is 0 then remove Date range and try again
-                'Dim isPagingRequired As Boolean = False
-
-                'If dataSetSize > 100 Then
-                '    isPagingRequired = True
-                'End If
-
-                ''Do
-                ''    '    [ statements ]
-                ''    '    [ Continue Do ]
-                ''    '    [ statements ]
-                ''    '    [ Exit Do ]
-                ''    '    [ statements ]
-                ''    'Loop { While | Until } condition
-                ''Loop(ispagingrequired
-                ''    )
-
-                ''Do
-                ''    'Debug.Write(index.ToString & " ")
-                ''    'index += 1
-                ''Loop Until Not isPagingRequired
-
+                
                 ' if total records int the Search request exceeds the max of 100 records per request
                 ' then page through the data
                 ' LIMIT the number of page request to a MAX of 5
@@ -590,8 +314,6 @@ Public Class ShopAwareService
         Next
 
         Return resultList
-
-        'tmpRecallResultList = ResultRecall.CnvJsonDataToList(searchResults)
 
     End Function
 
@@ -905,5 +627,19 @@ Public Class ShopAwareService
     End Sub
 
 #End Region
+
+    Private Sub LimitResultsOfSearchResultItems(searchResultItemList As List(Of SearchResultItem), maxResultSetSize As Integer)
+
+        'If searchResultLocal.ClassI.Count > maxResultSetSize Then
+        Dim tmpLinqResults = (From el In searchResultItemList Select el Order By CDate(el.ReportDate) Descending).ToList()
+
+        If tmpLinqResults.Count > maxResultSetSize Then
+            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        End If
+
+        searchResultItemList.Clear()
+        searchResultItemList.AddRange(tmpLinqResults)
+
+    End Sub
 
 End Class
