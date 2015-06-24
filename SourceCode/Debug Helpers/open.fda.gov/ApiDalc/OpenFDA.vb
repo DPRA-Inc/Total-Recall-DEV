@@ -277,21 +277,21 @@ Public Class OpenFda
 
     End Function
 
+
+    'Public Function GetDrugEventsByDrugName(ByVal drugName As String) As Object
+
+    '    ResetSearch()
+    '    Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
+
+    '    AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+
+
+    '    Return Nothing
+
+
+    'End Function
+
 #Region " Search "
-
-    Friend Sub ResetSearch()
-        _search = String.Empty
-    End Sub
-
-    Private Function RemoveSpecialCharactersFromKeyword(ByVal keyword As String) As String
-
-        Dim tmpitm = Regex.Replace(keyword, "\s+", " ")
-        tmpitm = Regex.Replace(tmpitm, "[\^\[\-\$\{\*\(\\\+\)\|\?\<\>!@#%&;]", " ")
-        keyword = Regex.Replace(tmpitm, " {2,}", " ")
-
-        Return keyword
-
-    End Function
 
     Public Sub SearchOnFieldByValue(searchField As String, searchFieldValue As String)
 
@@ -311,8 +311,7 @@ Public Class OpenFda
         SearchOnFieldByValue("_exists_", searchField)
     End Sub
 
-
-    Public Sub AddSearchFilter(endPointType As OpenFDAApiEndPoints, endpointField As String, keyWord As String, operationCompairType As FilterCompairType)
+    Public Sub AddSearchFilter(endPointType As OpenFdaApiEndPoints, endpointField As String, keyWord As String, operationCompairType As FilterCompairType)
 
         keyWord = RemoveSpecialCharactersFromKeyword(keyWord)
 
@@ -338,8 +337,7 @@ Public Class OpenFda
 
     End Sub
 
-
-    Public Function AddSearchFilter(ByVal endpointType As OpenFDAApiEndPoints, ByVal type As FDAFilterTypes, ByVal filters As List(Of String), Optional ByVal operationCompairType As FilterCompairType = FilterCompairType.Or) As String
+    Public Function AddSearchFilter(ByVal endpointType As OpenFdaApiEndPoints, ByVal type As FdaFilterTypes, ByVal filters As List(Of String), Optional ByVal operationCompairType As FilterCompairType = FilterCompairType.Or) As String
 
         ' Add Filter to KeyWord List
         Dim keyword As String = String.Empty
@@ -379,7 +377,6 @@ Public Class OpenFda
 
             Case FdaFilterTypes.Date
 
-
                 If filters.Count = 1 Then
 
                     Dim tmpDate As DateTime = DateTime.ParseExact(filters(0), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
@@ -404,7 +401,6 @@ Public Class OpenFda
                         End If
 
                     Next
-
 
                     Dim dtMin As String = String.Format("{0:yyyyMMdd}", minDate) 'minDate.ToString("yyyyMMdd")
                     Dim dtMax As String = String.Format("{0:yyyyMMdd}", maxDate) ' maxDate.ToString("yyyyMMdd")
@@ -436,6 +432,19 @@ Public Class OpenFda
         End Select
 
         Select Case endpointType
+            Case OpenFdaApiEndPoints.DrugEvent
+                Select Case type
+
+                    Case FdaFilterTypes.DrugEventDrugName
+                        param += "(patient.drug.openfda.substance_name:" & tmp
+                        param += "+"
+                        param += "patient.drug.openfda.brand_name:" & tmp
+                        param += "+"
+                        param += "patient.drug.openfda.generic_name:" & tmp
+                        param += "+"
+                        param += "patient.drug.medicinalproduct:" & tmp & ")"
+
+                End Select
 
             Case OpenFdaApiEndPoints.DeviceRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.FoodRecall
 
@@ -445,7 +454,7 @@ Public Class OpenFda
                         'param += "country:" & tmp
                         param += "(state:(" & tmp & ")"
                         param += "+"
-                        param += "distribution_pattern:(Nationwide+" & tmp & "))"
+                        param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
                         'TODO = Have a lookup to convert list of stateCodes to list of StateNames
 
@@ -461,7 +470,6 @@ Public Class OpenFda
                         param += "+"
                         param += "recall_initiation_date:" & tmp & ""
                         param += ")"
-
 
                 End Select
 
@@ -499,6 +507,41 @@ Public Class OpenFda
 
 #End Region
 
+#Region " Count "
+
+#End Region
+
+#End Region
+
+#Region " Friend Methods "
+
+    Friend Function GetMetaResults() As MetaResults
+
+        Dim metaData As New MetaResults
+
+        If _meta IsNot Nothing Then
+
+            If _meta("results") IsNot Nothing Then
+
+                With metaData
+
+                    .Limit = _meta("results")("limit")
+                    .Skip = _meta("results")("skip")
+                    .Total = _meta("results")("total")
+
+                End With
+
+            End If
+
+        End If
+
+        Return metaData
+
+    End Function
+
+    Friend Sub ResetSearch()
+        _search = String.Empty
+    End Sub
 
 #Region " Limits "
 
@@ -527,31 +570,17 @@ Public Class OpenFda
 
 #End Region
 
-#Region " Count "
-
 #End Region
 
-    Friend Function GetMetaResults() As MetaResults
+#Region " Private Methods "
 
-        Dim metaData As New MetaResults
+    Private Function RemoveSpecialCharactersFromKeyword(ByVal keyword As String) As String
 
-        If _meta IsNot Nothing Then
+        Dim tmpitm = Regex.Replace(keyword, "\s+", " ")
+        tmpitm = Regex.Replace(tmpitm, "[\^\[\-\$\{\*\(\\\+\)\|\?\<\>!@#%&;]", " ")
+        keyword = Regex.Replace(tmpitm, " {2,}", " ")
 
-            If _meta("results") IsNot Nothing Then
-
-                With metaData
-
-                    .Limit = _meta("results")("limit")
-                    .Skip = _meta("results")("skip")
-                    .Total = _meta("results")("total")
-
-                End With
-
-            End If
-
-        End If
-
-        Return metaData
+        Return keyword
 
     End Function
 
