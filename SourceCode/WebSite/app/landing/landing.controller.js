@@ -83,18 +83,10 @@ function landingcontroller($location, $localStorage, landingservice, feedLoader)
 
             vm.textValue = "";
 
-            // Differnt Ranks.  use the bootstrap theme codes.
-            //Rank: 'warning'
-            //Rank: 'success',
-            //Rank: 'info',
-            //Rank: 'danger',
-
             var searchStr = value + "|" + region;
 
             var data = landingservice.GetIssues(searchStr,
-                function (result) {
-
-                   
+                function (result) {                                      
 
                     // Search for the Keyword in our list.
                     vm.shoppingList.forEach(function (product) {
