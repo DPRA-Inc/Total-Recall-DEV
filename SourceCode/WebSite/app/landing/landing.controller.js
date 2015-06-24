@@ -51,6 +51,16 @@ function landingcontroller($location, $localStorage, landingservice, feedLoader)
             var value = vm.textValue.replace(disallowedChars, "");
             var region = "TN";
 
+            // Check for duplicates
+            vm.shoppingList.forEach(function (checkItem)
+            {
+                if (checkItem.Keyword == value)
+                {
+                    alert('Duplicate (todo: change this to ui style timeout message)');
+                    throw new Error('Duplicate');
+                }
+            })
+
             // Make the new item to be added to our list.
             var item = {};
 
