@@ -116,6 +116,7 @@
     <Content Include="app\product\product.html" />
     <Content Include="app\product\product.service.js" />
     <Content Include="Global.asax" />
+    <Content Include="img\FdaLogo.png" />
     <Content Include="img\GroceryStoresConsumers.jpg" />
     <Content Include="img\HomeTriptych1920.fw.fixed.jpg" />
     <Content Include="img\identifiers\E.png" />

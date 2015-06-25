@@ -80,7 +80,7 @@ Public Class ShopAwareService
                                                                   .EventId = itm.Event_Id,
                                                                   .RecallingFirm = itm.Recalling_Firm,
                                                                   .ReportDate = tmpReportDate.ToShortDateString(),
-                                                                  .CodeInfo = itm.Code_info,                                                                  
+                                                                  .CodeInfo = itm.Code_info,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
             Dim itmDate As DateTime = Nothing
@@ -208,7 +208,7 @@ Public Class ShopAwareService
                 OpenFdaApiHits += 1
 
                 Dim dataSetSize As Integer = _fda.GetMetaResults().Total()
-                
+
                 ' If there was not data in the 1 yr window the get all results.
                 ' Check a 2 yr window for results.
                 If dataSetSize = 0 Then

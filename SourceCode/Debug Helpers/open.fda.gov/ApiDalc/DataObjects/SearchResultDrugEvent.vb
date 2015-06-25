@@ -16,6 +16,24 @@ Namespace DataObjects
         Public Property Reactions As New List(Of String)
         Public Property Seriousness As New List(Of String)
         Public Property PrimarySource As String
+
+        ''' <summary>
+        ''' Date that the report was first received by FDA. If this report has multiple versions, this will be the date the first version was received by FDA.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property ReceiveDate As String
+
+        ''' <summary>
+        ''' Date that most recent information in the report was received by FDA.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property ReceiptDate As String
+
+
         Public Property Sender As String
         Public Property Receiver As String
 
@@ -40,6 +58,13 @@ Namespace DataObjects
                     End If
 
                     .PatientSex = GetEnumDescription(itm.Patient.PatientSex)
+
+                    If Not String.IsNullOrEmpty(itm.ReceiveDate) Then
+                        .ReceiveDate = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                    End If
+                    If Not String.IsNullOrEmpty(itm.ReceiptDate) Then
+                        .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                    End If
 
                     'Seriousneess
                     If Not String.IsNullOrEmpty(itm.Serious) Then
