@@ -4,6 +4,7 @@
         "oc.lazyLoad", // ocLazyLoad
         "ui.bootstrap", // Ui Bootstrap
         "ngStorage", // Local Storage
-        "openlayers-directive"
+        "openlayers-directive",
+        "sf.virtualScroll"
     ]);
 })();

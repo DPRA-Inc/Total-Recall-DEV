@@ -300,6 +300,9 @@
     <Content Include="js\plugins\peity\jquery.peity.min.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="js\plugins\virtualscroll\angular-virtual-scroll.js" />
+    <Content Include="js\plugins\virtualscroll\angular-virtual-scroll.min.js" />
+    <Content Include="js\plugins\vsrepeat\angular-vs-repeat.min.js" />
     <Content Include="js\TotalRecall.js" />
     <Content Include="js\ui-router\angular-ui-router.js" />
     <Content Include="js\ui-router\angular-ui-router.min.js" />
