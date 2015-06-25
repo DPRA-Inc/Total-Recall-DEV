@@ -59,21 +59,17 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
 
     //*******************************************
 
-    function LoadPageInfo()
-    {
+    function LoadPageInfo() {
 
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
 
-        productservice.GetProductResults(productName, region,
-            function (result)
-            {
+        productservice.GetFDAResults(productName, region,
+            function (result) {
 
-                if (angular.isObject(result))
-                {
+                if (angular.isObject(result)) {
 
-                    result.MapObjects.forEach(function (mapItem)
-                    {
+                    result.MapObjects.forEach(function (mapItem) {
 
                         vm.Markers.push(
                            {
@@ -105,6 +101,53 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         );
 
     }
+
+    //function LoadPageInfo()
+    //{
+
+    //    var productName = vm.SearchSummary.Keyword;
+    //    var region = vm.SearchSummary.State;
+
+    //    productservice.GetProductResults(productName, region,
+    //        function (result)
+    //        {
+
+    //            if (angular.isObject(result))
+    //            {
+
+    //                result.MapObjects.forEach(function (mapItem)
+    //                {
+
+    //                    vm.Markers.push(
+    //                       {
+    //                           lat: parseFloat(mapItem.Latitude),
+    //                           lon: parseFloat(mapItem.Longitude),
+    //                           label: {
+
+    //                               message: '',
+    //                               show: false,
+    //                               showOnMouseOver: true
+
+    //                           },
+    //                           style: {
+    //                               image: {
+    //                                   icon: mapItem.icon
+    //                               }
+    //                           }
+    //                       }
+    //                    )
+    //                })
+
+    //            }
+
+    //            GlobalsModule.SearchResult = result;
+    //            vm.SearchResult = result;
+    //            vm.DataLoading = false;
+
+    //        }
+    //    );
+
+    //}
 
     vm.ShowMoreInformation = function (item)
     {

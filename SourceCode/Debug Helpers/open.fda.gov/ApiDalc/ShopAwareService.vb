@@ -616,4 +616,72 @@ Public Class ShopAwareService
 
     End Sub
 
+
+    Public Function GetFDAResult(ByVal keyWord As String, ByVal state As String) As FDAResult
+
+        Const maxResultSetSize As Integer = 100
+
+        Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
+        Dim mapList As New Dictionary(Of String, SearchResultMapData)
+
+        Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
+
+        Dim values As New FDAResult
+
+        'For Each itm As ResultRecall In tmp
+
+        '    ProcessResultRecordForMapData(itm, mapList)
+
+        '    ' ------------------------------------------------------------
+        '    'TODO convert itm (ResultRecall) to SearchResultItem
+        '    ' ------------------------------------------------------------
+
+        '    Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+        '    Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+        '    Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
+        '                                                          .DateStarted = newItemDate.ToShortDateString(),
+        '                                                          .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
+        '                                                          .DistributionPattern = itm.Distribution_Pattern,
+        '                                                          .ProductDescription = itm.Product_Description,
+        '                                                          .State = itm.State,
+        '                                                          .Status = itm.Status,
+        '                                                          .Country = itm.Country,
+        '                                                          .RecallNumber = itm.Recall_Number,
+        '                                                          .ProductQuantity = itm.Product_Quantity,
+        '                                                          .EventId = itm.Event_Id,
+        '                                                          .RecallingFirm = itm.Recalling_Firm,
+        '                                                          .ReportDate = tmpReportDate.ToShortDateString(),
+        '                                                          .CodeInfo = itm.Code_info,
+        '                                                          .Voluntary = itm.Voluntary_Mandated}
+
+        '    Dim itmDate As DateTime = Nothing
+        '    Select Case itm.Classification
+
+        '        Case "Class I"
+
+        '            searchResultLocal.ClassI.Add(tmpSearchResultItem)
+
+        '        Case "Class II"
+
+        '            searchResultLocal.ClassII.Add(tmpSearchResultItem)
+
+        '        Case "Class III"
+
+        '            searchResultLocal.ClassIII.Add(tmpSearchResultItem)
+
+        '    End Select
+
+        'Next
+
+        'searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
+
+        'LimitResultsOfSearchResultItems(searchResultLocal.ClassI, maxResultSetSize)
+        'LimitResultsOfSearchResultItems(searchResultLocal.ClassII, maxResultSetSize)
+        'LimitResultsOfSearchResultItems(searchResultLocal.ClassIII, maxResultSetSize)
+
+        'Return searchResultLocal
+
+        Return values
+
+    End Function
 End Class

@@ -3,7 +3,8 @@
 function ProductService($http) {
 
     var service = {
-        GetProductResults: GetProductResults
+        GetProductResults: GetProductResults,
+        GetFDAResults: GetFDAResults
     };
 
     return service;
@@ -30,7 +31,25 @@ function ProductService($http) {
             });                 
     }
 
-        
+    function GetFDAResults(product, region, callback) {
+
+        var serviceUrl = "Api/ShopAware/FDAResults/";
+        serviceUrl += product + "/";
+        serviceUrl += region;
+
+        $http({
+            method: 'GET',
+            url: serviceUrl
+        }).
+            success(function (data, status, headers, config) {
+                if (!angular.isObject(data)) callback(null);
+
+                callback(data);
+            }).
+            error(function (data, status, headers, config) {
+                $log.warn(data, status, headers, config)
+            });
+    }
 
 }
 

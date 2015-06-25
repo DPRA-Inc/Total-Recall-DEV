@@ -31,6 +31,17 @@ Namespace Api
 
         End Function
 
+        <HttpGet>
+        <Route("FDAResults/{product}/{region}")>
+        Public Function FDAResults(product As String, region As String) As FDAResult
+
+            Dim wrapper As New ShopAwareService
+            Dim result = wrapper.GetFDAResult(product, region)
+
+            Return result
+
+        End Function
+
     End Class
 
 End Namespace
