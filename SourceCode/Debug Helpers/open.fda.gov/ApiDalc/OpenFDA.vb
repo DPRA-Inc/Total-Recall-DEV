@@ -531,10 +531,15 @@ Public Class OpenFda
                 Select Case type
 
                     Case FdaFilterTypes.Region
-                        'param += "country:" & tmp
-                        param += "(state:(" & tmp & ")"
-                        param += "+"
-                        param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
+
+                        If Not String.IsNullOrEmpty(tmp) Then
+
+                            'param += "country:" & tmp
+                            param += "(state:(" & tmp & ")"
+                            param += "+"
+                            param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
+
+                        End If
 
                         'TODO = Have a lookup to convert list of stateCodes to list of StateNames
 
