@@ -60,6 +60,27 @@ function ProductService($http)
     }
 
 
+    function GetReportData(product, region, callback) {
+
+        var serviceUrl = "Api/ShopAware/GetReportData/";
+        serviceUrl += product + "/";
+        serviceUrl += region;
+
+        $http({
+            method: 'GET',
+            url: serviceUrl
+        }).
+            success(function (data, status, headers, config) {
+                if (!angular.isObject(data)) callback(null);
+
+                callback(data);
+            }).
+            error(function (data, status, headers, config) {
+                $log.warn(data, status, headers, config)
+            });
+    }
+
+
 }
 
 
