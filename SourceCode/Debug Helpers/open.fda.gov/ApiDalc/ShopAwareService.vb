@@ -678,4 +678,11 @@ Public Class ShopAwareService
         Return searchResultLocal
 
     End Function
+
+    Public Function GetFeatureCollection() As List(Of FeatureObject)
+
+
+
+    End Function
+
 End Class

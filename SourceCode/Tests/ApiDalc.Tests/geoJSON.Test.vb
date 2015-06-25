@@ -46,22 +46,25 @@ Public Class geoJSON
 
     End Sub
 
-    <TestCase()>
-    Public Sub ReadData_currentTest()
+    '<TestCase()>
+    'Public Sub ReadData_currentTest()
 
-        Dim mockRestClient = New Mocks.MockRestClient("FeatureCollection.json")
-        Dim geoJson = mockRestClient.Execute(String.Empty)
+    '    Dim mockRestClient = New Mocks.MockRestClient("FeatureCollection.json")
+    '    Dim geoJson = mockRestClient.Execute(String.Empty)
 
-        Dim jo As JObject = JObject.Parse(geoJson)
-        For Each feature In jo("features")
+    '    Dim jo As JObject = JObject.Parse(geoJson)
 
-        Next
+    '    Dim dd = (From el In jo("features") Where el("properties")("NAME") = "Tennessee" Select el).ToString
+
+    '    For Each feature In jo("features")
+    '        Debug.WriteLine(feature)
+    '    Next
 
 
-        Assert.IsInstanceOf(Of JObject)(jo)
+    '    Assert.IsInstanceOf(Of JObject)(jo)
 
 
-    End Sub
+    'End Sub
 
 
 End Class

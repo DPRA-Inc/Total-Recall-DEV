@@ -71,6 +71,7 @@
     <Compile Include="DataObjects\AdverseDrugEvent.vb" />
     <Compile Include="DataObjects\DrugData.vb" />
     <Compile Include="DataObjects\FDAResults.vb" />
+    <Compile Include="DataObjects\FeatureObject.vb" />
     <Compile Include="DataObjects\IconStyle.vb" />
     <Compile Include="DataObjects\MetaResults.vb" />
     <Compile Include="DataObjects\OpenFdaData.vb" />

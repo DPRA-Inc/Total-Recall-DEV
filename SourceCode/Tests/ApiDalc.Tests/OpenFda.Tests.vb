@@ -83,19 +83,4 @@ Public Class OpenFda
 
     End Sub
 
-    <TestCase()>
-    Public Sub ConvertStatesEnumToJson()
-
-        Dim mockRestClient = New Mocks.MockRestClient()
-        Dim service = New ApiDalc.OpenFda(mockRestClient)
-        Dim result = service.ConvertStatesEnumToJson()
-        Debug.Write(result("results"))
-
-        Dim tmp = result("results")
-
-       
-        Assert.AreEqual(50, result.Count)
-
-    End Sub
-
 End Class
