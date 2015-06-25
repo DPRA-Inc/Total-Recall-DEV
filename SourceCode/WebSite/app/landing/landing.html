@@ -57,17 +57,17 @@
                                 </td>
                                 <td valign="middle">
                                     <div class="pull-right center-inarea">
-                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death.">
+                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/R1.png" ng-show="item.HasClassI" alt="Class 1" />
                                         </a>
-                                        <a href="#" title="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.">
+                                        <a href="#" title="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/R2.png" ng-show="item.HasClassII" alt="Class 2" />
                                         </a>
-                                        <a href="#" title="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.">
+                                        <a href="#" title="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." ng-click="vm.ViewProductDetails(item)">
 
                                             <img src="./img/identifiers/R3.png" ng-show="item.HasClassIII" />
                                         </a>
-                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death.">
+                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/E.png" ng-show="item.HasEvents" alt="Event" />
                                         </a>
                                         <div class="badge badge-success" ng-show="item.IsClean">
@@ -89,41 +89,10 @@
                             </tr>
                         </table>
 
-
-
-                        <!--<div ng-show="item.HasClassI">
-
-
-                        </div>
-
-                        <div ng-show="item.HasClassII">
-
-                        </div>
-
-                        <div ng-show="item.HasClassIII">
-                            <img src="../../img/identifiers/R3.png" />
-                        </div>
-
-                        <div ng-show="item.HasEvents">
-                            <img src="../../img/identifiers/E.png" />
-                        </div>
-
-                        <div class="badge badge-success" ng-show="item.IsClean">
-                            <h3><i class="fa fa-check"></i>
-                            </h3>
-                        </div>
-
-                        <div class="badge badge-white">
-                            <h3><i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i>
-                            </h3>
-                        </div>-->
-
-
-
-
-
                     </li>
+
                 </ul>
+
             </div>
         </div>
     </div>
