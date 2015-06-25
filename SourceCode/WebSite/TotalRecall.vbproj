@@ -194,6 +194,8 @@
     <Content Include="js\ngstorage\ngStorage.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.js" />
+    <Content Include="js\plugins\chartJs\angles.js" />
+    <Content Include="js\plugins\chartJs\Chart.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
@@ -287,7 +289,11 @@
     <Content Include="js\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="js\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="js\plugins\oclazyload\dist\ocLazyLoad.js" />
+    <Content Include="js\plugins\oclazyload\dist\ocLazyLoad.min.js" />
     <Content Include="js\plugins\pace\pace.min.js" />
+    <Content Include="js\plugins\peity\angular-peity.js" />
+    <Content Include="js\plugins\peity\jquery.peity.min.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="js\TotalRecall.js" />
