@@ -17,7 +17,9 @@ function LandingService($http, $log) {
     /*
      * Get the issues found for an item.
      */
-    function GetIssues(searchItem, callback) {
+    function GetIssues(searchStr, region, callback) {
+
+        var searchItem = searchStr + "|" + region;
 
         var serviceUrl = "QuickHandler.ashx?Command=GetIssues";
 

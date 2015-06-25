@@ -73,13 +73,6 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
                 if (angular.isObject(result))
                 {
 
-                    result.ClassI.forEach(function (item)
-                    {
-                        item.ShowMoreInformation = false;
-                    });
-
-
-
                     result.MapObjects.forEach(function (mapItem)
                     {
 

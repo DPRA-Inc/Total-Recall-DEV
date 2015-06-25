@@ -107,10 +107,8 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
             item.IsLoading = true; // Set to true to show that information about the item is loading.
 
             vm.textValue = "";
-
-            var searchStr = value + "|" + region;
-
-            landingservice.GetIssues(searchStr,
+           
+            landingservice.GetIssues(value, region,
                 function(result) {
 
                     // Search for the Keyword in our list.
