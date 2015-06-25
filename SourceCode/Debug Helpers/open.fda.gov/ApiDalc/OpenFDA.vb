@@ -532,7 +532,7 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.Region
 
-                        If Not String.IsNullOrEmpty(tmp) Then
+                        If Not (String.IsNullOrEmpty(tmp) OrElse tmp = "null" OrElse tmp = "All") Then
 
                             'param += "country:" & tmp
                             param += "(state:(" & tmp & ")"
