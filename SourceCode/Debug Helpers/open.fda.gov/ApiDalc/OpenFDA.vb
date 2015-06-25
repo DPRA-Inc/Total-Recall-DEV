@@ -340,6 +340,37 @@ Public Class OpenFda
 
     End Function
 
+
+    Public Function ConvertStatesEnumToJson() As Object
+
+        Dim jp As JProperty
+        Dim ja As New JArray
+        Dim jo As JObject
+
+        Dim tmpEnumValue As States
+        Dim stateArray As Array
+
+        stateArray = System.Enum.GetValues(GetType(States))
+
+        For Each itm In stateArray
+
+            tmpEnumValue = DirectCast([Enum].Parse(GetType(States), itm), States)
+
+            jo = New JObject
+            jo.Add(New JProperty("name", GetEnumDescription(tmpEnumValue)))
+            jo.Add(New JProperty("abbreviation", tmpEnumValue.ToString))
+
+            ja.Add(jo)
+
+        Next
+
+        jp = New JProperty("results", ja)
+
+        Return jp
+
+    End Function
+
+
 #Region " Search "
 
     Public Sub SearchOnFieldByValue(searchField As String, searchFieldValue As String)

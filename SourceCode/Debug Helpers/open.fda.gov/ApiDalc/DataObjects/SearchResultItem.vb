@@ -13,6 +13,19 @@ Namespace DataObjects
 
         Public Property DateStarted As String 'recall_initiation_date
         Public Property Content As String ' reason_for_recall  + code_info
+        Public ReadOnly Property ContentTruncated As String
+            Get
+
+                Dim value As String = Me.Content
+
+                If Content.Length > 1000 Then
+                    value = String.Concat(Me.Content.Substring(0, 999), "...")
+                End If
+
+                Return value
+
+            End Get
+        End Property
         Public Property Status As String ' status
         Public Property DistributionPattern As String  '"distribution_pattern
         Public Property DistributionList As New List(Of String)  '"distribution_pattern
