@@ -66,7 +66,7 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         var productName = vm.SearchSummary.Keyword;
         var region = "TN";
 
-        productservice.GetSearchResult(productName, region,
+        productservice.GetProductResults(productName, region,
             function (result)
             {
 

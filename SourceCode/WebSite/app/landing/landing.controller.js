@@ -53,7 +53,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
      * behind the scenes to make it faster when the user add an item.
      */
     function WarmUp() {
-        landingservice.GetIssues("TEST|TN",
+        landingservice.QuickSearch("TEST", "TN",
             function(result) {
                 // Do nothing.  Just warm it up!
             }
@@ -108,7 +108,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
 
             vm.textValue = "";
            
-            landingservice.GetIssues(value, region,
+            landingservice.QuickSearch(value, region,
                 function(result) {
 
                     // Search for the Keyword in our list.

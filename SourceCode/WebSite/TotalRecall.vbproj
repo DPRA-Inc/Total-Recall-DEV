@@ -310,11 +310,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
-    <Compile Include="API Services\BusinessObjects\ValidationError.vb" />
-    <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
-    <Compile Include="API Services\Enumerations\ErrorTypes.vb" />
-    <Compile Include="API Services\ServiceWrapper.vb" />
     <Compile Include="Api\ShopAwareApiController.vb" />
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="Global.asax.vb">
@@ -338,9 +333,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="QuickHandler.ashx.vb">
-      <DependentUpon>QuickHandler.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -410,7 +402,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="packages.config" />
-    <Content Include="QuickHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

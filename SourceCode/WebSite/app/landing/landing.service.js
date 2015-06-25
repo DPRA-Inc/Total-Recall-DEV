@@ -5,7 +5,7 @@ function LandingService($http, $log) {
     this.Feeds = [];
 
     var service = {
-        GetIssues: GetIssues,
+        QuickSearch: QuickSearch,
         SetupRSSFeed: SetupRSSFeed,
         GetStates: GetStates
     };
@@ -17,25 +17,25 @@ function LandingService($http, $log) {
     /*
      * Get the issues found for an item.
      */
-    function GetIssues(searchStr, region, callback) {
+    function QuickSearch(searchStr, region, callback) {
 
-        var searchItem = searchStr + "|" + region;
-
-        var serviceUrl = "QuickHandler.ashx?Command=GetIssues";
+        var serviceUrl = "Api/ShopAware/QuickSearch/";
+        serviceUrl += searchStr + "/";
+        serviceUrl += region;                
 
         $http({
-                method: "POST",
-                url: serviceUrl,
-                data: searchItem
-            }).
-            success(function(data) {
+            method: "GET",
+            url: serviceUrl            
+        }).
+            success(function (data) {
                 if (!angular.isObject(data)) return;
 
                 callback(data);
             }).
-            error(function(data, status, headers, config) {
+            error(function (data, status, headers, config) {
                 $log.warn(data, status, headers, config);
             });
+
     }
 
     /*
