@@ -370,8 +370,8 @@
     <Content Include="js\angular\angular.min.js.map" />
     <Content Include="js\angular\errors.json" />
     <Content Include="js\angular\version.json" />
-
     <Content Include="app\about\about.controller.js" />
+    <Content Include="json\regions.json" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

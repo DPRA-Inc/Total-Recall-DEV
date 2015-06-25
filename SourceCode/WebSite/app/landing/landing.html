@@ -19,8 +19,8 @@
                         </a>
                     </span>
                 </div>
+                <select class="input-lg form-control" ng-model="vm.selectedState" ng-options="item.abbreviation as item.name for item in vm.states"></select>
             </div>
-
             <div class="col-md-6">
                 <p></p>
                 <i class="h4 center-inarea">

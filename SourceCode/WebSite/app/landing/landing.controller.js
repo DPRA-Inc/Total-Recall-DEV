@@ -1,32 +1,29 @@
-﻿angular.module('TotalRecall').controller('landingcontroller', landingcontroller);
+﻿angular.module("TotalRecall").controller("landingcontroller", landingcontroller);
 
 function landingcontroller($scope, $window, $location, $localStorage, landingservice, feedLoader) {
     var vm = this;
 
-    var fontSizeClass = "";
+    vm.fontSizeClass = "";
+    vm.feeds = [];
+    vm.IsRSSLoading = true;
+    vm.textValue = null;
+    vm.states = [];
+    vm.selectedState = null;
 
-    if (angular.isString($localStorage.fontSizeClass))
-    {
+    if (angular.isString($localStorage.fontSizeClass)) {
         vm.fontSizeClass = $localStorage.fontSizeClass;
     }
 
-    vm.ChangeFontSize = function (className)
-    {
+    vm.ChangeFontSize = function(className) {
         vm.fontSizeClass = className;
         $localStorage.fontSizeClass = className;
-    }
-
-    vm.feeds = [];
-
-    vm.IsRSSLoading = true;
-
-    vm.textValue = null;
+    };
 
     if (!angular.isObject(GlobalsModule.ShoppingList)) {
         if (angular.isString($localStorage.cart)) {
             try {
                 GlobalsModule.ShoppingList = angular.fromJson($localStorage.cart); // Load from local storage
-            } catch(ex) {
+            } catch (ex) {
                 GlobalsModule.ShoppingList = [];
             }
         } else {
@@ -36,49 +33,60 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
 
     vm.shoppingList = GlobalsModule.ShoppingList;
 
-    if (vm.shoppingList.length == 0) LoadPageInfo();
-
-    //********************************
-
     function LoadPageInfo() {
+        landingservice.GetStates(
+            function(result) {
+                vm.states = result;
 
-        // Here, lets go ahead and ping the service once. 
-        // this make all searches 10x faster as there will be no loadup time.
-        landingservice.GetIssues("TEST|TN",
-            function (result) {
-
-                // Do nothing.  Just warm it up!
-
+                if (angular.isString($localStorage.selectedState)) {
+                    // Set to the previously selected value if available.
+                    vm.selectedState = $localStorage.selectedState;
+                } else {
+                    vm.selectedState = "All";
+                }
 
             }
         );
-
     }
 
-    vm.AddToList = function () {
+    function WarmUp() {
+        // Here, lets go ahead and ping the service once. 
+        // this make all searches 10x faster as there will be no load up time.
+        landingservice.GetIssues("TEST|TN",
+            function(result) {
+                // Do nothing.  Just warm it up!
+            }
+        );
+    }
+
+    if (vm.shoppingList.length === 0) WarmUp();
+
+    LoadPageInfo();
+
+    //********************************
+
+    vm.AddToList = function() {
+
+        $localStorage.selectedState = vm.selectedState; // Remember the state that was selected.
 
         var disallowedChars = /[^a-zA-Z0-9 :]/g;
 
         if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").length > 0) {
 
             var value = vm.textValue.replace(disallowedChars, "");
-            var region = "TN";
+            var region = vm.selectedState;
 
             // Check for duplicates
-            vm.shoppingList.forEach(function (checkItem)
-            {
-                if (checkItem.Keyword == value)
-                {
-                    alert('Duplicate (todo: change this to ui style timeout message)');
-                    throw new Error('Duplicate');
+            vm.shoppingList.forEach(function(checkItem) {
+                if (checkItem.Keyword == value) {
+                    alert("Duplicate (todo: change this to ui style timeout message)");
+                    throw new Error("Duplicate");
                 }
-            })
-
-            // Make the new item to be added to our list.
+            }); // Make the new item to be added to our list.
             var item = {};
 
             item.Keyword = value; // Product name
-            item.Rank = 'success'; // How Bad is it, Color Code.
+            item.Rank = "success"; // How Bad is it, Color Code.
             item.IsLoading = true; // Indicates we are waiting on Return From Service.
             item.HasClassI = false; // Indicates there is some Class I Data to show.
             item.HasClassII = false;
@@ -91,7 +99,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
             item.IsClean = true;
 
             vm.shoppingList.push(item);
-            
+
             item.IsLoading = true; // Set to true to show that information about the item is loading.
 
             vm.textValue = "";
@@ -99,10 +107,10 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
             var searchStr = value + "|" + region;
 
             var data = landingservice.GetIssues(searchStr,
-                function (result) {                                      
+                function(result) {
 
                     // Search for the Keyword in our list.
-                    vm.shoppingList.forEach(function (product) {
+                    vm.shoppingList.forEach(function(product) {
 
                         if (product.Keyword === result.Keyword) {
 
@@ -146,44 +154,39 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
                 }
             );
         }
-    }
+    };
 
-    vm.RemoveFromList= function(cartItem) {
+    vm.RemoveFromList = function(cartItem) {
 
         var itemIndex = vm.shoppingList.indexOf(cartItem);
         vm.shoppingList.splice(itemIndex, 1);
 
         $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
 
-    }
+    };
 
-    vm.ViewProductDetails = function (product) {
+    vm.ViewProductDetails = function(product) {
 
         // set our shopping list to use later.
         GlobalsModule.ShoppingList = vm.shoppingList;
 
         if (!product.IsClean) {
             GlobalsModule.SearchSummary = product;
-            $location.path('/index/product');
+            $location.path("/index/product");
         }
-    }
+    };
 
-    vm.ViewFeed = function (feed)
-    {
+    vm.ViewFeed = function(feed) {
         $window.open(feed.link);
-    }
+    };
 
-    vm.StartRSS = function () {
+    vm.StartRSS = function() {
 
-        
-        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function(res){
+
+        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function(res) {
             vm.feeds = res.data.responseData.feed.entries;
             vm.IsRSSLoading = false;
         });
-           
-    }
 
+    };
 };
-
-
-
