@@ -47,11 +47,9 @@ Namespace Api
         Public Function GetStates() As List(Of StateData)
 
             Dim wrapper As New ShopAwareService
-            Dim result = New List(Of StateData)
+            Dim result As List(Of StateData) = wrapper.GetStates
 
-            result.Add(New StateData With {.name = "Tennessee", .abbreviation = "TN"})
-            result.Add(New StateData With {.name = "Florida", .abbreviation = "FL"})
-            result.Add(New StateData With {.name = "Nationwide", .abbreviation = "All"})
+            result.Insert(0, New StateData With {.name = "Nationwide", .abbreviation = "All"})
 
             Return result
 
