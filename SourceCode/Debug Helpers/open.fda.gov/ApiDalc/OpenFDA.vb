@@ -341,9 +341,9 @@ Public Class OpenFda
     End Function
 
 
-    Public Function ConvertStatesEnumToJson() As Object
+    Public Function ConvertStatesEnumToJson() As JObject
 
-        Dim jp As JProperty
+        Dim result As New JObject
         Dim ja As New JArray
         Dim jo As JObject
 
@@ -364,9 +364,9 @@ Public Class OpenFda
 
         Next
 
-        jp = New JProperty("results", ja)
+        result.Add(ja)
 
-        Return jp
+        Return result
 
     End Function
 
