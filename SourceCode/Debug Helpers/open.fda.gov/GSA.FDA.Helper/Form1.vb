@@ -524,7 +524,7 @@ Public Class Form1
 
                 .Add("Sender: -- OBJECT")
                 .Add("Serious: " & itm.Serious)
-                .Add("Seriousness Congenital Anomali: " & itm.SeriousnessCongenitalanomali)
+                .Add("Seriousness Congenital Anomali: " & itm.SeriousnessCongenitalAnomali)
                 ' 1 = The adverse event resulted in death, a life threatening condition, hospitalization, disability, congenital anomali, or other serious condition.
                 ' 2 = The adverse event did not result in any of the above.
 
@@ -1308,6 +1308,7 @@ Public Class Form1
         Dim eventCount As Integer = fda.GetDrugEventsByDrugNameCount(drugName)
 
         fda.GetDrugEventsByDrugName(drugName)
+
 
         RichTextBox2.Visible = False
         TreeView3.Visible = True

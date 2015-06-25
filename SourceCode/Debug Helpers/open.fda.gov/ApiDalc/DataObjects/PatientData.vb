@@ -27,6 +27,8 @@ Namespace DataObjects
         Public Property PatientWeight As String
 
         'If the patient died, this section contains information about the death.
+        Public Property PatientDeathDate As Date = Nothing
+
         'Public Property patientdeath As List(Of String)
         'patient.patientdeath
         'patient.patientdeath.patientdeathdate
@@ -75,6 +77,11 @@ Namespace DataObjects
                 '2 = Female
 
                 data.PatientWeight = jToken("patientweight") ' KiloGrams
+
+                If IsJTokenValid(jToken("patientdeath")) Then
+                    data.PatientDeathDate = DateTime.ParseExact(jToken("patientdeath")("patientdeathdate"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+                End If
+
                 'data.patientdeath = jToken("patientdeath")
                 '        patient.patientdeath()
                 '        List()

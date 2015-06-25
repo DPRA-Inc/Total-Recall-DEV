@@ -50,7 +50,7 @@ Public Class ShopAwareService
 
     Public Function GetSearchResult(ByVal keyWord As String, ByVal state As String) As SearchResult
 
-        Const maxResultSetSize As Integer = 3 ' 10
+        Const maxResultSetSize As Integer = 100
 
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
@@ -248,7 +248,7 @@ Public Class ShopAwareService
                     dataSetSize = _fda.GetMetaResults().Total()
 
                 End If
-                
+
                 ' if total records int the Search request exceeds the max of 100 records per request
                 ' then page through the data
                 ' LIMIT the number of page request to a MAX of 5
@@ -565,7 +565,7 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Sub addSearchResultItemToClassificication(searchResultList As List(Of SearchResultItem), tmpSearchResultItem As SearchResultItem, maxResultSetSize As Integer)
+    Private Sub AddSearchResultItemToClassificication(searchResultList As List(Of SearchResultItem), tmpSearchResultItem As SearchResultItem, maxResultSetSize As Integer)
 
         Dim itmDate As DateTime
         Dim newItemDate As DateTime

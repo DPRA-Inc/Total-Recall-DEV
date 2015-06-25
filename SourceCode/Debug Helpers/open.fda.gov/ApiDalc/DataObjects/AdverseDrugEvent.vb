@@ -59,7 +59,7 @@ Namespace DataObjects
         'This value is 1 if the adverse event resulted in a hospitalization, and absent otherwise.
 
 
-        Public Property SeriousnessCongenitalanomali As String
+        Public Property SeriousnessCongenitalAnomali As String
         'seriousnesscongenitalanomali
         'string
         'This value is 1 if the adverse event resulted in a congenital anomali, and absent otherwise.
@@ -68,7 +68,7 @@ Namespace DataObjects
         'seriousnessdisabling
         'string
         'This value is 1 if the adverse event resulted in disability, and absent otherwise.
-        Public Property SeriousnSeriousnessLifeThreateningessOther As String
+        Public Property SeriousnessLifeThreateningOther As String
         'seriousnesslifethreatening
         'string
         'This value is 1 if the adverse event resulted in a life threatening condition, and absent otherwise.
@@ -102,7 +102,7 @@ Namespace DataObjects
 
 
                 tmp.Serious = obj("serious")
-                tmp.SeriousnessCongenitalanomali = obj("seriousnesscongenitalanomali")
+                tmp.SeriousnessCongenitalAnomali = obj("seriousnesscongenitalanomali")
                 tmp.SeriousnessDeath = obj("seriousnessdeath")
                 tmp.SeriousnessDisabling = obj("seriousnessdisabling")
                 tmp.SeriousnessHospitalization = obj("seriousnesshospitalization")
