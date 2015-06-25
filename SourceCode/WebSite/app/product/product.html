@@ -32,79 +32,17 @@
 
         <div ng-hide="vm.DataLoading">
 
-            <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassI"</div>
-
             <div class="ibox-content no-padding">
-                <h2><strong><i>CLASS I</i></strong></h2>
-
-                <small>{{vm.SearchSummary.ClassIDescription}}</small>
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassI">
+                    <li class="danger-element" ng-repeat="item in vm.SearchResult.Results">
 
                         <div>
+                            <h2><strong><i>{{item.Classification}}</i></strong></h2>
 
-                            <p><strong>{{item.ProductDescription}}</strong></p>
+                            <!--<p><small>{{vm.SearchSummary.ClassIDescription}}</small></p>-->
 
-                            <p>{{item.Content}}</p>
-
-                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
-
-                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
-
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassII">
-
-            <div class="ibox-content no-padding">
-                <h2><strong><i>CLASS II</i></strong></h2>
-
-                <small>{{vm.SearchSummary.ClassIIDescription}}</small>
-
-                <ul class="sortable-list connectList agile-list">
-
-                    <li class="warning-element" ng-repeat="item in vm.SearchResult.ClassII">
-
-                        <div>
-                            <p><strong>{{item.ProductDescription}}</strong></p>
-
-                            <p>{{item.Content}}</p>
-
-                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
-
-                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
-
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassIII">
-
-            <div class="ibox-content no-padding">
-                <h2><strong><i>CLASS III</i></strong></h2>
-
-                <small>{{vm.SearchSummary.ClassIIIDescription}}</small>
-
-                <ul class="sortable-list connectList agile-list">
-
-                    <li class="info-element" ng-repeat="item in vm.SearchResult.ClassIII">
-
-                        <div>
                             <p><strong>{{item.ProductDescription}}</strong></p>
 
                             <p>{{item.Content}}</p>
@@ -124,8 +62,6 @@
         </div>
 
     </div>
-
-</div>
 
 <div class="col-md-6 animated bounceInUp" id="mapPlaceholder">
 

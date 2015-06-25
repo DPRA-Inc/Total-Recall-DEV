@@ -9,6 +9,8 @@ Namespace DataObjects
 
     Public Class SearchResultItem
 
+        Public Property Classification As String
+
         Public Property DateStarted As String 'recall_initiation_date
         Public Property Content As String ' reason_for_recall  + code_info
         Public Property Status As String ' status

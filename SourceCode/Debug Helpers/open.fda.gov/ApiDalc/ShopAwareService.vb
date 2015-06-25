@@ -80,7 +80,7 @@ Public Class ShopAwareService
                                                                   .EventId = itm.Event_Id,
                                                                   .RecallingFirm = itm.Recalling_Firm,
                                                                   .ReportDate = tmpReportDate.ToShortDateString(),
-                                                                  .CodeInfo = itm.Code_info,
+                                                                  .CodeInfo = itm.Code_info,                                                                  
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
             Dim itmDate As DateTime = Nothing
@@ -653,6 +653,7 @@ Public Class ShopAwareService
                                                                   .RecallingFirm = itm.Recalling_Firm,
                                                                   .ReportDate = tmpReportDate.ToShortDateString(),
                                                                   .CodeInfo = itm.Code_info,
+                                                                  .Classification = itm.Classification,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
             searchResultLocal.Results.Add(tmpSearchResultItem)
