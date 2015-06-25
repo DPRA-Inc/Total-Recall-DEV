@@ -19,7 +19,6 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         $localStorage.fontSizeClass = className;
     }
 
-
     vm.SearchSummary = GlobalsModule.SearchSummary;
     vm.DataLoading = true;
 
@@ -64,7 +63,7 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
     {
 
         var productName = vm.SearchSummary.Keyword;
-        var region = "TN";
+        var region = vm.SearchSummary.State;
 
         productservice.GetProductResults(productName, region,
             function (result)
@@ -101,6 +100,7 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
                 GlobalsModule.SearchResult = result;
                 vm.SearchResult = result;
                 vm.DataLoading = false;
+
             }
         );
 
@@ -114,6 +114,7 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         var modalInstance = $modal.open({
             templateUrl: 'app/product/productFullDetails.modal.html',
             controller: 'productcontroller as vm'
+
         });
     };
 

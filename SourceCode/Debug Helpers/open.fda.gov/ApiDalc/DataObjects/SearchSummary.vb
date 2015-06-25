@@ -6,6 +6,8 @@ Namespace DataObjects
 
         Public Property Keyword As String
 
+        Public Property State As String
+
         Public Property EventCount As Integer
 
         Public Property ClassICount As Integer
