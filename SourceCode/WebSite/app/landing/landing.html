@@ -19,8 +19,8 @@
                         </a>
                     </span>
                 </div>
+                <select class="input-lg form-control" ng-model="vm.selectedState" ng-options="item.abbreviation as item.name for item in vm.states"></select>
             </div>
-
             <div class="col-md-6">
                 <p></p>
                 <i class="h4 center-inarea">
@@ -50,7 +50,7 @@
                             <tr>
                                 <td valign="middle">
                                     <h3>{{item.Keyword}}</h3>
-                                    <!--<h5><a href="#">Suggestions: ice cream</a></h5>-->
+                                    <h5>Affecting: Tennessee</h5>
                                 </td>
                                 <td>
                                     <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
