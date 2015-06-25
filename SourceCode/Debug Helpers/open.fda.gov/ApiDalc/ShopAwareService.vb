@@ -478,7 +478,7 @@ Public Class ShopAwareService
 
     End Sub
 
-    Private Sub ProcessResultRecordForMapData(data As ResultRecall, ByRef list As Dictionary(Of String, SearchResultMapData))
+    Private Sub ProcessResultRecordForMapData(data As ResultRecall, list As Dictionary(Of String, SearchResultMapData))
 
         Dim check As String = data.Distribution_Pattern
         Dim states As List(Of String) = System.Enum.GetNames(GetType(States)).ToList
@@ -621,67 +621,55 @@ Public Class ShopAwareService
 
         Const maxResultSetSize As Integer = 100
 
-        Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
+        Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
+
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
 
         Dim values As New FDAResult
 
-        'For Each itm As ResultRecall In tmp
+        For Each itm As ResultRecall In tmp
 
-        '    ProcessResultRecordForMapData(itm, mapList)
+            ProcessResultRecordForMapData(itm, mapList)
 
-        '    ' ------------------------------------------------------------
-        '    'TODO convert itm (ResultRecall) to SearchResultItem
-        '    ' ------------------------------------------------------------
+            ' ------------------------------------------------------------
+            'TODO convert itm (ResultRecall) to SearchResultItem
+            ' ------------------------------------------------------------
 
-        '    Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-        '    Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-        '    Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
-        '                                                          .DateStarted = newItemDate.ToShortDateString(),
-        '                                                          .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
-        '                                                          .DistributionPattern = itm.Distribution_Pattern,
-        '                                                          .ProductDescription = itm.Product_Description,
-        '                                                          .State = itm.State,
-        '                                                          .Status = itm.Status,
-        '                                                          .Country = itm.Country,
-        '                                                          .RecallNumber = itm.Recall_Number,
-        '                                                          .ProductQuantity = itm.Product_Quantity,
-        '                                                          .EventId = itm.Event_Id,
-        '                                                          .RecallingFirm = itm.Recalling_Firm,
-        '                                                          .ReportDate = tmpReportDate.ToShortDateString(),
-        '                                                          .CodeInfo = itm.Code_info,
-        '                                                          .Voluntary = itm.Voluntary_Mandated}
+            Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
+                                                                  .DateStarted = newItemDate.ToShortDateString(),
+                                                                  .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
+                                                                  .DistributionPattern = itm.Distribution_Pattern,
+                                                                  .ProductDescription = itm.Product_Description,
+                                                                  .State = itm.State,
+                                                                  .Status = itm.Status,
+                                                                  .Country = itm.Country,
+                                                                  .RecallNumber = itm.Recall_Number,
+                                                                  .ProductQuantity = itm.Product_Quantity,
+                                                                  .EventId = itm.Event_Id,
+                                                                  .RecallingFirm = itm.Recalling_Firm,
+                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
+                                                                  .CodeInfo = itm.Code_info,
+                                                                  .Voluntary = itm.Voluntary_Mandated}
 
-        '    Dim itmDate As DateTime = Nothing
-        '    Select Case itm.Classification
+            searchResultLocal.Results.Add(tmpSearchResultItem)
 
-        '        Case "Class I"
+        Next
 
-        '            searchResultLocal.ClassI.Add(tmpSearchResultItem)
+        searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
 
-        '        Case "Class II"
+        Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
 
-        '            searchResultLocal.ClassII.Add(tmpSearchResultItem)
+        If tmpLinqResults.Count > maxResultSetSize Then
+            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        End If
 
-        '        Case "Class III"
+        searchResultLocal.Results = tmpLinqResults
 
-        '            searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-
-        '    End Select
-
-        'Next
-
-        'searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
-
-        'LimitResultsOfSearchResultItems(searchResultLocal.ClassI, maxResultSetSize)
-        'LimitResultsOfSearchResultItems(searchResultLocal.ClassII, maxResultSetSize)
-        'LimitResultsOfSearchResultItems(searchResultLocal.ClassIII, maxResultSetSize)
-
-        'Return searchResultLocal
-
-        Return values
+        Return searchResultLocal
 
     End Function
 End Class
