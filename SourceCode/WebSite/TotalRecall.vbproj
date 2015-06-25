@@ -96,6 +96,8 @@
     <Content Include="app\notify\notify.controller.js" />
     <Content Include="app\notify\notify.html" />
     <Content Include="app\notify\notify.service.js" />
+    <Content Include="app\privacy\privacy.controller.js" />
+    <Content Include="app\privacy\privacy.html" />
     <Content Include="app\product\productFullDetails.modal.html" />
     <Content Include="app\product\product.controller.js" />
     <Content Include="app\product\product.html" />
@@ -140,6 +142,7 @@
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\PrivacyPolicy.jpg" />
     <Content Include="index.html" />
     <Content Include="js\angular\angular-animate.js" />
     <Content Include="js\angular\angular-animate.min.js" />

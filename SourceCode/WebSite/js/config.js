@@ -1,4 +1,5 @@
-function config($stateProvider, $urlRouterProvider) {
+function config($stateProvider, $urlRouterProvider)
+{
     $urlRouterProvider.otherwise("/index/landing");
 
     // Tags: ROUTING, ADD PAGE
@@ -22,12 +23,18 @@ function config($stateProvider, $urlRouterProvider) {
             url: "/about",
             templateUrl: "app/about/about.html",
             data: { pageTitle: "About Us" }
+        })
+        .state("index.privacy", {
+            url: "/privacy",
+            templateUrl: "app/privacy/privacy.html",
+            data: { pageTitle: "Privacy Policy" }
         });
 }
 
 angular
     .module("TotalRecall")
     .config(config)
-    .run(function($rootScope, $state) {
+    .run(function ($rootScope, $state)
+    {
         $rootScope.$state = $state;
     });
