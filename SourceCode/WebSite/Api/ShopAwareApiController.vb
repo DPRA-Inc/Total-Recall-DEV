@@ -42,6 +42,21 @@ Namespace Api
 
         End Function
 
+        <HttpGet>
+        <Route("GetStates")>
+        Public Function GetStates() As List(Of StateData)
+
+            Dim wrapper As New ShopAwareService
+            Dim result = New List(Of StateData)
+
+            result.Add(New StateData With {.name = "Tennessee", .abbreviation = "TN"})
+            result.Add(New StateData With {.name = "Florida", .abbreviation = "FL"})
+            result.Add(New StateData With {.name = "Nationwide", .abbreviation = "All"})
+
+            Return result
+
+        End Function
+
     End Class
 
 End Namespace
