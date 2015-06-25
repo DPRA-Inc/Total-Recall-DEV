@@ -682,6 +682,33 @@ Public Class OpenFda
 
     End Sub
 
+    ''' <summary>
+    ''' Gets States list
+    ''' </summary>
+    ''' <returns>List of StateData</returns>
+    ''' <remarks></remarks>
+    Friend Function GetStates() As List(Of StateData)
+
+        Dim result As New List(Of StateData)
+        Dim stateArray As Array
+        Dim tmpEnumValue As States
+
+        stateArray = System.Enum.GetValues(GetType(States))
+
+        For Each itm In stateArray
+
+            tmpEnumValue = DirectCast([Enum].Parse(GetType(States), itm), States)
+
+            Dim state As New StateData With {.name = GetEnumDescription(tmpEnumValue), .abbreviation = tmpEnumValue.ToString}
+
+            result.Add(state)
+
+        Next
+
+        Return result
+
+    End Function
+
 #Region " Limits "
 
     Friend Function AddResultLimit(ByVal limit As Integer) As String
@@ -724,5 +751,7 @@ Public Class OpenFda
     End Function
 
 #End Region
+
+
 
 End Class

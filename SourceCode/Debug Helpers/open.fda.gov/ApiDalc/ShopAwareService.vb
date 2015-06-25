@@ -48,6 +48,13 @@ Public Class ShopAwareService
 
     End Function
 
+    ''' <summary>
+    ''' Get search results data
+    ''' </summary>
+    ''' <param name="keyWord"></param>
+    ''' <param name="state"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetSearchResult(ByVal keyWord As String, ByVal state As String) As SearchResult
 
         Const maxResultSetSize As Integer = 100
@@ -112,6 +119,13 @@ Public Class ShopAwareService
 
     End Function
 
+    ''' <summary>
+    ''' Get report data item by region
+    ''' </summary>
+    ''' <param name="keyword"></param>
+    ''' <param name="state"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As Dictionary(Of String, String)
 
         _fda = New OpenFda(_restClient)
@@ -123,6 +137,24 @@ Public Class ShopAwareService
         Return results
 
     End Function
+
+    ''' <summary>
+    ''' Get States
+    ''' </summary>
+    ''' <returns>List of states</returns>
+    ''' <remarks></remarks>
+    Public Function GetStates() As List(Of StateData)
+
+        _fda = New OpenFda()
+
+        Dim results As List(Of StateData)
+
+        results = _fda.GetStates()
+
+        Return results
+
+    End Function
+
 
 #End Region
 
@@ -600,8 +632,6 @@ Public Class ShopAwareService
 
     End Sub
 
-#End Region
-
     Private Sub LimitResultsOfSearchResultItems(searchResultItemList As List(Of SearchResultItem), maxResultSetSize As Integer)
 
         'If searchResultLocal.ClassI.Count > maxResultSetSize Then
@@ -679,10 +709,15 @@ Public Class ShopAwareService
 
     End Function
 
+<<<<<<< HEAD
     Public Function GetFeatureCollection() As List(Of FeatureObject)
 
 
 
     End Function
+=======
+#End Region
+
+
 
 End Class

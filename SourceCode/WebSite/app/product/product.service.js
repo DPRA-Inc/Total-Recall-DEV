@@ -1,17 +1,20 @@
 ﻿angular.module('TotalRecall').factory('productservice', ProductService);
 
-function ProductService($http) {
+function ProductService($http)
+{
 
     var service = {
         GetProductResults: GetProductResults,
-        GetFDAResults: GetFDAResults
+        GetFDAResults: GetFDAResults,
+        GetStates: GetStates
     };
 
     return service;
 
     ///////////////////
 
-    function GetProductResults(product, region, callback) {
+    function GetProductResults(product, region, callback)
+    {
 
         var serviceUrl = "Api/ShopAware/ProductResults/";
         serviceUrl += product + "/";
@@ -21,19 +24,45 @@ function ProductService($http) {
             method: 'GET',
             url: serviceUrl
         }).
-            success(function (data, status, headers, config) {
+            success(function (data, status, headers, config)
+            {
                 if (!angular.isObject(data)) callback(null);
 
                 callback(data);
             }).
-            error(function (data, status, headers, config) {
+            error(function (data, status, headers, config)
+            {
                 $log.warn(data, status, headers, config)
-            });                 
+            });
     }
 
-    function GetFDAResults(product, region, callback) {
+    function GetFDAResults(product, region, callback)
+    {
 
         var serviceUrl = "Api/ShopAware/FDAResults/";
+        serviceUrl += product + "/";
+        serviceUrl += region;
+
+        $http({
+            method: 'GET',
+            url: serviceUrl
+        }).
+            success(function (data, status, headers, config)
+            {
+                if (!angular.isObject(data)) callback(null);
+
+                callback(data);
+            }).
+            error(function (data, status, headers, config)
+            {
+                $log.warn(data, status, headers, config)
+            });
+    }
+
+
+    function GetReportData(product, region, callback) {
+
+        var serviceUrl = "Api/ShopAware/GetReportData/";
         serviceUrl += product + "/";
         serviceUrl += region;
 
@@ -50,6 +79,7 @@ function ProductService($http) {
                 $log.warn(data, status, headers, config)
             });
     }
+
 
 }
 

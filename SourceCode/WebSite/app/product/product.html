@@ -1,55 +1,130 @@
 <div class="wrapper wrapper-content animated fadeInDown" data-ng-controller="productcontroller as vm">
-    <div class="row">
-        <div class="col-lg-9">
-            <ol class="breadcrumb">
-                <li>
-                    <a href="#/index/landing">Home</a>
-                </li>
-                <li class="active">
-                    <strong>Product Details</strong>
-                </li>
-            </ol>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#/index/landing">Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Product Details</strong>
+                    </li>
+                </ol>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <h1 class="col-md-11">Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong></h1>
-        <div class="col-md-1" style="padding-top: 20px">
-            <ul class="nav nav-pills" role="tablist">
-                <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
-                <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
-                <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
-            </ul>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>
+                    Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
+                </h1>
+                <div style="padding-top: 20px">
+                    <ul class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="active">
+                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
+                        <li role="presentation">
+                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
+                        <li role="presentation">
+                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-6 animated bounceInLeft" ng-class="vm.fontSizeClass">
+        <div class="row">
 
-        <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
-            <i class="fa fa-spinner fa-spin"></i>
-            Loading More Information...
-        </h1>
+            <div class="col-md-6 animated bounceInLeft" ng-class="vm.fontSizeClass">
 
-        <div ng-hide="vm.DataLoading">
+                <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
+                    <i class="fa fa-spinner fa-spin"></i>
+                    Loading More Information...
+                </h1>
 
-            <div class="ibox-content no-padding">
+                <div ng-hide="vm.DataLoading">
+
+                    <div class="ibox-content no-padding">
+
+                        <div style="max-height: 900px">
+
+                            <ul class="sortable-list connectList agile-list" style="max-height: 900px">
+
+                                <li class="danger-element" sf-virtual-repeat="item in vm.SearchResult.Results" style="height: 400px">
+
+                                    <div ng-hide="item.IsEvent">
+                                        <h2>
+                                            <strong>
+                                                <i>{{item.Classification}}</i>
+                                            </strong>
+                                        </h2>
+
+                                        <p>
+                                            <strong>{{item.ProductDescription}}</strong>
+                                        </p>
+
+                                        <p>{{item.ContentTruncated}}</p>
+
+                                        <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+
+                                        <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                                    </div>
+
+                                    <div ng-show="item.IsEvent">
+                                        <h2>
+                                            <strong>
+                                                <i>{{item.Classification}}</i>
+                                            </strong>
+                                        </h2>
+
+                                        <p>
+                                            <strong>Seriousness: {{item.Seriousness}}</strong>
+                                        </p>
+
+                                        <p>Source: {{item.PrimarySource}}</p>
+
+                                        <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+
+                                        <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                                    </div>
+
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" id="mapPlaceholder">
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="danger-element" ng-repeat="item in vm.SearchResult.Results">
+                    <li class="feed-element">
 
                         <div>
-                            <h2><strong><i>{{item.Classification}}</i></strong></h2>
 
-                            <!--<p><small>{{vm.SearchSummary.ClassIDescription}}</small></p>-->
+                            <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
 
-                            <p><strong>{{item.ProductDescription}}</strong></p>
+                                <ol-layer ol-layer-properties="osm"></ol-layer>
+                                <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
 
-                            <p>{{item.ContentTruncated}}</p>
+                            </openlayers>
 
-                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+                        </div>
 
-                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                    </li>
+
+                    <li class="feed-element">
+
+                        <div>
+
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
 
                         </div>
 
@@ -60,39 +135,6 @@
             </div>
 
         </div>
-
-    </div>
-
-    <div class="col-md-6 animated bounceInUp" id="mapPlaceholder">
-
-        <ul class="sortable-list connectList agile-list">
-
-            <li class="feed-element">
-
-                <div>
-
-                    <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
-
-                        <ol-layer ol-layer-properties="osm"></ol-layer>
-                        <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
-
-                    </openlayers>
-
-                </div>
-
-            </li>
-
-            <li class="feed-element">
-
-                <div>
-
-                    <canvas height="480" class="ng-isolate-scope" style="width: 100%; height: 480px;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
-
-                </div>
-
-            </li>
-
-        </ul>
 
     </div>
 

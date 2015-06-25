@@ -10,6 +10,8 @@ Namespace DataObjects
     Public Class SearchResultDrugEvent
 
         Public Property Classification As String = "Event"
+        Public Property IsEvent As Boolean = True
+
         Public Property PatientSex As String
         Public Property PatientAge As String
         Public Property PatientWeight As String
@@ -149,6 +151,5 @@ Namespace DataObjects
 #End Region
 
     End Class
-
 
 End Namespace
