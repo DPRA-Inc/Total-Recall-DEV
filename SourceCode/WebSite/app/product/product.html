@@ -37,11 +37,9 @@
                 <ul class="sortable-list connectList agile-list">
 
                     <li class="danger-element" ng-repeat="item in vm.SearchResult.Results">
-
-                        <div>
+                        
+                        <div ng-hide="item.IsEvent">
                             <h2><strong><i>{{item.Classification}}</i></strong></h2>
-
-                            <!--<p><small>{{vm.SearchSummary.ClassIDescription}}</small></p>-->
 
                             <p><strong>{{item.ProductDescription}}</strong></p>
 
@@ -52,6 +50,20 @@
                             <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
                         </div>
+
+                        <div ng-show="item.IsEvent">
+                            <h2><strong><i>{{item.Classification}}</i></strong></h2>
+
+                            <p><strong>Seriousness: {{item.Seriousness}}</strong></p>
+
+                            <p>Source: {{item.PrimarySource}}</p>
+
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                        </div>
+
 
                     </li>
 
