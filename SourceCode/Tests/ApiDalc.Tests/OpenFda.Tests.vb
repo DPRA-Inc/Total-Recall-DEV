@@ -40,6 +40,7 @@ Public Class OpenFda
         Assert.AreEqual(mockData.ToLower, result.ToLower)
 
     End Sub
+
     <TestCase()>
     Public Sub BuildURL_DrugEvent_WithDrugName_ReturnsResult()
 
@@ -55,6 +56,30 @@ Public Class OpenFda
 
         'Assert.AreEqual(Nothing, result)
         Assert.AreNotEqual(Nothing, url)
+
+    End Sub
+
+
+
+    <TestCase()>
+    Public Sub Convert_DrugEventData_AdverseDrugEventObject()
+
+        Dim mockRestClient = New Mocks.MockRestClient("DrugEventData.json")
+        Dim service = New ApiDalc.OpenFda(mockRestClient)
+        Dim result = service.GetDrugEventsByDrugName("Augmentin")
+
+        Assert.AreNotEqual(Nothing, result)
+
+    End Sub
+
+    <TestCase()>
+    Public Sub Convert_DrugEventData_AdverseDrugEventObject_Augmentin_CheckCount()
+
+        Dim mockRestClient = New Mocks.MockRestClient("DrugEventData_Augmentin_50.json")
+        Dim service = New ApiDalc.OpenFda(mockRestClient)
+        Dim result = service.GetDrugEventsByDrugName("Augmentin")
+
+        Assert.AreEqual(50, result.count)
 
     End Sub
 

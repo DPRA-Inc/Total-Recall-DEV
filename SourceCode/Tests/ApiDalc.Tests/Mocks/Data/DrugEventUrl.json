@@ -1,26 +1,4 @@
-﻿HTTP/1.1 200 OK
-accept-ranges: bytes
-access-control-allow-headers: X-Requested-With
-access-control-allow-origin: *
-age: 0
-cache-control: public, max-age=60
-content-security-policy: default-src 'none'
-Content-Type: application/json; charset=utf-8
-Date: Wed, 24 Jun 2015 21:30:44 GMT
-etag: W/"ZR2tt+kJDpvREhYrewqo4A=="
-location: 
-Server: nginx
-vary: Accept-Encoding, Accept-Encoding
-via: 1.1 varnish-v4
-x-cache: MISS
-x-content-type-options: nosniff
-x-frame-options: deny
-x-varnish: 7622265
-x-xss-protection: 1; mode=block
-Content-Length: 61273
-Connection: keep-alive
-
-{
+﻿{
   "meta": {
     "disclaimer": "openFDA is a beta research project and not for clinical use. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated.",
     "license": "http://open.fda.gov/license",

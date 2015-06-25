@@ -16,6 +16,8 @@ Public Class OpenFda
 
 #Region " Public Properties "
 
+    Private _getMetaResults As Object
+
     Public Shared Property HostUrl As String = "https://api.fda.gov/"
 
 #End Region
@@ -203,36 +205,7 @@ Public Class OpenFda
 
     Public Function Execute(ByVal url As String) As String
 
-        '_resultSet = (New RestClient).Execute(url)
-
-
         Dim result As String = _restClient.Execute(url)
-
-        '_resultSet = String.Empty
-
-        ''Dim res As String = GetOpenFDAEndPoint(OpenFDAApiEndPoints.DrugEvent)
-        'Dim webClient = New Net.WebClient()
-
-        'webClient.Headers.Clear()
-
-        'Try
-
-        '    result = webClient.DownloadString(url)
-        '    _resultSet = result
-
-        'Catch ex As Net.WebException
-
-        '    Debug.Write(ex.Message)
-
-        '    'ex.dump("Net.WebException")
-        '    'ex.Message.dump("")
-        '    ''ex.response.statusCode.dump()
-        '    ''ex.response.statusDescription.dump()
-        '    'webClient.dump()
-
-        'Catch ex As Exception
-        '    Debug.Write(ex.Message)
-        'End Try
 
         _meta = New JObject()
 
@@ -240,37 +213,15 @@ Public Class OpenFda
 
             Dim jo As JObject = JObject.Parse(result)
 
-            'jo.dump()
-            'jo.Children.Count.dump("children")
-            'jo.GetValue("meddta").dump()
-            'o.GetValue("meta").dump()
-
             _meta = jo.GetValue("meta")
 
             Try
 
-                '_results = jo.PropertyValues("results")
                 _results = jo.GetValue("results")
 
             Catch ex As Exception
 
             End Try
-
-            'jo.Property("meta").dump("prop")
-
-
-            'Dim tags As List(Of Newtonsoft.Json.Linq.JToken) = jo.SelectToken("meta").Children().ToList
-            ' tags.Dump()
-            ''for each i as object in jo.Properties("meta")
-            ''	i.tostring.dump()
-            ''next
-            ''for each i in jo.PropertyValues("meta")
-            ''	i.dump()
-            ''next
-            'jo("meta").dump("MetaData")
-            'jo("meta")("results")("skip").dump("skip")
-            'jo("meta")("results")("limit").dump("limit")
-            'jo("meta")("results")("total").dump("total")
 
         End If
 
@@ -360,25 +311,32 @@ Public Class OpenFda
         Return dataSetSize
 
     End Function
+
     Public Function GetDrugEventsByDrugName(ByVal drugName As String) As Object
 
-        Dim tmpAdverseDrugEventtList As List(Of AdverseDrugEvent)
+        Dim tmpAdverseDrugEventtList As New List(Of AdverseDrugEvent)
+        Dim tmpSearchResultDrugEvent As New List(Of SearchResultDrugEvent)
+
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+
         Dim limit As String = AddResultLimit(100)
 
         Dim url As String = BuildUrl(OpenFdaApiEndPoints.DrugEvent)
         Dim results As String = Execute(url & limit)
+
         If Not String.IsNullOrEmpty(results) Then
 
-            Dim dataSetSize As Integer = GetMetaResults().Total()
+            Dim dataSetSize As Integer = GetMetaResults(results).Total()
             tmpAdverseDrugEventtList = AdverseDrugEvent.CnvJsonDataToList(results)
+
+            tmpSearchResultDrugEvent = SearchResultDrugEvent.ConvertJsonData(tmpAdverseDrugEventtList)
 
         End If
 
-        Return Nothing
+        Return tmpSearchResultDrugEvent
 
     End Function
 
@@ -612,19 +570,74 @@ Public Class OpenFda
 
         If _meta IsNot Nothing Then
 
-            If _meta("results") IsNot Nothing Then
+            metaData = GetMetaResults(_meta)
+
+            'If _meta("results") IsNot Nothing Then
+
+            '    With metaData
+
+            '        .Limit = _meta("results")("limit")
+            '        .Skip = _meta("results")("skip")
+            '        .Total = _meta("results")("total")
+
+            '    End With
+
+            'End If
+
+        End If
+
+        Return metaData
+
+    End Function
+
+    Friend Function GetMetaResults(ByVal searchResults As String) As MetaResults
+
+        Dim metaData As New MetaResults
+
+        If Not String.IsNullOrEmpty(searchResults) Then
+
+            Dim jo As JObject = JObject.Parse(searchResults)
+
+            Dim meta As JObject = jo.GetValue("meta")
+
+            'If meta("results") IsNot Nothing Then
+
+            '    With metaData
+
+            '        .Limit = meta("results")("limit")
+            '        .Skip = meta("results")("skip")
+            '        .Total = meta("results")("total")
+
+            '    End With
+
+            'End If
+
+            metaData = GetMetaResults(meta)
+
+        End If
+
+        Return metaData
+
+    End Function
+
+
+
+    Friend Function GetMetaResults(ByVal meta As JObject) As MetaResults
+
+        Dim metaData As New MetaResults
+
+            If meta("results") IsNot Nothing Then
 
                 With metaData
 
-                    .Limit = _meta("results")("limit")
-                    .Skip = _meta("results")("skip")
-                    .Total = _meta("results")("total")
+                    .Limit = meta("results")("limit")
+                    .Skip = meta("results")("skip")
+                    .Total = meta("results")("total")
 
                 End With
 
             End If
 
-        End If
 
         Return metaData
 
