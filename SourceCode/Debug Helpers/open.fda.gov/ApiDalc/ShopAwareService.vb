@@ -709,15 +709,14 @@ Public Class ShopAwareService
 
     End Function
 
-<<<<<<< HEAD
+
     Public Function GetFeatureCollection() As List(Of FeatureObject)
 
 
-
+        Return Nothing
     End Function
-=======
-#End Region
 
+#End Region
 
 
 End Class
