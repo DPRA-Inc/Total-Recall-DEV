@@ -5,8 +5,7 @@ function ProductService($http)
 
     var service = {
         GetProductResults: GetProductResults,
-        GetFDAResults: GetFDAResults,
-        GetStates: GetStates
+        GetFDAResults: GetFDAResults       
     };
 
     return service;
