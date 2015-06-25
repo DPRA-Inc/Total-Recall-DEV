@@ -90,6 +90,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
             var item = {};
 
             item.Keyword = value; // Product name
+            item.State = region;
             item.Rank = "success"; // How Bad is it, Color Code.
             item.IsLoading = true; // Indicates we are waiting on Return From Service.
             item.HasClassI = false; // Indicates there is some Class I Data to show.
