@@ -33,6 +33,10 @@
     background-color: #BFDFFF;
 }
 
+.color-primary {
+    color: #BFFF00;
+}
+
 .appBar-header {
     background-color: #0085B2;
     height: 105px;

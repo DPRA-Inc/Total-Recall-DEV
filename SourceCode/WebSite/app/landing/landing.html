@@ -64,7 +64,6 @@
                                             <img src="./img/identifiers/R2.png" ng-show="item.HasClassII" alt="Class 2" />
                                         </a>
                                         <a href="#" title="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." ng-click="vm.ViewProductDetails(item)">
-
                                             <img src="./img/identifiers/R3.png" ng-show="item.HasClassIII" />
                                         </a>
                                         <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death." ng-click="vm.ViewProductDetails(item)">
@@ -73,7 +72,7 @@
                                         <div class="badge badge-success" ng-show="item.IsClean">
                                             <h3>
                                                 <a href="#" title="Nothing recent found using criteria.">
-                                                    <i class="fa fa-check"></i>
+                                                    <span class="color-primary"><i class="fa fa-check"></i></span>
                                                 </a>
                                             </h3>
                                         </div>
