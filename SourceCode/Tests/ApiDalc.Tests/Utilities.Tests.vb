@@ -162,5 +162,17 @@ Public Class Utilities
 
     End Sub
 
+
+
+    '<TestCase()>
+    'Public Sub ConvertEnumToStringArray_State()
+
+    '    Dim tmpEnum As Enumerations.States
+    '    Dim result = ApiDalc.ConvertEnumToStringArray(tmpEnum)
+
+    '    Assert.IsInstanceOf(Of Array)(result)
+
+    'End Sub
+
 End Class
 
