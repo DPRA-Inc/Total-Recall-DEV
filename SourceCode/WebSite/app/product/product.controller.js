@@ -1,25 +1,21 @@
-﻿angular.module("TotalRecall").controller('productcontroller', ProductController);
+﻿angular.module("TotalRecall").controller("productcontroller", ProductController);
 
-function ProductController($scope, $localStorage, $http, $modal, productservice)
-{
+function ProductController($scope, $sessionStorage, $localStorage, $http, $modal, productservice) {
     var vm = this;
 
-    var fontSizeClass = "";
+    vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData = [];
 
-    if (angular.isString($localStorage.fontSizeClass))
-    {
+    if (angular.isString($localStorage.fontSizeClass)) {
         vm.fontSizeClass = $localStorage.fontSizeClass;
     }
 
-    vm.ChangeFontSize = function (className)
-    {
+    vm.ChangeFontSize = function(className) {
         vm.fontSizeClass = className;
         $localStorage.fontSizeClass = className;
-    }
-
-    vm.SearchSummary = GlobalsModule.SearchSummary;
+    };
+    vm.SearchSummary = $sessionStorage.SearchSummary;
     vm.DataLoading = true;
 
     vm.Markers = [];
@@ -43,7 +39,7 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         },
         osm: {
             source: {
-                type: 'OSM'
+                type: "OSM"
             }
         }
     });
@@ -65,32 +61,30 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         var region = vm.SearchSummary.State;
 
         productservice.GetFDAResults(productName, region,
-            function (result) {
+            function(result) {
 
-                if (angular.isObject(result)) {
+                if (angular.isObject(result) && angular.isObject(result.MapObjects)) {
 
-                    result.MapObjects.forEach(function (mapItem) {
+                    result.MapObjects.forEach(function(mapItem) {
 
                         vm.Markers.push(
-                           {
-                               lat: parseFloat(mapItem.Latitude),
-                               lon: parseFloat(mapItem.Longitude),
-                               label: {
+                            {
+                                lat: parseFloat(mapItem.Latitude),
+                                lon: parseFloat(mapItem.Longitude),
+                                label: {
+                                    message: "",
+                                    show: false,
+                                    showOnMouseOver: true
 
-                                   message: '',
-                                   show: false,
-                                   showOnMouseOver: true
-
-                               },
-                               style: {
-                                   image: {
-                                       icon: mapItem.icon
-                                   }
-                               }
-                           }
-                        )
-                    })
-
+                                },
+                                style: {
+                                    image: {
+                                        icon: mapItem.icon
+                                    }
+                                }
+                            }
+                        );
+                    });
                 }
 
                 GlobalsModule.SearchResult = result;
@@ -149,14 +143,13 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
 
     //}
 
-    vm.ShowMoreInformation = function (item)
-    {
+    vm.ShowMoreInformation = function(item) {
 
         GlobalsModule.SearchResultItem = item;
 
         var modalInstance = $modal.open({
-            templateUrl: 'app/product/productFullDetails.modal.html',
-            controller: 'productcontroller as vm'
+            templateUrl: "app/product/productFullDetails.modal.html",
+            controller: "productcontroller as vm"
 
         });
     };
@@ -206,5 +199,4 @@ function ProductController($scope, $localStorage, $http, $modal, productservice)
         };
 
     }
-};
-
+}

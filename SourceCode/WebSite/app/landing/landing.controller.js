@@ -1,6 +1,6 @@
 ﻿angular.module("TotalRecall").controller("landingcontroller", landingcontroller);
 
-function landingcontroller($scope, $window, $location, $localStorage, landingservice, feedLoader) {
+function landingcontroller($scope, $window, $location, $sessionStorage, $localStorage, landingservice, feedLoader) {
     var vm = this;
 
     vm.fontSizeClass = "";
@@ -174,7 +174,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
      */
     vm.ViewProductDetails = function(product) {
         if (!product.IsClean) {
-            GlobalsModule.SearchSummary = product;
+            $sessionStorage.SearchSummary = product;
             $location.path("/index/product");
         }
     };
