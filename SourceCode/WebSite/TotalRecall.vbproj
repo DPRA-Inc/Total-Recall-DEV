@@ -180,6 +180,10 @@
     <Content Include="js\ngstorage\ngStorage.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.js" />
+    <Content Include="js\plugins\peity\angular-peity.js" />
+    <Content Include="js\plugins\peity\jquery.peity.min.js" />
+    <Content Include="js\plugins\chartJs\angles.js" />
+    <Content Include="js\plugins\chartJs\Chart.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
@@ -273,6 +277,26 @@
     <Content Include="js\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="js\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="js\plugins\oclazyload\dist\ocLazyLoad.js" />
+    <Content Include="js\plugins\oclazyload\dist\ocLazyLoad.min.js" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\index.html" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\js\app.js" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\js\AppCtrl.js" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\js\gridModule.js" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\partials\main.html" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\partials\modal.html" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\css\ng-grid.css" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\index.html" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\angular.min.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\jquery.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\lazymodule.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\main.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\ng-grid-2.0.11.debug.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\require.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\js\testmodule.js" />
+    <Content Include="js\plugins\oclazyload\examples\requireJSExample\partials\grid.html" />
+    <Content Include="js\plugins\oclazyload\examples\simpleExample\index.html" />
+    <Content Include="js\plugins\oclazyload\examples\simpleExample\js\testApp.js" />
     <Content Include="js\plugins\pace\pace.min.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.min.js" />
@@ -370,8 +394,14 @@
     <Content Include="js\angular\angular.min.js.map" />
     <Content Include="js\angular\errors.json" />
     <Content Include="js\angular\version.json" />
-
     <Content Include="app\about\about.controller.js" />
+    <Content Include="js\plugins\oclazyload\.bower.json" />
+    <Content Include="js\plugins\oclazyload\bower.json" />
+    <Content Include="js\plugins\oclazyload\CHANGELOG.md" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\bower.json" />
+    <Content Include="js\plugins\oclazyload\examples\complexExample\README.md" />
+    <Content Include="js\plugins\oclazyload\LICENSE.md" />
+    <Content Include="js\plugins\oclazyload\README.md" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
