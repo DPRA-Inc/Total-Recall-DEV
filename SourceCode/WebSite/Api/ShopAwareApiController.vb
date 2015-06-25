@@ -42,6 +42,14 @@ Namespace Api
 
         End Function
 
+        <HttpGet>
+        <Route("GetReportData/{product}/{region}")>
+        Public Function GetReportData(product As String, region As String) As FDAResult
+
+
+        End Function
+
+
     End Class
 
 End Namespace

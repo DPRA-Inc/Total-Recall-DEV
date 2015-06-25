@@ -4814,6 +4814,21 @@ table.issue-tracker tbody tr td {
 .agile-list li.success-element {
     border-left: 3px solid #1ab394;
 }
+
+.agile-list li.classII-element {
+    border-left: 3px solid #f8ac59;
+}
+.agile-list li.classI-element {
+    border-left: 3px solid #ed5565;
+}
+.agile-list li.classIII-element {
+    border-left: 3px solid #BFFF00;
+}
+.agile-list li.event-element {
+    border-left: 3px solid #1ab394;
+}
+
+
 .agile-detail {
     margin-top: 5px;
     font-size: 12px;
