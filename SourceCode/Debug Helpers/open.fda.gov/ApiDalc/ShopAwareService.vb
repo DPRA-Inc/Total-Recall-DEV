@@ -662,6 +662,11 @@ Public Class ShopAwareService
 
         searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
 
+        ' Lets Get the Events And Mix them In.
+        Dim drugee As New OpenFda
+        Dim drugs As List(Of SearchResultDrugEvent) = drugee.GetDrugEventsByDrugName(keyWord)
+        searchResultLocal.Results.AddRange(drugs)
+
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
 
         If tmpLinqResults.Count > maxResultSetSize Then

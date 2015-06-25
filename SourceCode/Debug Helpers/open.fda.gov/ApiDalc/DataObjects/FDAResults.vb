@@ -4,9 +4,7 @@
 
         Public Property Keyword As String
 
-        Public Property Results() As New List(Of SearchResultItem)
-
-        Public Property Events As New List(Of SearchResultItem)
+        Public Property Results() As New List(Of Object)
 
         Public Property MapObjects As List(Of SearchResultMapData)
 
