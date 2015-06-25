@@ -9,6 +9,9 @@ Namespace DataObjects
 
     Public Class SearchResultDrugEvent
 
+        Public Property Classification As String = "Event"
+        Public Property IsEvent As Boolean = True
+
         Public Property PatientSex As String
         Public Property PatientAge As String
         Public Property PatientWeight As String
@@ -23,7 +26,7 @@ Namespace DataObjects
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property ReceiveDate As String
+        Public Property DateStarted As String
 
         ''' <summary>
         ''' Date that most recent information in the report was received by FDA.
@@ -60,7 +63,7 @@ Namespace DataObjects
                     .PatientSex = GetEnumDescription(itm.Patient.PatientSex)
 
                     If Not String.IsNullOrEmpty(itm.ReceiveDate) Then
-                        .ReceiveDate = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
                     End If
                     If Not String.IsNullOrEmpty(itm.ReceiptDate) Then
                         .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString

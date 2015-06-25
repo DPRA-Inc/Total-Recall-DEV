@@ -51,7 +51,7 @@
 
                                 <li class="danger-element" sf-virtual-repeat="item in vm.SearchResult.Results" style="height: 400px">
 
-                                    <div>
+                                    <div ng-hide="item.IsEvent">
                                         <h2>
                                             <strong>
                                                 <i>{{item.Classification}}</i>
@@ -62,12 +62,32 @@
                                             <strong>{{item.ProductDescription}}</strong>
                                         </p>
 
-                                        <p>{{item.Content}}</p>
+                                        <p>{{item.ContentTruncated}}</p>
+
+                                        <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+
+                                        <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                                    </div>
+
+                                    <div ng-show="item.IsEvent">
+                                        <h2>
+                                            <strong>
+                                                <i>{{item.Classification}}</i>
+                                            </strong>
+                                        </h2>
+
+                                        <p>
+                                            <strong>Seriousness: {{item.Seriousness}}</strong>
+                                        </p>
+
+                                        <p>Source: {{item.PrimarySource}}</p>
 
                                         <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
                                         <i class="fa fa-clock-o"></i> {{item.DateStarted}}
                                     </div>
+
 
                                 </li>
 

@@ -1,4 +1,6 @@
-﻿Public Module Utilities
+﻿Imports ApiDalc.Enumerations
+
+Public Module Utilities
 
 #Region " Public Methods "
 
