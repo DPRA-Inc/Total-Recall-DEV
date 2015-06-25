@@ -2,24 +2,70 @@
     <div class="appBar-header">
         <div class="row">
             <div class="col-md-4">
-                <h3 class="appBar-title col-md-4">ShopAware.gov</h3>
+                <a href="#/index/landing"><h3 class="appBar-title col-md-4">ShopAware.gov</h3></a>
             </div>
-            <div class="col-md-4 col-md-offset-4">
-                <a href="#/index/landing" ng-if="$state.current.name === 'index.about'">
+            <div class="col-md-6 col-md-offset-2">
+
+                <div ng-if="$state.current.name === 'index.landing'">
                     <h3 class="appBar-aboutUS">
-                        <i class="fa fa-reorder"></i> Home
+                        <a href="#/index/privacy">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> Privacy Policy
+                            </span>
+                        </a>
+                        <a href="#/index/about">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> About Us
+                            </span>
+                        </a>
                     </h3>
-                </a>
-                <a href="#/index/about" ng-if="$state.current.name === 'index.landing'">
+                </div>
+
+                <div ng-if="$state.current.name === 'index.product'">
                     <h3 class="appBar-aboutUS">
-                        <i class="fa fa-reorder"></i> About Us
+                        <a href="#/index/privacy">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> Privacy Policy
+                            </span>
+                        </a>
+                        <a href="#/index/about">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> About Us
+                            </span>
+                        </a>
                     </h3>
-                </a>
-                <a href="#/index/about" ng-if="$state.current.name === 'index.product'">
+                </div>
+
+                <div ng-if="$state.current.name === 'index.about'">
                     <h3 class="appBar-aboutUS">
-                        <i class="fa fa-reorder"></i> About Us
+                        <a href="#/index/home">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> Home
+                            </span>
+                        </a>
+                        <a href="#/index/privacy">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> Privacy Policy
+                            </span>
+                        </a>
                     </h3>
-                </a>
+                </div>
+
+                <div ng-if="$state.current.name === 'index.privacy'">
+                    <h3 class="appBar-aboutUS">
+                        <a href="#/index/home">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> Home
+                            </span>
+                        </a>
+                        <a href="#/index/about">
+                            <span class="appBar-aboutUS">
+                                <i class="fa fa-reorder"></i> About Us
+                            </span>
+                        </a>
+                    </h3>
+                </div>
+
             </div>
         </div>
         <div class="row">
