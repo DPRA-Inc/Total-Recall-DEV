@@ -1,8 +1,23 @@
 ﻿angular.module("TotalRecall").controller('productcontroller', ProductController);
 
-function ProductController($scope, $http, $modal, productservice)
+function ProductController($scope, $localStorage, $http, $modal, productservice)
 {
     var vm = this;
+
+    var fontSizeClass = "";
+    vm.lineOptions = [];
+    vm.lineData = [];
+
+    if (angular.isString($localStorage.fontSizeClass))
+    {
+        vm.fontSizeClass = $localStorage.fontSizeClass;
+    }
+
+    vm.ChangeFontSize = function (className)
+    {
+        vm.fontSizeClass = className;
+        $localStorage.fontSizeClass = className;
+    }
 
     vm.SearchSummary = GlobalsModule.SearchSummary;
     vm.DataLoading = true;
@@ -40,31 +55,21 @@ function ProductController($scope, $http, $modal, productservice)
     vm.SearchResultItem = GlobalsModule.SearchResultItem;
 
     LoadPageInfo();
+    LoadChartInfo();
 
     //*******************************************
 
-    function LoadPageInfo()
-    {
+    function LoadPageInfo() {
 
         var productName = vm.SearchSummary.Keyword;
-        var region = "TN";
+        var region = vm.SearchSummary.State;
 
-        productservice.GetSearchResult(productName, region,
-            function (result)
-            {
+        productservice.GetFDAResults(productName, region,
+            function (result) {
 
-                if (angular.isObject(result))
-                {
+                if (angular.isObject(result)) {
 
-                    result.ClassI.forEach(function (item)
-                    {
-                        item.ShowMoreInformation = false;
-                    });
-
-
-
-                    result.MapObjects.forEach(function (mapItem)
-                    {
+                    result.MapObjects.forEach(function (mapItem) {
 
                         vm.Markers.push(
                            {
@@ -91,10 +96,58 @@ function ProductController($scope, $http, $modal, productservice)
                 GlobalsModule.SearchResult = result;
                 vm.SearchResult = result;
                 vm.DataLoading = false;
+
             }
         );
 
     }
+
+    //function LoadPageInfo()
+    //{
+
+    //    var productName = vm.SearchSummary.Keyword;
+    //    var region = vm.SearchSummary.State;
+
+    //    productservice.GetProductResults(productName, region,
+    //        function (result)
+    //        {
+
+    //            if (angular.isObject(result))
+    //            {
+
+    //                result.MapObjects.forEach(function (mapItem)
+    //                {
+
+    //                    vm.Markers.push(
+    //                       {
+    //                           lat: parseFloat(mapItem.Latitude),
+    //                           lon: parseFloat(mapItem.Longitude),
+    //                           label: {
+
+    //                               message: '',
+    //                               show: false,
+    //                               showOnMouseOver: true
+
+    //                           },
+    //                           style: {
+    //                               image: {
+    //                                   icon: mapItem.icon
+    //                               }
+    //                           }
+    //                       }
+    //                    )
+    //                })
+
+    //            }
+
+    //            GlobalsModule.SearchResult = result;
+    //            vm.SearchResult = result;
+    //            vm.DataLoading = false;
+
+    //        }
+    //    );
+
+    //}
 
     vm.ShowMoreInformation = function (item)
     {
@@ -104,9 +157,54 @@ function ProductController($scope, $http, $modal, productservice)
         var modalInstance = $modal.open({
             templateUrl: 'app/product/productFullDetails.modal.html',
             controller: 'productcontroller as vm'
+
         });
-
-
     };
+
+    function LoadChartInfo() {
+
+        vm.lineOptions = {
+            scaleShowGridLines: true,
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleGridLineWidth: 1,
+            bezierCurve: true,
+            bezierCurveTension: 0.4,
+            pointDot: true,
+            pointDotRadius: 4,
+            pointDotStrokeWidth: 1,
+            pointHitDetectionRadius: 20,
+            datasetStroke: true,
+            datasetStrokeWidth: 2,
+            datasetFill: true
+        };
+
+
+        vm.lineData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "Example dataset",
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label: "Example dataset",
+                    fillColor: "rgba(26,179,148,0.5)",
+                    strokeColor: "rgba(26,179,148,0.7)",
+                    pointColor: "rgba(26,179,148,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(26,179,148,1)",
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }
+            ]
+        };
+
+    }
 };
 

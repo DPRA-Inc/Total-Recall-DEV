@@ -50,7 +50,20 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solutions\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solutions\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solutions\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -96,10 +109,13 @@
     <Content Include="app\notify\notify.controller.js" />
     <Content Include="app\notify\notify.html" />
     <Content Include="app\notify\notify.service.js" />
+    <Content Include="app\privacy\privacy.controller.js" />
+    <Content Include="app\privacy\privacy.html" />
     <Content Include="app\product\productFullDetails.modal.html" />
     <Content Include="app\product\product.controller.js" />
     <Content Include="app\product\product.html" />
     <Content Include="app\product\product.service.js" />
+    <Content Include="Global.asax" />
     <Content Include="img\GroceryStoresConsumers.jpg" />
     <Content Include="img\HomeTriptych1920.fw.fixed.jpg" />
     <Content Include="img\identifiers\E.png" />
@@ -140,6 +156,7 @@
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\PrivacyPolicy.jpg" />
     <Content Include="index.html" />
     <Content Include="js\angular\angular-animate.js" />
     <Content Include="js\angular\angular-animate.min.js" />
@@ -180,6 +197,8 @@
     <Content Include="js\ngstorage\ngStorage.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.min.js" />
     <Content Include="js\openlayers\angular-openlayers-directive.js" />
+    <Content Include="js\plugins\chartJs\angles.js" />
+    <Content Include="js\plugins\chartJs\Chart.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
@@ -273,7 +292,11 @@
     <Content Include="js\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="js\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="js\plugins\oclazyload\dist\ocLazyLoad.js" />
+    <Content Include="js\plugins\oclazyload\dist\ocLazyLoad.min.js" />
     <Content Include="js\plugins\pace\pace.min.js" />
+    <Content Include="js\plugins\peity\angular-peity.js" />
+    <Content Include="js\plugins\peity\jquery.peity.min.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="js\TotalRecall.js" />
@@ -287,11 +310,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API Services\BusinessObjects\SiteExceptionInfo.vb" />
-    <Compile Include="API Services\BusinessObjects\ValidationError.vb" />
-    <Compile Include="API Services\BusinessObjects\WebBusinessInfo.vb" />
-    <Compile Include="API Services\Enumerations\ErrorTypes.vb" />
-    <Compile Include="API Services\ServiceWrapper.vb" />
+    <Compile Include="Api\ShopAwareApiController.vb" />
+    <Compile Include="App_Start\WebApiConfig.vb" />
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -310,9 +333,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="QuickHandler.ashx.vb">
-      <DependentUpon>QuickHandler.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -370,8 +390,8 @@
     <Content Include="js\angular\angular.min.js.map" />
     <Content Include="js\angular\errors.json" />
     <Content Include="js\angular\version.json" />
-
     <Content Include="app\about\about.controller.js" />
+    <Content Include="json\regions.json" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -382,7 +402,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="packages.config" />
-    <Content Include="QuickHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

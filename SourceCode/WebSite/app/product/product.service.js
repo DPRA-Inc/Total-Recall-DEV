@@ -3,22 +3,23 @@
 function ProductService($http) {
 
     var service = {
-        GetSearchResult: GetSearchResult
+        GetProductResults: GetProductResults,
+        GetFDAResults: GetFDAResults
     };
 
     return service;
 
     ///////////////////
 
-    function GetSearchResult(product, region, callback) {
+    function GetProductResults(product, region, callback) {
 
-        var searchStr = product + "|" + region;
-        var serviceUrl = 'QuickHandler.ashx?Command=GetSearchResult';
+        var serviceUrl = "Api/ShopAware/ProductResults/";
+        serviceUrl += product + "/";
+        serviceUrl += region;
 
         $http({
-            method: 'POST',
-            url: serviceUrl,
-            data: searchStr
+            method: 'GET',
+            url: serviceUrl
         }).
             success(function (data, status, headers, config) {
                 if (!angular.isObject(data)) callback(null);
@@ -30,7 +31,25 @@ function ProductService($http) {
             });                 
     }
 
-        
+    function GetFDAResults(product, region, callback) {
+
+        var serviceUrl = "Api/ShopAware/FDAResults/";
+        serviceUrl += product + "/";
+        serviceUrl += region;
+
+        $http({
+            method: 'GET',
+            url: serviceUrl
+        }).
+            success(function (data, status, headers, config) {
+                if (!angular.isObject(data)) callback(null);
+
+                callback(data);
+            }).
+            error(function (data, status, headers, config) {
+                $log.warn(data, status, headers, config)
+            });
+    }
 
 }
 

@@ -3,7 +3,7 @@
         <div class="col-lg-9">
             <ol class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="#/index/landing">Home</a>
                 </li>
                 <li class="active">
                     <strong>Product Details</strong>
@@ -13,10 +13,17 @@
     </div>
 
     <div class="row">
-        <h1>Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong></h1>
+        <h1 class="col-md-11">Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong></h1>
+        <div class="col-md-1" style="padding-top: 20px">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
+                <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
+                <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
+            </ul>
+        </div>
     </div>
 
-    <div class="col-md-6 animated bounceInLeft">
+    <div class="col-md-6 animated bounceInLeft" ng-class="vm.fontSizeClass">
 
         <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
             <i class="fa fa-spinner fa-spin"></i>
@@ -27,94 +34,90 @@
 
             <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassI"</div>
 
-                <div class="ibox-content no-padding">
-                    <h2><strong><i>CLASS I</i></strong></h2>
+            <div class="ibox-content no-padding">
+                <h2><strong><i>CLASS I</i></strong></h2>
 
-                    <small>{{vm.SearchSummary.ClassIDescription}}</small>
+                <small>{{vm.SearchSummary.ClassIDescription}}</small>
 
-                    <ul>
+                <ul class="sortable-list connectList agile-list">
 
-                        <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassI">
-                            <div class="hr-line-dashed"></div>
+                    <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassI">
 
-                            <div class="search-result">
-                                <p><strong>{{item.ProductDescription}}</strong></p>
+                        <div>
 
-                                <p>{{item.Content}}</p>
+                            <p><strong>{{item.ProductDescription}}</strong></p>
 
-                                <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+                            <p>{{item.Content}}</p>
 
-                                <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
-                            </div>
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
-                        </li>
+                        </div>
 
-                    </ul>
+                    </li>
 
-                </div>
+                </ul>
 
             </div>
 
-            <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassII">
+        </div>
 
-                <div class="ibox-content no-padding">
-                    <h2><strong><i>CLASS II</i></strong></h2>
+        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassII">
 
-                    <small>{{vm.SearchSummary.ClassIIDescription}}</small>
+            <div class="ibox-content no-padding">
+                <h2><strong><i>CLASS II</i></strong></h2>
 
-                    <ul>
+                <small>{{vm.SearchSummary.ClassIIDescription}}</small>
 
-                        <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassII">
-                            <div class="hr-line-dashed"></div>
+                <ul class="sortable-list connectList agile-list">
 
-                            <div class="search-result">
-                                <p><strong>{{item.ProductDescription}}</strong></p>
+                    <li class="warning-element" ng-repeat="item in vm.SearchResult.ClassII">
 
-                                <p>{{item.Content}}</p>
+                        <div>
+                            <p><strong>{{item.ProductDescription}}</strong></p>
 
-                                <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+                            <p>{{item.Content}}</p>
 
-                                <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
-                            </div>
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
-                        </li>
+                        </div>
 
-                    </ul>
+                    </li>
 
-                </div>
+                </ul>
 
             </div>
 
-            <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassIII">
+        </div>
 
-                <div class="ibox-content no-padding">
-                    <h2><strong><i>CLASS III</i></strong></h2>
+        <div class="ibox float-e-margins" ng-show="vm.SearchSummary.HasClassIII">
 
-                    <small>{{vm.SearchSummary.ClassIIIDescription}}</small>
+            <div class="ibox-content no-padding">
+                <h2><strong><i>CLASS III</i></strong></h2>
 
-                    <ul>
+                <small>{{vm.SearchSummary.ClassIIIDescription}}</small>
 
-                        <li class="danger-element" ng-repeat="item in vm.SearchResult.ClassIII">
-                            <div class="hr-line-dashed"></div>
+                <ul class="sortable-list connectList agile-list">
 
-                            <div class="search-result">
-                                <p><strong>{{item.ProductDescription}}</strong></p>
+                    <li class="info-element" ng-repeat="item in vm.SearchResult.ClassIII">
 
-                                <p>{{item.Content}}</p>
+                        <div>
+                            <p><strong>{{item.ProductDescription}}</strong></p>
 
-                                <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+                            <p>{{item.Content}}</p>
 
-                                <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                            <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
-                            </div>
+                            <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
-                        </li>
+                        </div>
 
-                    </ul>
+                    </li>
 
-                </div>
+                </ul>
 
             </div>
 
@@ -122,15 +125,39 @@
 
     </div>
 
-    <div class="col-md-6 animated bounceInUp" id="mapPlaceholder">
+</div>
 
-        <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
+<div class="col-md-6 animated bounceInUp" id="mapPlaceholder">
 
-            <ol-layer ol-layer-properties="osm"></ol-layer>
-            <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
+    <ul class="sortable-list connectList agile-list">
 
-        </openlayers>
+        <li class="feed-element">
 
-    </div>
+            <div>
+
+                <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
+
+                    <ol-layer ol-layer-properties="osm"></ol-layer>
+                    <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
+
+                </openlayers>
+
+            </div>
+
+        </li>
+
+        <li class="feed-element">
+
+            <div>
+
+                <canvas height="480" class="ng-isolate-scope" style="width: 100%; height: 480px;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
+
+            </div>
+
+        </li>
+
+    </ul>
 
 </div>
+
+

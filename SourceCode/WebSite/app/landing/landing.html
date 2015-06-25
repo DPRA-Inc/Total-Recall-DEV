@@ -19,8 +19,8 @@
                         </a>
                     </span>
                 </div>
+                <select class="input-lg form-control" ng-model="vm.selectedState" ng-options="item.abbreviation as item.name for item in vm.states"></select>
             </div>
-
             <div class="col-md-6">
                 <p></p>
                 <i class="h4 center-inarea">
@@ -50,30 +50,29 @@
                             <tr>
                                 <td valign="middle">
                                     <h3>{{item.Keyword}}</h3>
-                                    <!--<h5><a href="#">Suggestions: ice cream</a></h5>-->
+                                    <h5>Affecting: {{item.State}}</h5>
                                 </td>
                                 <td>
                                     <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
                                 </td>
                                 <td valign="middle">
                                     <div class="pull-right center-inarea">
-                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death.">
+                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/R1.png" ng-show="item.HasClassI" alt="Class 1" />
                                         </a>
-                                        <a href="#" title="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.">
+                                        <a href="#" title="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/R2.png" ng-show="item.HasClassII" alt="Class 2" />
                                         </a>
-                                        <a href="#" title="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.">
-
+                                        <a href="#" title="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/R3.png" ng-show="item.HasClassIII" />
                                         </a>
-                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death.">
+                                        <a href="#" title="Dangerous or defective products that predictably could cause serious health problems or death." ng-click="vm.ViewProductDetails(item)">
                                             <img src="./img/identifiers/E.png" ng-show="item.HasEvents" alt="Event" />
                                         </a>
                                         <div class="badge badge-success" ng-show="item.IsClean">
                                             <h3>
                                                 <a href="#" title="Nothing recent found using criteria.">
-                                                    <i class="fa fa-check"></i>
+                                                    <span class="color-primary"><i class="fa fa-check"></i></span>
                                                 </a>
                                             </h3>
                                         </div>
@@ -89,67 +88,30 @@
                             </tr>
                         </table>
 
-
-
-                        <!--<div ng-show="item.HasClassI">
-
-
-                        </div>
-
-                        <div ng-show="item.HasClassII">
-
-                        </div>
-
-                        <div ng-show="item.HasClassIII">
-                            <img src="../../img/identifiers/R3.png" />
-                        </div>
-
-                        <div ng-show="item.HasEvents">
-                            <img src="../../img/identifiers/E.png" />
-                        </div>
-
-                        <div class="badge badge-success" ng-show="item.IsClean">
-                            <h3><i class="fa fa-check"></i>
-                            </h3>
-                        </div>
-
-                        <div class="badge badge-white">
-                            <h3><i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i>
-                            </h3>
-                        </div>-->
-
-
-
-
-
                     </li>
+
                 </ul>
+
             </div>
         </div>
     </div>
 
     <div class="col-md-6 animated bounceInRight" ng-init="vm.StartRSS()">
 
-        <table style="width:100%;">
-            <tr>
-                <td>
-                    <h1>Latest FDA News</h1>
-                </td>
-                <td align="right" style="text-align:right;">
-                    <div class="col-md-6" style="padding-top: 20px">
-                        <ul class="nav nav-pills" role="tablist">
-                            <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
-                            <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
-                            <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="row">
+            <h1 class="col-md-10">Latest FDA News</h1>
+            <div class="col-md-2" style="padding-top: 20px">
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation" class="active"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
+                    <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
+                    <li role="presentation"><span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
+                </ul>
+            </div>
+        </div>
 
         <ul class="rss sortable-list connectList agile-list">
 
-            <li ng-repeat="feed in vm.feeds" ng-click="vm.ViewFeed(feed)">
+            <li ng-repeat="feed in vm.feeds" ng-click="vm.ViewFeed(feed)" class="feed-element">
 
                 <div ng-class="vm.fontSizeClass" style="background-color:#FAFAFA;">
 
