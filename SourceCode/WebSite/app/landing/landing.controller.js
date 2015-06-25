@@ -19,20 +19,19 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
         $localStorage.fontSizeClass = className;
     };
 
-    if (!angular.isObject(GlobalsModule.ShoppingList)) {
-        if (angular.isString($localStorage.cart)) {
-            try {
-                GlobalsModule.ShoppingList = angular.fromJson($localStorage.cart); // Load from local storage
-            } catch (ex) {
-                GlobalsModule.ShoppingList = [];
-            }
-        } else {
-            GlobalsModule.ShoppingList = [];
+    if (angular.isString($localStorage.cart)) {
+        try {
+            vm.shoppingList = angular.fromJson($localStorage.cart); // Load from local storage
+        } catch (ex) {
+            vm.shoppingList = [];
         }
+    } else {
+        vm.shoppingList = [];
     }
 
-    vm.shoppingList = GlobalsModule.ShoppingList;
-
+    /*
+     * Load the initial page data.
+     */
     function LoadPageInfo() {
         landingservice.GetStates(
             function(result) {
@@ -49,9 +48,11 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
         );
     }
 
+    /*
+     * Workaround. For some reason the first call can be much slower so we will call it the first time 
+     * behind the scenes to make it faster when the user add an item.
+     */
     function WarmUp() {
-        // Here, lets go ahead and ping the service once. 
-        // this make all searches 10x faster as there will be no load up time.
         landingservice.GetIssues("TEST|TN",
             function(result) {
                 // Do nothing.  Just warm it up!
@@ -65,6 +66,9 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
 
     //********************************
 
+    /*
+     * Adds an item to the shipping cart as well as getting recall detail.
+     */
     vm.AddToList = function() {
 
         $localStorage.selectedState = vm.selectedState; // Remember the state that was selected.
@@ -78,7 +82,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
 
             // Check for duplicates
             vm.shoppingList.forEach(function(checkItem) {
-                if (checkItem.Keyword == value) {
+                if (checkItem.Keyword === value) {
                     alert("Duplicate (todo: change this to ui style timeout message)");
                     throw new Error("Duplicate");
                 }
@@ -106,7 +110,7 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
 
             var searchStr = value + "|" + region;
 
-            var data = landingservice.GetIssues(searchStr,
+            landingservice.GetIssues(searchStr,
                 function(result) {
 
                     // Search for the Keyword in our list.
@@ -156,37 +160,40 @@ function landingcontroller($scope, $window, $location, $localStorage, landingser
         }
     };
 
+    /*
+     * Removed a item from the shopping cart.
+     */
     vm.RemoveFromList = function(cartItem) {
-
         var itemIndex = vm.shoppingList.indexOf(cartItem);
         vm.shoppingList.splice(itemIndex, 1);
 
         $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
-
     };
 
+    /*
+     *  Navigates to details related to the selected product
+     */
     vm.ViewProductDetails = function(product) {
-
-        // set our shopping list to use later.
-        GlobalsModule.ShoppingList = vm.shoppingList;
-
         if (!product.IsClean) {
             GlobalsModule.SearchSummary = product;
             $location.path("/index/product");
         }
     };
 
+    /*
+     * Navigates to the FDA site for additional details on the selected feed.
+     */
     vm.ViewFeed = function(feed) {
         $window.open(feed.link);
     };
 
+    /*
+     * Loads the feed data.
+     */
     vm.StartRSS = function() {
-
-
         feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function(res) {
             vm.feeds = res.data.responseData.feed.entries;
             vm.IsRSSLoading = false;
         });
-
     };
-};
+}

@@ -1,6 +1,6 @@
 ﻿angular.module("TotalRecall").factory("landingservice", LandingService);
 
-function LandingService($http) {
+function LandingService($http, $log) {
 
     this.Feeds = [];
 
@@ -14,6 +14,9 @@ function LandingService($http) {
 
     ///////////////////
 
+    /*
+     * Get the issues found for an item.
+     */
     function GetIssues(searchItem, callback) {
 
         var serviceUrl = "QuickHandler.ashx?Command=GetIssues";
@@ -23,23 +26,26 @@ function LandingService($http) {
                 url: serviceUrl,
                 data: searchItem
             }).
-            success(function(data, status, headers, config) {
+            success(function(data) {
                 if (!angular.isObject(data)) return;
 
                 callback(data);
             }).
             error(function(data, status, headers, config) {
-                //$log.warn(data, status, headers, config);
+                $log.warn(data, status, headers, config);
             });
     }
 
+    /*
+     * Get a list of states.
+     */
     function GetStates(callback) {
         $http.get("json/regions.json").
-            success(function(data, status, headers, config) {
+            success(function(data) {
                 callback(data);
             }).
             error(function(data, status, headers, config) {
-                //$log.warn(data, status, headers, config);
+                $log.warn(data, status, headers, config);
             });
     }
 
@@ -56,9 +62,4 @@ function LandingService($http) {
 
         //        }
     }
-
-
-//}
-
-
 }
