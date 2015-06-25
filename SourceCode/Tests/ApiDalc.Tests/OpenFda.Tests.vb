@@ -91,6 +91,9 @@ Public Class OpenFda
         Dim result = service.ConvertStatesEnumToJson()
         Debug.Write(result("results"))
 
+        Dim tmp = result("results")
+
+       
         Assert.AreEqual(50, result.Count)
 
     End Sub
