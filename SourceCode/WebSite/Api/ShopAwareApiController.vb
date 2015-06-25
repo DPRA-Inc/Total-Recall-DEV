@@ -24,6 +24,10 @@ Namespace Api
         <Route("ProductResults/{product}/{region}")>
         Public Function ProductResults(product As String, region As String) As SearchResult
 
+            If region.ToLower.Trim = "all" Then
+                region = String.Empty
+            End If
+
             Dim wrapper As New ShopAwareService
             Dim result = wrapper.GetSearchResult(product, region)
 
@@ -34,6 +38,10 @@ Namespace Api
         <HttpGet>
         <Route("FDAResults/{product}/{region}")>
         Public Function FDAResults(product As String, region As String) As FDAResult
+
+            If region.ToLower.Trim = "all" Then
+                region = String.Empty
+            End If
 
             Dim wrapper As New ShopAwareService
             Dim result = wrapper.GetFDAResult(product, region)
