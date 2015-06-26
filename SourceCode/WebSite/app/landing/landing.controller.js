@@ -207,14 +207,6 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
     };
 
     /*
-     * Navigates to the FDA site for additional details on the selected feed.
-     */
-    vm.ViewFeed = function (feed)
-    {
-        $window.open(feed.link);
-    };
-
-    /*
      * Loads the feed data.
      */
     vm.StartRSS = function ()

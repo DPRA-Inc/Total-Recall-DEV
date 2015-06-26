@@ -13,7 +13,6 @@ Namespace DataObjects
 
         Public Property Rank As String = "events"
         Public Property IsEvent As Boolean = True
-
         Public Property PatientSex As String
         Public Property PatientAge As String
         Public Property PatientWeight As String
@@ -37,7 +36,6 @@ Namespace DataObjects
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property ReceiptDate As String
-
 
         Public Property Sender As String
         Public Property Receiver As String
