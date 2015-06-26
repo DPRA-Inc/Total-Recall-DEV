@@ -200,6 +200,7 @@
     <Content Include="js\openlayers\angular-openlayers-directive.js" />
     <Content Include="js\plugins\chartJs\angles.js" />
     <Content Include="js\plugins\chartJs\Chart.min.js" />
+    <Content Include="js\plugins\infinitescroll\ng-infinite-scroll.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-af.min.js" />
     <Content Include="js\plugins\jquery-ui\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
@@ -300,9 +301,6 @@
     <Content Include="js\plugins\peity\jquery.peity.min.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="js\plugins\slimscroll\jquery.slimscroll.min.js" />
-    <Content Include="js\plugins\virtualscroll\angular-virtual-scroll.js" />
-    <Content Include="js\plugins\virtualscroll\angular-virtual-scroll.min.js" />
-    <Content Include="js\plugins\vsrepeat\angular-vs-repeat.min.js" />
     <Content Include="js\TotalRecall.js" />
     <Content Include="js\ui-router\angular-ui-router.js" />
     <Content Include="js\ui-router\angular-ui-router.min.js" />

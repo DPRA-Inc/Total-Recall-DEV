@@ -45,11 +45,11 @@
 
                     <div class="ibox-content no-padding">
 
-                        <div style="max-height: 900px">
+                        <div >
 
-                            <ul class="sortable-list connectList agile-list" style="max-height: 900px">
+                            <ul class="sortable-list connectList agile-list" infinite-scroll="vm.DisplayNext(2)" infinite-scroll-distance="2">
 
-                                <li class="danger-element" sf-virtual-repeat="item in vm.SearchResult.Results" style="max-height: 400px">
+                                <li class="danger-element" ng-repeat="item in vm.VisibleResults">
 
                                     <div ng-hide="item.IsEvent">
                                         <h2>

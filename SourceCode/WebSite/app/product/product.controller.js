@@ -6,19 +6,16 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
     vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData = [];
+    vm.SearchSummary = $sessionStorage.SearchSummary;
+    vm.DataLoading = true;
+    vm.Markers = [];
+    vm.CurrentIndex = 0;
+    vm.VisibleResults = [];
 
+    // load last selection from local storage.
     if (angular.isString($localStorage.fontSizeClass)) {
         vm.fontSizeClass = $localStorage.fontSizeClass;
     }
-
-    vm.ChangeFontSize = function(className) {
-        vm.fontSizeClass = className;
-        $localStorage.fontSizeClass = className;
-    };
-    vm.SearchSummary = $sessionStorage.SearchSummary;
-    vm.DataLoading = true;
-
-    vm.Markers = [];
 
     // default map configuration
     angular.extend($scope, {
@@ -55,6 +52,47 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
 
     //*******************************************
 
+    /*
+     * Displays additional information about an reult item.
+     */
+    vm.ShowMoreInformation = function(item) {
+
+        GlobalsModule.SearchResultItem = item;
+
+        var modalInstance = $modal.open({
+            templateUrl: "app/product/productFullDetails.modal.html",
+            controller: "productcontroller as vm"
+
+        });
+    };
+
+    /*
+     * Used changes the fonts size.
+     */
+    vm.ChangeFontSize = function(className) {
+        vm.fontSizeClass = className;
+        $localStorage.fontSizeClass = className;
+    };
+
+    /*
+     * Used to load only visible results to increase render performance.
+     */
+    vm.DisplayNext = function(numberToLoad) {
+        for (var i = 0; i < numberToLoad; i++) {
+            if (angular.isObject(vm.SearchResult) && angular.isObject(vm.SearchResult.Results)) {
+                var allResults = vm.SearchResult.Results;
+
+                if (vm.VisibleResults.length < allResults.length) {
+                    vm.VisibleResults.push(allResults[vm.CurrentIndex]);
+                    vm.CurrentIndex++;
+                }
+            }
+        }
+    };
+
+    /*
+     * Loads the page initial data.
+     */
     function LoadPageInfo() {
 
         var productName = vm.SearchSummary.Keyword;
@@ -87,27 +125,20 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
                     });
                 }
 
-                
-                GlobalsModule.SearchResult = result;
-                vm.SearchResult = result;
-                vm.DataLoading = false;
 
+                GlobalsModule.SearchResult = result;
+
+                vm.SearchResult = result;
+                vm.DisplayNext(5);
+                vm.DataLoading = false;
             }
         );
 
     }
 
-    vm.ShowMoreInformation = function(item) {
-
-        GlobalsModule.SearchResultItem = item;
-
-        var modalInstance = $modal.open({
-            templateUrl: "app/product/productFullDetails.modal.html",
-            controller: "productcontroller as vm"
-
-        });
-    };
-
+    /*
+     * Initialize the chart.
+     */
     function LoadChartInfo() {
 
         vm.lineOptions = {

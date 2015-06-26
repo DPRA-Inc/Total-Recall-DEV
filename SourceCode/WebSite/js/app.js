@@ -5,6 +5,6 @@
         "ui.bootstrap", // Ui Bootstrap
         "ngStorage", // Local Storage
         "openlayers-directive",
-        "sf.virtualScroll"
+        "infinite-scroll"
     ]);
 })();
