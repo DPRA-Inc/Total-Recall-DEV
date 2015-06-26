@@ -41,6 +41,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
      */
     function LoadPageInfo()
     {
+                
         landingservice.GetStates(
         function (result)
         {
