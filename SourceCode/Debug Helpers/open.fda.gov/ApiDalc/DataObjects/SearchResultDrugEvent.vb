@@ -10,6 +10,8 @@ Namespace DataObjects
     Public Class SearchResultDrugEvent
 
         Public Property Classification As String = "Event"
+
+        Public Property Rank As String = "events"
         Public Property IsEvent As Boolean = True
 
         Public Property PatientSex As String

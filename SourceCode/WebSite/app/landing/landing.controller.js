@@ -146,7 +146,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
                                 product.HasEvents = true;
                                 product.EventCount = result.EventCount;
                                 product.IsClean = false;
-                                product.Rank = "success";
+                                product.Rank = "events";
                             }
 
                             if (result.ClassIIICount > 0)
@@ -154,7 +154,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
                                 product.HasClassIII = true;
                                 product.ClassIIICount = result.ClassIIICount;
                                 product.IsClean = false;
-                                product.Rank = "info";
+                                product.Rank = "classiii";
                             }
 
                             if (result.ClassIICount > 0)
@@ -162,7 +162,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
                                 product.HasClassII = true;
                                 product.ClassIICount = result.ClassIICount;
                                 product.IsClean = false;
-                                product.Rank = "warning";
+                                product.Rank = "classii";
                             }
 
                             if (result.ClassICount > 0)
@@ -170,7 +170,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
                                 product.HasClassI = true;
                                 product.ClassICount = result.ClassICount;
                                 product.IsClean = false;
-                                product.Rank = "danger";
+                                product.Rank = "classi";
                             }
 
                             product.IsLoading = false;
