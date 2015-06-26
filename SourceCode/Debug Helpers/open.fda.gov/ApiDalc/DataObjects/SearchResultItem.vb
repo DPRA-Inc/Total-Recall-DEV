@@ -16,12 +16,13 @@ Namespace DataObjects
                 Return Replace(Classification, " ", "").ToLower
             End Get
             Set(value As String)
-
             End Set
         End Property
+
         Public Property IsEvent As Boolean = False
 
         Public Property DateStarted As String 'recall_initiation_date
+
         Public Property Content As String ' reason_for_recall  + code_info
         Public ReadOnly Property ContentTruncated As String
             Get

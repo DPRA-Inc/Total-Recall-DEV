@@ -145,7 +145,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
         //var productName = vm.SearchSummary.Keyword;
         //var region = vm.SearchSummary.State;
 
-        //var data = productservice.GetReportData(productName, keyword);
+        //var data = productservice.GetReportData(productName, region);
 
 
 
