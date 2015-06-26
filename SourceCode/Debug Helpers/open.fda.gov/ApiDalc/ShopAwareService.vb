@@ -283,107 +283,107 @@ Public Class ShopAwareService
 
         Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
 
-        Dim classificationList As New List(Of String)({"Class I", "Class II", "Class III"})
+        '' Dim classificationList As New List(Of String)({"Class I", "Class II", "Class III"})
 
         For Each endPointType In endPointList
 
-            For Each cc In classificationList
+            ''  For Each cc In classificationList
 
-                Dim filterList As New List(Of String)({state})
+            Dim filterList As New List(Of String)({state})
 
-                'Limit first query to a 1 year window
+            'Limit first query to a 1 year window
 
-                Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-                Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+            Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+            Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
+            _fda.ResetSearch()
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+            '' _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+
+            apiUrl = _fda.BuildUrl(endPointType, resultSize)
+
+            searchResults = _fda.Execute(apiUrl)
+            OpenFdaApiHits += 1
+
+            Dim dataSetSize As Integer = _fda.GetMetaResults().Total()
+
+            ' If there was not data in the 1 yr window the get all results.
+            ' Check a 2 yr window for results.
+            If dataSetSize = 0 Then
+
+
+                'beginDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+                endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
 
                 _fda.ResetSearch()
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
                 _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
-                _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+                ''  _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
                 apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
                 searchResults = _fda.Execute(apiUrl)
                 OpenFdaApiHits += 1
 
-                Dim dataSetSize As Integer = _fda.GetMetaResults().Total()
+                dataSetSize = _fda.GetMetaResults().Total()
 
-                ' If there was not data in the 1 yr window the get all results.
-                ' Check a 2 yr window for results.
-                If dataSetSize = 0 Then
+            End If
 
+            ' If there was not data in the 2 yr window the get all results.
+            If dataSetSize = 0 Then
 
-                    'beginDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-                    endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
+                _fda.ResetSearch()
+                _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
+                _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
+                ''  _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
-                    _fda.ResetSearch()
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+                apiUrl = _fda.BuildUrl(endPointType, resultSize)
 
-                    apiUrl = _fda.BuildUrl(endPointType, resultSize)
+                searchResults = _fda.Execute(apiUrl)
+                OpenFdaApiHits += 1
 
-                    searchResults = _fda.Execute(apiUrl)
-                    OpenFdaApiHits += 1
+                dataSetSize = _fda.GetMetaResults().Total()
 
-                    dataSetSize = _fda.GetMetaResults().Total()
+            End If
 
-                End If
+            ' if total records int the Search request exceeds the max of 100 records per request
+            ' then page through the data
+            ' LIMIT the number of page request to a MAX of 5
+            Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+            If pageLimit > 5 Then
+                pageLimit = 5
+            End If
 
-                ' If there was not data in the 2 yr window the get all results.
-                If dataSetSize = 0 Then
+            Dim skipValue As Integer = 0
+            If dataSetSize > 0 Then
 
-                    _fda.ResetSearch()
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-                    _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
+                Do
+                    pageLimit -= 1
 
-                    apiUrl = _fda.BuildUrl(endPointType, resultSize)
+                    If Not String.IsNullOrEmpty(searchResults) Then
 
-                    searchResults = _fda.Execute(apiUrl)
-                    OpenFdaApiHits += 1
+                        Dim result As List(Of ResultRecall) = ResultRecall.CnvJsonDataToList(searchResults)
+                        resultList.AddRange(result)
 
-                    dataSetSize = _fda.GetMetaResults().Total()
+                    End If
 
-                End If
+                    If pageLimit > 0 Then
 
-                ' if total records int the Search request exceeds the max of 100 records per request
-                ' then page through the data
-                ' LIMIT the number of page request to a MAX of 5
-                Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
-                If pageLimit > 5 Then
-                    pageLimit = 5
-                End If
+                        skipValue += 100
+                        Dim newApiUrl As String = apiUrl.Replace("&limit=100", String.Format("&limit=100&skip={0}", skipValue))
+                        searchResults = _fda.Execute(apiUrl)
+                        OpenFdaApiHits += 1
 
-                Dim skipValue As Integer = 0
-                If dataSetSize > 0 Then
+                    End If
 
-                    Do
-                        pageLimit -= 1
+                Loop Until pageLimit = 0
 
-                        If Not String.IsNullOrEmpty(searchResults) Then
+            End If
 
-                            Dim result As List(Of ResultRecall) = ResultRecall.CnvJsonDataToList(searchResults)
-                            resultList.AddRange(result)
-
-                        End If
-
-                        If pageLimit > 0 Then
-
-                            skipValue += 100
-                            Dim newApiUrl As String = apiUrl.Replace("&limit=100", String.Format("&limit=100&skip={0}", skipValue))
-                            searchResults = _fda.Execute(apiUrl)
-                            OpenFdaApiHits += 1
-
-                        End If
-
-                    Loop Until pageLimit = 0
-
-                End If
-
-            Next
+            ''Next
 
         Next
 
