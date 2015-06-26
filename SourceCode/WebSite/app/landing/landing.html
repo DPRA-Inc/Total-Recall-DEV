@@ -10,7 +10,7 @@
                 <p></p>
 
                 <div class="input-group">
-                    <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" ng-enter="vm.AddToList()"/>
+                    <input data-ng-model="vm.textValue" type="text" placeholder="Type here to add to the list" class="input-lg form-control" ng-enter="vm.AddToList()" />
                     <span class="input-group-btn">
                         <a href="#" title="Click to add search term to shopping list.">
                             <button type="button" class="btn btn-lg btn-primary" ng-click="vm.AddToList()">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6" style="z-index:73734;">
         <div class="ibox animated bounceInLeft">
             <div class="ibox-content">
 
@@ -55,18 +55,19 @@
                                 <td>
                                     <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
                                 </td>
-                                <td valign="middle">
+                                <td valign="middle" align="right">
 
-                                    <div class="pull-right center-inarea">
+                                    <div class="">
 
-                                        <img src="./img/identifiers/classi.png" ng-show="item.HasClassI" alt="Class 1" style="width:48px;height:48px;" tooltip-placement="bottom" tooltip="Dangerous or defective products that predictably could cause serious health problems or death." />
-                                        <img src="./img/identifiers/classii.png" ng-show="item.HasClassII" alt="Class 2" style="width:48px;height:48px;" tooltip-placement="bottom" tooltip="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." />
-                                        <img src="./img/identifiers/classiii.png" ng-show="item.HasClassIII" alt="Class 3" style="width:48px;height:48px;" tooltip-placement="bottom" tooltip="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." />
-                                        <img src="./img/identifiers/events.png" ng-show="item.HasEvents" alt="Event" style="width:48px;height:48px;" tooltip-placement="bottom" tooltip="Events occured with a drug or device." />
-                                        <img src="./img/identifiers/ok.png" ng-show="item.IsClean" alt="Ok" style="width:48px;height:48px;" tooltip-placement="bottom" tooltip="Nothing recent found for this item." />
-                                        <button class="btn btn-danger btn-circle btn-lg btn-outline" type="button" style="width:48px;height:48px;" ng-click="vm.RemoveFromList(item)" tooltip-placement="bottom" tooltip="Remove item from shopping list.">
+                                        <img src="./img/identifiers/classi.png" ng-show="item.HasClassI" alt="Class 1" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Dangerous or defective products that predictably could cause serious health problems or death." />
+                                        <img src="./img/identifiers/classii.png" ng-show="item.HasClassII" alt="Class 2" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." />
+                                        <img src="./img/identifiers/classiii.png" ng-show="item.HasClassIII" alt="Class 3" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." />
+                                        <img src="./img/identifiers/events.png" ng-show="item.HasEvents" alt="Event" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Events occured with a drug or device." />
+                                        <img src="./img/identifiers/ok.png" ng-show="item.IsClean" alt="Ok" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Nothing recent found for this item." />
+                                        <button class="btn btn-white btn-lg" type="button" style="width:48px;height:48px;" ng-click="vm.RemoveFromList(item)" tooltip-placement="right" tooltip="Remove item from shopping list.">
                                             <i class="fa fa-close"></i>
                                         </button>
+
                                         <!--<div class="badge badge-white">
                                             <h3>
                                                 <a href="#" title="Remove item from shopping list.">
