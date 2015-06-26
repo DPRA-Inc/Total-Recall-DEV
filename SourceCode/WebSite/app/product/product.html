@@ -49,17 +49,11 @@
 
                             <ul class="sortable-list connectList agile-list" infinite-scroll="vm.DisplayNext(2)" infinite-scroll-distance="2">
 
-                                <li class="{{item.Rank}}-element" ng-repeat="item in vm.VisibleResults">
+                                <li class="{{item.Rank}}-element" ng-repeat="item in vm.VisibleResults" ng-click="vm.ShowMoreInformation(item)">
 
                                     <div ng-hide="item.IsEvent">
 
                                         <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
-                                      
-                                          <!--<h2>
-                                            <strong>
-                                                <i>{{item.Classification}}</i>{{item.Rank}}
-                                            </strong>
-                                        </h2>-->
 
                                         <p>
                                             <strong>{{item.ProductDescription}}</strong>
@@ -67,29 +61,21 @@
 
                                         <p>{{item.ContentTruncated}}</p>
 
-                                        <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
-
                                         <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
                                     </div>
 
                                     <div ng-show="item.IsEvent">
-                                        
+
                                         <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
-                                        <!--<h2>
-                                            <strong>
-                                                <i>{{item.Classification}}</i>
-                                            </strong>
-                                        </h2>-->
-
                                         <p>
-                                             <strong>Seriousness: {{item.Seriousness}}</strong>
+                                            <strong>Seriousness: {{item.Seriousness}}</strong>
                                         </p>
 
                                         <p>Source: {{item.PrimarySource}}</p>
 
-                                        <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
+                                        <!--<div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>-->
 
                                         <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 

@@ -111,6 +111,7 @@
     <Content Include="app\notify\notify.service.js" />
     <Content Include="app\privacy\privacy.controller.js" />
     <Content Include="app\privacy\privacy.html" />
+    <Content Include="app\product\productFullDetails.modal.controller.js" />
     <Content Include="app\product\productFullDetails.modal.html" />
     <Content Include="app\product\product.controller.js" />
     <Content Include="app\product\product.html" />
