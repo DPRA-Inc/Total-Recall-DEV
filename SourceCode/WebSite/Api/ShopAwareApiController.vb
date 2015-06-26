@@ -14,7 +14,7 @@ Namespace Api
         Public Function QuickSearch(product As String, region As String) As SearchSummary
 
             Dim wrapper As New ShopAwareService
-            Dim result = wrapper.GetSearchSummary(product, region)
+            Dim result As SearchSummary = wrapper.GetSearchSummary(product, region)
 
             Return result
 
@@ -29,7 +29,7 @@ Namespace Api
             End If
 
             Dim wrapper As New ShopAwareService
-            Dim result = wrapper.GetSearchResult(product, region)
+            Dim result As SearchResult = wrapper.GetSearchResult(product, region)
 
             Return result
 
@@ -44,7 +44,7 @@ Namespace Api
             End If
 
             Dim wrapper As New ShopAwareService
-            Dim result = wrapper.GetFDAResult(product, region)
+            Dim result As FDAResult = wrapper.GetFDAResult(product, region)
 
             Return result
 
