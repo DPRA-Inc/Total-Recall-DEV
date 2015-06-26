@@ -9,12 +9,26 @@ Namespace Api
     Public Class ShopAwareApiController
         Inherits ApiController
 
+        Private Property CacheExpirationDays As Integer = 7
+
         <HttpGet>
         <Route("QuickSearch/{product}/{region}")>
         Public Function QuickSearch(product As String, region As String) As SearchSummary
 
-            Dim wrapper As New ShopAwareService
-            Dim result As SearchSummary = wrapper.GetSearchSummary(product, region)
+            Dim cacheKey As String = String.Concat(product.ToLower, region.ToUpper, "QuickSearch")
+
+            ' attempt to load the object from the cache
+            Dim result As SearchSummary = HttpRuntime.Cache(cacheKey)
+
+            If result Is Nothing Then
+
+                Dim wrapper As New ShopAwareService
+                result = wrapper.GetSearchSummary(product, region)
+
+                ' add the object to the cache
+                HttpRuntime.Cache.Insert(cacheKey, result, Nothing, DateTime.UtcNow.AddDays(CacheExpirationDays), TimeSpan.Zero)
+
+            End If
 
             Return result
 
@@ -24,12 +38,24 @@ Namespace Api
         <Route("ProductResults/{product}/{region}")>
         Public Function ProductResults(product As String, region As String) As SearchResult
 
-            If region.ToLower.Trim = "all" Then
-                region = String.Empty
-            End If
+            Dim cacheKey As String = String.Concat(product.ToLower, region.ToUpper, "QuickSearch")
 
-            Dim wrapper As New ShopAwareService
-            Dim result As SearchResult = wrapper.GetSearchResult(product, region)
+            ' attempt to load the object from the cache
+            Dim result As SearchResult = HttpRuntime.Cache(cacheKey)
+
+            If result Is Nothing Then
+
+                If region.ToLower.Trim = "all" Then
+                    region = String.Empty
+                End If
+
+                Dim wrapper As New ShopAwareService
+                result = wrapper.GetSearchResult(product, region)
+
+                ' add the object to the cache
+                HttpRuntime.Cache.Insert(cacheKey, result, Nothing, DateTime.UtcNow.AddDays(CacheExpirationDays), TimeSpan.Zero)
+
+            End If
 
             Return result
 
@@ -37,14 +63,27 @@ Namespace Api
 
         <HttpGet>
         <Route("FDAResults/{product}/{region}")>
-        Public Function FDAResults(product As String, region As String) As FDAResult
+        Public Function FdaResults(product As String, region As String) As FDAResult
 
-            If region.ToLower.Trim = "all" Then
-                region = String.Empty
+            Dim cacheKey As String = String.Concat(product.ToLower, region.ToUpper, "FdaResults")
+
+            ' attempt to load the object from the cache
+            Dim result As FDAResult = HttpRuntime.Cache(cacheKey)
+
+            If result Is Nothing Then
+
+                If region.ToLower.Trim = "all" Then
+                    region = String.Empty
+                End If
+
+                Dim wrapper As New ShopAwareService
+
+                result = wrapper.GetFDAResult(product, region)
+
+                ' add the object to the cache
+                HttpRuntime.Cache.Insert(cacheKey, result, Nothing, DateTime.UtcNow.AddDays(CacheExpirationDays), TimeSpan.Zero)
+
             End If
-
-            Dim wrapper As New ShopAwareService
-            Dim result As FDAResult = wrapper.GetFDAResult(product, region)
 
             Return result
 
