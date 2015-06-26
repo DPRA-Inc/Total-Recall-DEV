@@ -98,11 +98,11 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
      */
     function LoadPageInfo() {
 
+        var scrubText = vm.SearchSummary.ScrubedText;
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
-
       
-        productservice.GetFDAResults(productName, region,
+        productservice.GetFDAResults(scrubText, region,
             function(result) {
 
                 if (angular.isObject(result) && angular.isObject(result.MapObjects)) {
