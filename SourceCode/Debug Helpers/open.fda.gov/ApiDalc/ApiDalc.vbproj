@@ -78,6 +78,7 @@
     <Compile Include="DataObjects\PatientData.vb" />
     <Compile Include="DataObjects\ReactionData.vb" />
     <Compile Include="DataObjects\RecallSearchResultData.vb" />
+    <Compile Include="DataObjects\ReportData.vb" />
     <Compile Include="DataObjects\ResultRecall.vb" />
     <Compile Include="DataObjects\SearchResult.vb" />
     <Compile Include="DataObjects\SearchResultDrugEvent.vb" />

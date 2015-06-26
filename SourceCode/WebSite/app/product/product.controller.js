@@ -162,9 +162,9 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
             datasets: [
                 {
                     label: "Events in the Year",
-                    fillColor: "rgba(220,220,220,0.5)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
+                    fillColor: "rgba(26,179,148,0.5)",
+                    strokeColor: "rgba(26,179,148,0.7)",
+                    pointColor: "rgba(26,179,148,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(220,220,220,1)",
@@ -176,50 +176,14 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
 
-
-
         var data = productservice.GetReportData(productName, region,
             function (data) {
 
-                //vm.lineData.datasets.data = data;
-
+                vm.lineData.labels = data.Labels;
+                vm.lineData.datasets[0].data = data.Data;
                 vm.IsChartReady = true;
             }
         );
-
-
-
-
-     
-
- 
-
-
-        //vm.lineData = {
-        //    labels: ["January", "February", "March", "April", "May", "June", "July"],
-        //    datasets: [
-        //        {
-        //            label: "Example dataset",
-        //            fillColor: "rgba(220,220,220,0.5)",
-        //            strokeColor: "rgba(220,220,220,1)",
-        //            pointColor: "rgba(220,220,220,1)",
-        //            pointStrokeColor: "#fff",
-        //            pointHighlightFill: "#fff",
-        //            pointHighlightStroke: "rgba(220,220,220,1)",
-        //            data: [65, 59, 80, 81, 56, 55, 40]
-        //        },
-        //        {
-        //            label: "Example dataset",
-        //            fillColor: "rgba(26,179,148,0.5)",
-        //            strokeColor: "rgba(26,179,148,0.7)",
-        //            pointColor: "rgba(26,179,148,1)",
-        //            pointStrokeColor: "#fff",
-        //            pointHighlightFill: "#fff",
-        //            pointHighlightStroke: "rgba(26,179,148,1)",
-        //            data: [28, 48, 40, 19, 86, 27, 90]
-        //        }
-        //    ]
-        //};
 
     }
 }

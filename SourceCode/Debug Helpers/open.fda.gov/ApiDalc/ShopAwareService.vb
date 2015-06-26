@@ -126,15 +126,11 @@ Public Class ShopAwareService
     ''' <param name="state"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As Dictionary(Of String, String)
+    Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As ReportData
 
         _fda = New OpenFda(_restClient)
 
-        Dim results As Dictionary(Of String, String)
-
-        results = _fda.GetReportDataRecallReasonByReportDate(keyword, state)
-
-        Return results
+        Return _fda.GetReportDataRecallReasonByReportDate(keyword, state)
 
     End Function
 

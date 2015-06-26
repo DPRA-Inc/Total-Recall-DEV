@@ -229,11 +229,14 @@ Public Class OpenFda
 
     End Function
 
-    Public Function GetReportDataRecallReasonByReportDate(ByVal keyWord As String, ByVal state As String) As Dictionary(Of String, String)
+    Public Function GetReportDataRecallReasonByReportDate(ByVal keyWord As String, ByVal state As String) As ReportData
 
         Dim resutls As New Dictionary(Of String, String)
-        Dim reportCount As New Dictionary(Of Date, Integer)
+        Dim reportCount As New Dictionary(Of String, Integer)
         Dim url As String = String.Empty
+
+        Dim lowestMonth As Integer = 12
+        Dim highestMonth As Integer = 1
 
         Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
 
@@ -250,7 +253,6 @@ Public Class OpenFda
             AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
             AddCountField("report_date")
 
-
             url = BuildUrl(endPointType, 0)
 
             Dim searchResults As String = Execute(url)
@@ -265,11 +267,16 @@ Public Class OpenFda
 
                     tmpDate = DateTime.ParseExact(itm("time"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
-                    If reportCount.ContainsKey(tmpDate) Then
-                        reportCount(tmpDate) += CInt(itm("count"))
+                    Dim label As String = tmpDate.Month
+
+                    If reportCount.ContainsKey(label) Then
+                        reportCount(label) += CInt(itm("count"))
                     Else
-                        reportCount.Add(tmpDate, CInt(itm("count")))
+                        reportCount.Add(label, CInt(itm("count")))
                     End If
+
+                    If lowestMonth > tmpDate.Month Then lowestMonth = tmpDate.Month
+                    If highestMonth < tmpDate.Month Then highestMonth = tmpDate.Month
 
                 Next
 
@@ -277,12 +284,41 @@ Public Class OpenFda
 
         Next
 
+        Dim final As New ReportData
 
-        For Each itm As KeyValuePair(Of Date, Integer) In reportCount
-            resutls.Add(itm.Key.ToString, itm.Value.ToString)
+        For i As Integer = lowestMonth To highestMonth
+
+            Dim count As Integer
+
+            If reportCount.ContainsKey(i.ToString) Then
+                count = reportCount(i.ToString)
+            Else
+                count = 0
+            End If
+
+            Dim label As String = String.Empty
+
+            Select Case i
+                Case 1 : label = "January"
+                Case 2 : label = "February"
+                Case 3 : label = "March"
+                Case 4 : label = "April"
+                Case 5 : label = "May"
+                Case 6 : label = "June"
+                Case 7 : label = "July"
+                Case 8 : label = "August"
+                Case 9 : label = "September"
+                Case 10 : label = "October"
+                Case 11 : label = "November"
+                Case 12 : label = "December"
+            End Select
+
+            final.Labels.Add(label)
+            final.Data.Add(count)
+
         Next
 
-        Return resutls
+        Return final
 
     End Function
 

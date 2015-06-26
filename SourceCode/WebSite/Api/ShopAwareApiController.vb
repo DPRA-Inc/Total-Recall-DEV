@@ -104,10 +104,10 @@ Namespace Api
 
         <HttpGet>
         <Route("GetReportData/{product}/{region}")>
-        Public Function GetReportData(product As String, region As String) As Dictionary(Of String, String)
+        Public Function GetReportData(product As String, region As String) As ReportData
 
             Dim service As New ShopAwareService
-            Dim data As Dictionary(Of String, String) = service.GetReportDataItemByRegion(product, region)
+            Dim data As ReportData = service.GetReportDataItemByRegion(product, region)
 
             Return data
 
