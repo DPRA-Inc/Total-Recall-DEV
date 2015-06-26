@@ -421,10 +421,30 @@ Public Class OpenFda
 
         ' Add Filter to KeyWord List
         Dim keyword As String = String.Empty
+        Dim keywordToRemove As String() = {"null", "all"}
 
         For indx As Integer = 0 To filters.Count - 1
+
             filters(indx) = RemoveSpecialCharactersFromKeyword(filters(indx))
+
+            If keywordToRemove.Contains(filters(indx).ToLower) Then
+                filters(indx) = String.Empty
+            End If
+
         Next
+
+        Dim tmpFilters = (From el In filters Where el.Length > 0 Select el).ToList()
+
+        If Not tmpFilters.Count = filters.Count Then
+
+            filters.Clear()
+            filters.AddRange(tmpFilters)
+
+        End If
+
+        If filters.Count = 0 Then
+            Return String.Empty
+        End If
 
         For Each itm In filters
             keyword += itm.ToLower & ","
