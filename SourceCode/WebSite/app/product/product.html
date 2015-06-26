@@ -122,11 +122,14 @@
 
                     <li class="feed-element">
 
-                        <div>
+                        <div ng-show="vm.IsChartReady">
+
+                        </div>
+                        <div ng-show ="vm.IsChartReady">
 
                             <canvas class="ng-isolate-scope" style="height: 480px; width: 100%;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
 
-                        </div>
+                        </divng-show>
 
                     </li>
 
