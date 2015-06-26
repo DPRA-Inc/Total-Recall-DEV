@@ -286,37 +286,37 @@ Public Class OpenFda
 
         Dim final As New ReportData
 
-        For i As Integer = lowestMonth To highestMonth
+        'For i As Integer = lowestMonth To highestMonth
 
-            Dim count As Integer
+        '    Dim count As Integer
 
-            If reportCount.ContainsKey(i.ToString) Then
-                count = reportCount(i.ToString)
-            Else
-                count = 0
-            End If
+        '    If reportCount.ContainsKey(i.ToString) Then
+        '        count = reportCount(i.ToString)
+        '    Else
+        '        count = 0
+        '    End If
 
-            Dim label As String = String.Empty
+        '    Dim label As String = String.Empty
 
-            Select Case i
-                Case 1 : label = "January"
-                Case 2 : label = "February"
-                Case 3 : label = "March"
-                Case 4 : label = "April"
-                Case 5 : label = "May"
-                Case 6 : label = "June"
-                Case 7 : label = "July"
-                Case 8 : label = "August"
-                Case 9 : label = "September"
-                Case 10 : label = "October"
-                Case 11 : label = "November"
-                Case 12 : label = "December"
-            End Select
+        '    Select Case i
+        '        Case 1 : label = "January"
+        '        Case 2 : label = "February"
+        '        Case 3 : label = "March"
+        '        Case 4 : label = "April"
+        '        Case 5 : label = "May"
+        '        Case 6 : label = "June"
+        '        Case 7 : label = "July"
+        '        Case 8 : label = "August"
+        '        Case 9 : label = "September"
+        '        Case 10 : label = "October"
+        '        Case 11 : label = "November"
+        '        Case 12 : label = "December"
+        '    End Select
 
-            final.Labels.Add(label)
-            final.Data.Add(count)
+        '    final.Labels.Add(label)
+        '    final.Data.Add(count)
 
-        Next
+        'Next
 
         Return final
 

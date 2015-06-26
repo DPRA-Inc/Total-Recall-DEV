@@ -61,12 +61,17 @@ Public Class ShopAwareService
 
         Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
+        Dim graphList As New Dictionary(Of String, List(Of ReportData))
+
+        graphList.Add("class1", New List(Of ReportData))
+        graphList.Add("class2", New List(Of ReportData))
+        graphList.Add("class3", New List(Of ReportData))
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
 
         For Each itm As ResultRecall In tmp
 
-            ProcessResultRecordForMapData(itm, mapList)
+            ProcessResultRecordForData(itm, mapList)
 
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
@@ -158,6 +163,8 @@ Public Class ShopAwareService
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
 
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
+        
+        Dim graphData As New ReportData
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
 
@@ -165,7 +172,7 @@ Public Class ShopAwareService
 
         For Each itm As ResultRecall In tmp
 
-            ProcessResultRecordForMapData(itm, mapList)
+            ProcessResultRecordForData(itm, mapList)
 
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
@@ -192,9 +199,83 @@ Public Class ShopAwareService
 
             searchResultLocal.Results.Add(tmpSearchResultItem)
 
+            Dim dateForReport As String = tmpReportDate.ToString("MMyyyy")
+            Dim found As Boolean = False
+
+            Select Case itm.Classification
+
+                Case "Class I"
+
+                    For i As Integer = 0 To graphData.Labels.Count - 1
+
+                        If graphData.Labels(i) = dateForReport Then
+
+                            found = True
+                            graphData.Data1(i) += 1
+
+                        End If
+
+                    Next
+
+                    If Not found Then
+
+                        graphData.Labels.Add(dateForReport)
+                        graphData.Data1.Add(1)
+                        graphData.Data2.Add(0)
+                        graphData.Data3.Add(0)
+
+                    End If
+
+                Case "Class II"
+
+                    For i As Integer = 0 To graphData.Labels.Count - 1
+
+                        If graphData.Labels(i) = dateForReport Then
+
+                            found = True
+                            graphData.Data2(i) += 1
+
+                        End If
+
+                    Next
+
+                    If Not found Then
+
+                        graphData.Labels.Add(dateForReport)
+                        graphData.Data1.Add(0)
+                        graphData.Data2.Add(1)
+                        graphData.Data3.Add(0)
+
+                    End If
+
+                Case "Class III"
+
+                    For i As Integer = 0 To graphData.Labels.Count - 1
+
+                        If graphData.Labels(i) = dateForReport Then
+
+                            found = True
+                            graphData.Data3(i) += 1
+
+                        End If
+
+                    Next
+
+                    If Not found Then
+
+                        graphData.Labels.Add(dateForReport)
+                        graphData.Data1.Add(0)
+                        graphData.Data2.Add(0)
+                        graphData.Data3.Add(1)
+
+                    End If
+
+            End Select
+
         Next
 
         searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
+        searchResultLocal.GraphObjects = graphData
 
         ' Lets Get the Events And Mix them In.
         Dim drugee As New OpenFda
@@ -212,7 +293,6 @@ Public Class ShopAwareService
         Return searchResultLocal
 
     End Function
-
 
     Public Function GetFeatureCollection() As List(Of FeatureObject)
 
@@ -574,7 +654,7 @@ Public Class ShopAwareService
 
     End Sub
 
-    Private Sub ProcessResultRecordForMapData(data As ResultRecall, list As Dictionary(Of String, SearchResultMapData))
+    Private Sub ProcessResultRecordForData(data As ResultRecall, list As Dictionary(Of String, SearchResultMapData))
 
         Dim check As String = data.Distribution_Pattern
         Dim states As List(Of String) = System.Enum.GetNames(GetType(States)).ToList

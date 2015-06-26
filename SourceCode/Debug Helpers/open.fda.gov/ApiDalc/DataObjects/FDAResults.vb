@@ -8,6 +8,8 @@
 
         Public Property MapObjects As List(Of SearchResultMapData)
 
+        Public Property GraphObjects As ReportData
+
     End Class
 
 End Namespace
