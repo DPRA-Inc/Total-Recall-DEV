@@ -98,7 +98,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
             // Check for duplicates
             vm.shoppingList.forEach(function (checkItem)
             {
-                if (checkItem.Keyword === value)
+                if ((checkItem.Keyword === value) && (checkItem.State === region))
                 {
                     alert("Duplicate (todo: change this to ui style timeout message)");
                     throw new Error("Duplicate");
