@@ -1,5 +1,22 @@
 /*@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");*/
 
+.tkwrapper {
+	min-height:100%;
+	position:relative;
+}
+
+.tkcontent {
+	padding-bottom:30px; /* match height of tkfooter element */
+}
+
+.tkfooter {
+	width:100%;
+	height:30px;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
 .viewport {
   white-space: nowrap;
 }
