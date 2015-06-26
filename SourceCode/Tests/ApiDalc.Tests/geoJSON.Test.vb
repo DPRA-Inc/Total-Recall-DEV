@@ -6,7 +6,7 @@ Imports NUnit.Framework
 #End Region
 
 <TestFixture()>
-Public Class geoJSON
+Public Class GeoJson
 
     <TestCase()>
     Public Sub ReadData_Nothing()
