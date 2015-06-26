@@ -42,12 +42,6 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
         }
     });
 
-    if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
-    vm.SearchResult = GlobalsModule.SearchResult;
-
-    if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
-    vm.SearchResultItem = GlobalsModule.SearchResultItem;
-
     LoadPageInfo();
     LoadChartInfo();
 
@@ -57,13 +51,14 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
      * Displays additional information about an reult item.
      */
     vm.ShowMoreInformation = function(item) {
-
-        GlobalsModule.SearchResultItem = item;
-
-        var modalInstance = $modal.open({
+        $modal.open({
             templateUrl: "app/product/productFullDetails.modal.html",
-            controller: "productcontroller as vm"
-
+            controller: "productdialogcontroller as vm",
+            resolve: {
+                item: function () {
+                    return item;
+                }
+            }
         });
     };
 
@@ -125,9 +120,6 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
                         );
                     });
                 }
-
-
-                GlobalsModule.SearchResult = result;
 
                 vm.SearchResult = result;
                 vm.DisplayNext(5);
