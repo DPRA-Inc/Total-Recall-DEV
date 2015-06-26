@@ -126,10 +126,10 @@
     <Content Include="img\FdaLogo.png" />
     <Content Include="img\GroceryStoresConsumers.jpg" />
     <Content Include="img\HomeTriptych1920.fw.fixed.jpg" />
-    <Content Include="img\identifiers\E.png" />
-    <Content Include="img\identifiers\R1.png" />
-    <Content Include="img\identifiers\R2.png" />
-    <Content Include="img\identifiers\R3.png" />
+    <Content Include="img\identifiers\events.png" />
+    <Content Include="img\identifiers\classi.png" />
+    <Content Include="img\identifiers\classii.png" />
+    <Content Include="img\identifiers\classiii.png" />
     <Content Include="img\mapIcon\1.png" />
     <Content Include="img\mapIcon\10.png" />
     <Content Include="img\mapIcon\11.png" />

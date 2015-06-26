@@ -52,11 +52,14 @@
                                 <li class="{{item.Rank}}-element" ng-repeat="item in vm.VisibleResults">
 
                                     <div ng-hide="item.IsEvent">
-                                        <h2>
+
+                                        <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
+                                      
+                                          <!--<h2>
                                             <strong>
-                                                <i>{{item.Classification}}</i>
+                                                <i>{{item.Classification}}</i>{{item.Rank}}
                                             </strong>
-                                        </h2>
+                                        </h2>-->
 
                                         <p>
                                             <strong>{{item.ProductDescription}}</strong>
@@ -71,14 +74,17 @@
                                     </div>
 
                                     <div ng-show="item.IsEvent">
-                                        <h2>
+                                        
+                                        <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
+
+                                        <!--<h2>
                                             <strong>
                                                 <i>{{item.Classification}}</i>
                                             </strong>
-                                        </h2>
+                                        </h2>-->
 
                                         <p>
-                                            <strong>Seriousness: {{item.Seriousness}}</strong>
+                                             <strong>Seriousness: {{item.Seriousness}}</strong>
                                         </p>
 
                                         <p>Source: {{item.PrimarySource}}</p>
@@ -86,6 +92,7 @@
                                         <div class="pull-right btn btn-xs btn-white" ng-click="vm.ShowMoreInformation(item)">More Information</div>
 
                                         <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
                                     </div>
 
 
