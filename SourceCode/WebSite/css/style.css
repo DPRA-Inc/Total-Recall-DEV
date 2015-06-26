@@ -1,4 +1,9 @@
 /*@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");*/
+select::-ms-expand {
+            width:12px;
+            border:none;
+            background:#fff;
+        }
 
 .tkwrapper {
 	min-height:100%;
@@ -20,6 +25,7 @@
 .viewport {
   white-space: nowrap;
 }
+
 .viewport.real,.viewport.slice,.viewport.virtual{
   max-height: 100px;
 }
