@@ -532,12 +532,18 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.Region
 
-                        If Not (String.IsNullOrEmpty(tmp) OrElse tmp = "null" OrElse tmp = "All") Then
+                        If (String.IsNullOrEmpty(tmp) OrElse tmp = "null" OrElse tmp = "All") Then
 
                             'param += "country:" & tmp
                             param += "(state:(" & tmp & ")"
                             param += "+"
                             param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
+
+                        Else
+
+                            param += "(state:(" & tmp & ")"
+                            param += "+"
+                            param += "distribution_pattern:(" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
                         End If
 

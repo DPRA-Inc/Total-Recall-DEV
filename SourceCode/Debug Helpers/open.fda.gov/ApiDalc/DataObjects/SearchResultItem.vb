@@ -10,6 +10,15 @@ Namespace DataObjects
     Public Class SearchResultItem
 
         Public Property Classification As String
+
+        Public Property Rank As String
+            Get
+                Return Replace(Classification, " ", "").ToLower
+            End Get
+            Set(value As String)
+
+            End Set
+        End Property
         Public Property IsEvent As Boolean = False
 
         Public Property DateStarted As String 'recall_initiation_date

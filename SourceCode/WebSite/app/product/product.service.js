@@ -5,7 +5,8 @@ function ProductService($http)
 
     var service = {
         GetProductResults: GetProductResults,
-        GetFDAResults: GetFDAResults       
+        GetFDAResults: GetFDAResults,
+        GetReportData: GetReportData
     };
 
     return service;
@@ -57,8 +58,7 @@ function ProductService($http)
                 $log.warn(data, status, headers, config)
             });
     }
-
-
+    
     function GetReportData(product, region, callback) {
 
         var serviceUrl = "Api/ShopAware/GetReportData/";

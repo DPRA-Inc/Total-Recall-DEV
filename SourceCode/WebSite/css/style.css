@@ -5736,6 +5736,22 @@ table.issue-tracker tbody tr td {
             border-left: 3px solid #1ab394;
         }
 
+        .agile-list li.classii-element {
+            border-left: 3px solid #f8ac59;
+        }
+
+        .agile-list li.classi-element {
+            border-left: 3px solid #ed5565;
+        }
+
+        .agile-list li.classiii-element {
+            border-left: 3px solid #1c84c6;
+        }
+
+        .agile-list li.event-element {
+            border-left: 3px solid #1ab394;
+        }
+
 .agile-detail {
     margin-top: 5px;
     font-size: 12px;

@@ -11,6 +11,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
     vm.Markers = [];
     vm.CurrentIndex = 0;
     vm.VisibleResults = [];
+    vm.IsChartReady = false;
 
     // load last selection from local storage.
     if (angular.isString($localStorage.fontSizeClass)) {
@@ -140,6 +141,16 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
      * Initialize the chart.
      */
     function LoadChartInfo() {
+
+        //var productName = vm.SearchSummary.Keyword;
+        //var region = vm.SearchSummary.State;
+
+        //var data = productservice.GetReportData(productName, keyword);
+
+
+
+
+        vm.IsChartReady = true;
 
         vm.lineOptions = {
             scaleShowGridLines: true,
