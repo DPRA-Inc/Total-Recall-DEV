@@ -102,18 +102,6 @@ Namespace Api
 
         End Function
 
-        <HttpGet>
-        <Route("GetReportData/{product}/{region}")>
-        Public Function GetReportData(product As String, region As String) As ReportData
-
-            Dim service As New ShopAwareService
-            Dim data As ReportData = service.GetReportDataItemByRegion(product, region)
-
-            Return data
-
-        End Function
-
-
     End Class
 
 End Namespace
