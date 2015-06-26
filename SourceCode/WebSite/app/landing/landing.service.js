@@ -5,8 +5,7 @@ function LandingService($http, $log) {
     this.Feeds = [];
 
     var service = {
-        QuickSearch: QuickSearch,
-        SetupRSSFeed: SetupRSSFeed,
+        QuickSearch: QuickSearch,   
         GetStates: GetStates
     };
 
@@ -51,42 +50,4 @@ function LandingService($http, $log) {
             });
     }
 
-    /*
-     * Get a list of states from WebAPI.
-     */
-    //function GetStates(callback)
-    //{
-
-    //    var serviceUrl = "Api/ShopAware/GetStates/";
-
-    //    $http({
-    //        method: 'GET',
-    //        url: serviceUrl
-    //    }).
-    //        success(function (data, status, headers, config)
-    //        {
-    //            if (!angular.isObject(data)) callback(null);
-
-    //            callback(data);
-    //        }).
-    //        error(function (data, status, headers, config)
-    //        {
-    //            $log.warn(data, status, headers, config)
-    //        });
-
-    //}
-
-    function SetupRSSFeed() {
-
-        //    if (Feeds.length === 0) {
-
-        //        for (var i = 0; i < GlobalsModule.RSSFeeds.length; i++) {
-
-        //            FeedLoader.fetch({ q: feedSources[i].url, num: 10 }, {}, function (data) {
-        //                var feed = data.responseData.feed;
-        //                feeds.push(feed);
-        //            });
-
-        //        }
-    }
 }
