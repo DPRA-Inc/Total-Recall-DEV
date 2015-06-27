@@ -299,11 +299,8 @@ Public Class ShopAwareService
         drugs = drugee.GetDeviceEventByDescription(keyWord)
         searchResultLocal.Results.AddRange(drugs)
 
+        'Sort for most recient at the top of the list
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
-
-        If tmpLinqResults.Count > maxResultSetSize Then
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        End If
 
         searchResultLocal.Results = tmpLinqResults
 
