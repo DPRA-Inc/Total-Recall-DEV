@@ -1,3 +1,4 @@
+
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     $urlRouterProvider.otherwise("/index/landing");
 
@@ -16,7 +17,17 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state("index.landing", {
             url: "/landing",
             templateUrl: "app/Landing/landing.html",
-            data: { pageTitle: "Home" }
+            data: { pageTitle: "Home" },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'cgNotify',
+                            files: ['css/angular-notify.min.css', 'js/angular/angular-notify.min.js']
+                        }
+                    ]);
+                }
+            }
         })
         .state("index.product", {
             url: "/product",
@@ -27,11 +38,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                     return $ocLazyLoad.load([
                         {
                             name: 'angles',
-                            files: ['js/plugins/chartJs/angles.js', 'js/plugins/chartJs/Chart.min.js']
+                            files: ['plugins/chartJs/angles.js', 'plugins/chartJs/Chart.min.js']
                         },
                         {
                             name: 'angular-peity',
-                            files: ['js/plugins/peity/jquery.peity.min.js', 'js/plugins/peity/angular-peity.js']
+                            files: ['plugins/peity/jquery.peity.min.js', 'plugins/peity/angular-peity.js']
                         },
                         {
                             name: 'ui.checkbox',

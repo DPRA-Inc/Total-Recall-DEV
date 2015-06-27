@@ -1,6 +1,6 @@
 ﻿angular.module("TotalRecall").controller("landingcontroller", landingcontroller);
 
-function landingcontroller($scope, $window, $location, $sessionStorage, $localStorage, landingservice, feedLoader)
+function landingcontroller($location, $sessionStorage, $localStorage, landingservice, feedLoader, notify)
 {
     var vm = this;
 
@@ -95,15 +95,25 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
             var value = vm.textValue.replace(disallowedChars, "");
             var region = vm.selectedState;
 
+            var doesExist = false;
+
             // Check for duplicates
             vm.shoppingList.forEach(function (checkItem)
             {
-                if ((checkItem.Keyword === value) && (checkItem.State === region))
+                if ((checkItem.Keyword.toLowerCase() === vm.textValue.toLowerCase()) && (checkItem.State === region))
                 {
-                    alert("Duplicate (todo: change this to ui style timeout message)");
-                    throw new Error("Duplicate");
+                    notify({
+                        message: 'This item already exists in your shopping list!',
+                        classes: 'alert-info',
+                        templateUrl: 'app/notify/notify.html'
+                    });
+                    doesExist = true;
+                    return ;
                 }
             }); // Make the new item to be added to our list.
+
+            if (doesExist) return;
+
             var item = {};
 
             item.ScrubedText = value; // Product name
