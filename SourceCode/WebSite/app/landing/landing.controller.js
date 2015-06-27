@@ -102,11 +102,26 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
             {
                 if ((checkItem.Keyword.toLowerCase() === vm.textValue.toLowerCase()) && (checkItem.State === region))
                 {
-                    notify({
-                        message: 'This item already exists in your shopping list!',
-                        classes: 'alert-info',
-                        templateUrl: 'app/notify/notify.html'
-                    });
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-left",
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
+                    toastr["warning"]("This item already exist in your shopping list.", "Duplicate item!");
+
                     doesExist = true;
                     return ;
                 }
