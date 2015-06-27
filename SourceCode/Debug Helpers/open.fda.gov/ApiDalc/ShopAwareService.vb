@@ -748,7 +748,7 @@ Public Class ShopAwareService
                 Dim stateCoords As DefaultValueAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DefaultValueAttribute), False)(0), DefaultValueAttribute)
                 Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(";").ToList
 
-                If check.Contains(state) Or nationwide Then
+                If check.Contains(state) Or check.ToUpper.Contains(stateName.Description.ToUpper) Or nationwide Then
 
                     Dim listCheck As SearchResultMapData = Nothing
 
