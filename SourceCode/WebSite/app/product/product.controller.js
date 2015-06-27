@@ -143,6 +143,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
                 vm.lineData.datasets[0].data = result.GraphObjects.Data1;
                 vm.lineData.datasets[1].data = result.GraphObjects.Data2;
                 vm.lineData.datasets[2].data = result.GraphObjects.Data3;
+                vm.lineData.datasets[3].data = result.GraphObjects.DataE;
 
                 GlobalsModule.SearchResult = result;
 
@@ -180,33 +181,43 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [
                 {
-                    label: "Events in the Year",
-                    fillColor: "rgba(255,179,148,0.5)",
-                    strokeColor: "rgba(255,179,148,0.7)",
-                    pointColor: "rgba(255,179,148,1)",
+                    label: "Class 1",
+                    fillColor: "rgba(237,85,101,0.3)",
+                    strokeColor: "rgba(237,85,101,0.7)",
+                    pointColor: "rgba(237,85,101,1)",
                     pointStrokeColor: "#222",
-                    pointHighlightFill: "#333",
-                    pointHighlightStroke: "rgba(0,220,220,1)",
+                    pointHighlightFill: "#DDD",
+                    pointHighlightStroke: "rgba(237,85,101,1)",
                     data: []
                 },
                 {
-                    label: "Events in the Year",
-                    fillColor: "rgba(26,0,148,0.5)",
-                    strokeColor: "rgba(26,0,148,0.7)",
-                    pointColor: "rgba(26,0,148,1)",
-                    pointStrokeColor: "#555",
-                    pointHighlightFill: "#777",
-                    pointHighlightStroke: "rgba(220,0,220,1)",
+                    label: "Class 2",
+                    fillColor: "rgba(248,172,89,0.3)",
+                    strokeColor: "rgba(248,172,89,0.7)",
+                    pointColor: "rgba(248,172,89,1)",
+                    pointStrokeColor: "#222",
+                    pointHighlightFill: "#DDD",
+                    pointHighlightStroke: "rgba(248,172,89,1)",
                     data: []
                 },
                 {
-                    label: "Events in the Year",
-                    fillColor: "rgba(26,179,0,0.5)",
-                    strokeColor: "rgba(26,179,0,0.7)",
-                    pointColor: "rgba(26,179,0,1)",
-                    pointStrokeColor: "#aaa",
-                    pointHighlightFill: "#bbb",
-                    pointHighlightStroke: "rgba(220,220,0,1)",
+                    label: "Class 3",
+                    fillColor: "rgba(28,132,198,0.3)",
+                    strokeColor: "rgba(28,132,198,0.7)",
+                    pointColor: "rgba(28,132,198,1)",
+                    pointStrokeColor: "#222",
+                    pointHighlightFill: "#DDD",
+                    pointHighlightStroke: "rgba(28,132,198,1)",
+                    data: []
+                },
+                {
+                    label: "Events",
+                    fillColor: "rgba(35,198,200,0.3)",
+                    strokeColor: "rgba(35,198,200,0.7)",
+                    pointColor: "rgba(35,198,200,1)",
+                    pointStrokeColor: "#222",
+                    pointHighlightFill: "#DDD",
+                    pointHighlightStroke: "rgba(35,198,200,1)",
                     data: []
                 }
             ]
