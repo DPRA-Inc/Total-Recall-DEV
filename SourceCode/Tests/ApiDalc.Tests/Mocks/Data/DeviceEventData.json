@@ -1,0 +1,149 @@
+﻿{
+  "meta": {
+    "disclaimer": "openFDA is a beta research project and not for clinical use. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated.",
+    "license": "http://open.fda.gov/license",
+    "last_updated": "2015-05-22",
+    "results": {
+      "skip": 0,
+      "limit": 1,
+      "total": 4373274
+    }
+  },
+  "results": [
+    {
+      "report_number": "8010047-2011-00081",
+      "manufacturer_contact_state": "CA",
+      "device_date_of_manufacturer": "",
+      "event_type": "Injury",
+      "source_type": [
+        "Foreign",
+        "User facility"
+      ],
+      "manufacturer_g1_address_1": "2-22-2 NISHI-SHINJUKU",
+      "manufacturer_contact_pcountry": "",
+      "report_to_manufacturer": "N",
+      "previous_use_code": "R",
+      "manufacturer_postal_code": "163-91",
+      "manufacturer_city": "TOKYO",
+      "reporter_occupation_code": "PHYSICIAN",
+      "manufacturer_contact_extension": "",
+      "manufacturer_state": "",
+      "event_location": "",
+      "date_of_event": "20110217",
+      "manufacturer_g1_country": "JA",
+      "removal_correction_number": "",
+      "manufacturer_g1_city": "TOKYO",
+      "mdr_text": [
+        {
+          "text": "THE USER FACILITY REPORTED THAT A PT SUSTAINED PERFORATION AFTER UNDERGOING A THERAPEUTIC COLONOSCOPY WITH POLYPECTOMY. THE PT RETURNED TO THE HOSPITAL THE NEXT DAY OF THE PROCEDURE DUE TO BLOODY BOWEL DISCHARGE, STOMACH ACHE, AND FEVER. THE PHYSICIAN EXAMINED THE PT AND REPORTEDLY DISCOVERED A PERFORATION IN THE POLYPECTOMY SITE. THE PHYSICIAN UTILIZED A CLIP ON THE POLYPECTOMY SITE DUE TO BLOOD COAGULATION. THE PT WAS THEN TRANSPORTED TO ANOTHER HOSPITAL FOR SURGICAL INTERVENTION. THE PT WAS REPORTED TO HAVE RECOVERED FROM THE SURGERY.",
+          "mdr_text_key": "10547647",
+          "text_type_code": "Description of Event or Problem",
+          "patient_sequence_number": "1"
+        },
+        {
+          "text": "THE USER FACILITY DID NOT RETURN THE SUBJECT DEVICE FOR EVAL. HOWEVER, AN OLYMPUS' REP VISITED THE USER FACILITY AND INSPECTED THE SUBJECT DEVICE AND NO PROBLEM WAS FOUND. THE USER FACILITY CONTINUES TO UTILIZE THE SUBJECT DEVICE AND NO FURTHER ISSUES REPORTED. THE USER FURTHER REPORTED THAT THE STEM OF THE POLYP WAS LARGE AND SUBSTANTIAL TIME WAS REQUIRED FOR THE POLYPECTOMY PROCEDURE, WHICH LIKELY RESULTED IN HEAT DENATURATION, AND BLOOD COAGULATION. THE USER SUPPLIED AIR TO THE BOWELS WHILE CLIPPING THE POLYPECTOMY SITE, WHICH LIKELY CAUSED OR CONTRIBUTED TO THE PT'S OUTCOME. THE EXACT CAUSE OF THE REPORTED EVENT COULD NOT BE CONCLUSIVELY DETERMINED; HOWEVER, USER'S TECHNIQUE COULD NOT BE RULED OUT AS A CONTRIBUTORY FACTORY. THIS REPORT IS BEING SUBMITTED AS A MEDICAL DEVICE REPORT IN AN ABUNDANCE OF CAUTION.",
+          "mdr_text_key": "10547661",
+          "text_type_code": "Additional Manufacturer Narrative",
+          "patient_sequence_number": "1"
+        }
+      ],
+      "distributor_zip_code_ext": "",
+      "date_received": "20110421",
+      "manufacturer_zip_code": "",
+      "manufacturer_contact_address_2": "",
+      "date_report": "20110223",
+      "manufacturer_contact_address_1": "2400 RINGWOOD AVE",
+      "manufacturer_contact_plocal": "",
+      "manufacturer_name": "OLYMPUS MEDICAL SYSTEMS CORP",
+      "type_of_report": [
+        "Initial submission"
+      ],
+      "reprocessed_and_reused_flag": "N",
+      "manufacturer_link_flag": "Y",
+      "manufacturer_contact_zip_code": "95131",
+      "manufacturer_g1_zip_code_ext": "",
+      "manufacturer_contact_country": "US",
+      "distributor_zip_code": "",
+      "report_source_code": "Manufacturer report",
+      "distributor_name": "",
+      "date_manufacturer_received": "20110223",
+      "remedial_action": "",
+      "manufacturer_contact_postal_code": "",
+      "manufacturer_contact_city": "SAN JOSE",
+      "product_problem_flag": "N",
+      "event_key": "1969649",
+      "manufacturer_g1_zip_code": "",
+      "manufacturer_g1_state": "",
+      "patient": [
+        {
+          "date_received": "20110421",
+          "patient_sequence_number": "1",
+          "sequence_number_treatment": "MFR: ERBE, PRODUCT CODE: ICC50 ;(ELECTROSURGICAL UNIT);MFR: OLYMPUS, HX-201UR-135;(SINGLE USE ROTATABLE CLIP);",
+          "sequence_number_outcome": [
+            "1, Hospitalization",
+            "1, Hospitalization, 2, Required Intervention"
+          ]
+        }
+      ],
+      "manufacturer_contact_phone_number": "5688",
+      "manufacturer_zip_code_ext": "",
+      "manufacturer_contact_pcity": "",
+      "manufacturer_g1_postal_code": "163-91",
+      "manufacturer_contact_area_code": "484",
+      "adverse_event_flag": "Y",
+      "single_use_flag": "Y",
+      "distributor_city": "",
+      "manufacturer_country": "JA",
+      "manufacturer_contact_f_name": "LAURA",
+      "distributor_state": "",
+      "number_devices_in_event": "1",
+      "manufacturer_contact_exchange": "896",
+      "distributor_address_2": "",
+      "manufacturer_contact_t_name": "",
+      "distributor_address_1": "",
+      "manufacturer_g1_address_2": "SHINJUKU-KU, 1-CHOME",
+      "health_professional": "Y",
+      "initial_report_to_fda": "No",
+      "number_patients_in_event": "1",
+      "mdr_report_key": "2072673",
+      "report_to_fda": "",
+      "manufacturer_address_2": "SHINJUKU-KU, 1-CHOME",
+      "manufacturer_address_1": "2-22-2 NISHI-SHINJUKU",
+      "manufacturer_g1_name": "OLYMPUS MEDICAL SYSTEMS CORP",
+      "manufacturer_contact_zip_ext": "",
+      "manufacturer_contact_l_name": "STORMS-TYLER",
+      "device": [
+        {
+          "date_removed_flag": "B",
+          "other_id_number": "NA",
+          "manufacturer_d_zip_code_ext": "",
+          "baseline_510_k__number": "",
+          "implant_flag": "N",
+          "device_operator": "HEALTH PROFESSIONAL",
+          "brand_name": "OLYMPUS ELECTROSURGICAL SNARE",
+          "lot_number": "0YK",
+          "manufacturer_d_state": "",
+          "generic_name": "ELECTROSURGICAL SNARE",
+          "manufacturer_d_name": "OLYMPUS MEDICAL SYSTEMS CORP",
+          "device_availability": "No",
+          "manufacturer_d_city": "TOKYO",
+          "device_sequence_number": "1",
+          "device_age_text": "DA",
+          "catalog_number": "UNK",
+          "baseline_510_k__exempt_flag": "",
+          "date_received": "20110421",
+          "manufacturer_d_address_2": "SHINJUKU-KU, 1-CHOME",
+          "manufacturer_d_address_1": "2-22-2 NISHI-SHINJUKU",
+          "manufacturer_d_postal_code": "163-91",
+          "baseline_510_k__flag": "",
+          "model_number": "SD-5U-1",
+          "manufacturer_d_zip_code": "",
+          "device_report_product_code": "FDI",
+          "manufacturer_d_country": "JA",
+          "device_event_key": "2106344",
+          "device_evaluated_by_manufacturer": "R"
+        }
+      ]
+    }
+  ]
+}

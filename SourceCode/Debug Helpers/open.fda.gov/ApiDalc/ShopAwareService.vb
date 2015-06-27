@@ -77,8 +77,11 @@ Public Class ShopAwareService
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
 
+            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
+            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
             Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = newItemDate.ToShortDateString(),
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
@@ -178,8 +181,11 @@ Public Class ShopAwareService
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
 
+            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
+            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
             Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = newItemDate.ToShortDateString(),
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
@@ -279,7 +285,14 @@ Public Class ShopAwareService
 
         ' Lets Get the Events And Mix them In.
         Dim drugee As New OpenFda
-        Dim drugs As List(Of SearchResultDrugEvent) = drugee.GetDrugEventsByDrugName(keyWord)
+        Dim drugs As List(Of SearchResultDrugEvent)
+
+        'Get Drug Events
+        drugs = drugee.GetDrugEventsByDrugName(keyWord)
+        searchResultLocal.Results.AddRange(drugs)
+
+        'Get Device Events
+        drugs = drugee.GetDeviceEventByDescription(keyWord)
         searchResultLocal.Results.AddRange(drugs)
 
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()

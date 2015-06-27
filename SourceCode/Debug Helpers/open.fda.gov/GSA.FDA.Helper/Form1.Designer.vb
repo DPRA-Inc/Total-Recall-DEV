@@ -75,12 +75,13 @@ Partial Class Form1
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbEndPoints_2 = New System.Windows.Forms.ComboBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.TreeView3 = New System.Windows.Forms.TreeView()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.TreeView3 = New System.Windows.Forms.TreeView()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.spMaxResultSize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -625,6 +626,7 @@ Partial Class Form1
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.Button5)
         Me.TabPage4.Controls.Add(Me.Button4)
         Me.TabPage4.Controls.Add(Me.TreeView3)
         Me.TabPage4.Controls.Add(Me.Button3)
@@ -635,6 +637,36 @@ Partial Class Form1
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "TabPage4"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button4.Location = New System.Drawing.Point(722, 16)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(154, 23)
+        Me.Button4.TabIndex = 33
+        Me.Button4.Text = "DrugEvent - Augmentin"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'TreeView3
+        '
+        Me.TreeView3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TreeView3.Location = New System.Drawing.Point(7, 80)
+        Me.TreeView3.Name = "TreeView3"
+        Me.TreeView3.Size = New System.Drawing.Size(909, 523)
+        Me.TreeView3.TabIndex = 32
+        '
+        'Button3
+        '
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button3.Location = New System.Drawing.Point(722, 45)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(154, 23)
+        Me.Button3.TabIndex = 29
+        Me.Button3.Text = "Report - Ice Cream, TN"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'RichTextBox2
         '
@@ -648,35 +680,15 @@ Partial Class Form1
         Me.RichTextBox2.TabIndex = 25
         Me.RichTextBox2.Text = ""
         '
-        'Button3
+        'Button5
         '
-        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(722, 45)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(154, 23)
-        Me.Button3.TabIndex = 29
-        Me.Button3.Text = "Report - Ice Cream, TN"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'TreeView3
-        '
-        Me.TreeView3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TreeView3.Location = New System.Drawing.Point(7, 80)
-        Me.TreeView3.Name = "TreeView3"
-        Me.TreeView3.Size = New System.Drawing.Size(909, 523)
-        Me.TreeView3.TabIndex = 32
-        '
-        'Button4
-        '
-        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(722, 16)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(154, 23)
-        Me.Button4.TabIndex = 33
-        Me.Button4.Text = "DrugEvent - Augmentin"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button5.Location = New System.Drawing.Point(527, 16)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(180, 23)
+        Me.Button5.TabIndex = 34
+        Me.Button5.Text = "DeviceEvent - COLONOSCOPY"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -759,5 +771,6 @@ Partial Class Form1
     Friend WithEvents RichTextBox2 As System.Windows.Forms.RichTextBox
     Friend WithEvents TreeView3 As System.Windows.Forms.TreeView
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents Button5 As System.Windows.Forms.Button
 
 End Class
