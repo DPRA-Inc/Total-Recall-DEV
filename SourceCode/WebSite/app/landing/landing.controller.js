@@ -106,7 +106,8 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
             }); // Make the new item to be added to our list.
             var item = {};
 
-            item.Keyword = value; // Product name
+            item.ScrubedText = value; // Product name
+            item.Keyword = vm.textValue; 
             item.State = region;
             item.Rank = "success"; // How Bad is it, Color Code.
             item.IsLoading = true; // Indicates we are waiting on Return From Service.
@@ -134,7 +135,7 @@ function landingcontroller($scope, $window, $location, $sessionStorage, $localSt
                     vm.shoppingList.forEach(function (product)
                     {
 
-                        if (product.Keyword === result.Keyword)
+                        if (product.ScrubedText === result.Keyword)
                         {
 
                             product.ClassIDescription = result.ClassIDescription;
