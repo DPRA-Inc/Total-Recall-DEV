@@ -47,8 +47,8 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
         }
     });
 
-    if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
-    vm.SearchResult = GlobalsModule.SearchResult;
+    //if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
+    //vm.SearchResult = GlobalsModule.SearchResult;
 
     if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
     vm.SearchResultItem = GlobalsModule.SearchResultItem;
