@@ -170,7 +170,7 @@ Public Class ShopAwareService
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
 
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
-        
+
         Dim graphData As New ReportData
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
@@ -321,7 +321,7 @@ Public Class ShopAwareService
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
         _fda = New OpenFda(_restClient)
-        
+
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
