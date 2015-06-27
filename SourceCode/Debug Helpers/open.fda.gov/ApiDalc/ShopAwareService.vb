@@ -54,7 +54,7 @@ Public Class ShopAwareService
     ''' <param name="keyWord"></param>
     ''' <param name="state"></param>
     ''' <returns></returns>
-    ''' <remarks></remarks>
+    ''' <remarks></remarks>    
     Public Function GetSearchResult(ByVal keyWord As String, ByVal state As String) As SearchResult
 
         Const maxResultSetSize As Integer = 100
@@ -310,7 +310,7 @@ Public Class ShopAwareService
 
         'TODO: Need to query Drug/Events
 
-        Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
+        Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord, .State = state}
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
 
@@ -572,7 +572,9 @@ Public Class ShopAwareService
         Dim apiUrl As String = String.Empty
         Dim tmpRecallResultList As New List(Of ResultRecall)
 
-        Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
+        Dim searchSummary As New SearchSummary With {.Keyword = filterList(0),
+                                                     .State = state
+                                                    }
 
         _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
         _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)

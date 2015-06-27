@@ -160,7 +160,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                     vm.shoppingList.forEach(function (product)
                     {
 
-                        if (product.ScrubedText === result.Keyword)
+                        if (product.ScrubedText === result.Keyword && product.State === result.State)
                         {
 
                             product.ClassIDescription = result.ClassIDescription;

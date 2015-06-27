@@ -57,16 +57,35 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
     /*
      * Displays additional information about an reult item.
      */
-    vm.ShowMoreInformation = function(item) {
-        $modal.open({
-            templateUrl: "app/product/productFullDetails.modal.html",
-            controller: "productdialogcontroller as vm",
-            resolve: {
-                item: function () {
-                    return item;
+    vm.ShowMoreInformation = function (item) {
+
+        if (item.Classification.lastIndexOf("Class", 0) === 0) {
+            $modal.open({
+                templateUrl: "app/product/productFullDetails.modal.html",
+                controller: "productdialogcontroller as vm",
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
                 }
-            }
-        });
+            });
+            return;
+        }
+
+        if (item.Classification.lastIndexOf("Event", 0) === 0) {
+
+            $modal.open({
+                templateUrl: "app/product/drugEventFullDetails.modal.html",
+                controller: "drugeventdialogcontroller as vm",
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+            return;
+        }
+
     };
 
     /*
