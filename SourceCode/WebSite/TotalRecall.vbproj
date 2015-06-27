@@ -117,6 +117,7 @@
     <Content Include="app\product\product.html" />
     <Content Include="app\product\product.service.js" />
     <Content Include="css\angular-notify.min.css" />
+    <Content Include="css\navbar.css" />
     <Content Include="fonts\metro\css\metro-icons.css" />
     <Content Include="fonts\metro\css\metro-icons.min.css" />
     <Content Include="fonts\metro\css\metro.css" />
@@ -133,6 +134,7 @@
     <Content Include="img\identifiers\classii.png" />
     <Content Include="img\identifiers\classiii.png" />
     <Content Include="img\identifiers\ok.png" />
+    <Content Include="img\logo.png" />
     <Content Include="img\mapIcon\1.png" />
     <Content Include="img\mapIcon\10.png" />
     <Content Include="img\mapIcon\11.png" />
