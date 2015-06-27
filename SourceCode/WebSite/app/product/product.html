@@ -3,6 +3,21 @@
 
         <div class="row">
             <div class="col-md-12">
+
+                <div>
+                    <ul class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="active">
+                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
+                        </li>
+                        <li role="presentation">
+                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
+                        </li>
+                        <li role="presentation">
+                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
+                        </li>
+                    </ul>
+                </div>
+
                 <ol class="breadcrumb">
                     <li>
                         <a href="#/index/landing">Home</a>
@@ -18,21 +33,8 @@
             <div class="col-md-12">
                 <h1 class="col-md-6">
                     Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
-                    
-                </h1>
-                <span class="col-md-6 pull-right">legend placeholder</span>
-                <div style="padding-top: 20px">
-                    <ul class="nav nav-pills" role="tablist">
-                        <li role="presentation" class="active">
-                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span></li>
-                        <li role="presentation">
-                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span></li>
-                        <li role="presentation">
-                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span></li>
-                    </ul>
-                </div>
 
-                
+                </h1>
             </div>
         </div>
 
@@ -49,7 +51,7 @@
 
                     <div class="ibox-content no-padding">
 
-                        <div >
+                        <div>
 
                             <ul class="sortable-list connectList agile-list" infinite-scroll="vm.DisplayNext(2)" infinite-scroll-distance="2">
 
@@ -60,14 +62,20 @@
                                         <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>{{item.ProductDescription}}</strong>
+                                            <strong>Product:</strong> {{item.ProductDescription}}
                                         </p>
 
-                                        <p>{{item.ContentTruncated}}</p>
+                                        <p>
+                                            <strong>Reason:</strong> {{item.ContentTruncated}}
+                                        </p>
+
+                                        <p>
+                                            <strong>Distribution:</strong> {{item.DistributionPattern}}
+                                        </p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
-                                        <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}    &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{item.ReportDate}}
 
                                     </div>
 
@@ -100,11 +108,46 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp" id="mapPlaceholder">
+            <div class="col-md-6 animated bounceInDown" ng-class="vm.fontSizeClass">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="classi-element" ng-show="vm.Class1Visible" style="min-height:72px;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classi.png" alt="Class 1" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.ClassICount}}) Dangerous or defective products that predictably could cause serious health problems or death.</strong>
+                    </li>
+                    <li class="classii-element" ng-show="vm.Class2Visible" style="min-height:72px;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classii.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.ClassIICount}}) Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</strong>
+                    </li>
+                    <li class="classiii-element" ng-show="vm.Class3Visible" style="min-height:72px;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classiii.png" alt="Class 3" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.ClassIIICount}}) Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.</strong>
+                    </li>
+                    <li class="events-element" ng-show="vm.EventsVisible" style="min-height:72px;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/events.png" alt="Event" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.EventCount}}) Events occured with a drug or device.</strong>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp pull-right" id="mapPlaceholder">
 
                 <ul class="sortable-list connectList agile-list">
 
                     <li class="feed-element">
+
+                        <h3>Distribution States Detected in Reports</h3>
 
                         <div>
 
@@ -116,10 +159,12 @@
                             </openlayers>
 
                         </div>
-                        <div class="m-t">Put a good description of the Chart - here.</div>
+
                     </li>
 
-                    <li class="feed-element animated bounceInUp">
+                    <li class="col-md-12 feed-element animated bounceInUp pull-right">
+
+                        <h3>Reported Date Count by Classification</h3>
 
                         <div>
                             <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>

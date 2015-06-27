@@ -76,11 +76,15 @@ Public Class ShopAwareService
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
+            
+            Dim newItemDate As DateTime
+            Dim tmpReportDate As DateTime
 
-            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
-            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
-            Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            newItemDate = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
+            tmpReportDate = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
+
+            'newItemDate = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            'tmpReportDate = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = newItemDate.ToShortDateString(),
@@ -94,7 +98,7 @@ Public Class ShopAwareService
                                                                   .ProductQuantity = itm.Product_Quantity,
                                                                   .EventId = itm.Event_Id,
                                                                   .RecallingFirm = itm.Recalling_Firm,
-                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
+                                                                  .ReportDate = tmpReportDate.ToString("ddMMMyyyy"),
                                                                   .CodeInfo = itm.Code_info,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
@@ -163,15 +167,29 @@ Public Class ShopAwareService
 
         Const maxResultSetSize As Integer = 100
 
+        Dim dataYearsBack As Integer = 1
+
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
 
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
-        
         Dim graphData As New ReportData
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
-
         Dim values As New FDAResult
+
+        Dim dateInit As Date = Date.Now.AddYears(-dataYearsBack)
+
+        For i As Integer = 1 To 12 * dataYearsBack
+
+            dateInit = dateInit.AddMonths(1)
+
+            graphData.Labels.Add(dateInit.ToString("MMM-yyyy"))
+            graphData.Data1.Add(0)
+            graphData.Data2.Add(0)
+            graphData.Data3.Add(0)
+            graphData.DataE.Add(0)
+
+        Next
 
         For Each itm As ResultRecall In tmp
 
@@ -187,7 +205,7 @@ Public Class ShopAwareService
             Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
-                                                                  .DateStarted = newItemDate.ToShortDateString(),
+                                                                  .DateStarted = newItemDate.ToString("ddMMMyyyy"),
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
                                                                   .DistributionPattern = itm.Distribution_Pattern,
                                                                   .ProductDescription = itm.Product_Description,
@@ -198,14 +216,14 @@ Public Class ShopAwareService
                                                                   .ProductQuantity = itm.Product_Quantity,
                                                                   .EventId = itm.Event_Id,
                                                                   .RecallingFirm = itm.Recalling_Firm,
-                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
+                                                                  .ReportDate = tmpReportDate.ToString("ddMMMyyyy"),
                                                                   .CodeInfo = itm.Code_info,
                                                                   .Classification = itm.Classification,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
             searchResultLocal.Results.Add(tmpSearchResultItem)
 
-            Dim dateForReport As String = tmpReportDate.ToString("MMyyyy")
+            Dim dateForReport As String = tmpReportDate.ToString("MMM-yyyy")
             Dim found As Boolean = False
 
             Select Case itm.Classification
@@ -225,10 +243,11 @@ Public Class ShopAwareService
 
                     If Not found Then
 
-                        graphData.Labels.Add(dateForReport)
-                        graphData.Data1.Add(1)
-                        graphData.Data2.Add(0)
-                        graphData.Data3.Add(0)
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 1)
+                        graphData.Data2.Insert(0, 0)
+                        graphData.Data3.Insert(0, 0)
+                        graphData.DataE.Insert(0, 0)
 
                     End If
 
@@ -247,10 +266,11 @@ Public Class ShopAwareService
 
                     If Not found Then
 
-                        graphData.Labels.Add(dateForReport)
-                        graphData.Data1.Add(0)
-                        graphData.Data2.Add(1)
-                        graphData.Data3.Add(0)
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 0)
+                        graphData.Data2.Insert(0, 1)
+                        graphData.Data3.Insert(0, 0)
+                        graphData.DataE.Insert(0, 0)
 
                     End If
 
@@ -269,10 +289,11 @@ Public Class ShopAwareService
 
                     If Not found Then
 
-                        graphData.Labels.Add(dateForReport)
-                        graphData.Data1.Add(0)
-                        graphData.Data2.Add(0)
-                        graphData.Data3.Add(1)
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 0)
+                        graphData.Data2.Insert(0, 0)
+                        graphData.Data3.Insert(0, 1)
+                        graphData.DataE.Insert(0, 0)
 
                     End If
 
@@ -295,11 +316,8 @@ Public Class ShopAwareService
         drugs = drugee.GetDeviceEventByDescription(keyWord)
         searchResultLocal.Results.AddRange(drugs)
 
+        'Sort for most recient at the top of the list
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
-
-        If tmpLinqResults.Count > maxResultSetSize Then
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        End If
 
         searchResultLocal.Results = tmpLinqResults
 
@@ -320,8 +338,6 @@ Public Class ShopAwareService
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
         _fda = New OpenFda(_restClient)
-
-        'TODO: Need to query Drug/Events
 
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FdaFilterTypes
@@ -351,9 +367,11 @@ Public Class ShopAwareService
 
             End If
 
-            searchSummaryForKeyword.EventCount = _fda.GetDrugEventsByDrugNameCount(keyWord)
-
         Next
+
+        searchSummaryForKeyword.EventCount = 0
+        searchSummaryForKeyword.EventCount += _fda.GetDrugEventsByDrugNameCount(keyWord)
+        searchSummaryForKeyword.EventCount += _fda.GetDeviceEventsByDescriptionCount(keyWord)
 
         Return searchSummaryForKeyword
 
@@ -582,18 +600,62 @@ Public Class ShopAwareService
 
     Private Function ExecuteSearchCounts(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal state As String, ByVal cntField As String) As SearchSummary
 
+        Dim searchResults As String
+
         Dim apiUrl As String = String.Empty
         Dim tmpRecallResultList As New List(Of ResultRecall)
 
         Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
 
+        Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
+        OpenFdaApiHits = 0
+
+        _fda.ResetSearch()
         _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
         _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
+        _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
 
         apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
         apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
 
-        Dim searchResults As String = _fda.Execute(apiUrl)
+        searchResults = _fda.Execute(apiUrl)
+        OpenFdaApiHits += 1
+
+        ' If there was not data in the 1 yr window the get all results.
+        ' Check a 2 yr window for results.
+        If String.IsNullOrEmpty(searchResults) Then
+
+            endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
+
+            _fda.ResetSearch()
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+
+            apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
+            apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
+
+            searchResults = _fda.Execute(apiUrl)
+            OpenFdaApiHits += 1
+
+        End If
+
+        ' If there was not data in the 2 yr window the get all results.
+        If String.IsNullOrEmpty(searchResults) Then
+
+            _fda.ResetSearch()
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
+
+            apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
+            apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
+
+            searchResults = _fda.Execute(apiUrl)
+            OpenFdaApiHits += 1
+
+        End If
 
         If Not String.IsNullOrEmpty(searchResults) Then
 
@@ -686,7 +748,7 @@ Public Class ShopAwareService
                 Dim stateCoords As DefaultValueAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DefaultValueAttribute), False)(0), DefaultValueAttribute)
                 Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(";").ToList
 
-                If check.Contains(state) Or nationwide Then
+                If check.Contains(state) Or check.ToUpper.Contains(stateName.Description.ToUpper) Or nationwide Then
 
                     Dim listCheck As SearchResultMapData = Nothing
 

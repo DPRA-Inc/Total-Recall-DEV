@@ -582,9 +582,11 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.Region
 
+                        Dim tmpEnum As Enumerations.States = CType([Enum].Parse(GetType(Enumerations.States), tmp), Enumerations.States)
                         param += "(state:(" & tmp & ")"
                         param += "+"
-                        param += "distribution_pattern:(" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
+                        'param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
+                        param += String.Format("distribution_pattern:(Nationwide+{0}+{1}))", tmp, GetEnumDescription(tmpEnum)) ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
                         'TODO = Have a lookup to convert list of stateCodes to list of StateNames
 
