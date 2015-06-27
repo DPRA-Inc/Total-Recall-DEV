@@ -3,6 +3,8 @@
 function ProductController($scope, $sessionStorage, $localStorage, $http, $modal, productservice) {
     var vm = this;
 
+    vm.SearchResult = [];
+
     vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData = [];
@@ -42,8 +44,8 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
         }
     });
 
-    if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
-    vm.SearchResult = GlobalsModule.SearchResult;
+    //if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
+    //vm.SearchResult = GlobalsModule.SearchResult;
 
     if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
     vm.SearchResultItem = GlobalsModule.SearchResultItem;
