@@ -4,7 +4,7 @@ Public Module Utilities
 
 #Region " Public Methods "
 
-    Public Function ConvertDateStringToDate(ByVal dateFormat As String, ByVal dateString As String) As Date
+    Public Function ConvertDateStringToDate(ByVal dateString As String, ByVal dateFormat As String) As Date
 
         Dim result As DateTime
 

@@ -76,11 +76,15 @@ Public Class ShopAwareService
             ' ------------------------------------------------------------
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
+            
+            Dim newItemDate As DateTime
+            Dim tmpReportDate As DateTime
 
-            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
-            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
-            Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            newItemDate = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
+            tmpReportDate = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
+
+            'newItemDate = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            'tmpReportDate = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = newItemDate.ToShortDateString(),
@@ -320,9 +324,7 @@ Public Class ShopAwareService
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
         _fda = New OpenFda(_restClient)
-
-        'TODO: Need to query Drug/Events
-
+        
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord}
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
@@ -351,9 +353,11 @@ Public Class ShopAwareService
 
             End If
 
-            searchSummaryForKeyword.EventCount = _fda.GetDrugEventsByDrugNameCount(keyWord)
-
         Next
+
+        searchSummaryForKeyword.EventCount = 0
+        searchSummaryForKeyword.EventCount += _fda.GetDrugEventsByDrugNameCount(keyWord)
+        searchSummaryForKeyword.EventCount += _fda.GetDeviceEventsByDescriptionCount(keyWord)
 
         Return searchSummaryForKeyword
 
@@ -582,18 +586,62 @@ Public Class ShopAwareService
 
     Private Function ExecuteSearchCounts(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal state As String, ByVal cntField As String) As SearchSummary
 
+        Dim searchResults As String
+
         Dim apiUrl As String = String.Empty
         Dim tmpRecallResultList As New List(Of ResultRecall)
 
         Dim searchSummary As New SearchSummary With {.Keyword = filterList(0)}
 
+        Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
+        OpenFdaApiHits = 0
+
+        _fda.ResetSearch()
         _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
         _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
+        _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
 
         apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
         apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
 
-        Dim searchResults As String = _fda.Execute(apiUrl)
+        searchResults = _fda.Execute(apiUrl)
+        OpenFdaApiHits += 1
+
+        ' If there was not data in the 1 yr window the get all results.
+        ' Check a 2 yr window for results.
+        If String.IsNullOrEmpty(searchResults) Then
+
+            endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
+
+            _fda.ResetSearch()
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+
+            apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
+            apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
+
+            searchResults = _fda.Execute(apiUrl)
+            OpenFdaApiHits += 1
+
+        End If
+
+        ' If there was not data in the 2 yr window the get all results.
+        If String.IsNullOrEmpty(searchResults) Then
+
+            _fda.ResetSearch()
+            _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
+            _fda.AddSearchFilter(endPointType, filterType, filterList, FilterCompairType.And)
+
+            apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
+            apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
+
+            searchResults = _fda.Execute(apiUrl)
+            OpenFdaApiHits += 1
+
+        End If
 
         If Not String.IsNullOrEmpty(searchResults) Then
 
