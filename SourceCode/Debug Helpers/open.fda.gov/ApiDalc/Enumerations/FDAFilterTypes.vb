@@ -14,6 +14,8 @@ Namespace Enumerations
 
         DrugEventDrugName
 
+        DeviceEventDescription
+
     End Enum
 
 End Namespace

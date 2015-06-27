@@ -141,6 +141,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Mocks\Data\DrugEventData_Augmentin_50.json" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Mocks\Data\DeviceEventData.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mocks\Data\DeviceEventData_50.json" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

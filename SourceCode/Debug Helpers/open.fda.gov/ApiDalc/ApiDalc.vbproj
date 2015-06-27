@@ -68,7 +68,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataObjects\AdverseDeviceEvent.vb" />
     <Compile Include="DataObjects\AdverseDrugEvent.vb" />
+    <Compile Include="DataObjects\DeviceEventDeviceData.vb" />
+    <Compile Include="DataObjects\DeviceEventMdrTextData.vb" />
+    <Compile Include="DataObjects\DeviceEventPatientData.vb" />
     <Compile Include="DataObjects\DrugData.vb" />
     <Compile Include="DataObjects\FDAResults.vb" />
     <Compile Include="DataObjects\FeatureObject.vb" />

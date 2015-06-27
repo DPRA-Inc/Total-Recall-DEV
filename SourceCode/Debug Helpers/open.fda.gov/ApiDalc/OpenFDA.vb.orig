@@ -243,6 +243,7 @@ Public Class OpenFda
         Next
 
         Dim final As New ReportData
+
         'For i As Integer = lowestMonth To highestMonth
 
         '    Dim count As Integer
@@ -274,6 +275,11 @@ Public Class OpenFda
         '    final.Data.Add(count)
 
         'Next
+
+        For Each itm As KeyValuePair(Of String, Integer) In reportCount
+            resutls.Add(itm.Key, itm.Value.ToString)
+        Next
+
 
         Return final
 
@@ -313,20 +319,20 @@ Public Class OpenFda
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
-        Dim limit As String = AddResultLimit(100)
+        'Dim limit As String = AddResultLimit(100)
 
         Dim url As String = BuildUrl(endPointType)
-        Dim searchResults As String = Execute(url & limit)
+        Dim results As String = Execute(url)
 
-        If Not String.IsNullOrEmpty(searchResults) Then
+        If Not String.IsNullOrEmpty(results) Then
             dataSetSize = GetMetaResults().Total()
         End If
 
-        Dim deviceEventList As List(Of AdverseDeviceEvent) = AdverseDeviceEvent.CnvJsonDataToList(searchResults)
-        'AdverseDeviceEvent.CnvJsonDataToList(results)
+        Dim deviceEventList As List(Of AdverseDeviceEvent) = AdverseDeviceEvent.CnvJsonDataToList(results)
+        AdverseDeviceEvent.CnvJsonDataToList(results)
 
         Dim tmpAdverseDeviceEventList As List(Of AdverseDeviceEvent)
-        Dim tmpSearchResultDrugEvent As List(Of SearchResultDrugEvent) = AdverseDeviceEvent.CnvDeviceEventsToResultDrugEvents(deviceEventList)
+        Dim tmpSearchResultDrugEvent As List(Of SearchResultDrugEvent) = AdverseDeviceEvent.CnvDeviceEventsToResultDrugEvents(tmpAdverseDeviceEventList)
 
         Return tmpSearchResultDrugEvent
 

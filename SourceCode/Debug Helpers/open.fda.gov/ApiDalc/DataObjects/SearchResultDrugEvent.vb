@@ -42,7 +42,6 @@ Namespace DataObjects
 
         Public Property DrugItem As New List(Of SearchResultDrugEventItem)
 
-
 #Region " Public Methods "
 
         Public Shared Function ConvertJsonData(drugEvent As List(Of AdverseDrugEvent)) As List(Of SearchResultDrugEvent)
@@ -50,7 +49,6 @@ Namespace DataObjects
             Dim data As New List(Of SearchResultDrugEvent)
 
             For Each itm As AdverseDrugEvent In drugEvent
-
 
                 Dim obj As New SearchResultDrugEvent
 
@@ -63,9 +61,12 @@ Namespace DataObjects
                     .PatientSex = GetEnumDescription(itm.Patient.PatientSex)
 
                     If Not String.IsNullOrEmpty(itm.ReceiveDate) Then
+                        '.DateStarted = ConvertDateStringToDate(itm.ReceiveDate, "yyyyMMdd")
                         .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
                     End If
+
                     If Not String.IsNullOrEmpty(itm.ReceiptDate) Then
+                        '.ReceiptDate = ConvertDateStringToDate(itm.ReceiptDate, "yyyyMMdd")
                         .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
                     End If
 
@@ -80,35 +81,53 @@ Namespace DataObjects
                         End Select
 
                     End If
+
                     If Not String.IsNullOrEmpty(itm.SeriousnessCongenitalAnomali) Then
+
                         If itm.SeriousnessCongenitalAnomali = "1" Then
                             .Seriousness.Add("The adverse event resulted in a congenital anomali")
                         End If
+
                     End If
+
                     If Not String.IsNullOrEmpty(itm.SeriousnessDeath) Then
+
                         If itm.SeriousnessDeath = "1" Then
                             .Seriousness.Add("The adverse event resulted in death")
                         End If
+
                     End If
+
                     If Not String.IsNullOrEmpty(itm.SeriousnessDisabling) Then
+
                         If itm.SeriousnessDisabling = "1" Then
                             .Seriousness.Add("The adverse event resulted in disability")
                         End If
+
                     End If
+
                     If Not String.IsNullOrEmpty(itm.SeriousnessHospitalization) Then
+
                         If itm.SeriousnessHospitalization = "1" Then
                             .Seriousness.Add("The adverse event resulted in a hospitalization")
                         End If
+
                     End If
+
                     If Not String.IsNullOrEmpty(itm.SeriousnessLifeThreatening) Then
+
                         If itm.SeriousnessLifeThreatening = "1" Then
                             .Seriousness.Add("The adverse event resulted in a life threatening condition")
                         End If
+
                     End If
+
                     If Not String.IsNullOrEmpty(itm.SeriousnessOther) Then
+
                         If itm.SeriousnessOther = "1" Then
                             .Seriousness.Add("The adverse event resulted in some other serious condition")
                         End If
+
                     End If
 
                     '.Sender
@@ -125,12 +144,15 @@ Namespace DataObjects
                         For Each ofda In drug.OpenFDA.Brand_Name
                             drugItem.BrandName.Add(ofda)
                         Next
+
                         For Each ofda In drug.OpenFDA.Generic_Name
                             drugItem.GenericName.Add(ofda)
                         Next
+
                         For Each ofda In drug.OpenFDA.Manufacturer_Name
                             drugItem.ManufacturerName.Add(ofda)
                         Next
+
                         For Each ofda In drug.OpenFDA.Route
                             drugItem.Route.Add(ofda)
                         Next

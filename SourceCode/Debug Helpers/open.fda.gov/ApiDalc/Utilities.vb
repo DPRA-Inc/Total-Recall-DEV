@@ -4,6 +4,24 @@ Public Module Utilities
 
 #Region " Public Methods "
 
+    Public Function ConvertDateStringToDate(ByVal dateFormat As String, ByVal dateString As String) As Date
+
+        Dim result As DateTime
+
+        Select Case dateFormat
+            Case "yyyyMMdd"
+                result = DateTime.ParseExact(dateString, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+
+            Case Else
+                result = Nothing
+
+        End Select
+
+        Return result
+
+    End Function
+
+
     ''' <summary>
     ''' Fixes String values
     ''' </summary>

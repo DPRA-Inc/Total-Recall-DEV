@@ -79,6 +79,7 @@ Namespace DataObjects
                 data.PatientWeight = jToken("patientweight") ' KiloGrams
 
                 If IsJTokenValid(jToken("patientdeath")) Then
+                    'data.PatientDeathDate = ConvertDateStringToDate(jToken("patientdeath")("patientdeathdate"), "yyyyMMdd")
                     data.PatientDeathDate = DateTime.ParseExact(jToken("patientdeath")("patientdeathdate"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
                 End If
 
