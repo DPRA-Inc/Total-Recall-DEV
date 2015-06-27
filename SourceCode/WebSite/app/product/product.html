@@ -62,14 +62,16 @@
                                         <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>{{item.ProductDescription}}</strong>
+                                            <strong>Product:</strong> {{item.ProductDescription}}
                                         </p>
 
-                                        <p>{{item.ContentTruncated}}</p>
+                                        <p>
+                                            <strong>Reson:</strong> {{item.ContentTruncated}}
+                                        </p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
-                                        <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}    &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{item.ReportDate}}
 
                                     </div>
 
@@ -158,7 +160,7 @@
 
                     <li class="col-md-12 feed-element animated bounceInUp pull-right">
 
-                        <h3>Reports by Classification Over Time</h3>
+                        <h3>Reported Date Count by Classification</h3>
 
                         <div>
                             <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>

@@ -98,7 +98,7 @@ Public Class ShopAwareService
                                                                   .ProductQuantity = itm.Product_Quantity,
                                                                   .EventId = itm.Event_Id,
                                                                   .RecallingFirm = itm.Recalling_Firm,
-                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
+                                                                  .ReportDate = tmpReportDate.ToString("ddMMMyyyy"),
                                                                   .CodeInfo = itm.Code_info,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
@@ -167,15 +167,29 @@ Public Class ShopAwareService
 
         Const maxResultSetSize As Integer = 100
 
+        Dim dataYearsBack As Integer = 1
+
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
 
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
-
         Dim graphData As New ReportData
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
-
         Dim values As New FDAResult
+
+        Dim dateInit As Date = Date.Now.AddYears(-dataYearsBack)
+
+        For i As Integer = 1 To 12 * dataYearsBack
+
+            dateInit = dateInit.AddMonths(1)
+
+            graphData.Labels.Add(dateInit.ToString("MMM-yyyy"))
+            graphData.Data1.Add(0)
+            graphData.Data2.Add(0)
+            graphData.Data3.Add(0)
+            graphData.DataE.Add(0)
+
+        Next
 
         For Each itm As ResultRecall In tmp
 
@@ -191,7 +205,7 @@ Public Class ShopAwareService
             Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
-                                                                  .DateStarted = newItemDate.ToShortDateString(),
+                                                                  .DateStarted = newItemDate.ToString("ddMMMyyyy"),
                                                                   .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
                                                                   .DistributionPattern = itm.Distribution_Pattern,
                                                                   .ProductDescription = itm.Product_Description,
@@ -202,14 +216,14 @@ Public Class ShopAwareService
                                                                   .ProductQuantity = itm.Product_Quantity,
                                                                   .EventId = itm.Event_Id,
                                                                   .RecallingFirm = itm.Recalling_Firm,
-                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
+                                                                  .ReportDate = tmpReportDate.ToString("ddMMMyyyy"),
                                                                   .CodeInfo = itm.Code_info,
                                                                   .Classification = itm.Classification,
                                                                   .Voluntary = itm.Voluntary_Mandated}
 
             searchResultLocal.Results.Add(tmpSearchResultItem)
 
-            Dim dateForReport As String = tmpReportDate.ToString("MMyyyy")
+            Dim dateForReport As String = tmpReportDate.ToString("MMM-yyyy")
             Dim found As Boolean = False
 
             Select Case itm.Classification
@@ -229,10 +243,11 @@ Public Class ShopAwareService
 
                     If Not found Then
 
-                        graphData.Labels.Add(dateForReport)
-                        graphData.Data1.Add(1)
-                        graphData.Data2.Add(0)
-                        graphData.Data3.Add(0)
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 1)
+                        graphData.Data2.Insert(0, 0)
+                        graphData.Data3.Insert(0, 0)
+                        graphData.DataE.Insert(0, 0)
 
                     End If
 
@@ -251,10 +266,11 @@ Public Class ShopAwareService
 
                     If Not found Then
 
-                        graphData.Labels.Add(dateForReport)
-                        graphData.Data1.Add(0)
-                        graphData.Data2.Add(1)
-                        graphData.Data3.Add(0)
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 0)
+                        graphData.Data2.Insert(0, 1)
+                        graphData.Data3.Insert(0, 0)
+                        graphData.DataE.Insert(0, 0)
 
                     End If
 
@@ -273,10 +289,11 @@ Public Class ShopAwareService
 
                     If Not found Then
 
-                        graphData.Labels.Add(dateForReport)
-                        graphData.Data1.Add(0)
-                        graphData.Data2.Add(0)
-                        graphData.Data3.Add(1)
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 0)
+                        graphData.Data2.Insert(0, 0)
+                        graphData.Data3.Insert(0, 1)
+                        graphData.DataE.Insert(0, 0)
 
                     End If
 
