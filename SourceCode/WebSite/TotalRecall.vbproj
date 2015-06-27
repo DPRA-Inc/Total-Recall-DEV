@@ -148,11 +148,11 @@
     <Content Include="img\mapIcon\7.png" />
     <Content Include="img\mapIcon\8.png" />
     <Content Include="img\mapIcon\9.png" />
-    <Content Include="css\angular-openlayers-directive.css" />
+    <Content Include="plugins\openlayers\angular-openlayers-directive.css" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\ol.css" />
+    <Content Include="plugins\openlayers\ol.css" />
     <Content Include="css\patterns\congruent_pentagon.png" />
     <Content Include="css\patterns\header-profile-skin-1.png" />
     <Content Include="css\patterns\header-profile-skin-2.png" />
@@ -205,10 +205,10 @@
     <Content Include="js\jquery\jquery-ui-1.10.4.min.js" />
     <Content Include="js\jquery\jquery-ui.custom.min.js" />
     <Content Include="js\jquery\moment.min.js" />
-    <Content Include="js\map\ol.js" />
+    <Content Include="plugins\openlayers\ol.js" />
     <Content Include="js\ngstorage\ngStorage.min.js" />
-    <Content Include="js\openlayers\angular-openlayers-directive.min.js" />
-    <Content Include="js\openlayers\angular-openlayers-directive.js" />
+    <Content Include="plugins\openlayers\angular-openlayers-directive.min.js" />
+    <Content Include="plugins\openlayers\angular-openlayers-directive.js" />
     <Content Include="plugins\chartJs\angles.js" />
     <Content Include="plugins\chartJs\Chart.min.js" />
     <Content Include="plugins\infinitescroll\ng-infinite-scroll.min.js" />
