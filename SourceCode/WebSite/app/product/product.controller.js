@@ -12,6 +12,11 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
     vm.CurrentIndex = 0;
     vm.VisibleResults = [];
     vm.IsChartReady = false;
+
+    vm.Class1Visible = false;
+    vm.Class2Visible = false;
+    vm.Class3Visible = false;
+    vm.EventsVisible = false;
   
     // load last selection from local storage.
     if (angular.isString($localStorage.fontSizeClass)) {
@@ -101,6 +106,11 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
         var scrubText = vm.SearchSummary.ScrubedText;
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
+
+        vm.EventsVisible = (vm.SearchSummary.EventCount);
+        vm.Class1Visible = (vm.SearchSummary.ClassICount);
+        vm.Class2Visible = (vm.SearchSummary.ClassIICount);
+        vm.Class3Visible = (vm.SearchSummary.ClassIIICount);
       
         productservice.GetFDAResults(scrubText, region,
             function(result) {
