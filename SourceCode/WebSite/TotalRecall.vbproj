@@ -102,6 +102,8 @@
   <ItemGroup>
     <Content Include="app\about\about.html" />
     <Content Include="app\globals\globals.js" />
+    <Content Include="app\globals\sitecomments.controller.js" />
+    <Content Include="app\globals\sitecomments.html" />
     <Content Include="app\landing\landing.controller.js" />
     <Content Include="app\landing\landing.html" />
     <Content Include="app\landing\landing.service.js" />
