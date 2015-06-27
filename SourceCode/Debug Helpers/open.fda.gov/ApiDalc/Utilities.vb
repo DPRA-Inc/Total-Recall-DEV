@@ -6,6 +6,10 @@ Public Module Utilities
 
     Public Function ConvertDateStringToDate(ByVal dateString As String, ByVal dateFormat As String) As Date
 
+        If dateString Is Nothing OrElse dateString.Length = 0 Then
+            Return Nothing
+        End If
+
         Dim result As DateTime
 
         Select Case dateFormat
