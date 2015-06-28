@@ -163,8 +163,6 @@ Public Class ShopAwareService
 
     Public Function GetFDAResult(ByVal keyWord As String, ByVal state As String) As FDAResult
 
-        Const maxResultSetSize As Integer = 100
-
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
 
         Dim mapList As New Dictionary(Of String, SearchResultMapData)
@@ -172,7 +170,6 @@ Public Class ShopAwareService
         Dim graphData As New ReportData
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state)
-
         Dim values As New FDAResult
 
         For Each itm As ResultRecall In tmp
@@ -294,21 +291,16 @@ Public Class ShopAwareService
         searchResultLocal.Results.AddRange(drugs)
 
         'Get Device Events
-        'Dim devices = fda.GetDeviceEventByDescription(keyWord)
-        'searchResultLocal.Results.AddRange(devices)
+        Dim devices = fda.GetDeviceEventByDescription(keyWord)
+        searchResultLocal.Results.AddRange(devices)
 
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
-
-        'If tmpLinqResults.Count > maxResultSetSize Then
-        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        'End If
 
         searchResultLocal.Results = tmpLinqResults
 
         Return searchResultLocal
 
     End Function
-
 #End Region
 
 #Region " Private Methods "
@@ -316,7 +308,6 @@ Public Class ShopAwareService
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
         _fda = New OpenFda(_restClient)
-
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord, .State = state}
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
@@ -340,7 +331,6 @@ Public Class ShopAwareService
                 searchSummaryForKeyword.ClassICount += endpointSearchSummary.ClassICount
                 searchSummaryForKeyword.ClassIICount += endpointSearchSummary.ClassIICount
                 searchSummaryForKeyword.ClassIIICount += endpointSearchSummary.ClassIIICount
-
             End If
 
         Next
@@ -389,6 +379,7 @@ Public Class ShopAwareService
             ' If there was not data in the 1 yr window the get all results.
             ' Check a 2 yr window for results.
             If dataSetSize = 0 Then
+
 
                 endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
 
@@ -455,7 +446,6 @@ Public Class ShopAwareService
                 Loop Until pageLimit = 0
 
             End If
-
         Next
 
         Return resultList
