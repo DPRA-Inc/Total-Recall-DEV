@@ -161,7 +161,7 @@ Public Class ShopAwareService
 
     Public Function GetFDAResult(ByVal keyWord As String, ByVal state As String) As FDAResult
 
-        Const maxResultSetSize As Integer = 100
+        'Const maxResultSetSize As Integer = 100
 
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
 
@@ -169,7 +169,7 @@ Public Class ShopAwareService
         
         Dim graphData As New ReportData
 
-        Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, maxResultSetSize)
+        Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state, 0)
 
         Dim values As New FDAResult
 
@@ -292,14 +292,14 @@ Public Class ShopAwareService
         searchResultLocal.Results.AddRange(drugs)
 
         'Get Device Events
-        'Dim devices = fda.GetDeviceEventByDescription(keyWord)
-        'searchResultLocal.Results.AddRange(devices)
+        Dim devices = fda.GetDeviceEventByDescription(keyWord)
+        searchResultLocal.Results.AddRange(devices)
 
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
 
-        If tmpLinqResults.Count > maxResultSetSize Then
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        End If
+        'If tmpLinqResults.Count > maxResultSetSize Then
+        '    tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
+        'End If
 
         searchResultLocal.Results = tmpLinqResults
 
