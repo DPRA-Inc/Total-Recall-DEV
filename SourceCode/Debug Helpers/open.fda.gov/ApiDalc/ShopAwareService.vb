@@ -658,20 +658,6 @@ Public Class ShopAwareService
 
     End Sub
 
-    Private Sub LimitResultsOfSearchResultItems(searchResultItemList As List(Of SearchResultItem), maxResultSetSize As Integer)
-
-        'If searchResultLocal.ClassI.Count > maxResultSetSize Then
-        Dim tmpLinqResults = (From el In searchResultItemList Select el Order By CDate(el.DateStarted) Descending).ToList()
-
-        If tmpLinqResults.Count > maxResultSetSize Then
-            tmpLinqResults.RemoveRange(maxResultSetSize, tmpLinqResults.Count - maxResultSetSize)
-        End If
-
-        searchResultItemList.Clear()
-        searchResultItemList.AddRange(tmpLinqResults)
-
-    End Sub
-
 #End Region
 
 End Class
