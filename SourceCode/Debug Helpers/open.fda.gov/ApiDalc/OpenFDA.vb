@@ -588,12 +588,23 @@ Public Class OpenFda
                         'param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
                         param += String.Format("distribution_pattern:(Nationwide+{0}+{1}))", tmp, GetEnumDescription(tmpEnum)) ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
-                        'TODO = Have a lookup to convert list of stateCodes to list of StateNames
-
                     Case FdaFilterTypes.RecallReason
-                        param += "(reason_for_recall:(" & tmp & ")"
-                        param += "+"
-                        param += "product_description:(" & tmp & "))"
+
+                        Dim keywordList As String() = tmp.Split("+")
+
+                        param += "(("
+                        For Each itm In keywordList
+                            param += String.Format("reason_for_recall:{0}+AND+", tmp)
+                        Next
+                        'Remove the Ending +AND+
+                        param = param.Substring(0, param.Length - 5)
+                        param += ")+("
+                        For Each itm In keywordList
+                            param += String.Format("product_description:{0}+AND+", tmp)
+                        Next
+                        'Remove the Ending +AND+
+                        param = param.Substring(0, param.Length - 5)
+                        param += "))"
 
                     Case FdaFilterTypes.Date
                         param += "("

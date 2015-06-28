@@ -186,7 +186,8 @@ Public Class Form1
         Dim result As Object
         If String.IsNullOrEmpty(tbExactURL.Text) Then
 
-            Dim apiUrl As String = fda.buildUrl(ept, spMaxResultSize.Value)
+            Dim apiUrl As String = fda.BuildUrl(ept, spMaxResultSize.Value)
+            TextBox1.Text = apiUrl
             lbFdaUrl.Text = apiUrl
 
             result = fda.Execute(apiUrl)
@@ -222,7 +223,6 @@ Public Class Form1
         Dim mr As MetaResults = MetaResults.cnvJsonData(result)
 
         lbMetaResultsTotal.Text = String.Format("Total Results: {0}", mr.Total)
-
 
         'TreeView1.Nodes.Clear()
         'TreeView1.Nodes.Add("results")
