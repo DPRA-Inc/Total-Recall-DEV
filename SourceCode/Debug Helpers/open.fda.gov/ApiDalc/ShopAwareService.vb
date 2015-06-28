@@ -292,8 +292,8 @@ Public Class ShopAwareService
         searchResultLocal.Results.AddRange(drugs)
 
         'Get Device Events
-        Dim devices = fda.GetDeviceEventByDescription(keyWord)
-        searchResultLocal.Results.AddRange(devices)
+        'Dim devices = fda.GetDeviceEventByDescription(keyWord)
+        'searchResultLocal.Results.AddRange(devices)
 
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
 

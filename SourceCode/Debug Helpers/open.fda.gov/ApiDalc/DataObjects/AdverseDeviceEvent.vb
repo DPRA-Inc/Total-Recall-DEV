@@ -409,13 +409,13 @@ Namespace DataObjects
                         If TypeOf deviceItem.BrandName Is System.String Then
 
                             If Not String.IsNullOrEmpty(deviceItem.BrandName) Then
-                                objDetail.BrandName.Add(deviceItem.BrandName)
+                                objDetail.BrandName.Add(StrConv(deviceItem.BrandName, VbStrConv.ProperCase))
                             End If
 
                         Else
 
                             For Each brand As String In deviceItem.BrandName
-                                objDetail.BrandName.Add(brand)
+                                objDetail.BrandName.Add(StrConv(brand, VbStrConv.ProperCase))
                             Next
 
                         End If
@@ -423,19 +423,19 @@ Namespace DataObjects
                         If TypeOf deviceItem.GenericName Is System.String Then
 
                             If Not String.IsNullOrEmpty(deviceItem.GenericName) Then
-                                objDetail.GenericName.Add(deviceItem.GenericName)
+                                objDetail.GenericName.Add(StrConv(deviceItem.GenericName, VbStrConv.ProperCase))
                             End If
 
                         Else
 
                             For Each generic As String In deviceItem.GenericName
-                                objDetail.GenericName.Add(generic)
+                                objDetail.GenericName.Add(StrConv(generic, VbStrConv.ProperCase))
                             Next
 
                         End If
 
                         For Each mdrItem As DeviceEventMdrTextData In itm.MdrText
-                            objDetail.Route.Add(mdrItem.Text)
+                            objDetail.Route.Add(StrConv(mdrItem.Text, VbStrConv.ProperCase))
                         Next
 
                     Next
