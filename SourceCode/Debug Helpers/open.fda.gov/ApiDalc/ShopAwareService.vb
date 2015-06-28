@@ -50,20 +50,20 @@ Public Class ShopAwareService
 
     End Function
 
-    ''' <summary>
-    ''' Get report data item by region
-    ''' </summary>
-    ''' <param name="keyword"></param>
-    ''' <param name="state"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As ReportData
+    ' ''' <summary>
+    ' ''' Get report data item by region
+    ' ''' </summary>
+    ' ''' <param name="keyword"></param>
+    ' ''' <param name="state"></param>
+    ' ''' <returns></returns>
+    ' ''' <remarks></remarks>
+    'Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As ReportData
 
-        _fda = New OpenFda(_restClient)
-        
-        Return _fda.GetReportDataRecallReasonByReportDate(keyword, state)
+    '    _fda = New OpenFda(_restClient)
 
-    End Function
+    '    Return _fda.GetReportDataRecallReasonByReportDate(keyword, state)
+
+    'End Function
 
     ''' <summary>
     ''' Get States
@@ -503,37 +503,37 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Sub RecallData_AddPropertyInfo(ByRef recallData As RecallSearchResultData, ByVal itm As ResultRecall)
-
-        If itm.Distribution_Pattern.ToLower.Contains("nationwide") Then
-            recallData.IsNationWide = True
-        End If
-
-        If Not String.IsNullOrEmpty(itm.State) Then
-            recallData.Regions.Add(itm.State)
-        End If
-
-        Dim items As Array
-
-        items = System.Enum.GetValues(GetType(States))
-
-        Dim tmpState As States
-
-        For Each item As String In items
-
-            tmpState = DirectCast([Enum].Parse(GetType(States), item), States)
-
-            If itm.Distribution_Pattern.Contains(tmpState.ToString) OrElse
-                itm.Distribution_Pattern.Contains(GetEnumDescription(tmpState)) OrElse
-                recallData.IsNationWide Then
-
-                recallData.Regions.Add(tmpState.ToString)
-
-            End If
-
-        Next
-
-    End Sub
+    '    Private Sub RecallData_AddPropertyInfo(ByRef recallData As RecallSearchResultData, ByVal itm As ResultRecall)
+    '
+    '        If itm.Distribution_Pattern.ToLower.Contains("nationwide") Then
+    '            recallData.IsNationWide = True
+    '        End If
+    '
+    '        If Not String.IsNullOrEmpty(itm.State) Then
+    '            recallData.Regions.Add(itm.State)
+    '        End If
+    '
+    '        Dim items As Array
+    '
+    '        items = System.Enum.GetValues(GetType(States))
+    '
+    '        Dim tmpState As States
+    '
+    '        For Each item As String In items
+    '
+    '            tmpState = DirectCast([Enum].Parse(GetType(States), item), States)
+    '
+    '            If itm.Distribution_Pattern.Contains(tmpState.ToString) OrElse
+    '                itm.Distribution_Pattern.Contains(GetEnumDescription(tmpState)) OrElse
+    '                recallData.IsNationWide Then
+    '
+    '                recallData.Regions.Add(tmpState.ToString)
+    '
+    '            End If
+    '
+    '        Next
+    '
+    '    End Sub
 
     Private Sub ProcessResultRecordForData(data As ResultRecall, list As Dictionary(Of String, SearchResultMapData))
 
@@ -622,41 +622,41 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Sub AddSearchResultItemToClassificication(searchResultList As List(Of SearchResultItem), tmpSearchResultItem As SearchResultItem, maxResultSetSize As Integer)
-
-        Dim itmDate As DateTime
-        Dim newItemDate As DateTime
-
-        DateTime.TryParse(tmpSearchResultItem.DateStarted, newItemDate)
-
-        If searchResultList.Count = 0 Then
-            searchResultList.Add(tmpSearchResultItem)
-        Else
-
-            Dim itemAdded = False
-
-            For ndx As Integer = 0 To searchResultList.Count - 1
-
-                DateTime.TryParse(searchResultList(ndx).DateStarted, itmDate)
-
-                If newItemDate > itmDate Then
-
-                    searchResultList.Insert(ndx, tmpSearchResultItem)
-                    itemAdded = True
-
-                    Exit For
-
-                End If
-
-            Next
-
-            If Not itemAdded AndAlso searchResultList.Count < maxResultSetSize Then
-                searchResultList.Add(tmpSearchResultItem)
-            End If
-
-        End If
-
-    End Sub
+    '    Private Sub AddSearchResultItemToClassificication(searchResultList As List(Of SearchResultItem), tmpSearchResultItem As SearchResultItem, maxResultSetSize As Integer)
+    '
+    '        Dim itmDate As DateTime
+    '        Dim newItemDate As DateTime
+    '
+    '        DateTime.TryParse(tmpSearchResultItem.DateStarted, newItemDate)
+    '
+    '        If searchResultList.Count = 0 Then
+    '            searchResultList.Add(tmpSearchResultItem)
+    '        Else
+    '
+    '            Dim itemAdded = False
+    '
+    '            For ndx As Integer = 0 To searchResultList.Count - 1
+    '
+    '                DateTime.TryParse(searchResultList(ndx).DateStarted, itmDate)
+    '
+    '                If newItemDate > itmDate Then
+    '
+    '                    searchResultList.Insert(ndx, tmpSearchResultItem)
+    '                    itemAdded = True
+    '
+    '                    Exit For
+    '
+    '                End If
+    '
+    '            Next
+    '
+    '            If Not itemAdded AndAlso searchResultList.Count < maxResultSetSize Then
+    '                searchResultList.Add(tmpSearchResultItem)
+    '            End If
+    '
+    '        End If
+    '
+    '    End Sub
 
 #End Region
 

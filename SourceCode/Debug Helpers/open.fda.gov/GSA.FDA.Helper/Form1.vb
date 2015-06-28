@@ -1280,48 +1280,48 @@ Public Class Form1
 
 #End Region
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    'Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        Dim fda As New OpenFda
-        Dim results As ReportData = fda.GetReportDataRecallReasonByReportDate("Ice Cream", "TN")
+    '    Dim fda As New OpenFda
+    '    Dim results As ReportData = fda.GetReportDataRecallReasonByReportDate("Ice Cream", "TN")
 
-        Dim totalCount As String = 0
+    '    Dim totalCount As String = 0
 
-        RichTextBox2.Visible = False
-        TreeView3.Visible = True
+    '    RichTextBox2.Visible = False
+    '    TreeView3.Visible = True
 
-        'For Each xx As KeyValuePair(Of String, String) In results
+    '    'For Each xx As KeyValuePair(Of String, String) In results
 
-        '    TreeView3.Nodes.Add(String.Format("{0}  -  ({1})", xx.Key, xx.Value))
-        '    totalCount += CInt(xx.Value)
+    '    '    TreeView3.Nodes.Add(String.Format("{0}  -  ({1})", xx.Key, xx.Value))
+    '    '    totalCount += CInt(xx.Value)
 
-        'Next
-        For Each xx As String In results.Labels
+    '    'Next
+    '    For Each xx As String In results.Labels
 
-            TreeView3.Nodes.Add(String.Format("{0}", xx))
-            '    totalCount += CInt(xx.Value)
+    '        TreeView3.Nodes.Add(String.Format("{0}", xx))
+    '        '    totalCount += CInt(xx.Value)
 
-        Next
-
-
-        'Public Class ReportData
-
-        '    Public Property Labels As New List(Of String)
-        '    Public Property Data1 As New List(Of Integer)
-
-        '    Public Property Data2 As New List(Of Integer)
-
-        '    Public Property Data3 As New List(Of Integer)
-
-        '    Public Property DataE As New List(Of Integer)
-
-        'End Class
-
-        TreeView3.Nodes.Add(String.Format("Total: {0}", totalCount))
+    '    Next
 
 
+    '    'Public Class ReportData
 
-    End Sub
+    '    '    Public Property Labels As New List(Of String)
+    '    '    Public Property Data1 As New List(Of Integer)
+
+    '    '    Public Property Data2 As New List(Of Integer)
+
+    '    '    Public Property Data3 As New List(Of Integer)
+
+    '    '    Public Property DataE As New List(Of Integer)
+
+    '    'End Class
+
+    '    TreeView3.Nodes.Add(String.Format("Total: {0}", totalCount))
+
+
+
+    'End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
