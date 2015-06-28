@@ -76,12 +76,13 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbEndPoints_2 = New System.Windows.Forms.ComboBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.TreeView3 = New System.Windows.Forms.TreeView()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.spMaxResultSize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,6 +109,7 @@ Partial Class Form1
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.TextBox1)
         Me.TabPage1.Controls.Add(Me.tbSearchTypeNotes)
         Me.TabPage1.Controls.Add(Me.dtSerchTypeOptions)
         Me.TabPage1.Controls.Add(Me.cbSerchTypeOptions)
@@ -242,7 +244,7 @@ Partial Class Form1
         '
         Me.lbFdaUrl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lbFdaUrl.Location = New System.Drawing.Point(14, 19)
+        Me.lbFdaUrl.Location = New System.Drawing.Point(14, 6)
         Me.lbFdaUrl.Name = "lbFdaUrl"
         Me.lbFdaUrl.Size = New System.Drawing.Size(903, 23)
         Me.lbFdaUrl.TabIndex = 17
@@ -638,6 +640,16 @@ Partial Class Form1
         Me.TabPage4.Text = "TabPage4"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'Button5
+        '
+        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button5.Location = New System.Drawing.Point(527, 16)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(180, 23)
+        Me.Button5.TabIndex = 34
+        Me.Button5.Text = "DeviceEvent - COLONOSCOPY"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Button4
         '
         Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -680,15 +692,12 @@ Partial Class Form1
         Me.RichTextBox2.TabIndex = 25
         Me.RichTextBox2.Text = ""
         '
-        'Button5
+        'TextBox1
         '
-        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button5.Location = New System.Drawing.Point(527, 16)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(180, 23)
-        Me.Button5.TabIndex = 34
-        Me.Button5.Text = "DeviceEvent - COLONOSCOPY"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.TextBox1.Location = New System.Drawing.Point(17, 19)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(875, 20)
+        Me.TextBox1.TabIndex = 30
         '
         'Form1
         '
@@ -772,5 +781,6 @@ Partial Class Form1
     Friend WithEvents TreeView3 As System.Windows.Forms.TreeView
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 
 End Class
