@@ -1229,51 +1229,51 @@ Public Class Form1
         ' Dim wrapper As New ShopAwareService
         'Dim ShoppingList As New List(Of String)
 
-        Dim results_2 As New List(Of SearchResult)
-        For Each item In lbShoppingList.Items
+        'Dim results_2 As New List(Of SearchResult)
+        'For Each item In lbShoppingList.Items
 
-            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, tbRegion.Text)
-            results_2.Add(mySearchResult)
+        '    Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, tbRegion.Text)
+        '    results_2.Add(mySearchResult)
 
-        Next
+        'Next
 
         elapsedTime.Stop()
 
-        For Each itm In results_2
+        'For Each itm In results_2
 
-            Dim parentNode_2 As TreeNode = TreeView2.Nodes.Add("Results for: " & itm.Keyword)
-            Dim classNode As TreeNode
+        '    Dim parentNode_2 As TreeNode = TreeView2.Nodes.Add("Results for: " & itm.Keyword)
+        '    Dim classNode As TreeNode
 
-            If itm.ClassI.Count > 0 Then
+        '    If itm.ClassI.Count > 0 Then
 
-                classNode = parentNode_2.Nodes.Add("Class I")
-                For Each nd In itm.ClassI
-                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
-                Next
-            End If
+        '        classNode = parentNode_2.Nodes.Add("Class I")
+        '        For Each nd In itm.ClassI
+        '            classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
+        '        Next
+        '    End If
 
-            If itm.ClassII.Count > 0 Then
+        '    If itm.ClassII.Count > 0 Then
 
-                classNode = parentNode_2.Nodes.Add("Class II")
-                For Each nd In itm.ClassII
-                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
-                Next
-            End If
+        '        classNode = parentNode_2.Nodes.Add("Class II")
+        '        For Each nd In itm.ClassII
+        '            classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
+        '        Next
+        '    End If
 
 
-            If itm.ClassIII.Count > 0 Then
+        '    If itm.ClassIII.Count > 0 Then
 
-                classNode = parentNode_2.Nodes.Add("Class III")
-                For Each nd In itm.ClassIII
-                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
-                Next
-            End If
-            
-            parentNode_2.Nodes.Add(String.Format("Hits to the api: {0}", wrapper.OpenFdaApiHits))
-            parentNode_2.Nodes.Add(String.Format("Elapsed Time: {0}", elapsedTime.Elapsed))
-            parentNode_2.Expand()
+        '        classNode = parentNode_2.Nodes.Add("Class III")
+        '        For Each nd In itm.ClassIII
+        '            classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
+        '        Next
+        '    End If
 
-        Next
+        '    parentNode_2.Nodes.Add(String.Format("Hits to the api: {0}", wrapper.OpenFdaApiHits))
+        '    parentNode_2.Nodes.Add(String.Format("Elapsed Time: {0}", elapsedTime.Elapsed))
+        '    parentNode_2.Expand()
+
+        'Next
 
 
     End Sub

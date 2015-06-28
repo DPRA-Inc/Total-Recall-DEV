@@ -23,7 +23,7 @@ Public Class ShopAwareService
 
     Public Sub New()
         _restClient = New RestClient
-    End Sub
+        End Sub
 
     Public Sub New(restClient As IRestClient)
         _restClient = restClient
@@ -45,87 +45,8 @@ Public Class ShopAwareService
         Dim results As SearchSummary = Nothing
 
         results = GetRecallInfoCounts(keyWord, state)
-
+        
         Return results
-
-    End Function
-
-    ''' <summary>
-    ''' Get search results data
-    ''' </summary>
-    ''' <param name="keyWord"></param>
-    ''' <param name="state"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>    
-    Public Function GetSearchResult(ByVal keyWord As String, ByVal state As String) As SearchResult
-
-        Const maxResultSetSize As Integer = 100
-
-        Dim searchResultLocal As New SearchResult With {.Keyword = keyWord}
-        Dim mapList As New Dictionary(Of String, SearchResultMapData)
-        Dim graphList As New Dictionary(Of String, List(Of ReportData))
-
-        graphList.Add("class1", New List(Of ReportData))
-        graphList.Add("class2", New List(Of ReportData))
-        graphList.Add("class3", New List(Of ReportData))
-
-        Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state)
-
-        For Each itm As ResultRecall In tmp
-
-            ProcessResultRecordForData(itm, mapList)
-
-            ' ------------------------------------------------------------
-            'TODO convert itm (ResultRecall) to SearchResultItem
-            ' ------------------------------------------------------------
-
-            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
-            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
-            Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-
-            Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
-                                                                  .DateStarted = newItemDate.ToShortDateString(),
-                                                                  .Content = String.Format("{0} {1}", itm.Reason_For_Recall, itm.Code_info),
-                                                                  .DistributionPattern = itm.Distribution_Pattern,
-                                                                  .ProductDescription = itm.Product_Description,
-                                                                  .State = itm.State,
-                                                                  .Status = itm.Status,
-                                                                  .Country = itm.Country,
-                                                                  .RecallNumber = itm.Recall_Number,
-                                                                  .ProductQuantity = itm.Product_Quantity,
-                                                                  .EventId = itm.Event_Id,
-                                                                  .RecallingFirm = itm.Recalling_Firm,
-                                                                  .ReportDate = tmpReportDate.ToShortDateString(),
-                                                                  .CodeInfo = itm.Code_info,
-                                                                  .Voluntary = itm.Voluntary_Mandated}
-
-            Dim itmDate As DateTime = Nothing
-            Select Case itm.Classification
-
-                Case "Class I"
-
-                    searchResultLocal.ClassI.Add(tmpSearchResultItem)
-
-                Case "Class II"
-
-                    searchResultLocal.ClassII.Add(tmpSearchResultItem)
-
-                Case "Class III"
-
-                    searchResultLocal.ClassIII.Add(tmpSearchResultItem)
-
-            End Select
-
-        Next
-
-        searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
-
-        'LimitResultsOfSearchResultItems(searchResultLocal.ClassI, maxResultSetSize)
-        'LimitResultsOfSearchResultItems(searchResultLocal.ClassII, maxResultSetSize)
-        'LimitResultsOfSearchResultItems(searchResultLocal.ClassIII, maxResultSetSize)
-
-        Return searchResultLocal
 
     End Function
 
@@ -139,7 +60,7 @@ Public Class ShopAwareService
     Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As ReportData
 
         _fda = New OpenFda(_restClient)
-
+        
         Return _fda.GetReportDataRecallReasonByReportDate(keyword, state)
 
     End Function
@@ -152,7 +73,7 @@ Public Class ShopAwareService
     Public Function GetStates() As List(Of StateData)
 
         _fda = New OpenFda()
-
+        
         Dim results As List(Of StateData)
 
         results = _fda.GetStates()
@@ -170,6 +91,7 @@ Public Class ShopAwareService
         Dim graphData As New ReportData
 
         Dim tmp As List(Of ResultRecall) = GetRecallInfo(keyWord, state)
+
         Dim values As New FDAResult
 
         For Each itm As ResultRecall In tmp
@@ -180,10 +102,10 @@ Public Class ShopAwareService
             'TODO convert itm (ResultRecall) to SearchResultItem
             ' ------------------------------------------------------------
 
-            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
-            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
-            Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
+            Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
+            'Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+            'Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
             Dim tmpSearchResultItem As New SearchResultItem With {.City = itm.City,
                                                                   .DateStarted = newItemDate.ToShortDateString(),
@@ -308,6 +230,7 @@ Public Class ShopAwareService
     Private Function GetRecallInfoCounts(keyWord As String, state As String) As SearchSummary
 
         _fda = New OpenFda(_restClient)
+
         Dim searchSummaryForKeyword As New SearchSummary With {.Keyword = keyWord, .State = state}
         Dim filterType As FdaFilterTypes
         filterType = FdaFilterTypes.RecallReason
@@ -319,11 +242,8 @@ Public Class ShopAwareService
         Dim filterList As New List(Of String)
         filterList.Add(keyWord)
 
-        'Dim recallResultList As List(Of ResultRecall)
-
         For Each endPoint In endPointList
 
-            'recallResultList = New List(Of ResultRecall)
             Dim endpointSearchSummary As SearchSummary = ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, state, "classification")
 
             If endpointSearchSummary IsNot Nothing Then
@@ -331,6 +251,7 @@ Public Class ShopAwareService
                 searchSummaryForKeyword.ClassICount += endpointSearchSummary.ClassICount
                 searchSummaryForKeyword.ClassIICount += endpointSearchSummary.ClassIICount
                 searchSummaryForKeyword.ClassIIICount += endpointSearchSummary.ClassIIICount
+
             End If
 
         Next
@@ -346,7 +267,7 @@ Public Class ShopAwareService
     Private Function GetRecallInfo(ByVal keyWord As String, state As String) As List(Of ResultRecall)
 
         _fda = New OpenFda(_restClient)
-
+        
         OpenFdaApiHits = 0
 
         Dim apiUrl As String = String.Empty
@@ -367,7 +288,6 @@ Public Class ShopAwareService
             _fda.AddSearchFilter(endPointType, FdaFilterTypes.Region, filterList, FilterCompairType.And)
             _fda.AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
             _fda.AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
-            '' _fda.AddSearchFilter(endPointType, "classification", cc, FilterCompairType.And)
 
             apiUrl = _fda.BuildUrl(endPointType, MaxResultSetSize)
 
@@ -379,7 +299,6 @@ Public Class ShopAwareService
             ' If there was not data in the 1 yr window the get all results.
             ' Check a 2 yr window for results.
             If dataSetSize = 0 Then
-
 
                 endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-2))
 
@@ -451,106 +370,40 @@ Public Class ShopAwareService
         Return resultList
 
     End Function
+    
+    'Private Function ExecuteSearch(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
 
-    'Private Function GetRecallInfo(ByVal keyWordList As List(Of String), ByVal maxresultsize As Integer) As List(Of RecallSearchResultData)
+    '    Dim apiUrl As String = String.Empty
+    '    Dim searchResults As String
+    '    Dim srMetaData As MetaResults
+    '    Dim tmpRecallResultList As New List(Of ResultRecall)
 
-    '    _fda = New OpenFda(_restClient)
+    '    _fda.AddSearchFilter(endPointType, filterType, filterList)
+    '    apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
+    '    searchResults = _fda.Execute(apiUrl)
 
-    '    Dim results As New List(Of RecallSearchResultData)
+    '    srMetaData = MetaResults.CnvJsonData(searchResults)
 
-    '    Dim filterType As FdaFilterTypes
-    '    filterType = FdaFilterTypes.RecallReason
+    '    If srMetaData.Total > 0 Then
 
-    '    Dim resultCount As Integer
-    '    Dim recallResultList As New List(Of ResultRecall)
+    '        tmpRecallResultList = ResultRecall.CnvJsonDataToList(searchResults)
 
-    '    For Each kwGroup In keyWordList
+    '        If tmpRecallResultList.Count > 0 Then
 
-    '        Dim filterList As New List(Of String)
-    '        Dim kwGroupArray As String() = kwGroup.Split(",")
+    '            For Each itm As ResultRecall In tmpRecallResultList
 
-    '        For Each itm In kwGroupArray
-    '            filterList.Add(itm)
-    '        Next
-
-    '        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
-
-    '        For Each endPoint In endPointList
-
-    '            recallResultList = New List(Of ResultRecall)
-    '            resultCount = ExecuteSearch(endPoint, filterType, filterList, maxresultsize, recallResultList)
-
-    '            For Each itm As ResultRecall In recallResultList
-
-    '                Dim itmClassification As Classification
-
-    '                Select Case itm.Classification
-    '                    Case "Class I"
-    '                        itmClassification = Classification.Class_I
-
-    '                    Case "Class II"
-    '                        itmClassification = Classification.Class_II
-
-    '                    Case "Class III"
-    '                        itmClassification = Classification.Class_III
-
-    '                End Select
-
-    '                'itm.KeyWord = kwGroup
-
-    '                Dim recallData As New RecallSearchResultData With {.KeyWord = itm.KeyWord,
-    '                                                                   .Type = itm.Product_Type,
-    '                                                                   .Count = resultCount,
-    '                                                                   .Classification = String.Format("{0}  -  {1}", itm.Classification, GetEnumDescription(itmClassification)),
-    '                                                                   .ProductDescription = itm.Product_Description,
-    '                                                                   .ReasonForRecall = itm.Reason_For_Recall}
-
-    '                RecallData_AddPropertyInfo(recallData, itm)
-    '                results.Add(recallData)
+    '                itm.KeyWord = filterList(0)
+    '                recallResultList.Add(itm)
 
     '            Next
 
-    '        Next
+    '        End If
 
-    '    Next
+    '    End If
 
-    '    Return results
+    '    Return srMetaData.Total
 
     'End Function
-
-    Private Function ExecuteSearch(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
-
-        Dim apiUrl As String = String.Empty
-        Dim searchResults As String
-        Dim srMetaData As MetaResults
-        Dim tmpRecallResultList As New List(Of ResultRecall)
-
-        _fda.AddSearchFilter(endPointType, filterType, filterList)
-        apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
-        searchResults = _fda.Execute(apiUrl)
-
-        srMetaData = MetaResults.CnvJsonData(searchResults)
-
-        If srMetaData.Total > 0 Then
-
-            tmpRecallResultList = ResultRecall.CnvJsonDataToList(searchResults)
-
-            If tmpRecallResultList.Count > 0 Then
-
-                For Each itm As ResultRecall In tmpRecallResultList
-
-                    itm.KeyWord = filterList(0)
-                    recallResultList.Add(itm)
-
-                Next
-
-            End If
-
-        End If
-
-        Return srMetaData.Total
-
-    End Function
 
     Private Function ExecuteSearchCounts(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal state As String, ByVal cntField As String) As SearchSummary
 
@@ -573,10 +426,8 @@ Public Class ShopAwareService
 
         _fda.AddCountField(String.Format("{0}.exact", cntField.ToLower))
         apiUrl = _fda.BuildUrl(endPointType)
-        'apiUrl += String.Format("&count={0}.exact", cntField.ToLower)
 
         searchResults = _fda.Execute(apiUrl)
-
 
         ' If there was not data in the 1 yr window the get all results.
         ' Check a 2 yr window for results.
@@ -596,7 +447,6 @@ Public Class ShopAwareService
 
         End If
 
-
         ' If there was not data in the 2 yr window the get all results.
         If String.IsNullOrEmpty(searchResults) Then
 
@@ -611,7 +461,6 @@ Public Class ShopAwareService
 
         End If
 
-
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
@@ -625,14 +474,16 @@ Public Class ShopAwareService
                 termCount = itm("count")
 
                 Select Case itm("term")
+
                     Case "Class I"
+
                         searchSummary.ClassICount = termCount
                         termCountFound = True
 
                     Case "Class II"
+
                         searchSummary.ClassIICount = termCount
                         termCountFound = True
-
 
                     Case "Class III"
                         searchSummary.ClassIIICount = termCount
@@ -792,6 +643,7 @@ Public Class ShopAwareService
 
                     searchResultList.Insert(ndx, tmpSearchResultItem)
                     itemAdded = True
+
                     Exit For
 
                 End If
@@ -820,8 +672,6 @@ Public Class ShopAwareService
 
     End Sub
 
-
 #End Region
-
 
 End Class

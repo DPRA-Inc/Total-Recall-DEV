@@ -34,33 +34,6 @@ Namespace Api
 
         End Function
 
-        '<HttpGet>
-        '<Route("ProductResults/{product}/{region}")>
-        'Public Function ProductResults(product As String, region As String) As SearchResult
-
-        '    Dim cacheKey As String = String.Concat(product.ToLower, region.ToUpper, "QuickSearch")
-
-        '    ' attempt to load the object from the cache
-        '    Dim result As SearchResult = HttpRuntime.Cache(cacheKey)
-
-        '    If result Is Nothing Then
-
-        '        If region.ToLower.Trim = "all" Then
-        '            region = String.Empty
-        '        End If
-
-        '        Dim wrapper As New ShopAwareService
-        '        result = wrapper.GetSearchResult(product, region)
-
-        '        ' add the object to the cache
-        '        HttpRuntime.Cache.Insert(cacheKey, result, Nothing, DateTime.UtcNow.AddDays(CacheExpirationDays), TimeSpan.Zero)
-
-        '    End If
-
-        '    Return result
-
-        'End Function
-
         <HttpGet>
         <Route("FDAResults/{product}/{region}")>
         Public Function FdaResults(product As String, region As String) As FDAResult
