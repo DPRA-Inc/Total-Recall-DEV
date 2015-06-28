@@ -368,6 +368,10 @@ Namespace DataObjects
         ''' <remarks></remarks>
         Public Shared Function CnvJsonDataToList(jsondata As String) As List(Of AdverseDeviceEvent)
 
+            If jsondata.Length = 0 Then
+                Return New List(Of AdverseDeviceEvent)
+            End If
+
             Dim jo As JObject = JObject.Parse(jsondata)
 
             Return CnvJsonDataToList(jo)

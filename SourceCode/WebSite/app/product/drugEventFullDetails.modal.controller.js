@@ -3,5 +3,5 @@
 function DrugEventDialogController($scope, $modalInstance, item) {
     var vm = this;
 
-    vm.SearchResultItem = item;
+    vm.Patient = item;
 }

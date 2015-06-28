@@ -11,71 +11,24 @@
             <form class="form-horizontal">
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Event ID:</label>
+                    <label class="col-md-2 control-label">Status:</label>
+                    <div class="col-md-2">
+                        <span class="help-block m-b-none">OnGoing</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Patient:</label>
                     <div class="col-lg-4">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.EventId}} - {{vm.SearchResultItem.RecallNumber}}</span>
+                        <span class="help-block m-b-none">{{vm.Patient.Receiver}} on {{vm.Patient.DateStarted}}</span>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Status:</label>
-                    <div class="col-lg-2">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.Status}}</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Started:</label>
-                    <div class="col-lg-2">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.DateStarted}}</span>
-                    </div>
-                    <label class="col-lg-2 control-label">Reported:</label>
-                    <div class="col-lg-6">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.ReportDate}}</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Voluntary:</label>
-                    <div class="col-lg-10">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.Voluntary}}</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Recall Firm:</label>
-                    <div class="col-lg-10">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.RecallingFirm}}</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Locations:</label>
-                    <div class="col-lg-3">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.City}}  {{vm.SearchResultItem.State}}</span>
-                    </div>
-                    <div class="col-lg-7">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.DistributionPattern}}</span>
-                    </div>
-                </div>
+ 
 
                 <div class="hr-line-dashed"></div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Product:</label>
-                    <div class="col-lg-10">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.ProductDescription}}</span>
-                    </div>
-                </div>
-
-                <div class="hr-line-dashed"></div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Reason:</label>
-                    <div class="col-lg-10">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.Content}}</span>
-                    </div>
-                </div>               
+   
 
             </form>
 

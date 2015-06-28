@@ -74,6 +74,8 @@
     <Compile Include="DataObjects\DeviceEventMdrTextData.vb" />
     <Compile Include="DataObjects\DeviceEventPatientData.vb" />
     <Compile Include="DataObjects\DrugData.vb" />
+    <Compile Include="DataObjects\DrugEventItem.vb" />
+    <Compile Include="DataObjects\DrugEventList.vb" />
     <Compile Include="DataObjects\FDAResults.vb" />
     <Compile Include="DataObjects\FeatureObject.vb" />
     <Compile Include="DataObjects\IconStyle.vb" />

@@ -4,7 +4,18 @@ Public Module Utilities
 
 #Region " Public Methods "
 
-    Public Function ConvertDateStringToDate(ByVal dateFormat As String, ByVal dateString As String) As Date
+    ''' <summary>
+    ''' Converts a string date to a Date Object
+    ''' </summary>
+    ''' <param name="dateString">21050102</param>
+    ''' <param name="dateFormat">yyyyMMdd</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ConvertDateStringToDate(ByVal dateString As String, ByVal dateFormat As String) As Date
+
+        If dateString Is Nothing OrElse dateString.Length = 0 Then
+            Return Nothing
+        End If
 
         Dim result As DateTime
 
