@@ -390,7 +390,8 @@ Namespace DataObjects
                 With obj
 
                     .Classification = "Device Event"
-                    .IsEvent = True
+                    .IsEvent = False
+                    .IsDeviceEvent = True
 
                     If itm.EventType.ToString.Length > 1 Then
                         .Seriousness.Add(itm.EventType)

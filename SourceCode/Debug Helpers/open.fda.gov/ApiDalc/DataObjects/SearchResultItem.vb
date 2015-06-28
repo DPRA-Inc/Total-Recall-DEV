@@ -20,6 +20,7 @@ Namespace DataObjects
         End Property
 
         Public Property IsEvent As Boolean = False
+        Public Property IsProduct As Boolean = True
 
         Public Property DateStarted As String 'recall_initiation_date
 
