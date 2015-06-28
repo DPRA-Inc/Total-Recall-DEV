@@ -12,15 +12,19 @@
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">Status:</label>
+                    <div class="col-md-5">
+                        <span class="help-block">OnGoing</span>
+                    </div>
+                    <label class="col-md-2 control-label">Date Started:</label>
                     <div class="col-md-2">
-                        <span class="help-block m-b-none">OnGoing</span>
+                        <span class="help-block">{{vm.Patient.DateStarted}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Patient:</label>
                     <div class="col-lg-4">
-                        <span class="help-block m-b-none">{{vm.Patient.Receiver}} on {{vm.Patient.DateStarted}}</span>
+                        <span class="help-block">{{vm.Patient.Receiver}} </span>
                     </div>
                 </div>
 

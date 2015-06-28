@@ -389,15 +389,15 @@ Namespace DataObjects
 
                 With obj
 
-                    .Classification = "Device Event"
+                    .Classification = "Event"
                     .IsEvent = True
 
                     If itm.EventType.ToString.Length > 1 Then
                         .Seriousness.Add(itm.EventType)
                     End If
 
-                    .DateStarted = ConvertDateStringToDate(itm.DateOfEvent, "yyyyMMdd").ToString
-                    .ReceiptDate = ConvertDateStringToDate(itm.DateReceived, "yyyyMMdd").ToString
+                    .DateStarted = ConvertDateStringToDate(itm.DateOfEvent, "yyyyMMdd").ToShortDateString
+                    .ReceiptDate = ConvertDateStringToDate(itm.DateReceived, "yyyyMMdd").ToShortDateString
                     ' DateTime.TryParse(itm.DateOfEvent, .DateStarted)
                     'DateTime.TryParse(itm.DateReceived, .ReceiptDate)
 

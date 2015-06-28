@@ -62,12 +62,12 @@ Namespace DataObjects
 
                     If Not String.IsNullOrEmpty(itm.ReceiveDate) Then
                         '.DateStarted = ConvertDateStringToDate(itm.ReceiveDate, "yyyyMMdd")
-                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString
                     End If
 
                     If Not String.IsNullOrEmpty(itm.ReceiptDate) Then
                         '.ReceiptDate = ConvertDateStringToDate(itm.ReceiptDate, "yyyyMMdd")
-                        .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                        .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString
                     End If
 
                     'Seriousneess

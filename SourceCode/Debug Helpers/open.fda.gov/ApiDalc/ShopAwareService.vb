@@ -284,16 +284,16 @@ Public Class ShopAwareService
         searchResultLocal.GraphObjects = graphData
 
         ' Lets Get the Events And Mix them In.
-        Dim drugee As New OpenFda
+        Dim fda As New OpenFda
         Dim drugs As List(Of SearchResultDrugEvent)
 
         'Get Drug Events
-        drugs = drugee.GetDrugEventsByDrugName(keyWord)
+        drugs = fda.GetDrugEventsByDrugName(keyWord)
         searchResultLocal.Results.AddRange(drugs)
 
         'Get Device Events
-        drugs = drugee.GetDeviceEventByDescription(keyWord)
-        searchResultLocal.Results.AddRange(drugs)
+        Dim devices = fda.GetDeviceEventByDescription(keyWord)
+        searchResultLocal.Results.AddRange(devices)
 
         Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
 

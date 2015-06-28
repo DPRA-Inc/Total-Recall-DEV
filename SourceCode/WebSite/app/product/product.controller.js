@@ -84,6 +84,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
             $modal.open({
                 templateUrl: "app/product/drugEventFullDetails.modal.html",
                 controller: "drugeventdialogcontroller as vm",
+                size: "lg",
                 resolve: {
                     item: function () {
                         return item;
