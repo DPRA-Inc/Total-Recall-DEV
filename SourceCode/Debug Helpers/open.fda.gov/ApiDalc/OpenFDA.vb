@@ -566,7 +566,7 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.DrugEventDrugName
 
-                        param += "(patient.drug.openfda.substance_name:" & tmp
+                        param = "(patient.drug.openfda.substance_name:" & tmp
                         param += "+"
                         param += "patient.drug.openfda.brand_name:" & tmp
                         param += "+"
@@ -583,31 +583,31 @@ Public Class OpenFda
                     Case FdaFilterTypes.Region
 
                         Dim tmpEnum As Enumerations.States = CType([Enum].Parse(GetType(Enumerations.States), tmp), Enumerations.States)
-                        param += "(state:(" & tmp & ")"
+                        param = "(state:(" & tmp & ")"
                         param += "+"
                         'param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
                         param += String.Format("distribution_pattern:(Nationwide+{0}+{1}))", tmp, GetEnumDescription(tmpEnum)) ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
                     Case FdaFilterTypes.RecallReason
+                        
+                        Dim keywordList As String() = tmp.Replace("""", String.Empty).Split("+")
 
-                        Dim keywordList As String() = tmp.Split("+")
-
-                        param += "(("
+                        param = "(("
                         For Each itm In keywordList
-                            param += String.Format("reason_for_recall:{0}+AND+", tmp)
+                            param += String.Format("reason_for_recall:{0}+AND+", itm)
                         Next
                         'Remove the Ending +AND+
                         param = param.Substring(0, param.Length - 5)
                         param += ")+("
                         For Each itm In keywordList
-                            param += String.Format("product_description:{0}+AND+", tmp)
+                            param += String.Format("product_description:{0}+AND+", itm)
                         Next
                         'Remove the Ending +AND+
                         param = param.Substring(0, param.Length - 5)
                         param += "))"
 
                     Case FdaFilterTypes.Date
-                        param += "("
+                        param = "("
                         param += "report_date:" & tmp & ""
                         param += "+"
                         param += "recall_initiation_date:" & tmp & ""
@@ -622,7 +622,7 @@ Public Class OpenFda
                     Case FdaFilterTypes.Date
 
                     Case FdaFilterTypes.DeviceEventDescription
-                        param += "(device.brand_name:" & tmp
+                        param = "(device.brand_name:" & tmp
                         param += "+"
                         param += "device.generic_name:" & tmp
                         param += "+"
