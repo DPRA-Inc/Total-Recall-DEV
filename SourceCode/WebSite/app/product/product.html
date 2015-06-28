@@ -57,7 +57,7 @@
 
                                 <li class="{{item.Rank}}-element" ng-repeat="item in vm.VisibleResults" ng-click="vm.ShowMoreInformation(item)">
 
-                                    <div ng-hide="item.IsEvent">
+                                    <div ng-show="item.IsProduct">
 
                                         <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
@@ -84,17 +84,35 @@
                                         <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Seriousness: {{item.Seriousness}}</strong>
+                                            <strong>Seriousness:</strong> {{item.Seriousness}}
                                         </p>
 
-                                        <p>Source: {{item.PrimarySource}}</p>
+                                        <p><strong>Source:</strong> {{item.PrimarySource}}</p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
-                                        <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
                                     </div>
 
+                                    <div ng-show="item.IsDeviceEvent">
+
+                                        <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
+
+                                        <p>
+                                            <strong>Products:</strong> {{item.DrugItem[0].BrandNamesString}}
+                                        </p>
+                                        <p>
+                                            <strong>Generic Name:</strong> {{item.DrugItem[0].GenericNamesString}}
+                                        </p>
+
+                                        <p><strong>Seriousness:</strong> {{item.SeriousnessString}}</p>
+
+                                        <div class="pull-right btn btn-xs btn-white">More Information</div>
+
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}
+
+                                    </div>
 
                                 </li>
 

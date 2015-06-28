@@ -111,6 +111,8 @@
     <Content Include="app\notify\notify.html" />
     <Content Include="app\privacy\privacy.controller.js" />
     <Content Include="app\privacy\privacy.html" />
+    <Content Include="app\product\deviceEventFullDetails.modal.html" />
+    <Content Include="app\product\deviceEventFullDetails.modal.controller.js" />
     <Content Include="app\product\drugEventFullDetails.modal.html" />
     <Content Include="app\product\drugEventFullDetails.modal.controller.js" />
     <Content Include="app\product\productFullDetails.modal.controller.js" />

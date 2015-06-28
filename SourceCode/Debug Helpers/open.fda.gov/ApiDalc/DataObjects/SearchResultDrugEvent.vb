@@ -11,7 +11,10 @@ Namespace DataObjects
 
         Public Property Classification As String = "Event"
         Public Property Rank As String = "events"
+
         Public Property IsEvent As Boolean = True
+        Public Property IsDeviceEvent As Boolean = False
+        Public Property IsProduct As Boolean = False
 
         Public Property PatientSex As String
         Public Property PatientAge As String
