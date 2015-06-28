@@ -389,7 +389,7 @@ Namespace DataObjects
 
                 With obj
 
-                    .Classification = "Event"
+                    .Classification = "Device Event"
                     .IsEvent = True
 
                     If itm.EventType.ToString.Length > 1 Then

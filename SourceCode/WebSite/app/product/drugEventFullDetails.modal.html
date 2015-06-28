@@ -62,33 +62,39 @@
 
                 <div class="form-group">
 
-                    <ul class="sortable-list connectList">
+                    <div class="ibox float-e-margins">
 
-                        <li ng-repeat="item in vm.Patient.DrugItem">
-                            <div class="col-md-6">
-                                <span class="help-block">{{item.BrandNamesString}} </span>
-                            </div>
-                            <div class="col-md-6">
-                                <span class="help-block">{{item.GenericNamesString}} </span>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                        </li>
+                        <div class="ibox-title">
+                            <h5>Drugs: </h5>
+                        </div>
 
-                        
+                        <div class="ibox-content">
 
-                    </ul>
-
-
-
-</div>
-
-
-
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Brand Name</th>
+                                        <th>Generic Name</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in vm.Patient.DrugItem">
+                                        <td>
+                                            <span class="v-align-middle help-block">{{item.BrandNamesString}} </span>
+                                        </td>
+                                        <td>
+                                            <span class="v-align-middle help-block">{{item.GenericNamesString}} </span>
+                                        </td>                                        
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </form>
 
         </div>
-
 
     </div>
 </div>

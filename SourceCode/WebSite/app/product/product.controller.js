@@ -93,6 +93,21 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
             });
             return;
         }
+        
+        //if (item.Classification.lastIndexOf("Device", 0) === 0) {
+
+        //    $modal.open({
+        //        templateUrl: "app/product/drugEventFullDetails.modal.html",
+        //        controller: "drugeventdialogcontroller as vm",
+        //        size: "lg",
+        //        resolve: {
+        //            item: function () {
+        //                return item;
+        //            }
+        //        }
+        //    });
+        //    return;
+        //}
 
     };
 
