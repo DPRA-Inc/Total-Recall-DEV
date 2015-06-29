@@ -51,23 +51,6 @@ Public Class ShopAwareService
     End Function
 
     ''' <summary>
-    ''' Get States
-    ''' </summary>
-    ''' <returns>List of states</returns>
-    ''' <remarks></remarks>
-    Public Function GetStates() As List(Of StateData)
-
-        _fda = New OpenFda()
-
-        Dim results As List(Of StateData)
-
-        results = _fda.GetStates()
-
-        Return results
-
-    End Function
-
-    ''' <summary>
     ''' Gets a detailed list of issues. Issues are enforcements (Recalls) of food, drug and device (identified by classification) and events of drug and devices
     ''' </summary>
     ''' <param name="keyWord"></param>
