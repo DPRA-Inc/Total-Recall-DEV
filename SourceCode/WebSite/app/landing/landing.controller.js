@@ -124,7 +124,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                         "hideMethod": "fadeOut"
                     }
 
-                    toastr["warning"]("This item already exist in your shopping list.", "Duplicate item!");
+                    toastr["warning"]("This item already exists in your shopping list.", "Duplicate item!");
 
                     doesExist = true;
                     return ;

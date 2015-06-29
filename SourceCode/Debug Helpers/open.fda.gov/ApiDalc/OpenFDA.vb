@@ -25,7 +25,6 @@ Public Class OpenFda
     Private _search As String
     Private _count As String
     Private _limit As Integer = 0
-    Private _resultSet As String
     Private _meta As JObject
     Private _results As Object 'JObject
     Private _keyWords As New HashSet(Of String)
@@ -329,8 +328,6 @@ Public Class OpenFda
 
     End Function
 
-#Region " Search "
-
     Public Sub SearchOnFieldByValue(searchField As String, searchFieldValue As String)
 
         searchFieldValue = RemoveSpecialCharactersFromKeyword(searchFieldValue)
@@ -588,12 +585,6 @@ Public Class OpenFda
 
 #End Region
 
-#Region " Count "
-
-#End Region
-
-#End Region
-
 #Region " Friend Methods "
 
     Friend Function GetMetaResults() As MetaResults
@@ -680,8 +671,6 @@ Public Class OpenFda
 
     End Function
 
-#Region " Limits "
-
     Friend Function AddResultLimit(ByVal limit As Integer) As String
 
         Dim parm As String = String.Empty
@@ -707,8 +696,6 @@ Public Class OpenFda
 
 #End Region
 
-#End Region
-
 #Region " Private Methods "
 
     Private Function RemoveSpecialCharactersFromKeyword(ByVal keyword As String) As String
@@ -722,7 +709,5 @@ Public Class OpenFda
     End Function
 
 #End Region
-
-
 
 End Class
