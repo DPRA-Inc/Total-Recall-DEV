@@ -397,8 +397,8 @@ Namespace DataObjects
                         .Seriousness.Add(itm.EventType)
                     End If
 
-                    .DateStarted = ConvertDateStringToDate(itm.DateOfEvent, "yyyyMMdd").ToShortDateString
-                    .ReceiptDate = ConvertDateStringToDate(itm.DateReceived, "yyyyMMdd").ToShortDateString
+                    .DateStarted = ConvertDateStringToDate(itm.DateOfEvent, "yyyyMMdd").ToString("ddMMMyyyy")
+                    .ReportDate = ConvertDateStringToDate(itm.DateReceived, "yyyyMMdd").ToString("ddMMMyyyy")
                     ' DateTime.TryParse(itm.DateOfEvent, .DateStarted)
                     'DateTime.TryParse(itm.DateReceived, .ReceiptDate)
 

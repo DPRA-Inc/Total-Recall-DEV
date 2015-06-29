@@ -66,7 +66,7 @@ Public Class OpenFda
         Dim uri As Uri
         Dim sb As New System.Text.StringBuilder
         Dim hostUrl As String = GetOpenFdaEndPoint(endPointType)
-        
+
         sb.Append(hostUrl)
 
         If Not String.IsNullOrEmpty(_search) Then
@@ -144,7 +144,7 @@ Public Class OpenFda
         Return result
 
     End Function
-    
+
     Public Sub AddCountField(ByVal field As String)
         _count = field
     End Sub
