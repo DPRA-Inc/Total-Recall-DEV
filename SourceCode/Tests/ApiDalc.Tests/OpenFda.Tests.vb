@@ -59,8 +59,6 @@ Public Class OpenFda
 
     End Sub
 
-
-
     <TestCase()>
     Public Sub Convert_DrugEventData_AdverseDrugEventObject()
 

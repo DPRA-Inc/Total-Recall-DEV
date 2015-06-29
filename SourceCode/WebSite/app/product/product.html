@@ -130,25 +130,25 @@
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="classi-element" ng-show="vm.Class1Visible" style="min-height:72px;">
+                    <li class="classi-element" ng-show="vm.Class1Visible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classi.png" alt="Class 1" style="width:48px;height:48px;" />
                         </div>
                         <strong>({{vm.SearchSummary.ClassICount}}) Dangerous or defective products that predictably could cause serious health problems or death.</strong>
                     </li>
-                    <li class="classii-element" ng-show="vm.Class2Visible" style="min-height:72px;">
+                    <li class="classii-element" ng-show="vm.Class2Visible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classii.png" alt="Class 2" style="width:48px;height:48px;" />
                         </div>
                         <strong>({{vm.SearchSummary.ClassIICount}}) Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</strong>
                     </li>
-                    <li class="classiii-element" ng-show="vm.Class3Visible" style="min-height:72px;">
+                    <li class="classiii-element" ng-show="vm.Class3Visible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classiii.png" alt="Class 3" style="width:48px;height:48px;" />
                         </div>
                         <strong>({{vm.SearchSummary.ClassIIICount}}) Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.</strong>
                     </li>
-                    <li class="events-element" ng-show="vm.EventsVisible" style="min-height:72px;">
+                    <li class="events-element" ng-show="vm.EventsVisible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/events.png" alt="Event" style="width:48px;height:48px;" />
                         </div>
@@ -159,7 +159,7 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass">
 
                 <ul class="sortable-list connectList agile-list">
 
@@ -184,13 +184,13 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass">
 
                 <ul class="sortable-list connectList agile-list">
 
                     <li class="feed-element">
 
-                        <h3>Reported Date Count by Classification</h3>
+                        <h3>Number of Reports by Classification</h3>
 
                         <div>
                             <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>

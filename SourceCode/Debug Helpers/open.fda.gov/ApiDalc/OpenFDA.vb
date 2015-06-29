@@ -47,19 +47,14 @@ Public Class OpenFda
 
 #Region " Public Methods "
 
-    Friend Function GetOpenFdaEndPoint(endpoint As OpenFdaApiEndPoints) As String
-
-        _endPointType = endpoint
-
-        Dim result As String = String.Empty
-        Dim endPT As String = GetEnumDefaultValue(endpoint)
-
-        result = AddForwardSlash(HostUrl) & endPT & ".json?"
-
-        Return result
-
-    End Function
-
+    ''' <summary>
+    ''' Builds the url string for the endpoint, using the 
+    ''' </summary>
+    ''' <param name="endPointType"></param>
+    ''' <param name="limit"></param>
+    ''' <param name="ongoingOnly"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function BuildUrl(ByVal endPointType As OpenFdaApiEndPoints, Optional ByVal limit As Integer = 0, Optional ByVal ongoingOnly As Boolean = True) As String
 
         Dim uri As Uri
@@ -265,7 +260,7 @@ Public Class OpenFda
 
     End Function
 
-    Public Function GetDrugEventsByDrugName(ByVal drugName As String) As Object
+    Public Function GetDrugEventsByDrugName(ByVal drugName As String) As List(Of SearchResultDrugEvent)
 
         Dim DrugEventList As New List(Of AdverseDrugEvent)
         Dim tmpSearchResultDrugEvent As New List(Of SearchResultDrugEvent)
@@ -586,6 +581,19 @@ Public Class OpenFda
 #End Region
 
 #Region " Friend Methods "
+
+    Friend Function GetOpenFdaEndPoint(endpoint As OpenFdaApiEndPoints) As String
+
+        _endPointType = endpoint
+
+        Dim result As String = String.Empty
+        Dim endPT As String = GetEnumDefaultValue(endpoint)
+
+        result = AddForwardSlash(HostUrl) & endPT & ".json?"
+
+        Return result
+
+    End Function
 
     Friend Function GetMetaResults() As MetaResults
 
