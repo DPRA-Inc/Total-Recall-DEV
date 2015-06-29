@@ -26,4 +26,8 @@
         padding-top: 5px;
         float: none !important;
     }
+
+    .body-small.top-navigation .wrapper-content.wrapper, .body-small .top-navigation .wrapper-content.wrapper {
+        padding: 10px 0px 40px 0px;
+    }
 }
