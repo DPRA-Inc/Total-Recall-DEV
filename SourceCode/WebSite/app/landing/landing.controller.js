@@ -243,4 +243,10 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
             vm.IsRSSLoading = false;
         });
     };
+
+    vm.ClearList = function () {
+
+        vm.shoppingList = [];
+
+    }
 }
