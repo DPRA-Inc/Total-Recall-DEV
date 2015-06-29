@@ -38,7 +38,7 @@ Public Class ShopAwareService
     ''' </summary>
     ''' <param name="keyWord"></param>
     ''' <param name="state"></param>
-    ''' <returns></returns>
+    ''' <returns>Search Summary object</returns>
     ''' <remarks></remarks>
     Public Function GetSearchSummary(ByVal keyWord As String, ByVal state As String) As SearchSummary
 
@@ -67,6 +67,13 @@ Public Class ShopAwareService
 
     End Function
 
+    ''' <summary>
+    ''' Gets a detailed list of issues. Issues are enforcements (Recalls) of food, drug and device (identified by classification) and events of drug and devices
+    ''' </summary>
+    ''' <param name="keyWord"></param>
+    ''' <param name="state"></param>
+    ''' <returns>FDA Result object</returns>
+    ''' <remarks></remarks>
     Public Function GetFDAResult(ByVal keyWord As String, ByVal state As String) As FDAResult
 
         Dim dataYearsBack As Integer = 1
