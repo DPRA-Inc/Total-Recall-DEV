@@ -553,7 +553,7 @@ Public Class ShopAwareService
         Return result
 
     End Function
-    
+
 #End Region
 
 End Class
