@@ -217,7 +217,6 @@ Namespace Enumerations
         <Description("Wyoming")>
         WY
 
-
     End Enum
 
 End Namespace
