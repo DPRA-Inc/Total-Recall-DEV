@@ -11,7 +11,7 @@ function LandingService($http, $log) {
 
     return service;
 
-    ///////////////////
+    //////////////////
 
     /*
      * Get the issues found for an item.
