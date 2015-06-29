@@ -23,7 +23,7 @@ Public Class ShopAwareService
 
     Public Sub New()
         _restClient = New RestClient
-        End Sub
+    End Sub
 
     Public Sub New(restClient As IRestClient)
         _restClient = restClient
@@ -71,6 +71,7 @@ Public Class ShopAwareService
 
         Dim dateInit As Date = Date.Now.AddYears(-dataYearsBack)
 
+        ' Initialize graph data
         For i As Integer = 1 To 12 * dataYearsBack
 
             dateInit = dateInit.AddMonths(1)
@@ -83,16 +84,9 @@ Public Class ShopAwareService
 
         Next
 
+        ' Reconstruct recall data as searchresultitem object
         For Each itm As ResultRecall In tmp ' should be in order by newest date
 
-            ProcessResultRecordForData(itm, mapList)
-
-            ' ------------------------------------------------------------
-            'TODO convert itm (ResultRecall) to SearchResultItem
-            ' ------------------------------------------------------------
-
-            'Dim newItemDate As DateTime = ConvertDateStringToDate(itm.Recall_Initiation_Date, "yyyyMMdd")
-            'Dim tmpReportDate As DateTime = ConvertDateStringToDate(itm.Report_Date, "yyyyMMdd")
             Dim newItemDate As DateTime = DateTime.ParseExact(itm.Recall_Initiation_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
             Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.Report_Date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
 
@@ -115,6 +109,40 @@ Public Class ShopAwareService
 
             searchResultLocal.Results.Add(tmpSearchResultItem)
 
+        Next
+
+        ' Lets Get the Events And Mix them In.
+        Dim drugee As New OpenFda
+        Dim drugs As List(Of SearchResultDrugEvent)
+
+        'Get Drug Events
+        drugs = drugee.GetDrugEventsByDrugName(keyWord)
+        searchResultLocal.Results.AddRange(drugs)
+
+        'Get Device Events
+        drugs = drugee.GetDeviceEventByDescription(keyWord)
+        searchResultLocal.Results.AddRange(drugs)
+
+        'Sort for most recient at the top of the list
+        Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.ReportDate) Descending).ToList()
+
+        ' Process data for maps and graphs
+        For Each itm As Object In tmpLinqResults
+
+            ' Map Processing first
+            Select Case itm.GetType.ToString
+
+                Case "ApiDalc.DataObjects.SearchResultItem"
+                    ProcessResultRecordForRecall(itm, mapList)
+
+                Case "ApiDalc.DataObjects.SearchResultDrugEvent"
+                    ProcessResultRecordForDrugEvent(itm, mapList)
+
+            End Select
+
+            ' Now process graph data
+            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
+
             Dim dateForReport As String = tmpReportDate.ToString("MMM-yyyy")
             Dim found As Boolean = False
 
@@ -128,6 +156,8 @@ Public Class ShopAwareService
 
                             found = True
                             graphData.Data1(i) += 1
+
+                            Exit For
 
                         End If
 
@@ -189,29 +219,41 @@ Public Class ShopAwareService
 
                     End If
 
+                Case "Device Event", "Drug Event", "Event"
+
+                    For i As Integer = 0 To graphData.Labels.Count - 1
+
+                        If graphData.Labels(i) = dateForReport Then
+
+                            found = True
+                            graphData.DataE(i) += 1
+
+                        End If
+
+                    Next
+
+                    If Not found Then
+
+                        graphData.Labels.Insert(0, dateForReport)
+                        graphData.Data1.Insert(0, 0)
+                        graphData.Data2.Insert(0, 0)
+                        graphData.Data3.Insert(0, 0)
+                        graphData.DataE.Insert(0, 1)
+
+                    End If
+
+                Case Else
+
+                    Dim i As Integer = 0
+                    ' classification not found
+
+
             End Select
 
         Next
 
         searchResultLocal.MapObjects = ConvertDictionaryMapObjectsToSearchResult(mapList)
         searchResultLocal.GraphObjects = graphData
-
-        ' Lets Get the Events And Mix them In.
-        Dim drugee As New OpenFda
-        Dim drugs As List(Of SearchResultDrugEvent)
-
-        'Get Drug Events
-        drugs = drugee.GetDrugEventsByDrugName(keyWord)
-        searchResultLocal.Results.AddRange(drugs)
-
-        'Get Device Events
-        drugs = drugee.GetDeviceEventByDescription(keyWord)
-        searchResultLocal.Results.AddRange(drugs)
-
-        'Sort for most recient at the top of the list
-        Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.DateStarted) Descending).ToList()
-
-        searchResultLocal.Results = tmpLinqResults
 
         Return searchResultLocal
 
@@ -467,9 +509,9 @@ Public Class ShopAwareService
 
     End Function
 
-    Private Sub ProcessResultRecordForData(data As ResultRecall, list As Dictionary(Of String, SearchResultMapData))
+    Private Sub ProcessResultRecordForRecall(data As SearchResultItem, list As Dictionary(Of String, SearchResultMapData))
 
-        Dim check As String = data.Distribution_Pattern
+        Dim check As String = data.DistributionPattern
         Dim states As List(Of String) = System.Enum.GetNames(GetType(States)).ToList
         Dim nationwide As Boolean = False
 
@@ -499,7 +541,7 @@ Public Class ShopAwareService
 
                     End If
 
-                    Dim tooltip As String = String.Concat(data.Product_Type, " {0}")
+                    Dim tooltip As String = String.Concat(data.Classification, " {0}")
 
                     Select Case data.Classification.ToLower
 
@@ -519,6 +561,64 @@ Public Class ShopAwareService
                             listCheck.IconSet = (listCheck.IconSet Or IconSet.Class3)
 
                     End Select
+
+                    If Not listCheck.Tooltip.Contains(tooltip) Then
+
+                        If listCheck.Tooltip.Length > 0 Then
+                            listCheck.Tooltip += ", "
+                        End If
+
+                        listCheck.Tooltip += tooltip
+
+                    End If
+
+                    list(state) = listCheck
+
+                End If
+
+            Next
+
+        Catch ex As Exception
+            Throw
+        End Try
+
+    End Sub
+
+    Private Sub ProcessResultRecordForDrugEvent(data As SearchResultDrugEvent, list As Dictionary(Of String, SearchResultMapData))
+
+        Dim check As String = "nationwide" ' add state field data.
+        Dim states As List(Of String) = System.Enum.GetNames(GetType(States)).ToList
+        Dim nationwide As Boolean = False
+
+        Try
+
+            If check.ToLower.Contains("nationwide") Then
+                nationwide = True
+            End If
+
+            For Each state As String In states
+
+                Dim stEnum As Reflection.FieldInfo = GetType(States).GetField(state)
+                Dim stateName As DescriptionAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DescriptionAttribute), False)(0), DescriptionAttribute)
+                Dim stateCoords As DefaultValueAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DefaultValueAttribute), False)(0), DefaultValueAttribute)
+                Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(";").ToList
+
+                If check.Contains(state) Or check.ToUpper.Contains(stateName.Description.ToUpper) Or nationwide Then
+
+                    Dim listCheck As SearchResultMapData = Nothing
+
+                    If list.ContainsKey(state) Then
+                        listCheck = list(state)
+                    Else
+
+                        listCheck = New SearchResultMapData With {.State = state, .Latitude = coordPair(0), .Longitude = coordPair(1)}
+                        list.Add(state, listCheck)
+
+                    End If
+
+                    Dim tooltip As String = String.Concat(data.Rank)
+
+                    listCheck.IconSet = (listCheck.IconSet Or IconSet.Event)
 
                     If Not listCheck.Tooltip.Contains(tooltip) Then
 

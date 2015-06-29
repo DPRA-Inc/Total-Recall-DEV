@@ -50,13 +50,26 @@ Namespace DataObjects
         ''' <remarks></remarks>
         Public Property DateStarted As String
 
+        Private _reportDate As String = String.Empty
+
         ''' <summary>
         ''' Date that most recent information in the report was received by FDA.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property ReceiptDate As String
+        Public Property ReportDate As String
+            Get
+                If _reportDate.Length = 0 Then
+                    Return Me.DateStarted
+                Else
+                    Return _reportDate
+                End If
+            End Get
+            Set(value As String)
+                _reportDate = value
+            End Set
+        End Property
 
         Public Property Sender As String
         Public Property Receiver As String
@@ -83,12 +96,12 @@ Namespace DataObjects
 
                     If Not String.IsNullOrEmpty(itm.ReceiveDate) Then
                         '.DateStarted = ConvertDateStringToDate(itm.ReceiveDate, "yyyyMMdd")
-                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString
+                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("ddMMMyyyy")
                     End If
 
                     If Not String.IsNullOrEmpty(itm.ReceiptDate) Then
                         '.ReceiptDate = ConvertDateStringToDate(itm.ReceiptDate, "yyyyMMdd")
-                        .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString
+                        .ReportDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("ddMMMyyyy")
                     End If
 
                     'Seriousneess
