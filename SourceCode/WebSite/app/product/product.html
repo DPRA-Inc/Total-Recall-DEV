@@ -55,62 +55,62 @@
 
                             <ul class="sortable-list connectList agile-list" infinite-scroll="vm.DisplayNext(2)" infinite-scroll-distance="2">
 
-                                <li class="{{::item.Rank}}-element" ng-repeat="item in vm.VisibleResults" ng-click="vm.ShowMoreInformation(item)">
+                                <li class="{{item.Rank}}-element" ng-repeat="item in vm.VisibleResults" ng-click="vm.ShowMoreInformation(item)">
 
-                                    <div ng-if="::item.IsProduct">
+                                    <div ng-show="item.IsProduct">
 
-                                        <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
+                                        <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Product:</strong> {{::item.ProductDescription}}
+                                            <strong>Product:</strong> {{item.ProductDescription}}
                                         </p>
 
                                         <p>
-                                            <strong>Reason:</strong> {{::item.ContentTruncated}}
+                                            <strong>Reason:</strong> {{item.ContentTruncated}}
                                         </p>
 
                                         <p>
-                                            <strong>Distribution:</strong> {{::item.DistributionPattern}}
+                                            <strong>Distribution:</strong> {{item.DistributionPattern}}
                                         </p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
-                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{::item.DateStarted}}    &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{::item.ReportDate}}
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}    &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{item.ReportDate}}
 
                                     </div>
 
-                                    <div ng-if="::item.IsEvent">
+                                    <div ng-show="item.IsEvent">
 
-                                        <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
+                                        <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Seriousness:</strong> {{::item.Seriousness}}
+                                            <strong>Seriousness:</strong> {{item.Seriousness}}
                                         </p>
 
-                                        <p><strong>Source:</strong> {{::item.PrimarySource}}</p>
+                                        <p><strong>Source:</strong> {{item.PrimarySource}}</p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
-                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{::item.DateStarted}}
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
                                     </div>
 
-                                    <div ng-if="::item.IsDeviceEvent">
+                                    <div ng-show="item.IsDeviceEvent">
 
-                                        <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
+                                        <div class="pull-right"><img src="img/identifiers/{{item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Products:</strong> {{::item.DrugItem[0].BrandNamesString}}
+                                            <strong>Products:</strong> {{item.DrugItem[0].BrandNamesString}}
                                         </p>
                                         <p>
-                                            <strong>Generic Name:</strong> {{::item.DrugItem[0].GenericNamesString}}
+                                            <strong>Generic Name:</strong> {{item.DrugItem[0].GenericNamesString}}
                                         </p>
 
-                                        <p><strong>Seriousness:</strong> {{::item.SeriousnessString}}</p>
+                                        <p><strong>Seriousness:</strong> {{item.SeriousnessString}}</p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
-                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{::item.DateStarted}}
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{item.DateStarted}}
 
                                     </div>
 

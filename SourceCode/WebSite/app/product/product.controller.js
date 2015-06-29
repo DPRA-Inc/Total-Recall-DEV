@@ -70,6 +70,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
             $modal.open({
                 templateUrl: "app/product/productFullDetails.modal.html",
                 controller: "productdialogcontroller as vm",
+                windowClass: "animated fadeInLeft",
                 resolve: {
                     item: function () {
                         return item;
@@ -85,6 +86,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
                 templateUrl: "app/product/drugEventFullDetails.modal.html",
                 controller: "drugeventdialogcontroller as vm",
                 size: "lg",
+                windowClass: "animated fadeInLeft",
                 resolve: {
                     item: function () {
                         return item;
@@ -100,6 +102,7 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
                 templateUrl: "app/product/deviceEventFullDetails.modal.html",
                 controller: "deviceeventdialogcontroller as vm",
                 size: "lg",
+                windowClass: "animated fadeInLeft",
                 resolve: {
                     item: function () {
                         return item;

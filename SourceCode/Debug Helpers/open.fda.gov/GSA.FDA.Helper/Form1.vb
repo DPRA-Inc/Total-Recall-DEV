@@ -186,7 +186,8 @@ Public Class Form1
         Dim result As Object
         If String.IsNullOrEmpty(tbExactURL.Text) Then
 
-            Dim apiUrl As String = fda.buildUrl(ept, spMaxResultSize.Value)
+            Dim apiUrl As String = fda.BuildUrl(ept, spMaxResultSize.Value)
+            TextBox1.Text = apiUrl
             lbFdaUrl.Text = apiUrl
 
             result = fda.Execute(apiUrl)
@@ -222,7 +223,6 @@ Public Class Form1
         Dim mr As MetaResults = MetaResults.cnvJsonData(result)
 
         lbMetaResultsTotal.Text = String.Format("Total Results: {0}", mr.Total)
-
 
         'TreeView1.Nodes.Clear()
         'TreeView1.Nodes.Add("results")
@@ -1229,99 +1229,99 @@ Public Class Form1
         ' Dim wrapper As New ShopAwareService
         'Dim ShoppingList As New List(Of String)
 
-        Dim results_2 As New List(Of SearchResult)
-        For Each item In lbShoppingList.Items
+        'Dim results_2 As New List(Of SearchResult)
+        'For Each item In lbShoppingList.Items
 
-            Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, tbRegion.Text)
-            results_2.Add(mySearchResult)
+        '    Dim mySearchResult As SearchResult = wrapper.GetSearchResult(item, tbRegion.Text)
+        '    results_2.Add(mySearchResult)
 
-        Next
+        'Next
 
         elapsedTime.Stop()
 
-        For Each itm In results_2
+        'For Each itm In results_2
 
-            Dim parentNode_2 As TreeNode = TreeView2.Nodes.Add("Results for: " & itm.Keyword)
-            Dim classNode As TreeNode
+        '    Dim parentNode_2 As TreeNode = TreeView2.Nodes.Add("Results for: " & itm.Keyword)
+        '    Dim classNode As TreeNode
 
-            If itm.ClassI.Count > 0 Then
+        '    If itm.ClassI.Count > 0 Then
 
-                classNode = parentNode_2.Nodes.Add("Class I")
-                For Each nd In itm.ClassI
-                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
-                Next
-            End If
+        '        classNode = parentNode_2.Nodes.Add("Class I")
+        '        For Each nd In itm.ClassI
+        '            classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
+        '        Next
+        '    End If
 
-            If itm.ClassII.Count > 0 Then
+        '    If itm.ClassII.Count > 0 Then
 
-                classNode = parentNode_2.Nodes.Add("Class II")
-                For Each nd In itm.ClassII
-                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
-                Next
-            End If
+        '        classNode = parentNode_2.Nodes.Add("Class II")
+        '        For Each nd In itm.ClassII
+        '            classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
+        '        Next
+        '    End If
 
 
-            If itm.ClassIII.Count > 0 Then
+        '    If itm.ClassIII.Count > 0 Then
 
-                classNode = parentNode_2.Nodes.Add("Class III")
-                For Each nd In itm.ClassIII
-                    classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
-                Next
-            End If
-            
-            parentNode_2.Nodes.Add(String.Format("Hits to the api: {0}", wrapper.OpenFdaApiHits))
-            parentNode_2.Nodes.Add(String.Format("Elapsed Time: {0}", elapsedTime.Elapsed))
-            parentNode_2.Expand()
+        '        classNode = parentNode_2.Nodes.Add("Class III")
+        '        For Each nd In itm.ClassIII
+        '            classNode.Nodes.Add(String.Format("{0} -- {1}", nd.DateStarted, nd.ProductDescription))
+        '        Next
+        '    End If
 
-        Next
+        '    parentNode_2.Nodes.Add(String.Format("Hits to the api: {0}", wrapper.OpenFdaApiHits))
+        '    parentNode_2.Nodes.Add(String.Format("Elapsed Time: {0}", elapsedTime.Elapsed))
+        '    parentNode_2.Expand()
+
+        'Next
 
 
     End Sub
 
 #End Region
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    'Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        Dim fda As New OpenFda
-        Dim results As ReportData = fda.GetReportDataRecallReasonByReportDate("Ice Cream", "TN")
+    '    Dim fda As New OpenFda
+    '    Dim results As ReportData = fda.GetReportDataRecallReasonByReportDate("Ice Cream", "TN")
 
-        Dim totalCount As String = 0
+    '    Dim totalCount As String = 0
 
-        RichTextBox2.Visible = False
-        TreeView3.Visible = True
+    '    RichTextBox2.Visible = False
+    '    TreeView3.Visible = True
 
-        'For Each xx As KeyValuePair(Of String, String) In results
+    '    'For Each xx As KeyValuePair(Of String, String) In results
 
-        '    TreeView3.Nodes.Add(String.Format("{0}  -  ({1})", xx.Key, xx.Value))
-        '    totalCount += CInt(xx.Value)
+    '    '    TreeView3.Nodes.Add(String.Format("{0}  -  ({1})", xx.Key, xx.Value))
+    '    '    totalCount += CInt(xx.Value)
 
-        'Next
-        For Each xx As String In results.Labels
+    '    'Next
+    '    For Each xx As String In results.Labels
 
-            TreeView3.Nodes.Add(String.Format("{0}", xx))
-            '    totalCount += CInt(xx.Value)
+    '        TreeView3.Nodes.Add(String.Format("{0}", xx))
+    '        '    totalCount += CInt(xx.Value)
 
-        Next
-
-
-        'Public Class ReportData
-
-        '    Public Property Labels As New List(Of String)
-        '    Public Property Data1 As New List(Of Integer)
-
-        '    Public Property Data2 As New List(Of Integer)
-
-        '    Public Property Data3 As New List(Of Integer)
-
-        '    Public Property DataE As New List(Of Integer)
-
-        'End Class
-
-        TreeView3.Nodes.Add(String.Format("Total: {0}", totalCount))
+    '    Next
 
 
+    '    'Public Class ReportData
 
-    End Sub
+    '    '    Public Property Labels As New List(Of String)
+    '    '    Public Property Data1 As New List(Of Integer)
+
+    '    '    Public Property Data2 As New List(Of Integer)
+
+    '    '    Public Property Data3 As New List(Of Integer)
+
+    '    '    Public Property DataE As New List(Of Integer)
+
+    '    'End Class
+
+    '    TreeView3.Nodes.Add(String.Format("Total: {0}", totalCount))
+
+
+
+    'End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
