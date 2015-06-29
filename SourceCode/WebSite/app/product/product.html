@@ -159,7 +159,7 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" id="mapPlaceholder">
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass">
 
                 <ul class="sortable-list connectList agile-list">
 
@@ -169,7 +169,7 @@
 
                         <div>
 
-                            <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" height="480px" width="100%">
+                            <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" style="height: 480px; width: 100%; min-width: 320px;">
 
                                 <ol-layer ol-layer-properties="osm"></ol-layer>
                                 <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
@@ -180,13 +180,21 @@
 
                     </li>
 
-                    <li class="col-md-12 feed-element animated bounceInUp pull-right">
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="feed-element">
 
                         <h3>Reported Date Count by Classification</h3>
 
                         <div>
                             <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
-                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
 
                         </div>
 
