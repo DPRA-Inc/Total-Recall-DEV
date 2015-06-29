@@ -124,10 +124,10 @@ Public Class ShopAwareService
         searchResultLocal.Results.AddRange(drugs)
 
         'Sort for most recient at the top of the list
-        Dim tmpLinqResults = (From el In searchResultLocal.Results Select el Order By CDate(el.ReportDate) Descending).ToList()
+        searchResultLocal.Results = (From el In searchResultLocal.Results Select el Order By CDate(el.SortDate) Descending).ToList()
 
-        ' Process data for maps and graphs
-        For Each itm As Object In tmpLinqResults
+        ' Now that the data is combined and sorted, Process data for maps and graphs
+        For Each itm As Object In searchResultLocal.Results
 
             ' Map Processing first
             Select Case itm.GetType.ToString
@@ -241,12 +241,6 @@ Public Class ShopAwareService
                         graphData.DataE.Insert(0, 1)
 
                     End If
-
-                Case Else
-
-                    Dim i As Integer = 0
-                    ' classification not found
-
 
             End Select
 

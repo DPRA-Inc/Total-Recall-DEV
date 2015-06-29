@@ -71,6 +71,12 @@ Namespace DataObjects
             End Set
         End Property
 
+        Public ReadOnly Property SortDate As DateTime
+            Get
+                Return DateTime.ParseExact(Me.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
+            End Get
+        End Property
+
         Public Property Sender As String
         Public Property Receiver As String
 

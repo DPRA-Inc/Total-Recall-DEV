@@ -51,6 +51,11 @@ Namespace DataObjects
         Public Property ProductQuantity As String ' product_quantity
         Public Property Country As String ' country
         Public Property ReportDate As String ' report_date
+        Public ReadOnly Property SortDate As DateTime
+            Get
+                Return DateTime.ParseExact(Me.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
+            End Get
+        End Property
         Public Property CodeInfo As String ' code_info
 
     End Class
