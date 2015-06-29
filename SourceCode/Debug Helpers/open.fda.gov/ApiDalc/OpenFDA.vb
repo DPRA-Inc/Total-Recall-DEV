@@ -16,8 +16,6 @@ Public Class OpenFda
 
 #Region " Public Properties "
 
-    Private _getMetaResults As Object
-
     Public Shared Property HostUrl As String = "https://api.fda.gov/"
 
 #End Region
@@ -124,39 +122,6 @@ Public Class OpenFda
 
         Dim result As String = String.Empty
 
-        Dim webClient = New Net.WebClient()
-
-        webClient.Headers.Clear()
-
-        Try
-
-            result = webClient.DownloadString(url)
-            _resultSet = result
-
-        Catch ex As Net.WebException
-
-            Debug.Write(ex.Message)
-
-        Catch ex As Exception
-            Debug.Write(ex.Message)
-        End Try
-
-
-        If Not String.IsNullOrEmpty(result) Then
-
-            Dim jo As JObject = JObject.Parse(result)
-
-            _meta = jo.GetValue("meta")
-
-            Try
-                _results = jo.PropertyValues("results")
-
-            Catch ex As Exception
-
-            End Try
-
-        End If
-
         Return result
 
     End Function
@@ -171,13 +136,8 @@ Public Class OpenFda
 
             Dim jo As JObject = JObject.Parse(result)
 
-            _meta = jo.GetValue("meta")
-
-            Try
-                _results = jo.GetValue("results")
-            Catch ex As Exception
-
-            End Try
+            _meta = jo.GetValue("meta") ' If the property doesn't exist, it returns null 
+            _results = jo("results")    ' If the property doesn't exist, it returns null 
 
         End If
 
