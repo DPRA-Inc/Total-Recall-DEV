@@ -96,6 +96,10 @@ Namespace DataObjects
 
         End Function
 
+        Public Overrides Function ToString() As String
+            Return String.Format("{0} - {1}", Recall_Initiation_Date, Classification)
+        End Function
+
 #End Region
 
     End Class
