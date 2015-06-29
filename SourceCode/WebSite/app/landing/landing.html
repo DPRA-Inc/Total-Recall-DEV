@@ -38,8 +38,8 @@
 
     <div class="col-md-6" style="z-index:73734;">
         <div class="ibox animated bounceInLeft">
+            
             <div class="ibox-content">
-
                 <div class="row">
                     <div class="col-md-10">
                         <h1>Shopping List</h1>
@@ -54,57 +54,54 @@
                 </div>
             </div>
 
-                
+            <ul class="sortable-list connectList agile-list" ng-model="todoList">
 
-                <ul class="sortable-list connectList agile-list" ng-model="todoList">
+                <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
 
-                    <li class="{{item.Rank}}-element" ng-repeat="item in vm.shoppingList" ng-click="vm.ViewProductDetails(item)">
+                    <table style="width:100%;" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td valign="middle">
+                                <h3>{{item.Keyword}}</h3>
+                                <h5>Affecting: {{item.State}}</h5>
+                            </td>
+                            <td>
+                                <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
+                            </td>
+                            <td valign="middle" align="right">
 
-                        <table style="width:100%;" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td valign="middle">
-                                    <h3>{{item.Keyword}}</h3>
-                                    <h5>Affecting: {{item.State}}</h5>
-                                </td>
-                                <td>
-                                    <h1><i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i></h1>
-                                </td>
-                                <td valign="middle" align="right">
+                                <div class="">
 
-                                    <div class="">
+                                    <img src="./img/identifiers/classi.png" ng-show="item.HasClassI" alt="Class 1" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Dangerous or defective products that predictably could cause serious health problems or death." />
+                                    <img src="./img/identifiers/classii.png" ng-show="item.HasClassII" alt="Class 2" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." />
+                                    <img src="./img/identifiers/classiii.png" ng-show="item.HasClassIII" alt="Class 3" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." />
+                                    <img src="./img/identifiers/events.png" ng-show="item.HasEvents" alt="Event" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Events occured with a drug or device." />
+                                    <img src="./img/identifiers/ok.png" ng-show="item.IsClean" alt="Ok" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Nothing recent found for this item." />
+                                    <button class="btn btn-white btn-lg" type="button" style="width:48px;height:48px;" ng-click="vm.RemoveFromList(item)" tooltip-placement="right" tooltip="Remove item from shopping list.">
+                                        <i class="fa fa-close"></i>
+                                    </button>
 
-                                        <img src="./img/identifiers/classi.png" ng-show="item.HasClassI" alt="Class 1" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Dangerous or defective products that predictably could cause serious health problems or death." />
-                                        <img src="./img/identifiers/classii.png" ng-show="item.HasClassII" alt="Class 2" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." />
-                                        <img src="./img/identifiers/classiii.png" ng-show="item.HasClassIII" alt="Class 3" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." />
-                                        <img src="./img/identifiers/events.png" ng-show="item.HasEvents" alt="Event" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Events occured with a drug or device." />
-                                        <img src="./img/identifiers/ok.png" ng-show="item.IsClean" alt="Ok" style="width:48px;height:48px;" tooltip-placement="right" tooltip="Nothing recent found for this item." />
-                                        <button class="btn btn-white btn-lg" type="button" style="width:48px;height:48px;" ng-click="vm.RemoveFromList(item)" tooltip-placement="right" tooltip="Remove item from shopping list.">
-                                            <i class="fa fa-close"></i>
-                                        </button>
+                                    <!--<div class="badge badge-white">
+                                        <h3>
+                                            <a href="#" title="Remove item from shopping list.">
+                                                <i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i>
+                                            </a>
+                                        </h3>
+                                    </div>-->
 
-                                        <!--<div class="badge badge-white">
-                                            <h3>
-                                                <a href="#" title="Remove item from shopping list.">
-                                                    <i class="fa fa-times" ng-click="vm.RemoveFromList(item)"></i>
-                                                </a>
-                                            </h3>
-                                        </div>-->
+                                </div>
 
-                                    </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                                </td>
-                            </tr>
-                        </table>
+                </li>
 
-                    </li>
+            </ul>
 
-                </ul>
-
-            </div>
         </div>
     </div>
 
-    <div class="col-md-6 animated bounceInRight" ng-init="vm.StartRSS()">
+    <div class="col-md-6 animated bounceInRight">
 
         <div class="row">
             <h1 class="col-md-10">Latest FDA News</h1>

@@ -57,6 +57,10 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
             }
 
         });
+
+        StartupRSS();
+        WarmUp();
+
     }
 
     /*
@@ -237,16 +241,22 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
      */
     vm.StartRSS = function ()
     {
-        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function (res)
-        {
+        StartupRSS();
+    };
+
+    function StartupRSS() {
+
+        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function (res) {
             vm.feeds = res.data.responseData.feed.entries;
             vm.IsRSSLoading = false;
         });
-    };
+
+    }
 
     vm.ClearList = function () {
 
         vm.shoppingList = [];
+        $localStorage.cart = angular.toJson(vm.shoppingList);
 
     }
 }
