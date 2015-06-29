@@ -16,6 +16,7 @@ Namespace DataObjects
         Public Property IsDeviceEvent As Boolean = False
         Public Property IsProduct As Boolean = False
 
+        Public Property Description As New List(Of String)
         Public Property PatientSex As String
         Public Property PatientAge As String
         Public Property PatientWeight As String

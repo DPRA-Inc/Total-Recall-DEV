@@ -436,7 +436,7 @@ Namespace DataObjects
                         End If
 
                         For Each mdrItem As DeviceEventMdrTextData In itm.MdrText
-                            objDetail.Route.Add(StrConv(mdrItem.Text, VbStrConv.ProperCase))
+                            obj.Description.Add(StrConv(mdrItem.Text, VbStrConv.ProperCase))
                         Next
 
                     Next

@@ -30,32 +30,39 @@
 
                 </div>
 
-                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label">Brand Name(s):</label>
+                    <div class="col-md-10">
+                        <span class="help-block">{{vm.EventItem.DrugItem[0].BrandNamesString}} </span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label">Generic Name(s):</label>
+                    <div class="col-md-10">
+                        <span class="help-block">{{vm.EventItem.DrugItem[0].GenericNamesString}} </span>
+                    </div>
+
+                </div>
 
                 <div class="form-group">
 
                     <div class="ibox float-e-margins">
 
                         <div class="ibox-title">
-                            <h5>Device: </h5>
+                            <h5>Event(s): </h5>
                         </div>
-
+                        
                         <div class="ibox-content">
 
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Brand Name</th>
-                                        <th>Generic Name</th>                                        
-                                    </tr>
-                                </thead>
+                            <table class="table table-striped">                                
                                 <tbody>
-                                    <tr ng-repeat="item in vm.EventItem.DrugItem">
+                                    <tr class="sortable-list connectList agile-list" ng-repeat="item in vm.EventItem.Description">
                                         <td>
-                                            <span class="v-align-middle help-block">{{item.BrandNamesString}} </span>
-                                        </td>
-                                        <td>
-                                            <span class="v-align-middle help-block">{{item.GenericNamesString}} </span>
+                                            <span class="v-align-middle help-block">{{item}} </span>
                                         </td>
                                     </tr>                                    
                                 </tbody>
