@@ -59,12 +59,12 @@ select::-ms-expand {
 .imagesection {
     height: 400px;
     width: 110%;
-    margin-top: -3px;
     background-repeat: repeat-x;
 }
 
 .searchbox {
     margin-top: 100px;
+    margin-bottom: 65px;
     background-color: #BFDFFF;
 }
 
