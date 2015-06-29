@@ -246,7 +246,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
     function StartupRSS() {
 
-        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function (res) {
+        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Recalls/rss.xml").then(function (res) {
             var data = angular.toJson(res.data.responseData.feed.entries);
 
             vm.feeds = angular.fromJson(data);
