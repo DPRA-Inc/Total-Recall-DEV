@@ -34,7 +34,7 @@ Public Class ShopAwareService
 #Region " Public Methods "
 
     ''' <summary>
-    ''' This Gets a count of Issues. The count is based on Classifications (Class I, Class II, Class III) of enforcements (Recalls) of food, drug and device and events of drug and devices
+    ''' This Gets a count of Issues. The count is based on Classifications (Class I, Class II, Class III) and drug event
     ''' </summary>
     ''' <param name="keyWord"></param>
     ''' <param name="state"></param>
@@ -49,6 +49,21 @@ Public Class ShopAwareService
         Return results
 
     End Function
+
+    ' ''' <summary>
+    ' ''' Get report data item by region
+    ' ''' </summary>
+    ' ''' <param name="keyword"></param>
+    ' ''' <param name="state"></param>
+    ' ''' <returns></returns>
+    ' ''' <remarks></remarks>
+    'Public Function GetReportDataItemByRegion(ByVal keyword As String, ByVal state As String) As ReportData
+
+    '    _fda = New OpenFda(_restClient)
+
+    '    Return _fda.GetReportDataRecallReasonByReportDate(keyword, state)
+
+    'End Function
 
     ''' <summary>
     ''' Get States
@@ -67,13 +82,6 @@ Public Class ShopAwareService
 
     End Function
 
-    ''' <summary>
-    ''' Gets a detailed list of issues. Issues are enforcements (Recalls) of food, drug and device (identified by classification) and events of drug and devices
-    ''' </summary>
-    ''' <param name="keyWord"></param>
-    ''' <param name="state"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
     Public Function GetFDAResult(ByVal keyWord As String, ByVal state As String) As FDAResult
 
         Dim searchResultLocal As New FDAResult With {.Keyword = keyWord}
@@ -363,6 +371,40 @@ Public Class ShopAwareService
 
     End Function
     
+    'Private Function ExecuteSearch(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByRef recallResultList As List(Of ResultRecall)) As Integer
+
+    '    Dim apiUrl As String = String.Empty
+    '    Dim searchResults As String
+    '    Dim srMetaData As MetaResults
+    '    Dim tmpRecallResultList As New List(Of ResultRecall)
+
+    '    _fda.AddSearchFilter(endPointType, filterType, filterList)
+    '    apiUrl = _fda.BuildUrl(endPointType, maxresultsize)
+    '    searchResults = _fda.Execute(apiUrl)
+
+    '    srMetaData = MetaResults.CnvJsonData(searchResults)
+
+    '    If srMetaData.Total > 0 Then
+
+    '        tmpRecallResultList = ResultRecall.CnvJsonDataToList(searchResults)
+
+    '        If tmpRecallResultList.Count > 0 Then
+
+    '            For Each itm As ResultRecall In tmpRecallResultList
+
+    '                itm.KeyWord = filterList(0)
+    '                recallResultList.Add(itm)
+
+    '            Next
+
+    '        End If
+
+    '    End If
+
+    '    Return srMetaData.Total
+
+    'End Function
+
     Private Function ExecuteSearchCounts(endPointType As OpenFdaApiEndPoints, filterType As FdaFilterTypes, filterList As List(Of String), ByVal maxresultsize As Integer, ByVal state As String, ByVal cntField As String) As SearchSummary
 
         Dim apiUrl As String = String.Empty
@@ -460,7 +502,39 @@ Public Class ShopAwareService
         Return searchSummary
 
     End Function
-    
+
+    '    Private Sub RecallData_AddPropertyInfo(ByRef recallData As RecallSearchResultData, ByVal itm As ResultRecall)
+    '
+    '        If itm.Distribution_Pattern.ToLower.Contains("nationwide") Then
+    '            recallData.IsNationWide = True
+    '        End If
+    '
+    '        If Not String.IsNullOrEmpty(itm.State) Then
+    '            recallData.Regions.Add(itm.State)
+    '        End If
+    '
+    '        Dim items As Array
+    '
+    '        items = System.Enum.GetValues(GetType(States))
+    '
+    '        Dim tmpState As States
+    '
+    '        For Each item As String In items
+    '
+    '            tmpState = DirectCast([Enum].Parse(GetType(States), item), States)
+    '
+    '            If itm.Distribution_Pattern.Contains(tmpState.ToString) OrElse
+    '                itm.Distribution_Pattern.Contains(GetEnumDescription(tmpState)) OrElse
+    '                recallData.IsNationWide Then
+    '
+    '                recallData.Regions.Add(tmpState.ToString)
+    '
+    '            End If
+    '
+    '        Next
+    '
+    '    End Sub
+
     Private Sub ProcessResultRecordForData(data As ResultRecall, list As Dictionary(Of String, SearchResultMapData))
 
         Dim check As String = data.Distribution_Pattern
@@ -547,6 +621,42 @@ Public Class ShopAwareService
         Return result
 
     End Function
+
+    '    Private Sub AddSearchResultItemToClassificication(searchResultList As List(Of SearchResultItem), tmpSearchResultItem As SearchResultItem, maxResultSetSize As Integer)
+    '
+    '        Dim itmDate As DateTime
+    '        Dim newItemDate As DateTime
+    '
+    '        DateTime.TryParse(tmpSearchResultItem.DateStarted, newItemDate)
+    '
+    '        If searchResultList.Count = 0 Then
+    '            searchResultList.Add(tmpSearchResultItem)
+    '        Else
+    '
+    '            Dim itemAdded = False
+    '
+    '            For ndx As Integer = 0 To searchResultList.Count - 1
+    '
+    '                DateTime.TryParse(searchResultList(ndx).DateStarted, itmDate)
+    '
+    '                If newItemDate > itmDate Then
+    '
+    '                    searchResultList.Insert(ndx, tmpSearchResultItem)
+    '                    itemAdded = True
+    '
+    '                    Exit For
+    '
+    '                End If
+    '
+    '            Next
+    '
+    '            If Not itemAdded AndAlso searchResultList.Count < maxResultSetSize Then
+    '                searchResultList.Add(tmpSearchResultItem)
+    '            End If
+    '
+    '        End If
+    '
+    '    End Sub
 
 #End Region
 
