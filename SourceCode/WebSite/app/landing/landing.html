@@ -40,7 +40,21 @@
         <div class="ibox animated bounceInLeft">
             <div class="ibox-content">
 
-                <h1>Shopping List</h1>
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1>Shopping List</h1>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button ng-click="vm.ClearList()" class="pull-right btn btn-link">
+                            <i class="fa fa-times-circle-o" ></i>
+                            Clear Shopping List
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+
+                
 
                 <ul class="sortable-list connectList agile-list" ng-model="todoList">
 
