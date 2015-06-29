@@ -10,15 +10,36 @@ Namespace DataObjects
     Public Class SearchResultDrugEvent
 
         Public Property Classification As String = "Event"
-
         Public Property Rank As String = "events"
+
         Public Property IsEvent As Boolean = True
+        Public Property IsDeviceEvent As Boolean = False
+        Public Property IsProduct As Boolean = False
+
         Public Property PatientSex As String
         Public Property PatientAge As String
         Public Property PatientWeight As String
         Public Property IsPatientDeath As Boolean
         Public Property Reactions As New List(Of String)
+
+        Public Property ReactionsString As String
+            Get
+                Return Join(Reactions.ToArray, ", ")
+            End Get
+            Set(value As String)
+            End Set
+        End Property
+
         Public Property Seriousness As New List(Of String)
+
+        Public Property SeriousnessString As String
+            Get
+                Return Join(Seriousness.ToArray, ", ")
+            End Get
+            Set(value As String)
+            End Set
+        End Property
+
         Public Property PrimarySource As String
 
         ''' <summary>
@@ -62,12 +83,12 @@ Namespace DataObjects
 
                     If Not String.IsNullOrEmpty(itm.ReceiveDate) Then
                         '.DateStarted = ConvertDateStringToDate(itm.ReceiveDate, "yyyyMMdd")
-                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                        .DateStarted = DateTime.ParseExact(itm.ReceiveDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString
                     End If
 
                     If Not String.IsNullOrEmpty(itm.ReceiptDate) Then
                         '.ReceiptDate = ConvertDateStringToDate(itm.ReceiptDate, "yyyyMMdd")
-                        .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString
+                        .ReceiptDate = DateTime.ParseExact(itm.ReceiptDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString
                     End If
 
                     'Seriousneess
@@ -142,19 +163,19 @@ Namespace DataObjects
                         Dim drugItem As New SearchResultDrugEventItem
 
                         For Each ofda In drug.OpenFDA.Brand_Name
-                            drugItem.BrandName.Add(ofda)
+                            drugItem.BrandName.Add(StrConv(ofda, VbStrConv.ProperCase))
                         Next
 
                         For Each ofda In drug.OpenFDA.Generic_Name
-                            drugItem.GenericName.Add(ofda)
+                            drugItem.GenericName.Add(StrConv(ofda, VbStrConv.ProperCase))
                         Next
 
                         For Each ofda In drug.OpenFDA.Manufacturer_Name
-                            drugItem.ManufacturerName.Add(ofda)
+                            drugItem.ManufacturerName.Add(StrConv(ofda, VbStrConv.ProperCase))
                         Next
 
                         For Each ofda In drug.OpenFDA.Route
-                            drugItem.Route.Add(ofda)
+                            drugItem.Route.Add(StrConv(ofda, VbStrConv.ProperCase))
                         Next
 
                         .DrugItem.Add(drugItem)

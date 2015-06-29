@@ -3,6 +3,8 @@
 function ProductController($scope, $sessionStorage, $localStorage, $http, $modal, productservice) {
     var vm = this;
 
+    vm.SearchResult = [];
+
     vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData = [];
@@ -62,16 +64,51 @@ function ProductController($scope, $sessionStorage, $localStorage, $http, $modal
     /*
      * Displays additional information about an reult item.
      */
-    vm.ShowMoreInformation = function(item) {
-        $modal.open({
-            templateUrl: "app/product/productFullDetails.modal.html",
-            controller: "productdialogcontroller as vm",
-            resolve: {
-                item: function () {
-                    return item;
+    vm.ShowMoreInformation = function (item) {
+
+        if (item.Classification.lastIndexOf("Class", 0) === 0) {
+            $modal.open({
+                templateUrl: "app/product/productFullDetails.modal.html",
+                controller: "productdialogcontroller as vm",
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
                 }
-            }
-        });
+            });
+            return;
+        }
+
+        if (item.Classification.lastIndexOf("Event", 0) === 0) {
+
+            $modal.open({
+                templateUrl: "app/product/drugEventFullDetails.modal.html",
+                controller: "drugeventdialogcontroller as vm",
+                size: "lg",
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+            return;
+        }
+        
+        if (item.Classification.lastIndexOf("Device", 0) === 0) {
+
+            $modal.open({
+                templateUrl: "app/product/deviceEventFullDetails.modal.html",
+                controller: "deviceeventdialogcontroller as vm",
+                size: "lg",
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+            return;
+        }
+
     };
 
     /*

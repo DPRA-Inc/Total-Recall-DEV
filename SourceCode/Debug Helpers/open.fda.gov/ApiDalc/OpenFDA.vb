@@ -174,9 +174,7 @@ Public Class OpenFda
             _meta = jo.GetValue("meta")
 
             Try
-
                 _results = jo.GetValue("results")
-
             Catch ex As Exception
 
             End Try
@@ -186,103 +184,10 @@ Public Class OpenFda
         Return result
 
     End Function
-
-    Public Function GetReportDataRecallReasonByReportDate(ByVal keyWord As String, ByVal state As String) As ReportData
-
-        Dim resutls As New Dictionary(Of String, String)
-        Dim reportCount As New Dictionary(Of String, Integer)
-        Dim url As String = String.Empty
-
-        Dim lowestMonth As Integer = 12
-        Dim highestMonth As Integer = 1
-
-        Dim endPointList As New List(Of OpenFdaApiEndPoints)({OpenFdaApiEndPoints.FoodRecall, OpenFdaApiEndPoints.DrugRecall, OpenFdaApiEndPoints.DeviceRecall})
-
-        For Each endPointType In endPointList
-
-            ResetSearch()
-            '  ExecuteSearchCounts(endPoint, filterType, filterList, maxresultsize, state, "classification")
-            'TODO:  this needs to be same as FrontPage Counts
-            'AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}))
-            'AddCountField("report_date")
-
-            'Dim filterList As New List(Of String) With {keyWord}
-            AddSearchFilter(endPointType, FdaFilterTypes.Region, New List(Of String)({state}), FilterCompairType.And)
-            AddSearchFilter(endPointType, FdaFilterTypes.RecallReason, New List(Of String)({keyWord}), FilterCompairType.And)
-            AddCountField("report_date")
-
-            url = BuildUrl(endPointType, 0)
-
-            Dim searchResults As String = Execute(url)
-
-            If Not String.IsNullOrEmpty(searchResults) Then
-
-                Dim jo As JObject = JObject.Parse(searchResults)
-                Dim countResults As JArray = jo("results")
-                Dim tmpDate As DateTime '= DateTime.ParseExact(filters(0), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-
-                For Each itm In countResults
-                    'tmpDate = ConvertDateStringToDate(itm("time"), "yyyyMMdd")
-                    tmpDate = DateTime.ParseExact(itm("time"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
-
-                    Dim label As String = tmpDate.Month
-
-                    If reportCount.ContainsKey(label) Then
-                        reportCount(label) += CInt(itm("count"))
-                    Else
-                        reportCount.Add(label, CInt(itm("count")))
-                    End If
-
-                    If lowestMonth > tmpDate.Month Then lowestMonth = tmpDate.Month
-                    If highestMonth < tmpDate.Month Then highestMonth = tmpDate.Month
-
-                Next
-
-            End If
-
-        Next
-
-        Dim final As New ReportData
-        'For i As Integer = lowestMonth To highestMonth
-
-        '    Dim count As Integer
-
-        '    If reportCount.ContainsKey(i.ToString) Then
-        '        count = reportCount(i.ToString)
-        '    Else
-        '        count = 0
-        '    End If
-
-        '    Dim label As String = String.Empty
-
-        '    Select Case i
-        '        Case 1 : label = "January"
-        '        Case 2 : label = "February"
-        '        Case 3 : label = "March"
-        '        Case 4 : label = "April"
-        '        Case 5 : label = "May"
-        '        Case 6 : label = "June"
-        '        Case 7 : label = "July"
-        '        Case 8 : label = "August"
-        '        Case 9 : label = "September"
-        '        Case 10 : label = "October"
-        '        Case 11 : label = "November"
-        '        Case 12 : label = "December"
-        '    End Select
-
-        '    final.Labels.Add(label)
-        '    final.Data.Add(count)
-
-        'Next
-
-        Return final
-
-    End Function
-
+    
     Public Sub AddCountField(ByVal field As String)
         _count = field
     End Sub
-
 
     Public Function GetDeviceEventsByDescriptionCount(ByVal keyword As String) As Integer
 
@@ -566,7 +471,7 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.DrugEventDrugName
 
-                        param += "(patient.drug.openfda.substance_name:" & tmp
+                        param = "(patient.drug.openfda.substance_name:" & tmp
                         param += "+"
                         param += "patient.drug.openfda.brand_name:" & tmp
                         param += "+"
@@ -583,20 +488,31 @@ Public Class OpenFda
                     Case FdaFilterTypes.Region
 
                         Dim tmpEnum As Enumerations.States = CType([Enum].Parse(GetType(Enumerations.States), tmp), Enumerations.States)
-                        param += "(state:(" & tmp & ")"
+                        param = "(state:(" & tmp & ")"
                         param += "+"
                         'param += "distribution_pattern:(Nationwide+" & tmp & "))" ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
                         param += String.Format("distribution_pattern:(Nationwide+{0}+{1}))", tmp, GetEnumDescription(tmpEnum)) ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
-                        'TODO = Have a lookup to convert list of stateCodes to list of StateNames
-
                     Case FdaFilterTypes.RecallReason
-                        param += "(reason_for_recall:(" & tmp & ")"
-                        param += "+"
-                        param += "product_description:(" & tmp & "))"
+                        
+                        Dim keywordList As String() = tmp.Replace("""", String.Empty).Split("+")
+
+                        param = "(("
+                        For Each itm In keywordList
+                            param += String.Format("reason_for_recall:{0}+AND+", itm)
+                        Next
+                        'Remove the Ending +AND+
+                        param = param.Substring(0, param.Length - 5)
+                        param += ")+("
+                        For Each itm In keywordList
+                            param += String.Format("product_description:{0}+AND+", itm)
+                        Next
+                        'Remove the Ending +AND+
+                        param = param.Substring(0, param.Length - 5)
+                        param += "))"
 
                     Case FdaFilterTypes.Date
-                        param += "("
+                        param = "("
                         param += "report_date:" & tmp & ""
                         param += "+"
                         param += "recall_initiation_date:" & tmp & ""
@@ -611,7 +527,7 @@ Public Class OpenFda
                     Case FdaFilterTypes.Date
 
                     Case FdaFilterTypes.DeviceEventDescription
-                        param += "(device.brand_name:" & tmp
+                        param = "(device.brand_name:" & tmp
                         param += "+"
                         param += "device.generic_name:" & tmp
                         param += "+"
@@ -662,21 +578,7 @@ Public Class OpenFda
         Dim metaData As New MetaResults
 
         If _meta IsNot Nothing Then
-
             metaData = GetMetaResults(_meta)
-
-            'If _meta("results") IsNot Nothing Then
-
-            '    With metaData
-
-            '        .Limit = _meta("results")("limit")
-            '        .Skip = _meta("results")("skip")
-            '        .Total = _meta("results")("total")
-
-            '    End With
-
-            'End If
-
         End If
 
         Return metaData
@@ -690,20 +592,7 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-
             Dim meta As JObject = jo.GetValue("meta")
-
-            'If meta("results") IsNot Nothing Then
-
-            '    With metaData
-
-            '        .Limit = meta("results")("limit")
-            '        .Skip = meta("results")("skip")
-            '        .Total = meta("results")("total")
-
-            '    End With
-
-            'End If
 
             metaData = GetMetaResults(meta)
 
@@ -712,8 +601,6 @@ Public Class OpenFda
         Return metaData
 
     End Function
-
-
 
     Friend Function GetMetaResults(ByVal meta As JObject) As MetaResults
 
@@ -730,7 +617,6 @@ Public Class OpenFda
             End With
 
         End If
-
 
         Return metaData
 

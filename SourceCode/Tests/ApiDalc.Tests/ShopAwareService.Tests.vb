@@ -18,15 +18,4 @@ Public Class ShopAwareService
 
     End Sub
 
-    <TestCase()>
-    Public Sub GetSearchResult_ValidInput_ReturnFoundItems()
-
-        Dim mockRestClient = New Mocks.MockRestClient("GetSearchResult.json")
-        Dim service = New ApiDalc.ShopAwareService(mockRestClient)
-        Dim result = service.GetSearchResult("nuts", "TN")
-
-        Assert.IsNotNull(result)
-
-    End Sub
-
 End Class
