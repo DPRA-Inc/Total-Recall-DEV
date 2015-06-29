@@ -93,7 +93,7 @@ Public Class ShopAwareService
 
         Next
 
-        For Each itm As ResultRecall In tmp
+        For Each itm As ResultRecall In tmp ' should be in order by newest date
 
             ProcessResultRecordForData(itm, mapList)
 
