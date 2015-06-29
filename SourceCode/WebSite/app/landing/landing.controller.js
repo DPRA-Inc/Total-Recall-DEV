@@ -11,6 +11,8 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
     vm.states = [];
     vm.selectedState = null;
 
+    vm.HasItems = false;
+
     if (angular.isString($localStorage.fontSizeClass))
     {
         vm.fontSizeClass = $localStorage.fontSizeClass;
@@ -60,6 +62,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
         StartupRSS();
         WarmUp();
+        BuildLegend();
 
     }
 
@@ -178,6 +181,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                                 product.EventCount = result.EventCount;
                                 product.IsClean = false;
                                 product.Rank = "events";
+                                vm.EventsVisible = true;
                             }
 
                             if (result.ClassIIICount > 0)
@@ -186,6 +190,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                                 product.ClassIIICount = result.ClassIIICount;
                                 product.IsClean = false;
                                 product.Rank = "classiii";
+                                vm.Class3Visible = true;
                             }
 
                             if (result.ClassIICount > 0)
@@ -194,6 +199,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                                 product.ClassIICount = result.ClassIICount;
                                 product.IsClean = false;
                                 product.Rank = "classii";
+                                vm.Class2Visible = true;
                             }
 
                             if (result.ClassICount > 0)
@@ -202,6 +208,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                                 product.ClassICount = result.ClassICount;
                                 product.IsClean = false;
                                 product.Rank = "classi";
+                                vm.Class1Visible = true;
                             }
 
                             product.IsLoading = false;
@@ -212,6 +219,9 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                 }
             );
         }
+
+        BuildLegend();
+
     };
 
     /*
@@ -223,6 +233,8 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
         vm.shoppingList.splice(itemIndex, 1);
 
         $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
+
+        BuildLegend();
     };
 
     /*
@@ -260,6 +272,41 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
         vm.shoppingList = [];
         $localStorage.cart = angular.toJson(vm.shoppingList);
+        BuildLegend();
 
+    }
+
+    function BuildLegend()
+    {
+
+        vm.Class1Visible = false;
+        vm.Class2Visible = false;
+        vm.Class3Visible = false;
+        vm.EventsVisible = false;
+        vm.HasItems = false;
+
+        vm.shoppingList.forEach(function (product)
+        {
+
+            vm.HasItems = true;
+
+            if (product.HasClassI)
+            {
+                vm.Class1Visible = true;
+            }
+            if (product.HasClassII)
+            {
+                vm.Class2Visible = true;
+            }
+            if (product.HasClassIII)
+            {
+                vm.Class3Visible = true;
+            }
+            if (product.HasEvents)
+            {
+                vm.EventsVisible = true;
+            }
+
+        });
     }
 }
