@@ -33,13 +33,6 @@ Public Class ShopAwareService
 
 #Region " Public Methods "
 
-    ''' <summary>
-    ''' This Gets a count of Issues. The count is based on Classifications (Class I, Class II, Class III) and drug event
-    ''' </summary>
-    ''' <param name="keyWord"></param>
-    ''' <param name="state"></param>
-    ''' <returns>Search Summary object</returns>
-    ''' <remarks></remarks>
     Public Function GetSearchSummary(ByVal keyWord As String, ByVal state As String) As SearchSummary
 
         Dim results As SearchSummary = Nothing
