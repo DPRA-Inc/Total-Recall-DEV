@@ -1,14 +1,20 @@
 ﻿angular.module("TotalRecall").controller("productcontroller", ProductController);
 
-function ProductController($scope, $sessionStorage, $localStorage, $http, $modal, productservice) {
+function ProductController($scope, $location, $sessionStorage, $localStorage, $http, $modal, productservice) {
     var vm = this;
 
     vm.SearchResult = [];
 
+    vm.SearchSummary = $sessionStorage.SearchSummary;
+
+    if (!angular.isObject(vm.SearchSummary)) {
+        $location.path("/index");
+        return;
+    }
+
     vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData = [];
-    vm.SearchSummary = $sessionStorage.SearchSummary;
     vm.DataLoading = true;
     vm.Markers = [];
     vm.CurrentIndex = 0;
