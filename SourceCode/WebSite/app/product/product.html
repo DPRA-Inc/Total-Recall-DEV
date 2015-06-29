@@ -186,17 +186,77 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class1Visible">
 
                 <ul class="sortable-list connectList agile-list">
 
                     <li class="feed-element">
 
-                        <h3>Number of Reports by Classification</h3>
+                        <h3>Number of Reports by Class 1</h3>
 
                         <div>
                             <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
-                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData" responsive="true" linechart=""></canvas>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData1" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class2Visible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="feed-element">
+
+                        <h3>Number of Reports by Class 2</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData2" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class3Visible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="feed-element">
+
+                        <h3>Number of Reports by Class 3</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData3" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class1Visible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="feed-element">
+
+                        <h3>Number of Reports by Event</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineDataE" responsive="true" linechart=""></canvas>
 
                         </div>
 
