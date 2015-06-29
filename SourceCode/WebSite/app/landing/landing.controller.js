@@ -96,7 +96,8 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
         if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").length > 0)
         {
 
-            var value = vm.textValue.replace(disallowedChars, "");
+            var value = vm.textValue.replace(disallowedChars, " ");
+            value = value.replace("  ", "").trim();
             var region = vm.selectedState;
 
             var doesExist = false;
