@@ -14,7 +14,10 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
     vm.fontSizeClass = "";
     vm.lineOptions = [];
-    vm.lineData = [];
+    vm.lineData1 = [];
+    vm.lineData2 = [];
+    vm.lineData3 = [];
+    vm.lineDataE = [];
     vm.DataLoading = true;
     vm.Markers = [];
     vm.CurrentIndex = 0;
@@ -185,11 +188,17 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     });
                 }
 
-                vm.lineData.labels = result.GraphObjects.Labels;
-                vm.lineData.datasets[0].data = result.GraphObjects.Data1;
-                vm.lineData.datasets[1].data = result.GraphObjects.Data2;
-                vm.lineData.datasets[2].data = result.GraphObjects.Data3;
-                vm.lineData.datasets[3].data = result.GraphObjects.DataE;
+                vm.lineData1.labels = result.GraphObjects.Labels;
+                vm.lineData1.datasets[0].data = result.GraphObjects.Data1;
+
+                vm.lineData2.labels = result.GraphObjects.Labels;
+                vm.lineData2.datasets[0].data = result.GraphObjects.Data2;
+
+                vm.lineData3.labels = result.GraphObjects.Labels;
+                vm.lineData3.datasets[0].data = result.GraphObjects.Data3;
+
+                vm.lineDataE.labels = result.GraphObjects.Labels;
+                vm.lineDataE.datasets[0].data = result.GraphObjects.DataE;
 
                 GlobalsModule.SearchResult = result;
 
@@ -223,43 +232,61 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             datasetFill: true
         };
 
-        vm.lineData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+        vm.lineData1 = {
+            labels: ["January"],
             datasets: [
                 {
                     label: "Class 1",
-                    fillColor: "rgba(237,85,101,0.3)",
-                    strokeColor: "rgba(237,85,101,0.7)",
+                    fillColor: "rgba(237,85,101,1)",
+                    strokeColor: "rgba(237,85,101,1)",
                     pointColor: "rgba(237,85,101,1)",
                     pointStrokeColor: "#222",
                     pointHighlightFill: "#DDD",
                     pointHighlightStroke: "rgba(237,85,101,1)",
                     data: []
-                },
+                }
+            ]
+        };
+
+        vm.lineData2 = {
+            labels: ["January"],
+            datasets: [
                 {
                     label: "Class 2",
-                    fillColor: "rgba(248,172,89,0.3)",
-                    strokeColor: "rgba(248,172,89,0.7)",
+                    fillColor: "rgba(248,172,89,1)",
+                    strokeColor: "rgba(248,172,89,1)",
                     pointColor: "rgba(248,172,89,1)",
                     pointStrokeColor: "#222",
                     pointHighlightFill: "#DDD",
                     pointHighlightStroke: "rgba(248,172,89,1)",
                     data: []
-                },
+                }
+            ]
+        };
+
+        vm.lineData3 = {
+            labels: ["January"],
+            datasets: [
                 {
                     label: "Class 3",
-                    fillColor: "rgba(28,132,198,0.3)",
-                    strokeColor: "rgba(28,132,198,0.7)",
+                    fillColor: "rgba(28,132,198,1)",
+                    strokeColor: "rgba(28,132,198,1)",
                     pointColor: "rgba(28,132,198,1)",
                     pointStrokeColor: "#222",
                     pointHighlightFill: "#DDD",
                     pointHighlightStroke: "rgba(28,132,198,1)",
                     data: []
-                },
+                }
+            ]
+        };
+
+        vm.lineDataE = {
+            labels: ["January"],
+            datasets: [
                 {
                     label: "Events",
-                    fillColor: "rgba(35,198,200,0.3)",
-                    strokeColor: "rgba(35,198,200,0.7)",
+                    fillColor: "rgba(35,198,200,1)",
+                    strokeColor: "rgba(35,198,200,1)",
                     pointColor: "rgba(35,198,200,1)",
                     pointStrokeColor: "#222",
                     pointHighlightFill: "#DDD",
