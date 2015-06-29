@@ -121,6 +121,7 @@
     <Content Include="app\product\product.html" />
     <Content Include="app\product\product.service.js" />
     <Content Include="css\angular-notify.min.css" />
+    <Content Include="css\mobile.css" />
     <Content Include="css\navbar.css" />
     <Content Include="fonts\metro\css\metro-icons.css" />
     <Content Include="fonts\metro\css\metro-icons.min.css" />

@@ -1,0 +1,24 @@
+﻿/*For mobile devices.*/
+@media (max-width: 767px) {
+    .h4, h4 {
+        font-size: 14px;
+    }
+
+    .searchbox {
+        margin-top: 50px;
+    }
+
+    .shoppingcart-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .feed-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .ibox-content {
+        padding: 15px 5px 20px 5px;
+    }
+}
