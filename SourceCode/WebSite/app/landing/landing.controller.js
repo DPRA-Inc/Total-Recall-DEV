@@ -247,7 +247,9 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
     function StartupRSS() {
 
         feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Consumers/rss.xml").then(function (res) {
-            vm.feeds = res.data.responseData.feed.entries;
+            var data = angular.toJson(res.data.responseData.feed.entries);
+
+            vm.feeds = angular.fromJson(data);
             vm.IsRSSLoading = false;
         });
 
