@@ -155,8 +155,13 @@ Public Class OpenFda
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DeviceEvent
         Dim dataSetSize As Integer = 0
 
+        'Limit first query to a 1 year window
+        Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
+        AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
         'Dim limit As String = AddResultLimit(100)
 
         Dim url As String = BuildUrl(endPointType)
@@ -172,28 +177,66 @@ Public Class OpenFda
 
     Public Function GetDeviceEventByDescription(ByVal keyword As String) As List(Of SearchResultDrugEvent)
 
-        'Dim tmpAdverseDrugEventtList As List(Of AdverseDrugEvent)
+        Dim deviceEventList As New List(Of AdverseDeviceEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DeviceEvent
         Dim dataSetSize As Integer = 0
 
+        'Limit first query to a 1 year window
+        Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
+        AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
         Dim limit As String = AddResultLimit(100)
 
-        Dim url As String = BuildUrl(endPointType)
-        Dim searchResults As String = Execute(url & limit)
+        Dim apiUrl As String = BuildUrl(endPointType)
+        Dim searchResults As String = Execute(apiUrl & limit)
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
         End If
 
-        Dim deviceEventList As List(Of AdverseDeviceEvent) = AdverseDeviceEvent.CnvJsonDataToList(searchResults)
+        ' LIMIT the number of page request to a MAX of 5
+        Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+        If pageLimit > 5 Then
+            pageLimit = 5
+        End If
+
+        Dim skipValue As Integer = 0
+        If dataSetSize > 0 Then
+
+            Do
+                pageLimit -= 1
+
+                If Not String.IsNullOrEmpty(searchResults) Then
+
+                    Dim result As List(Of AdverseDeviceEvent) = AdverseDeviceEvent.CnvJsonDataToList(searchResults)
+                    deviceEventList.AddRange(result)
+
+                End If
+
+                If pageLimit > 0 Then
+
+                    skipValue += 100
+                    'Dim newApiUrl As String = apiUrl.Replace("&limit=100", String.Format("&limit=100&skip={0}", skipValue))
+                    limit = String.Format("&limit=100&skip={0}", skipValue)
+                    searchResults = Execute(apiUrl & limit)
+                    ' OpenFdaApiHits += 1
+
+                End If
+
+            Loop Until pageLimit = 0
+
+        End If
+
+        'Dim deviceEventList As List(Of AdverseDeviceEvent) = AdverseDeviceEvent.CnvJsonDataToList(searchResults)
         'AdverseDeviceEvent.CnvJsonDataToList(results)
 
-        Dim tmpAdverseDeviceEventList As List(Of AdverseDeviceEvent)
-        Dim tmpSearchResultDrugEvent As List(Of SearchResultDrugEvent) = AdverseDeviceEvent.CnvDeviceEventsToResultDrugEvents(deviceEventList)
+        'Dim tmpAdverseDeviceEventList As List(Of AdverseDeviceEvent)
+        Dim tmpSearchResultDeviceEvent As List(Of SearchResultDrugEvent) = AdverseDeviceEvent.CnvDeviceEventsToResultDrugEvents(deviceEventList)
 
-        Return tmpSearchResultDrugEvent
+        Return tmpSearchResultDeviceEvent
 
     End Function
 
@@ -203,8 +246,13 @@ Public Class OpenFda
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
         Dim dataSetSize As Integer = 0
 
+        'Limit first query to a 1 year window
+        Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
         'Dim limit As String = AddResultLimit(100)
 
         Dim url As String = BuildUrl(endPointType)
@@ -220,59 +268,66 @@ Public Class OpenFda
 
     Public Function GetDrugEventsByDrugName(ByVal drugName As String) As Object
 
-        Dim tmpAdverseDrugEventList As New List(Of AdverseDrugEvent)
+        Dim DrugEventList As New List(Of AdverseDrugEvent)
         Dim tmpSearchResultDrugEvent As New List(Of SearchResultDrugEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
+        Dim dataSetSize As Integer = 0
+
+        'Limit first query to a 1 year window
+        Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
 
         Dim limit As String = AddResultLimit(100)
 
-        Dim url As String = BuildUrl(endPointType)
-        Dim results As String = Execute(url & limit)
+        Dim apiUrl As String = BuildUrl(endPointType)
+        Dim searchResults As String = Execute(apiUrl & limit)
 
-        If Not String.IsNullOrEmpty(results) Then
+        If Not String.IsNullOrEmpty(searchResults) Then
+            dataSetSize = GetMetaResults().Total()
+        End If
 
-            Dim dataSetSize As Integer = GetMetaResults(results).Total()
+        ' LIMIT the number of page request to a MAX of 5
+        Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+        If pageLimit > 5 Then
+            pageLimit = 5
+        End If
 
-            tmpAdverseDrugEventList = AdverseDrugEvent.CnvJsonDataToList(results)
-            tmpSearchResultDrugEvent = SearchResultDrugEvent.ConvertJsonData(tmpAdverseDrugEventList)
+        Dim skipValue As Integer = 0
+        If dataSetSize > 0 Then
+
+            Do
+                pageLimit -= 1
+
+                If Not String.IsNullOrEmpty(searchResults) Then
+
+                    Dim result As List(Of AdverseDrugEvent) = AdverseDrugEvent.CnvJsonDataToList(searchResults)
+                    DrugEventList.AddRange(result)
+
+                End If
+
+                If pageLimit > 0 Then
+
+                    skipValue += 100
+                    'Dim newApiUrl As String = apiUrl.Replace("&limit=100", String.Format("&limit=100&skip={0}", skipValue))
+                    limit = String.Format("&limit=100&skip={0}", skipValue)
+                    searchResults = Execute(apiUrl & limit)
+                    ' OpenFdaApiHits += 1
+
+                End If
+
+            Loop Until pageLimit = 0
 
         End If
+
+        tmpSearchResultDrugEvent = SearchResultDrugEvent.ConvertJsonData(DrugEventList)
 
         Return tmpSearchResultDrugEvent
 
     End Function
-
-    'Public Function ConvertStatesEnumToJson() As JObject
-
-    '    Dim result As New JObject
-    '    Dim ja As New JArray
-    '    Dim jo As JObject
-
-    '    Dim tmpEnumValue As States
-    '    Dim stateArray As Array
-
-    '    stateArray = System.Enum.GetValues(GetType(States))
-
-    '    For Each itm In stateArray
-
-    '        tmpEnumValue = DirectCast([Enum].Parse(GetType(States), itm), States)
-
-    '        jo = New JObject
-    '        jo.Add(New JProperty("name", GetEnumDescription(tmpEnumValue)))
-    '        jo.Add(New JProperty("abbreviation", tmpEnumValue.ToString))
-
-    '        ja.Add(jo)
-
-    '    Next
-
-    '    result.Add(ja)
-
-    '    Return result
-
-    'End Function
 
 #Region " Search "
 
@@ -429,6 +484,11 @@ Public Class OpenFda
 
                 Select Case type
 
+                    Case FdaFilterTypes.Date
+                        param = "("
+                        param += "receivedate:" & tmp & ""
+                        param += ")"
+
                     Case FdaFilterTypes.DrugEventDrugName
 
                         param = "(patient.drug.openfda.substance_name:" & tmp
@@ -454,7 +514,7 @@ Public Class OpenFda
                         param += String.Format("distribution_pattern:(Nationwide+{0}+{1}))", tmp, GetEnumDescription(tmpEnum)) ' TODO:  Need the State NAME + GetEnumDescription(tmpEnum)
 
                     Case FdaFilterTypes.RecallReason
-                        
+
                         Dim keywordList As String() = tmp.Replace("""", String.Empty).Split("+")
 
                         param = "(("
@@ -483,8 +543,11 @@ Public Class OpenFda
             Case OpenFdaApiEndPoints.DeviceEvent
 
                 Select Case type
-                    
+
                     Case FdaFilterTypes.Date
+                        param = "("
+                        param += "date_of_event:" & tmp & ""
+                        param += ")"
 
                     Case FdaFilterTypes.DeviceEventDescription
                         param = "(device.brand_name:" & tmp
