@@ -21,4 +21,9 @@
     .ibox-content {
         padding: 15px 5px 20px 5px;
     }
+
+    .copyright {
+        padding-top: 5px;
+        float: none !important;
+    }
 }

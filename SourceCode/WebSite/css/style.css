@@ -1,38 +1,43 @@
 /*@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");*/
 select::-ms-expand {
-            width:12px;
-            border:none;
-            background:#fff;
-        }
+    width: 12px;
+    border: none;
+    background: #fff;
+}
 
 .tkwrapper {
-	min-height:100%;
-	position:relative;
+    min-height: 100%;
+    position: relative;
 }
 
 .tkcontent {
-	padding-bottom:60px; /* match height of tkfooter element */
+    padding-bottom: 60px; /* match height of tkfooter element */
 }
 
 .tkfooter {
-	width:100%;
-	height:60px;
-	position:absolute;
-	bottom:0;
-	left:0;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 .viewport {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
-.viewport.real,.viewport.slice,.viewport.virtual{
-  max-height: 100px;
-}
+    .viewport.real, .viewport.slice, .viewport.virtual {
+        max-height: 100px;
+    }
 
 .rss {
     font-family: roboto,arial,helvetica;
     font-size: 14px;
+}
+
+.copyright {
+    padding-top: 5px;
+    float: right !important;
 }
 
 .center-inarea {
@@ -7833,6 +7838,7 @@ body.skin-3 {
         display: inline-block;
     }
 }
+
 /* Only demo */
 @media (max-width: 1000px) {
     .welcome-message {
