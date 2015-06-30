@@ -123,13 +123,6 @@
     <Content Include="css\angular-notify.min.css" />
     <Content Include="css\mobile.css" />
     <Content Include="css\navbar.css" />
-    <Content Include="fonts\metro\css\metro-icons.css" />
-    <Content Include="fonts\metro\css\metro-icons.min.css" />
-    <Content Include="fonts\metro\css\metro.css" />
-    <Content Include="fonts\metro\css\metro.min.css" />
-    <Content Include="fonts\metro\fonts\metro.svg" />
-    <Content Include="fonts\metro\js\metro.js" />
-    <Content Include="fonts\metro\js\metro.min.js" />
     <Content Include="Global.asax" />
     <Content Include="img\FdaLogo.png" />
     <Content Include="img\GroceryStoresConsumers.jpg" />
@@ -414,10 +407,6 @@
     <Content Include="js\angular\version.json" />
     <Content Include="app\about\about.controller.js" />
     <Content Include="json\regions.txt" />
-    <Content Include="fonts\metro\fonts\metro.eot" />
-    <Content Include="fonts\metro\fonts\metro.ttf" />
-    <Content Include="fonts\metro\fonts\metro.woff" />
-    <Content Include="fonts\metro\fonts\selection.json" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

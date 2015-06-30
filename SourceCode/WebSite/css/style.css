@@ -11,6 +11,19 @@ select::-ms-expand {
     right: 0;
 }
 
+.v-align-top {
+
+}
+.v-align-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.v-align-middle {
+  top: 50%;
+}
+
 .tkwrapper {
     min-height: 100%;
     position: relative;
