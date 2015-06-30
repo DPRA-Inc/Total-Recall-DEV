@@ -254,30 +254,13 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         productservice.GetFDAResults(scrubText, region,
             function (result)
             {
+                var states = [];
 
                 if (angular.isObject(result) && angular.isObject(result.MapObjects))
                 {
-
                     result.MapObjects.forEach(function (mapItem)
                     {
-
-                        vm.Markers.push(
-                            {
-                                lat: parseFloat(mapItem.Latitude),
-                                lon: parseFloat(mapItem.Longitude),
-                                label: {
-                                    message: "",
-                                    show: false,
-                                    showOnMouseOver: true
-
-                                },
-                                style: {
-                                    image: {
-                                        icon: mapItem.icon
-                                    }
-                                }
-                            }
-                        );
+                        states.push(mapItem.State);
                     });
                 }
 
@@ -300,25 +283,47 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 vm.DataLoading = false;
                 vm.IsChartReady = true;
 
-                // re-zoom and center based on the objects on the map
-                olData.getMap().then(function (map)
-                {
+                //var link = "json/" + mapItem.State + ".geo.json.txt";
+                //var link = "json/" + "Test" + ".geo.json.txt";
+                //// load json test
+                //$http.get(link).success(function (data) {
 
-                    var size = map.getSize();
+                //    var poly = data;
 
-                    size = [size[0] * 2, size[1] * 2];
+                //    $scope.class2.source.geojson = {
+                //        object: poly
+                //    }
 
-                    var extent = map.getView().calculateExtent(map.getSize());
-                    map.getView().fitExtent(extent, size);
+                //});
 
-                    // load json test
-                    $http.get('json/tn.txt').success(function (data)
-                    {
+                productservice.GetRegionsJson(states, function (jsonData) {
 
-                        var tn = data;
-                        $scope.class1.source.geojson = {
-                            object: tn
-                        }
+                    $scope.class2.source.geojson = {
+                        object: jsonData
+                    }
+
+                    // re-zoom and center based on the objects on the map
+                    olData.getMap().then(function (map) {
+
+                        var size = map.getSize();
+
+                        size = [size[0] * 2, size[1] * 2];
+
+                        var extent = map.getView().calculateExtent(map.getSize());
+                        map.getView().fitExtent(extent, size);
+
+
+
+                        //// load json test
+                        //$http.get('json/tn.txt').success(function (data)
+                        //{
+
+                        //    var tn = data;
+                        //    $scope.class2.source.geojson = {
+                        //        object: tn
+                        //    }
+
+                        //});
 
                     });
 

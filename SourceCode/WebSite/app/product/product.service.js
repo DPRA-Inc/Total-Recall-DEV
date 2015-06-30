@@ -6,7 +6,8 @@ function ProductService($http)
     var service = {
         GetProductResults: GetProductResults,
         GetFDAResults: GetFDAResults,
-        GetReportData: GetReportData
+        GetReportData: GetReportData,
+        GetRegionsJson: GetRegionsJson
     };
 
     return service;
@@ -79,7 +80,25 @@ function ProductService($http)
             });
     }
 
+    function GetRegionsJson(regions, callback) {
 
+        var serviceUrl = "Api/ShopAware/Regions/GetStateJson/";
+        serviceUrl += regions;        
+
+        $http({
+            method: 'GET',
+            url: serviceUrl
+        }).
+            success(function (data, status, headers, config) {
+                
+                callback(data);
+            }).
+            error(function (data, status, headers, config) {
+                $log.warn(data, status, headers, config)
+            });
+
+
+    }
 }
 
 
