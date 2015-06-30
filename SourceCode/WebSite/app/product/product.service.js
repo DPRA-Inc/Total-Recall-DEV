@@ -1,7 +1,6 @@
-﻿angular.module('TotalRecall').factory('productservice', ProductService);
+﻿angular.module("TotalRecall").factory("productservice", ProductService);
 
-function ProductService($http)
-{
+function ProductService($http, $log) {
 
     var service = {
         GetProductResults: GetProductResults,
@@ -14,52 +13,46 @@ function ProductService($http)
 
     ///////////////////
 
-    function GetProductResults(product, region, callback)
-    {
+    function GetProductResults(product, region, callback) {
 
         var serviceUrl = "Api/ShopAware/ProductResults/";
         serviceUrl += product + "/";
         serviceUrl += region;
 
         $http({
-            method: 'GET',
-            url: serviceUrl
-        }).
-            success(function (data, status, headers, config)
-            {
+                method: "GET",
+                url: serviceUrl
+            }).
+            success(function(data, status, headers, config) {
                 if (!angular.isObject(data)) callback(null);
 
                 callback(data);
             }).
-            error(function (data, status, headers, config)
-            {
-                $log.warn(data, status, headers, config)
+            error(function(data, status, headers, config) {
+                $log.warn(data, status, headers, config);
             });
     }
 
-    function GetFDAResults(product, region, callback)
-    {
+    function GetFDAResults(product, region, callback) {
 
         var serviceUrl = "Api/ShopAware/FDAResults/";
         serviceUrl += product + "/";
         serviceUrl += region;
 
         $http({
-            method: 'GET',
-            url: serviceUrl
-        }).
-            success(function (data, status, headers, config)
-            {
+                method: "GET",
+                url: serviceUrl
+            }).
+            success(function(data, status, headers, config) {
                 if (!angular.isObject(data)) callback(null);
 
                 callback(data);
             }).
-            error(function (data, status, headers, config)
-            {
-                $log.warn(data, status, headers, config)
+            error(function(data, status, headers, config) {
+                $log.warn(data, status, headers, config);
             });
     }
-    
+
     function GetReportData(product, region, callback) {
 
         var serviceUrl = "Api/ShopAware/GetReportData/";
@@ -67,42 +60,36 @@ function ProductService($http)
         serviceUrl += region;
 
         $http({
-            method: 'GET',
-            url: serviceUrl
-        }).
-            success(function (data, status, headers, config) {
+                method: "GET",
+                url: serviceUrl
+            }).
+            success(function(data, status, headers, config) {
                 if (!angular.isObject(data)) callback(null);
 
                 callback(data);
             }).
-            error(function (data, status, headers, config) {
-                $log.warn(data, status, headers, config)
+            error(function(data, status, headers, config) {
+                $log.warn(data, status, headers, config);
             });
     }
 
     function GetRegionsJson(regions, callback) {
 
         var serviceUrl = "Api/ShopAware/Regions/GetStateJson/";
-        serviceUrl += regions;        
+        serviceUrl += regions;
 
         $http({
-            method: 'GET',
-            url: serviceUrl
-        }).
-            success(function (data, status, headers, config) {
-                
+                method: "GET",
+                url: serviceUrl
+            }).
+            success(function(data, status, headers, config) {
+
                 callback(data);
             }).
-            error(function (data, status, headers, config) {
-                $log.warn(data, status, headers, config)
+            error(function(data, status, headers, config) {
+                $log.warn(data, status, headers, config);
             });
 
 
     }
 }
-
-
-
-
-
-
