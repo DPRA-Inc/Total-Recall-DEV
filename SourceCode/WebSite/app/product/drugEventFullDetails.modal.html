@@ -80,10 +80,10 @@
                                 <tbody>
                                     <tr ng-repeat="item in vm.Patient.DrugItem">
                                         <td>
-                                            <span class="v-align-middle help-block">{{item.BrandNamesString}} </span>
+                                            <span class="v-align-middle help-block"><span ng-bind-html="item.BrandNamesString | highlight:vm.Keyword"></span></span>
                                         </td>
                                         <td>
-                                            <span class="v-align-middle help-block">{{item.GenericNamesString}} </span>
+                                            <span class="v-align-middle help-block"><span ng-bind-html="item.GenericNamesString | highlight:vm.Keyword"></span></span>
                                         </td>                                        
                                     </tr>                                    
                                 </tbody>

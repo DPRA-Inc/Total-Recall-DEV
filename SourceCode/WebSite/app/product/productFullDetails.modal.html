@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Product:</label>
                     <div class="col-lg-10">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.ProductDescription}}</span>
+                        <span class="help-block m-b-none"><strong>Product:</strong> <span ng-bind-html="vm.SearchResultItem.ProductDescription | highlight:vm.Keyword"></span></span>
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Reason:</label>
                     <div class="col-lg-10">
-                        <span class="help-block m-b-none">{{vm.SearchResultItem.Content}}</span>
+                        <span class="help-block m-b-none"><strong>Reason:</strong> <span ng-bind-html="vm.SearchResultItem.Content | highlight:vm.Keyword"></span></span>
                     </div>
                 </div>               
 

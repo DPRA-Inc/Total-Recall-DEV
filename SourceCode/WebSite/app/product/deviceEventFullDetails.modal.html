@@ -34,7 +34,7 @@
 
                     <label class="col-md-2 control-label">Brand Name(s):</label>
                     <div class="col-md-10">
-                        <span class="help-block">{{vm.EventItem.DrugItem[0].BrandNamesString}} </span>
+                        <span class="help-block"><span ng-bind-html="vm.EventItem.DrugItem[0].BrandNamesString | highlight:vm.Keyword"></span></span>
                     </div>
 
                 </div>
@@ -43,7 +43,7 @@
 
                     <label class="col-md-2 control-label">Generic Name(s):</label>
                     <div class="col-md-10">
-                        <span class="help-block">{{vm.EventItem.DrugItem[0].GenericNamesString}} </span>
+                        <span class="help-block"><span ng-bind-html="vm.EventItem.DrugItem[0].GenericNamesString | highlight:vm.Keyword"></span></span>
                     </div>
 
                 </div>
@@ -62,7 +62,7 @@
                                 <tbody>
                                     <tr class="sortable-list connectList agile-list" ng-repeat="item in vm.EventItem.Description">
                                         <td>
-                                            <span class="v-align-middle help-block">{{item}} </span>
+                                            <span class="v-align-middle help-block"><span ng-bind-html="item | highlight:vm.Keyword"></span></span>
                                         </td>
                                     </tr>                                    
                                 </tbody>

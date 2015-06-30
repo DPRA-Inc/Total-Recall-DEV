@@ -154,6 +154,9 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     item: function ()
                     {
                         return item;
+                    },
+                    keyword: function() {
+                        return vm.SearchSummary.Keyword;
                     }
                 }
             });
@@ -172,6 +175,9 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     item: function ()
                     {
                         return item;
+                    },
+                    keyword: function () {
+                        return vm.SearchSummary.Keyword;
                     }
                 }
             });
@@ -190,6 +196,9 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     item: function ()
                     {
                         return item;
+                    },
+                    keyword: function () {
+                        return vm.SearchSummary.Keyword;
                     }
                 }
             });
