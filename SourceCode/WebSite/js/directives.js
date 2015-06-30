@@ -1,15 +1,17 @@
 /**
  * pageTitle - Directive for set Page title - mata title
  */
-function pageTitle($rootScope, $timeout) {
+function pageTitle($rootScope, $timeout)
+{
     return {
-        link: function (scope, element) {
-            var listener = function (event, toState, toParams, fromState, fromParams) {
-                // Default title - load on Dashboard 1
-                var title = 'TotalRecall | Responsive Admin Theme';
-                // Create your own title pattern
-                if (toState.data && toState.data.pageTitle) title = 'TotalRecall | ' + toState.data.pageTitle;
-                $timeout(function () {
+        link: function (scope, element)
+        {
+            var listener = function (event, toState, toParams, fromState, fromParams)
+            {
+                var title = 'ShopAware.gov';
+                if (toState.data && toState.data.pageTitle) title = 'ShopAware.gov | ' + toState.data.pageTitle;
+                $timeout(function ()
+                {
                     element.text(title);
                 });
             };
@@ -21,12 +23,15 @@ function pageTitle($rootScope, $timeout) {
 /**
  * sideNavigation - Directive for run metsiMenu on sidebar navigation
  */
-function sideNavigation($timeout) {
+function sideNavigation($timeout)
+{
     return {
         restrict: 'A',
-        link: function (scope, element) {
+        link: function (scope, element)
+        {
             // Call the metsiMenu plugin and plug it to sidebar navigation
-            $timeout(function () {
+            $timeout(function ()
+            {
                 element.metisMenu();
             });
         }
@@ -36,14 +41,17 @@ function sideNavigation($timeout) {
 /**
  * iboxTools - Directive for iBox tools elements in right corner of ibox
  */
-function iboxTools($timeout) {
+function iboxTools($timeout)
+{
     return {
         restrict: 'A',
         scope: true,
         templateUrl: 'views/common/ibox_tools.html',
-        controller: function ($scope, $element) {
+        controller: function ($scope, $element)
+        {
             // Function for collapse ibox
-            $scope.showhide = function () {
+            $scope.showhide = function ()
+            {
                 var ibox = $element.closest('div.ibox');
                 var icon = $element.find('i:first');
                 var content = ibox.find('div.ibox-content');
@@ -51,13 +59,15 @@ function iboxTools($timeout) {
                 // Toggle icon from up to down
                 icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
                 ibox.toggleClass('').toggleClass('border-bottom');
-                $timeout(function () {
+                $timeout(function ()
+                {
                     ibox.resize();
                     ibox.find('[id^=map-]').resize();
                 }, 50);
             },
             // Function for close ibox
-                $scope.closebox = function () {
+                $scope.closebox = function ()
+                {
                     var ibox = $element.closest('div.ibox');
                     ibox.remove();
                 }
@@ -68,28 +78,36 @@ function iboxTools($timeout) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
 */
-function minimalizaSidebar($timeout) {
+function minimalizaSidebar($timeout)
+{
     return {
         restrict: 'A',
         template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
-        controller: function ($scope, $element) {
-            $scope.minimalize = function () {
+        controller: function ($scope, $element)
+        {
+            $scope.minimalize = function ()
+            {
                 $("body").toggleClass("mini-navbar");
-                if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+                if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small'))
+                {
                     // Hide menu in order to smoothly turn on when maximize menu
                     $('#side-menu').hide();
                     // For smoothly turn on menu
                     setTimeout(
-                        function () {
+                        function ()
+                        {
                             $('#side-menu').fadeIn(500);
                         }, 100);
-                } else if ($('body').hasClass('fixed-sidebar')) {
+                } else if ($('body').hasClass('fixed-sidebar'))
+                {
                     $('#side-menu').hide();
                     setTimeout(
-                        function () {
+                        function ()
+                        {
                             $('#side-menu').fadeIn(500);
                         }, 300);
-                } else {
+                } else
+                {
                     // Remove all inline style from jquery fadeIn function to reset menu state
                     $('#side-menu').removeAttr('style');
                 }
@@ -101,12 +119,17 @@ function minimalizaSidebar($timeout) {
 /**
  * ngEnter - Added to a input text box to execute a function on pressing enter.
  */
-function ngEnter() {
+function ngEnter()
+{
     return {
-        link: function (scope, elements, attrs) {
-            elements.bind('keydown keypress', function (event) {
-                if (event.which === 13) {
-                    scope.$apply(function () {
+        link: function (scope, elements, attrs)
+        {
+            elements.bind('keydown keypress', function (event)
+            {
+                if (event.which === 13)
+                {
+                    scope.$apply(function ()
+                    {
                         scope.$eval(attrs.ngEnter);
                     });
                     event.preventDefault();
@@ -124,12 +147,15 @@ function ngEnter() {
  * Usage:
  * <input type="text" autofocus>
  */
-function autoFocus($timeout) {
+function autoFocus($timeout)
+{
 
     return {
         restrict: 'A',
-        link: function ($scope, $element) {
-            $timeout(function () {
+        link: function ($scope, $element)
+        {
+            $timeout(function ()
+            {
                 $element[0].focus();
             });
         }
