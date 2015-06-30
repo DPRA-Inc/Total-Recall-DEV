@@ -5,6 +5,12 @@ select::-ms-expand {
     background: #fff;
 }
 
+.bottom-align-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .tkwrapper {
     min-height: 100%;
     position: relative;

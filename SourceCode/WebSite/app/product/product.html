@@ -32,11 +32,11 @@
         <div class="row">
             <div class="col-md-6">
 
-                    <h1 class="pull-left col-md-8">
-                        Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
-                    </h1>
+                <h1 class="pull-left">
+                    Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
+                </h1>
 
-                    <p class="pull-right v-align-bottom" ng-class="vm.fontSizeClass">(Newest first)</p>
+                <p class="pull-right bottom-align-text" ng-class="vm.fontSizeClass">(Newest first)</p>
 
             </div>
         </div>
@@ -45,7 +45,7 @@
 
             <div class="col-md-6 animated bounceInLeft" ng-class="vm.fontSizeClass">
 
-                <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
+                <h1 ng-if="vm.DataLoading" class="text-center m-b-lg m-t-lg">
                     <i class="fa fa-spinner fa-spin"></i>
                     Loading More Information...
                 </h1>
@@ -135,25 +135,25 @@
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="classi-element" ng-show="vm.Class1Visible" style="min-height:72px; cursor:default;">
+                    <li class="classi-element" ng-if="vm.Class1Visible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classi.png" alt="Class 1" style="width:48px;height:48px;" />
                         </div>
                         <strong>({{vm.SearchSummary.ClassICount}}) Recall which indicate dangerous or defective products that predictably could cause serious health problems or death.</strong>
                     </li>
-                    <li class="classii-element" ng-show="vm.Class2Visible" style="min-height:72px; cursor:default;">
+                    <li class="classii-element" ng-if="vm.Class2Visible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classii.png" alt="Class 2" style="width:48px;height:48px;" />
                         </div>
                         <strong>({{vm.SearchSummary.ClassIICount}}) Recall which indicate products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</strong>
                     </li>
-                    <li class="classiii-element" ng-show="vm.Class3Visible" style="min-height:72px; cursor:default;">
+                    <li class="classiii-element" ng-if="vm.Class3Visible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classiii.png" alt="Class 3" style="width:48px;height:48px;" />
                         </div>
                         <strong>({{vm.SearchSummary.ClassIIICount}}) Recall which indicate products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.</strong>
                     </li>
-                    <li class="events-element" ng-show="vm.EventsVisible" style="min-height:72px; cursor:default;">
+                    <li class="events-element" ng-if="vm.EventsVisible" style="min-height:72px; cursor:default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/events.png" alt="Event" style="width:48px;height:48px;" />
                         </div>
@@ -189,7 +189,7 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class1Visible">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-if="vm.Class1Visible">
 
                 <ul class="sortable-list connectList agile-list">
 
@@ -209,7 +209,7 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class2Visible">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-if="vm.Class2Visible">
 
                 <ul class="sortable-list connectList agile-list">
 
@@ -229,7 +229,7 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class3Visible">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-if="vm.Class3Visible">
 
                 <ul class="sortable-list connectList agile-list">
 
@@ -249,7 +249,7 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-show="vm.Class1Visible">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-if="vm.Class1Visible">
 
                 <ul class="sortable-list connectList agile-list">
 

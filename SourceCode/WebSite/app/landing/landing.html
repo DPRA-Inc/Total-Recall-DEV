@@ -46,7 +46,7 @@
 
         <div class="row">
 
-            <div class="col-md-6 shoppingcart-container" style="z-index: 73734;" ng-show="vm.HasItems">
+            <div class="col-md-6 shoppingcart-container" style="z-index: 73734;" ng-if="vm.HasItems">
                 <div class="ibox animated bounceInLeft">
 
                     <div class="ibox-content">
@@ -79,18 +79,18 @@
                                     </td>
                                     <td>
                                         <h1>
-                                            <i class="fa fa-spinner fa-spin" ng-show="item.IsLoading"></i>
+                                            <i class="fa fa-spinner fa-spin" ng-if="item.IsLoading"></i>
                                         </h1>
                                     </td>
                                     <td valign="middle" align="right">
 
                                         <div class="">
 
-                                            <img src="./img/identifiers/classi.png" ng-show="item.HasClassI" alt="Class 1" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Dangerous or defective products that predictably could cause serious health problems or death." />
-                                            <img src="./img/identifiers/classii.png" ng-show="item.HasClassII" alt="Class 2" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." />
-                                            <img src="./img/identifiers/classiii.png" ng-show="item.HasClassIII" alt="Class 3" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." />
-                                            <img src="./img/identifiers/events.png" ng-show="item.HasEvents" alt="Event" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Events occured with a drug or device." />
-                                            <img src="./img/identifiers/ok.png" ng-show="item.IsClean" alt="Ok" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Nothing recent found for this item." />
+                                            <img src="./img/identifiers/classi.png" ng-if="item.HasClassI" alt="Class 1" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Dangerous or defective products that predictably could cause serious health problems or death." />
+                                            <img src="./img/identifiers/classii.png" ng-if="item.HasClassII" alt="Class 2" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Products that might cause a temporary health problem, or pose only a slight threat of a serious nature." />
+                                            <img src="./img/identifiers/classiii.png" ng-if="item.HasClassIII" alt="Class 3" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." />
+                                            <img src="./img/identifiers/events.png" ng-if="item.HasEvents" alt="Event" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Events occured with a drug or device." />
+                                            <img src="./img/identifiers/ok.png" ng-if="item.IsClean" alt="Ok" style="height: 48px; width: 48px;" tooltip-placement="right" tooltip="Nothing recent found for this item." />
                                             <button class="btn btn-white btn-lg" type="button" style="height: 48px; width: 48px;" ng-click="vm.RemoveFromList(item)" tooltip-placement="right" tooltip="Remove item from shopping list.">
                                                 <i class="fa fa-close"></i>
                                             </button>
@@ -108,31 +108,31 @@
                 </div>
             </div>
 
-            <div class="col-md-6 animated bounceInRight legend-container" ng-class="vm.fontSizeClass" ng-show="vm.HasItems">
+            <div class="col-md-6 animated bounceInRight legend-container" ng-class="vm.fontSizeClass" ng-if="vm.HasItems">
 
                 <h1>Shopping List Results Legend</h1>
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="classi-element" ng-show="vm.Class1Visible" style="min-height: 72px; cursor: default;">
+                    <li class="classi-element" ng-if="vm.Class1Visible" style="min-height: 72px; cursor: default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classi.png" alt="Class 1" style="width: 48px; height: 48px;" />
                         </div>
                         <strong>Recall which indicates dangerous or defective products that predictably could cause serious health problems or death.</strong>
                     </li>
-                    <li class="classii-element" ng-show="vm.Class2Visible" style="min-height: 72px; cursor: default;">
+                    <li class="classii-element" ng-if="vm.Class2Visible" style="min-height: 72px; cursor: default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classii.png" alt="Class 2" style="width: 48px; height: 48px;" />
                         </div>
                         <strong>Recall which indicates products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</strong>
                     </li>
-                    <li class="classiii-element" ng-show="vm.Class3Visible" style="min-height: 72px; cursor: default;">
+                    <li class="classiii-element" ng-if="vm.Class3Visible" style="min-height: 72px; cursor: default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/classiii.png" alt="Class 3" style="width: 48px; height: 48px;" />
                         </div>
                         <strong>Recall which indicates products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.</strong>
                     </li>
-                    <li class="events-element" ng-show="vm.EventsVisible" style="min-height: 72px; cursor: default;">
+                    <li class="events-element" ng-if="vm.EventsVisible" style="min-height: 72px; cursor: default;">
                         <div class="pull-right">
                             <img src="./img/identifiers/events.png" alt="Event" style="width: 48px; height: 48px;" />
                         </div>
