@@ -290,12 +290,26 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                             default:
                                 eventStates.push(mapItem.State)
                                 break;
-
                         }
-                        //if (mapItem.Rank === 1) classiStates.push(mapItem.State);
-                        //if (mapItem.Rank === 2) classiiStates.push(mapItem.State);
-                        //if (mapItem.Rank === 3) classiiiStates.push(mapItem.State);
-                        //if (mapItem.Rank === 4) eventStates.push(mapItem.State);
+
+                        vm.Markers.push(
+                            {
+                            lat: parseFloat(mapItem.Latitude),
+                            lon: parseFloat(mapItem.Longitude),
+                            label: {
+                                message: "",
+                                show: false,
+                                showOnMouseOver: true
+
+                            },
+                            style: {
+                                image: {
+                                    icon: mapItem.icon
+                                    }
+                                }
+                            }
+                        );
+                       
                     });
                 }
 
