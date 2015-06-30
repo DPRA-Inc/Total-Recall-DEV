@@ -241,7 +241,6 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
      */
     function LoadPageInfo()
     {
-
         var scrubText = vm.SearchSummary.ScrubedText;
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
@@ -254,13 +253,34 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         productservice.GetFDAResults(scrubText, region,
             function (result)
             {
-                var states = [];
+                var classiStates = [];
+                var classiiStates = [];
+                var classiiiStates = [];
+                var eventStates = [];
 
                 if (angular.isObject(result) && angular.isObject(result.MapObjects))
                 {
                     result.MapObjects.forEach(function (mapItem)
                     {
-                        states.push(mapItem.State);
+                        switch (mapItem.Rank) {
+                            case 1:
+                                classiStates.push(mapItem.State)
+                                break;
+                            case 2:
+                                classiiStates.push(mapItem.State)
+                                break;
+                            case 3:
+                                classiiiStates.push(mapItem.State)
+                                break;
+                            default:
+                                eventStates.push(mapItem.State)
+                                break;
+
+                        }
+                        //if (mapItem.Rank === 1) classiStates.push(mapItem.State);
+                        //if (mapItem.Rank === 2) classiiStates.push(mapItem.State);
+                        //if (mapItem.Rank === 3) classiiiStates.push(mapItem.State);
+                        //if (mapItem.Rank === 4) eventStates.push(mapItem.State);
                     });
                 }
 
@@ -283,51 +303,41 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 vm.DataLoading = false;
                 vm.IsChartReady = true;
 
-                //var link = "json/" + mapItem.State + ".geo.json.txt";
-                //var link = "json/" + "Test" + ".geo.json.txt";
-                //// load json test
-                //$http.get(link).success(function (data) {
+                productservice.GetRegionsJson(classiStates, function (jsonData) {
+                    $scope.class1.source.geojson = {
+                        object: jsonData
+                    }
+                });
 
-                //    var poly = data;
-
-                //    $scope.class2.source.geojson = {
-                //        object: poly
-                //    }
-
-                //});
-
-                productservice.GetRegionsJson(states, function (jsonData) {
-
+                productservice.GetRegionsJson(classiiStates, function (jsonData) {
                     $scope.class2.source.geojson = {
                         object: jsonData
                     }
-
-                    // re-zoom and center based on the objects on the map
-                    olData.getMap().then(function (map) {
-
-                        var size = map.getSize();
-
-                        size = [size[0] * 2, size[1] * 2];
-
-                        var extent = map.getView().calculateExtent(map.getSize());
-                        map.getView().fitExtent(extent, size);
-
-
-
-                        //// load json test
-                        //$http.get('json/tn.txt').success(function (data)
-                        //{
-
-                        //    var tn = data;
-                        //    $scope.class2.source.geojson = {
-                        //        object: tn
-                        //    }
-
-                        //});
-
-                    });
-
                 });
+
+                productservice.GetRegionsJson(classiiiStates, function (jsonData) {
+                    $scope.class3.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(eventStates, function (jsonData) {
+                    $scope.events.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                //// re-zoom and center based on the objects on the map
+                //olData.getMap().then(function (map) {
+
+                //    var size = map.getSize();
+
+                //    size = [size[0] * 2, size[1] * 2];
+
+                //    var extent = map.getView().calculateExtent(map.getSize());
+                //    map.getView().fitExtent(extent, size);
+
+                //});
 
             }
         );

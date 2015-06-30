@@ -62,7 +62,6 @@ Namespace Api
 
         End Function
 
-
         <HttpGet>
         <Route("Regions/GetStateJson/{selected}")>
         Public Function GetStateJson(selected As String) As String
