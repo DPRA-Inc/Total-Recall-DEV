@@ -54,12 +54,6 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 attribution: true
             }
         },
-        osm: {
-            source: {
-                type: "OSM"
-            },
-            opacity: .33
-        },
         class1: {
             visible: true,
             opacity: 1,
@@ -135,7 +129,14 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     width: 1
                 }
             }
+        },
+        osm: {
+            source: {
+                type: "OSM"
+            },
+            opacity: .33
         }
+
     });
 
     //if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
@@ -277,7 +278,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 {
                     result.MapObjects.forEach(function (mapItem)
                     {
-                        switch (mapItem.Rank) {
+                        switch (mapItem.Rank)
+                        {
                             case 1:
                                 classiStates.push(mapItem.State)
                                 break;
@@ -294,22 +296,22 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
                         vm.Markers.push(
                             {
-                            lat: parseFloat(mapItem.Latitude),
-                            lon: parseFloat(mapItem.Longitude),
-                            label: {
-                                message: "",
-                                show: false,
-                                showOnMouseOver: true
+                                lat: parseFloat(mapItem.Latitude),
+                                lon: parseFloat(mapItem.Longitude),
+                                label: {
+                                    message: "",
+                                    show: false,
+                                    showOnMouseOver: true
 
-                            },
-                            style: {
-                                image: {
-                                    icon: mapItem.icon
+                                },
+                                style: {
+                                    image: {
+                                        icon: mapItem.icon
                                     }
                                 }
                             }
                         );
-                       
+
                     });
                 }
 
@@ -332,32 +334,37 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 vm.DataLoading = false;
                 vm.IsChartReady = true;
 
-                productservice.GetRegionsJson(classiStates, function (jsonData) {
+                productservice.GetRegionsJson(classiStates, function (jsonData)
+                {
                     $scope.class1.source.geojson = {
                         object: jsonData
                     }
                 });
 
-                productservice.GetRegionsJson(classiiStates, function (jsonData) {
+                productservice.GetRegionsJson(classiiStates, function (jsonData)
+                {
                     $scope.class2.source.geojson = {
                         object: jsonData
                     }
                 });
 
-                productservice.GetRegionsJson(classiiiStates, function (jsonData) {
+                productservice.GetRegionsJson(classiiiStates, function (jsonData)
+                {
                     $scope.class3.source.geojson = {
                         object: jsonData
                     }
                 });
 
-                productservice.GetRegionsJson(eventStates, function (jsonData) {
+                productservice.GetRegionsJson(eventStates, function (jsonData)
+                {
                     $scope.events.source.geojson = {
                         object: jsonData
                     }
                 });
 
                 // re-zoom and center based on the objects on the map
-                olData.getMap().then(function (map) {
+                olData.getMap().then(function (map)
+                {
 
                     var size = map.getSize();
 
