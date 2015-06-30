@@ -13,16 +13,51 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
     vm.HasItems = false;
 
+    vm.PillNormal = "badge-plain";
+    vm.PillBig = "badge-plain";
+    vm.PillBigger = "badge-plain";
+
+    // load last selection from local storage.
     if (angular.isString($localStorage.fontSizeClass))
     {
         vm.fontSizeClass = $localStorage.fontSizeClass;
     }
 
+    AnalyzeFontSize(vm.fontSizeClass);
+
+    /*
+    * Used to change the fonts size.
+    */
     vm.ChangeFontSize = function (className)
     {
         vm.fontSizeClass = className;
         $localStorage.fontSizeClass = className;
+
+        AnalyzeFontSize(className);
     };
+
+    /*
+     * Used to analyze and properly set up a selector style for the font size.
+     */
+    function AnalyzeFontSize(fontSize)
+    {
+        vm.PillNormal = "badge-plain";
+        vm.PillBig = "badge-plain";
+        vm.PillBigger = "badge-plain";
+
+        switch (fontSize)
+        {
+            case "big":
+                vm.PillBig = "badge-primary";
+                break;
+            case "bigger":
+                vm.PillBigger = "badge-primary";
+                break;
+            default:
+                vm.PillNormal = "badge-primary";
+                break;
+        }
+    }
 
     if (angular.isString($localStorage.cart))
     {
@@ -43,7 +78,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
      */
     function LoadPageInfo()
     {
-                
+
         landingservice.GetStates(
         function (result)
         {
@@ -83,7 +118,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
     LoadPageInfo();
 
     if (vm.shoppingList.length === 0) WarmUp();
-    
+
     //********************************
 
     /*
@@ -131,7 +166,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                     toastr["warning"]("This item already exists in your shopping list.", "Duplicate item!");
 
                     doesExist = true;
-                    return ;
+                    return;
                 }
             }); // Make the new item to be added to our list.
 
@@ -140,7 +175,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
             var item = {};
 
             item.ScrubedText = value; // Product name
-            item.Keyword = vm.textValue; 
+            item.Keyword = vm.textValue;
             item.State = region;
             item.Rank = "success"; // How Bad is it, Color Code.
             item.IsLoading = true; // Indicates we are waiting on Return From Service.
@@ -257,9 +292,11 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
         StartupRSS();
     };
 
-    function StartupRSS() {
+    function StartupRSS()
+    {
 
-        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Recalls/rss.xml").then(function (res) {
+        feedLoader.GetRSSFeed("http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Recalls/rss.xml").then(function (res)
+        {
             var data = angular.toJson(res.data.responseData.feed.entries);
 
             vm.feeds = angular.fromJson(data);
@@ -268,7 +305,8 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
     }
 
-    vm.ClearList = function () {
+    vm.ClearList = function ()
+    {
 
         vm.shoppingList = [];
         $localStorage.cart = angular.toJson(vm.shoppingList);

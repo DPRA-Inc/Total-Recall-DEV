@@ -31,11 +31,17 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     vm.Class3Visible = false;
     vm.EventsVisible = false;
 
+    vm.PillNormal = "badge-plain";
+    vm.PillBig = "badge-plain";
+    vm.PillBigger = "badge-plain";
+
     // load last selection from local storage.
     if (angular.isString($localStorage.fontSizeClass))
     {
         vm.fontSizeClass = $localStorage.fontSizeClass;
     }
+
+    AnalyzeFontSize(vm.fontSizeClass);
 
     // default map configuration
     angular.extend($scope, {
@@ -224,13 +230,38 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     };
 
     /*
-     * Used changes the fonts size.
+     * Used to change the fonts size.
      */
     vm.ChangeFontSize = function (className)
     {
         vm.fontSizeClass = className;
         $localStorage.fontSizeClass = className;
+
+        AnalyzeFontSize(className);
     };
+
+    /*
+     * Used to analyze and properly set up a selector style for the font size.
+     */
+    function AnalyzeFontSize(fontSize)
+    {
+        vm.PillNormal = "badge-plain";
+        vm.PillBig = "badge-plain";
+        vm.PillBigger = "badge-plain";
+
+        switch (fontSize)
+        {
+            case "big":
+                vm.PillBig = "badge-primary";
+                break;
+            case "bigger":
+                vm.PillBigger = "badge-primary";
+                break;
+            default:
+                vm.PillNormal = "badge-primary";
+                break;
+        }
+    }
 
     /*
      * Used to load only visible results to increase render performance.

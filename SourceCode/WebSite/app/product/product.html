@@ -7,13 +7,13 @@
                 <div>
                     <ul class="nav nav-pills" role="tablist">
                         <li role="presentation" class="active">
-                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
+                            <span class="badge {{vm.PillNormal}}" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
                         </li>
                         <li role="presentation">
-                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
+                            <span class="badge {{vm.PillBig}}" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
                         </li>
                         <li role="presentation">
-                            <span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
+                            <span class="badge {{vm.PillBigger}}" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
                         </li>
                     </ul>
                 </div>
