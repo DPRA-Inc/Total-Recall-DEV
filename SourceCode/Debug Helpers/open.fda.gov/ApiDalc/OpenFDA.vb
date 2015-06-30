@@ -116,6 +116,8 @@ Public Class OpenFda
 
         Dim result As String = String.Empty
 
+        result = Execute(url)
+
         Return result
 
     End Function
@@ -148,20 +150,45 @@ Public Class OpenFda
         'Dim tmpAdverseDrugEventtList As List(Of AdverseDrugEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DeviceEvent
         Dim dataSetSize As Integer = 0
+        Dim yearCheck As Integer = -1
 
         'Limit first query to a 1 year window
         Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
         AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
         'Dim limit As String = AddResultLimit(100)
 
-        Dim url As String = BuildUrl(endPointType)
-        Dim results As String = Execute(url)
+        Dim apiUrl As String = BuildUrl(endPointType)
+        Dim searchResults As String = Execute(apiUrl)
 
-        If Not String.IsNullOrEmpty(results) Then
+        Do
+
+            ' If there was not data in the 1 yr window the get all results.
+            ' Check date range window for results year 2 thur year 5.
+            If dataSetSize = 0 Then
+
+                yearCheck -= 1
+                endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
+
+                ResetSearch()
+                AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
+                AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+
+                apiUrl = BuildUrl(endPointType)
+
+                searchResults = Execute(apiUrl)
+                'OpenFdaApiHits += 1
+
+                dataSetSize = GetMetaResults().Total()
+
+            End If
+
+        Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
+
+        If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
         End If
 
@@ -174,10 +201,11 @@ Public Class OpenFda
         Dim deviceEventList As New List(Of AdverseDeviceEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DeviceEvent
         Dim dataSetSize As Integer = 0
+        Dim yearCheck As Integer = -1
 
         'Limit first query to a 1 year window
         Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
@@ -186,6 +214,33 @@ Public Class OpenFda
 
         Dim apiUrl As String = BuildUrl(endPointType)
         Dim searchResults As String = Execute(apiUrl & limit)
+        'OpenFdaApiHits += 1
+
+        dataSetSize = GetMetaResults().Total()
+
+        Do
+
+            ' If there was not data in the 1 yr window the get all results.
+            ' Check date range window for results year 2 thur year 5.
+            If dataSetSize = 0 Then
+
+                yearCheck -= 1
+                endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
+
+                ResetSearch()
+                AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
+                AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+
+                apiUrl = BuildUrl(endPointType)
+
+                searchResults = Execute(apiUrl & limit)
+                'OpenFdaApiHits += 1
+
+                dataSetSize = GetMetaResults().Total()
+
+            End If
+
+        Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
@@ -239,20 +294,45 @@ Public Class OpenFda
         'Dim tmpAdverseDrugEventtList As List(Of AdverseDrugEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
         Dim dataSetSize As Integer = 0
+        Dim yearCheck As Integer = -1
 
         'Limit first query to a 1 year window
         Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
         AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
         'Dim limit As String = AddResultLimit(100)
 
-        Dim url As String = BuildUrl(endPointType)
-        Dim results As String = Execute(url)
+        Dim apiUrl As String = BuildUrl(endPointType)
+        Dim searchResults As String = Execute(apiUrl)
 
-        If Not String.IsNullOrEmpty(results) Then
+        Do
+
+            ' If there was not data in the 1 yr window the get all results.
+            ' Check date range window for results year 2 thur year 5.
+            If dataSetSize = 0 Then
+
+                yearCheck -= 1
+                endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
+
+                ResetSearch()
+                AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+                AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+
+                apiUrl = BuildUrl(endPointType)
+
+                searchResults = Execute(apiUrl)
+                'OpenFdaApiHits += 1
+
+                dataSetSize = GetMetaResults().Total()
+
+            End If
+
+        Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
+
+        If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
         End If
 
@@ -266,10 +346,11 @@ Public Class OpenFda
         Dim tmpSearchResultDrugEvent As New List(Of SearchResultDrugEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
         Dim dataSetSize As Integer = 0
+        Dim yearCheck As Integer = -1
 
         'Limit first query to a 1 year window
         Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(-1))
+        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
@@ -279,6 +360,33 @@ Public Class OpenFda
 
         Dim apiUrl As String = BuildUrl(endPointType)
         Dim searchResults As String = Execute(apiUrl & limit)
+        'OpenFdaApiHits += 1
+
+        dataSetSize = GetMetaResults().Total()
+
+        Do
+
+            ' If there was not data in the 1 yr window the get all results.
+            ' Check date range window for results year 2 thur year 5.
+            If dataSetSize = 0 Then
+
+                yearCheck -= 1
+                endDate = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
+
+                ResetSearch()
+                AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+                AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
+
+                apiUrl = BuildUrl(endPointType)
+
+                searchResults = Execute(apiUrl & limit)
+                'OpenFdaApiHits += 1
+
+                dataSetSize = GetMetaResults().Total()
+
+            End If
+
+        Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
