@@ -59,15 +59,4 @@ Public Class OpenFda
 
     End Sub
 
-    <TestCase()>
-    Public Sub Convert_DrugEventData_AdverseDrugEventObject()
-
-        Dim mockRestClient = New Mocks.MockRestClient("DrugEventData.json")
-        Dim service = New ApiDalc.OpenFda(mockRestClient)
-        Dim result = service.GetDrugEventsByDrugName("Augmentin")
-
-        Assert.AreNotEqual(Nothing, result)
-
-    End Sub
-
 End Class
