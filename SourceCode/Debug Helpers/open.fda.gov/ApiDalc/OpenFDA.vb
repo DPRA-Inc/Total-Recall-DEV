@@ -265,6 +265,7 @@ Public Class OpenFda
 
             searchResults = Execute(apiUrl & limit)
             'OpenFdaApiHits += 1
+            dataSetSize = GetMetaResults().Total()
 
         End If
 
@@ -436,6 +437,8 @@ Public Class OpenFda
             apiUrl = BuildUrl(endPointType)
 
             searchResults = Execute(apiUrl & limit)
+            'OpenFdaApiHits += 1
+            dataSetSize = GetMetaResults().Total()
 
         End If
 

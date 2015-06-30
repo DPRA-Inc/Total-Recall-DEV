@@ -36,7 +36,7 @@
                     Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
                 </h1>
 
-                <p class="pull-right v-align-bottom" ng-class="vm.fontSizeClass">(Newest first)</p>
+                <p class="pull-right v-align-bottom" style="padding-right:15px;" ng-class="vm.fontSizeClass">(Newest first)</p>
 
             </div>
         </div>
@@ -177,6 +177,10 @@
                             <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" style="height: 480px; width: 100%; min-width: 320px;">
 
                                 <ol-layer ol-layer-properties="osm"></ol-layer>
+                                <ol-layer ol-layer-properties="events"></ol-layer>
+                                <ol-layer ol-layer-properties="class3"></ol-layer>
+                                <ol-layer ol-layer-properties="class2"></ol-layer>
+                                <ol-layer ol-layer-properties="class1"></ol-layer>
                                 <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
 
                             </openlayers>
@@ -193,7 +197,11 @@
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="feed-element">
+                    <li class="classi-element" >
+
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classi.png" alt="Class 1" style="width:48px;height:48px;" />
+                        </div>
 
                         <h3>Number of Reports by Class 1</h3>
 
@@ -213,7 +221,11 @@
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="feed-element">
+                    <li class="classii-element">
+
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classii.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
 
                         <h3>Number of Reports by Class 2</h3>
 
@@ -233,7 +245,11 @@
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="feed-element">
+                    <li class="classiii-element">
+
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classiii.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
 
                         <h3>Number of Reports by Class 3</h3>
 
@@ -249,11 +265,15 @@
 
             </div>
 
-            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-if="vm.Class1Visible">
+            <div class="col-md-6 animated bounceInUp pull-right" ng-class="vm.fontSizeClass" ng-if="vm.EventsVisible">
 
                 <ul class="sortable-list connectList agile-list">
 
-                    <li class="feed-element">
+                    <li class="events-element">
+
+                        <div class="pull-right">
+                            <img src="./img/identifiers/events.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
 
                         <h3>Number of Reports by Event</h3>
 

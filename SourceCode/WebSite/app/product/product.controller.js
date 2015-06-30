@@ -57,6 +57,71 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         osm: {
             source: {
                 type: "OSM"
+            },
+            opacity: 0.5
+        },
+        class1: {
+            visible: true,
+            opacity: 0.5,
+            source: {
+                type: 'GeoJSON'
+            },
+            style: {
+                fill: {
+                    color: 'rgba(255, 0, 0, 0.6)'
+                },
+                stroke: {
+                    color: 'white',
+                    width: 3
+                }
+            }
+        },
+        class2: {
+            visible: true,
+            opacity: 0.5,
+            source: {
+                type: 'GeoJSON'
+            },
+            style: {
+                fill: {
+                    color: 'rgba(255, 0, 0, 0.6)'
+                },
+                stroke: {
+                    color: 'white',
+                    width: 3
+                }
+            }
+        },
+        class3: {
+            visible: true,
+            opacity: 0.5,
+            source: {
+                type: 'GeoJSON'
+            },
+            style: {
+                fill: {
+                    color: 'rgba(255, 0, 0, 0.6)'
+                },
+                stroke: {
+                    color: 'white',
+                    width: 3
+                }
+            }
+        },
+        events: {
+            visible: true,
+            opacity: 0.5,
+            source: {
+                type: 'GeoJSON'
+            },
+            style: {
+                fill: {
+                    color: 'rgba(255, 0, 0, 0.6)'
+                },
+                stroke: {
+                    color: 'white',
+                    width: 3
+                }
             }
         }
     });
@@ -236,6 +301,17 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
                     var extent = map.getView().calculateExtent(map.getSize());
                     map.getView().fitExtent(extent, size);
+
+                    // load json test
+                    $http.get('json/tn.txt').success(function (data)
+                    {
+
+                        var tn = data;
+                        $scope.class1.source.geojson = {
+                            object: tn
+                        }
+
+                    });
 
                 });
 

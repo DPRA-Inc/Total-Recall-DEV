@@ -33,6 +33,13 @@ Public Class ShopAwareService
 
 #Region " Public Methods "
 
+    ''' <summary>
+    ''' Gets a count of issues. Issues are enforcements (Recalls) of food, drug and device (identified by classification) and events of drug and devices
+    ''' </summary>
+    ''' <param name="keyWord"></param>
+    ''' <param name="state"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function GetSearchSummary(ByVal keyWord As String, ByVal state As String) As SearchSummary
 
         Dim results As SearchSummary = Nothing
