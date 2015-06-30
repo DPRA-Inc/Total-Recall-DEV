@@ -356,17 +356,17 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     }
                 });
 
-                //// re-zoom and center based on the objects on the map
-                //olData.getMap().then(function (map) {
+                // re-zoom and center based on the objects on the map
+                olData.getMap().then(function (map) {
 
-                //    var size = map.getSize();
+                    var size = map.getSize();
 
-                //    size = [size[0] * 2, size[1] * 2];
+                    size = [size[0] * 2, size[1] * 2];
 
-                //    var extent = map.getView().calculateExtent(map.getSize());
-                //    map.getView().fitExtent(extent, size);
+                    var extent = map.getView().calculateExtent(map.getSize());
+                    map.getView().fitExtent(extent, size);
 
-                //});
+                });
 
             }
         );
