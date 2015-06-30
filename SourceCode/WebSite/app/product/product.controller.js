@@ -64,7 +64,10 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
@@ -80,7 +83,10 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
@@ -96,7 +102,10 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
@@ -112,7 +121,10 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
@@ -155,7 +167,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function() {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -176,7 +189,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function () {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -197,7 +211,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function () {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -296,14 +311,16 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
                 //});
 
-                productservice.GetRegionsJson(states, function (jsonData) {
+                productservice.GetRegionsJson(states, function (jsonData)
+                {
 
                     $scope.class2.source.geojson = {
                         object: jsonData
                     }
 
                     // re-zoom and center based on the objects on the map
-                    olData.getMap().then(function (map) {
+                    olData.getMap().then(function (map)
+                    {
 
                         var size = map.getSize();
 
