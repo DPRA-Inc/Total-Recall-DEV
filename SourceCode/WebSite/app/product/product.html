@@ -65,11 +65,11 @@
                                         <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Product:</strong> {{::item.ProductDescription}}
+                                            <strong>Product:</strong> <span ng-bind-html="::item.ProductDescription | highlight:vm.SearchSummary.Keyword"></span>
                                         </p>
 
                                         <p>
-                                            <strong>Reason:</strong> {{::item.ContentTruncated}}
+                                            <strong>Reason:</strong> <span ng-bind-html="::item.ContentTruncated | highlight:vm.SearchSummary.Keyword"></span>
                                         </p>
 
                                         <p>
@@ -90,7 +90,7 @@
                                             <strong>Seriousness:</strong> {{::item.Seriousness}}
                                         </p>
 
-                                        <p><strong>Source:</strong> {{::item.PrimarySource}}</p>
+                                        <p><strong>Source:</strong> <span ng-bind-html="::item.PrimarySource | highlight:vm.SearchSummary.Keyword"></span></p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
@@ -103,10 +103,10 @@
                                         <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Products:</strong> {{::item.DrugItem[0].BrandNamesString}}
+                                            <strong>Products:</strong> <span ng-bind-html="::item.DrugItem[0].BrandNamesString | highlight:vm.SearchSummary.Keyword"></span>
                                         </p>
                                         <p>
-                                            <strong>Generic Name:</strong> {{::item.DrugItem[0].GenericNamesString}}
+                                            <strong>Generic Name:</strong> <span ng-bind-html="::item.DrugItem[0].GenericNamesString | highlight:vm.SearchSummary.Keyword"></span>
                                         </p>
 
                                         <p><strong>Seriousness:</strong> {{::item.SeriousnessString}}</p>

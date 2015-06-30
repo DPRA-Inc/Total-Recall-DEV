@@ -148,6 +148,7 @@
     <Content Include="img\mapIcon\7.png" />
     <Content Include="img\mapIcon\8.png" />
     <Content Include="img\mapIcon\9.png" />
+    <Content Include="js\filters.js" />
     <Content Include="plugins\openlayers\angular-openlayers-directive.css" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />

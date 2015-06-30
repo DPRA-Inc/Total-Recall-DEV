@@ -5,6 +5,11 @@ select::-ms-expand {
     background: #fff;
 }
 
+.highlight {
+    color: #000;
+    background-color: yellow;
+}
+
 .bottom-align-text {
     position: absolute;
     bottom: 0;
