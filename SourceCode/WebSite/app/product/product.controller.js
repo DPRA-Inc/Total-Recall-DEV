@@ -351,7 +351,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineData1 = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Class 1",
@@ -367,7 +367,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineData2 = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Class 2",
@@ -383,7 +383,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineData3 = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Class 3",
@@ -399,7 +399,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineDataE = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Events",
