@@ -1,5 +1,6 @@
 ﻿#Region " Imports "
 
+Imports ApiDalc.DataObjects
 Imports NUnit.Framework
 
 #End Region
@@ -15,6 +16,7 @@ Public Class ShopAwareService
         Dim result = service.GetSearchSummary("TEST", "TN")
 
         Assert.IsNotNull(result)
+
 
     End Sub
 
