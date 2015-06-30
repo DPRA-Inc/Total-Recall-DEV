@@ -163,6 +163,7 @@ Public Class OpenFda
 
         Dim apiUrl As String = BuildUrl(endPointType)
         Dim searchResults As String = Execute(apiUrl)
+        dataSetSize = GetMetaResults().Total()
 
         Do
 
@@ -187,6 +188,18 @@ Public Class OpenFda
             End If
 
         Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
+
+        'Search w/o Date range filter
+        If String.IsNullOrEmpty(searchResults) Then
+
+            ResetSearch()
+            AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
+
+            apiUrl = BuildUrl(endPointType)
+
+            searchResults = Execute(apiUrl)
+
+        End If
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
@@ -241,6 +254,19 @@ Public Class OpenFda
             End If
 
         Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
+
+        'Search w/o Date range filter
+        If String.IsNullOrEmpty(searchResults) Then
+
+            ResetSearch()
+            AddSearchFilter(endPointType, FdaFilterTypes.DeviceEventDescription, New List(Of String)({keyword}), FilterCompairType.And)
+
+            apiUrl = BuildUrl(endPointType)
+
+            searchResults = Execute(apiUrl & limit)
+            'OpenFdaApiHits += 1
+
+        End If
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
@@ -307,6 +333,7 @@ Public Class OpenFda
 
         Dim apiUrl As String = BuildUrl(endPointType)
         Dim searchResults As String = Execute(apiUrl)
+        dataSetSize = GetMetaResults().Total()
 
         Do
 
@@ -331,6 +358,18 @@ Public Class OpenFda
             End If
 
         Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
+
+        'Search w/o Date range filter
+        If String.IsNullOrEmpty(searchResults) Then
+
+            ResetSearch()
+            AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+
+            apiUrl = BuildUrl(endPointType)
+
+            searchResults = Execute(apiUrl)
+
+        End If
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
@@ -387,6 +426,18 @@ Public Class OpenFda
             End If
 
         Loop Until dataSetSize > 0 OrElse Math.Abs(yearCheck) >= 5
+
+        'Search w/o Date range filter
+        If String.IsNullOrEmpty(searchResults) Then
+
+            ResetSearch()
+            AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+
+            apiUrl = BuildUrl(endPointType)
+
+            searchResults = Execute(apiUrl & limit)
+
+        End If
 
         If Not String.IsNullOrEmpty(searchResults) Then
             dataSetSize = GetMetaResults().Total()
