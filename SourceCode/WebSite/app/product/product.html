@@ -36,7 +36,7 @@
                     Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
                 </h1>
 
-                <p class="pull-right v-align-bottom" ng-class="vm.fontSizeClass">(Newest first)</p>
+                <p class="pull-right v-align-bottom" style="padding-right:15px;" ng-class="vm.fontSizeClass">(Newest first)</p>
 
             </div>
         </div>
@@ -177,6 +177,10 @@
                             <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" style="height: 480px; width: 100%; min-width: 320px;">
 
                                 <ol-layer ol-layer-properties="osm"></ol-layer>
+                                <ol-layer ol-layer-properties="events"></ol-layer>
+                                <ol-layer ol-layer-properties="class3"></ol-layer>
+                                <ol-layer ol-layer-properties="class2"></ol-layer>
+                                <ol-layer ol-layer-properties="class1"></ol-layer>
                                 <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
 
                             </openlayers>
