@@ -323,17 +323,40 @@ Public Class OpenFda
         Dim dataSetSize As Integer = 0
         Dim yearCheck As Integer = -1
 
+        Dim apiUrl As String
+        Dim searchResults As String
+
         'Limit first query to a 1 year window
         Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
+        Dim endDate As String = String.Empty
+
+        ResetSearch()
+        AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        AddCountField("receivedate")
+
+        apiUrl = BuildUrl(endPointType)
+        searchResults = Execute(apiUrl)
+
+        If Not String.IsNullOrEmpty(searchResults) Then
+
+            Dim jo As JObject = JObject.Parse(searchResults)
+            Dim maxEventDate = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
+
+            endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+
+        End If
+
+        If String.IsNullOrEmpty(endDate) Then
+            Return 0
+        End If
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
         AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
         'Dim limit As String = AddResultLimit(100)
 
-        Dim apiUrl As String = BuildUrl(endPointType)
-        Dim searchResults As String = Execute(apiUrl)
+        apiUrl = BuildUrl(endPointType)
+        searchResults = Execute(apiUrl)
         dataSetSize = GetMetaResults().Total()
 
         Do
@@ -382,24 +405,48 @@ Public Class OpenFda
 
     Public Function GetDrugEventsByDrugName(ByVal drugName As String) As List(Of SearchResultDrugEvent)
 
-        Dim DrugEventList As New List(Of AdverseDrugEvent)
+        Dim drugEventList As New List(Of AdverseDrugEvent)
         Dim tmpSearchResultDrugEvent As New List(Of SearchResultDrugEvent)
         Dim endPointType As OpenFdaApiEndPoints = OpenFdaApiEndPoints.DrugEvent
         Dim dataSetSize As Integer = 0
         Dim yearCheck As Integer = -1
 
+        Dim apiUrl As String
+        Dim searchResults As String
+        Dim limit As String
+
         'Limit first query to a 1 year window
         Dim beginDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddDays(1))
-        Dim endDate As String = String.Format("{0:yyyyMMdd}", DateTime.Now.AddYears(yearCheck))
+        Dim endDate As String = String.Empty
+
+        ResetSearch()
+        AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
+        AddCountField("receivedate")
+
+        apiUrl = BuildUrl(endPointType)
+        searchResults = Execute(apiUrl)
+
+        If Not String.IsNullOrEmpty(searchResults) Then
+
+            Dim jo As JObject = JObject.Parse(searchResults)
+            Dim maxEventDate = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
+
+            endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+
+        End If
+
+        If String.IsNullOrEmpty(endDate) Then
+            Return tmpSearchResultDrugEvent
+        End If
 
         ResetSearch()
         AddSearchFilter(endPointType, FdaFilterTypes.DrugEventDrugName, New List(Of String)({drugName}), FilterCompairType.And)
         AddSearchFilter(endPointType, FdaFilterTypes.Date, New List(Of String)({beginDate, endDate}), FilterCompairType.And)
 
-        Dim limit As String = AddResultLimit(100)
+        limit = AddResultLimit(100)
 
-        Dim apiUrl As String = BuildUrl(endPointType)
-        Dim searchResults As String = Execute(apiUrl & limit)
+        apiUrl = BuildUrl(endPointType)
+        searchResults = Execute(apiUrl & limit)
         'OpenFdaApiHits += 1
 
         dataSetSize = GetMetaResults().Total()
@@ -461,7 +508,7 @@ Public Class OpenFda
                 If Not String.IsNullOrEmpty(searchResults) Then
 
                     Dim result As List(Of AdverseDrugEvent) = AdverseDrugEvent.CnvJsonDataToList(searchResults)
-                    DrugEventList.AddRange(result)
+                    drugEventList.AddRange(result)
 
                 End If
 
@@ -479,7 +526,7 @@ Public Class OpenFda
 
         End If
 
-        tmpSearchResultDrugEvent = SearchResultDrugEvent.ConvertJsonData(DrugEventList)
+        tmpSearchResultDrugEvent = SearchResultDrugEvent.ConvertJsonData(drugEventList)
 
         Return tmpSearchResultDrugEvent
 
