@@ -58,11 +58,11 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             source: {
                 type: "OSM"
             },
-            opacity: 0.5
+            opacity: .33
         },
         class1: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
                 type: 'GeoJSON',
                 geojson: {
@@ -71,7 +71,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             },
             style: {
                 fill: {
-                    color: 'rgba(237, 85, 101, 0.9)'
+                    color: 'rgba(237, 85, 101, 1)'
                 },
                 stroke: {
                     color: 'white',
@@ -81,7 +81,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         },
         class2: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
                 type: 'GeoJSON',
                 geojson: {
@@ -90,7 +90,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             },
             style: {
                 fill: {
-                    color: 'rgba(248, 172, 89, 0.9)'
+                    color: 'rgba(248, 172, 89, 1)'
                 },
                 stroke: {
                     color: 'white',
@@ -100,7 +100,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         },
         class3: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
                 type: 'GeoJSON',
                 geojson: {
@@ -109,7 +109,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             },
             style: {
                 fill: {
-                    color: 'rgba(28, 132, 198, 0.9)'
+                    color: 'rgba(28, 132, 198, 1)'
                 },
                 stroke: {
                     color: 'white',
@@ -119,7 +119,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         },
         events: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
                 type: 'GeoJSON',
                 geojson: {
@@ -128,7 +128,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             },
             style: {
                 fill: {
-                    color: 'rgba(35, 198, 200, 0.9)'
+                    color: 'rgba(35, 198, 200, 1)'
                 },
                 stroke: {
                     color: 'white',
