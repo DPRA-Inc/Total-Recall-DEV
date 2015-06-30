@@ -76,6 +76,8 @@ Public Class SearchResultMapData
         End Get
     End Property
 
+    Public Property Rank As Integer = 9
+
 #End Region
 
 End Class

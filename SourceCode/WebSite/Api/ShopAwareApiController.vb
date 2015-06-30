@@ -62,6 +62,35 @@ Namespace Api
 
         End Function
 
+        <HttpGet>
+        <Route("Regions/GetStateJson/{selected}")>
+        Public Function GetStateJson(selected As String) As String
+
+            Dim path As String = HttpContext.Current.Server.MapPath("~/json/")
+
+            Dim regions As New List(Of String)
+            regions.AddRange(Split(selected, ","))
+
+            Dim statePolys As New List(Of String)
+
+            For Each state In regions
+                Dim folder As String = String.Format("{0}{1}.geo.json.txt", path, state)
+                Dim data As String() = IO.File.ReadAllLines(folder)
+
+                statePolys.Add(data(1))
+
+            Next
+
+            Dim result As New List(Of String)
+            result.Add("{""type"":""FeatureCollection"",""features"":[")
+            result.Add(Join(statePolys.ToArray, ","))
+            result.Add("]}")
+
+            Return Join(result.ToArray, "")
+
+        End Function
+
+
     End Class
 
 End Namespace

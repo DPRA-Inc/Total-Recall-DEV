@@ -167,6 +167,7 @@
     <Content Include="json\KS.geo.json.txt" />
     <Content Include="json\KY.geo.json.txt" />
     <Content Include="json\LA.geo.json.txt" />
+    <Content Include="json\Test.geo.json.txt" />
     <Content Include="json\MA.geo.json.txt" />
     <Content Include="json\MD.geo.json.txt" />
     <Content Include="json\ME.geo.json.txt" />

@@ -58,69 +58,81 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             source: {
                 type: "OSM"
             },
-            opacity: 0.5
+            opacity: .33
         },
         class1: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(237, 85, 101, 1)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         },
         class2: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(248, 172, 89, 1)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         },
         class3: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(28, 132, 198, 1)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         },
         events: {
             visible: true,
-            opacity: 0.5,
+            opacity: 1,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(35, 198, 200, 1)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         }
@@ -155,7 +167,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function() {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -176,7 +189,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function () {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -197,7 +211,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function () {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -241,7 +256,6 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
      */
     function LoadPageInfo()
     {
-
         var scrubText = vm.SearchSummary.ScrubedText;
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
@@ -254,30 +268,48 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         productservice.GetFDAResults(scrubText, region,
             function (result)
             {
+                var classiStates = [];
+                var classiiStates = [];
+                var classiiiStates = [];
+                var eventStates = [];
 
                 if (angular.isObject(result) && angular.isObject(result.MapObjects))
                 {
-
                     result.MapObjects.forEach(function (mapItem)
                     {
+                        switch (mapItem.Rank) {
+                            case 1:
+                                classiStates.push(mapItem.State)
+                                break;
+                            case 2:
+                                classiiStates.push(mapItem.State)
+                                break;
+                            case 3:
+                                classiiiStates.push(mapItem.State)
+                                break;
+                            default:
+                                eventStates.push(mapItem.State)
+                                break;
+                        }
 
                         vm.Markers.push(
                             {
-                                lat: parseFloat(mapItem.Latitude),
-                                lon: parseFloat(mapItem.Longitude),
-                                label: {
-                                    message: "",
-                                    show: false,
-                                    showOnMouseOver: true
+                            lat: parseFloat(mapItem.Latitude),
+                            lon: parseFloat(mapItem.Longitude),
+                            label: {
+                                message: "",
+                                show: false,
+                                showOnMouseOver: true
 
-                                },
-                                style: {
-                                    image: {
-                                        icon: mapItem.icon
+                            },
+                            style: {
+                                image: {
+                                    icon: mapItem.icon
                                     }
                                 }
                             }
                         );
+                       
                     });
                 }
 
@@ -300,9 +332,32 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 vm.DataLoading = false;
                 vm.IsChartReady = true;
 
+                productservice.GetRegionsJson(classiStates, function (jsonData) {
+                    $scope.class1.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(classiiStates, function (jsonData) {
+                    $scope.class2.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(classiiiStates, function (jsonData) {
+                    $scope.class3.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(eventStates, function (jsonData) {
+                    $scope.events.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
                 // re-zoom and center based on the objects on the map
-                olData.getMap().then(function (map)
-                {
+                olData.getMap().then(function (map) {
 
                     var size = map.getSize();
 
@@ -310,17 +365,6 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
                     var extent = map.getView().calculateExtent(map.getSize());
                     map.getView().fitExtent(extent, size);
-
-                    // load json test
-                    $http.get('json/tn.txt').success(function (data)
-                    {
-
-                        var tn = data;
-                        $scope.class1.source.geojson = {
-                            object: tn
-                        }
-
-                    });
 
                 });
 
@@ -351,7 +395,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineData1 = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Class 1",
@@ -367,7 +411,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineData2 = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Class 2",
@@ -383,7 +427,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineData3 = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Class 3",
@@ -399,7 +443,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         };
 
         vm.lineDataE = {
-            labels: ["January"],
+            labels: [""],
             datasets: [
                 {
                     label: "Events",

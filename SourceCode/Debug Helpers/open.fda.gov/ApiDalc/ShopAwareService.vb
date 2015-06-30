@@ -527,10 +527,13 @@ Public Class ShopAwareService
                     Dim listCheck As SearchResultMapData = Nothing
 
                     If list.ContainsKey(state) Then
+
                         listCheck = list(state)
+
                     Else
 
                         listCheck = New SearchResultMapData With {.State = state, .Latitude = coordPair(0), .Longitude = coordPair(1)}
+
                         list.Add(state, listCheck)
 
                     End If
@@ -565,6 +568,20 @@ Public Class ShopAwareService
                         listCheck.Tooltip += tooltip
 
                     End If
+
+                    ' Get the Rank
+                    Dim rank As Integer = 9
+                    Select Case data.Rank.ToLower
+                        Case "classi" : rank = 1
+                        Case "classii" : rank = 2
+                        Case "classiii" : rank = 3
+                        Case "events" : rank = 4
+                        Case "device event" : rank = 5
+                        Case Else : rank = 5
+
+                    End Select
+
+                    If listCheck.Rank > rank Then listCheck.Rank = rank
 
                     list(state) = listCheck
 
@@ -623,6 +640,21 @@ Public Class ShopAwareService
                         listCheck.Tooltip += tooltip
 
                     End If
+
+                    ' Get the Rank
+                    Dim rank As Integer = 9
+                    Select Case data.Rank.ToLower
+                        Case "classi" : rank = 1
+                        Case "classii" : rank = 2
+                        Case "classiii" : rank = 3
+                        Case "events" : rank = 4
+                        Case "device event" : rank = 5
+                        Case Else : rank = 5
+                    End Select
+
+                    If listCheck.Rank > rank Then listCheck.Rank = rank
+
+                    list(state) = listCheck
 
                     list(state) = listCheck
 
