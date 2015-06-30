@@ -64,15 +64,18 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(237, 85, 101, 0.9)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         },
@@ -80,15 +83,18 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(248, 172, 89, 0.9)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         },
@@ -96,15 +102,18 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(28, 132, 198, 0.9)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         },
@@ -112,15 +121,18 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             visible: true,
             opacity: 0.5,
             source: {
-                type: 'GeoJSON'
+                type: 'GeoJSON',
+                geojson: {
+                    object: []
+                }
             },
             style: {
                 fill: {
-                    color: 'rgba(255, 0, 0, 0.6)'
+                    color: 'rgba(35, 198, 200, 0.9)'
                 },
                 stroke: {
                     color: 'white',
-                    width: 3
+                    width: 1
                 }
             }
         }
@@ -155,7 +167,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function() {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -176,7 +189,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function () {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
@@ -197,7 +211,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                     {
                         return item;
                     },
-                    keyword: function () {
+                    keyword: function ()
+                    {
                         return vm.SearchSummary.Keyword;
                     }
                 }
