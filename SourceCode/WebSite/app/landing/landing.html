@@ -156,22 +156,25 @@
             <div class="col-md-12 animated bounceInUp feed-container">
 
                 <div class="row">
+
                     <div class="col-md-10">
-                        <h1>Latest FDA News</h1>
+                        <h1>Latest FDA Recall News</h1>
                     </div>
+
                     <div class="col-md-2" style="padding-top: 20px">
-                        <ul class="nav nav-pills pull-right" role="tablist">
+                        <ul class="nav nav-pills" role="tablist">
                             <li role="presentation" class="active">
-                                <span class="badge badge-primary" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
+                                <span class="badge {{vm.PillNormal}}" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
                             </li>
                             <li role="presentation">
-                                <span class="badge badge-primary" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
+                                <span class="badge {{vm.PillBig}}" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
                             </li>
                             <li role="presentation">
-                                <span class="badge badge-primary" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
+                                <span class="badge {{vm.PillBigger}}" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
                             </li>
                         </ul>
                     </div>
+
                 </div>
 
                 <ul class="rss sortable-list connectList agile-list">
