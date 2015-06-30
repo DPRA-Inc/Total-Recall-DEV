@@ -1,13 +1,15 @@
 ﻿angular.module("TotalRecall").controller("productcontroller", ProductController);
 
-function ProductController($scope, $location, $sessionStorage, $localStorage, $http, $modal, productservice) {
+function ProductController($scope, $location, $sessionStorage, $localStorage, $http, $modal, productservice, olData)
+{
     var vm = this;
 
     vm.SearchResult = [];
 
     vm.SearchSummary = $sessionStorage.SearchSummary;
 
-    if (!angular.isObject(vm.SearchSummary)) {
+    if (!angular.isObject(vm.SearchSummary))
+    {
         $location.path("/index");
         return;
     }
@@ -28,9 +30,10 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     vm.Class2Visible = false;
     vm.Class3Visible = false;
     vm.EventsVisible = false;
-  
+
     // load last selection from local storage.
-    if (angular.isString($localStorage.fontSizeClass)) {
+    if (angular.isString($localStorage.fontSizeClass))
+    {
         vm.fontSizeClass = $localStorage.fontSizeClass;
     }
 
@@ -66,22 +69,25 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
     LoadChartInfo();
     LoadPageInfo();
-   
+
 
     //*******************************************
 
     /*
      * Displays additional information about an reult item.
      */
-    vm.ShowMoreInformation = function (item) {
+    vm.ShowMoreInformation = function (item)
+    {
 
-        if (item.Classification.lastIndexOf("Class", 0) === 0) {
+        if (item.Classification.lastIndexOf("Class", 0) === 0)
+        {
             $modal.open({
                 templateUrl: "app/product/productFullDetails.modal.html",
                 controller: "productdialogcontroller as vm",
                 windowClass: "animated fadeInLeft",
                 resolve: {
-                    item: function () {
+                    item: function ()
+                    {
                         return item;
                     }
                 }
@@ -89,7 +95,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             return;
         }
 
-        if (item.Classification.lastIndexOf("Event", 0) === 0) {
+        if (item.Classification.lastIndexOf("Event", 0) === 0)
+        {
 
             $modal.open({
                 templateUrl: "app/product/drugEventFullDetails.modal.html",
@@ -97,15 +104,17 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 size: "lg",
                 windowClass: "animated fadeInLeft",
                 resolve: {
-                    item: function () {
+                    item: function ()
+                    {
                         return item;
                     }
                 }
             });
             return;
         }
-        
-        if (item.Classification.lastIndexOf("Device", 0) === 0) {
+
+        if (item.Classification.lastIndexOf("Device", 0) === 0)
+        {
 
             $modal.open({
                 templateUrl: "app/product/deviceEventFullDetails.modal.html",
@@ -113,7 +122,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 size: "lg",
                 windowClass: "animated fadeInLeft",
                 resolve: {
-                    item: function () {
+                    item: function ()
+                    {
                         return item;
                     }
                 }
@@ -126,7 +136,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     /*
      * Used changes the fonts size.
      */
-    vm.ChangeFontSize = function(className) {
+    vm.ChangeFontSize = function (className)
+    {
         vm.fontSizeClass = className;
         $localStorage.fontSizeClass = className;
     };
@@ -134,12 +145,16 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     /*
      * Used to load only visible results to increase render performance.
      */
-    vm.DisplayNext = function(numberToLoad) {
-        for (var i = 0; i < numberToLoad; i++) {
-            if (angular.isObject(vm.SearchResult) && angular.isObject(vm.SearchResult.Results)) {
+    vm.DisplayNext = function (numberToLoad)
+    {
+        for (var i = 0; i < numberToLoad; i++)
+        {
+            if (angular.isObject(vm.SearchResult) && angular.isObject(vm.SearchResult.Results))
+            {
                 var allResults = vm.SearchResult.Results;
 
-                if (vm.VisibleResults.length < allResults.length) {
+                if (vm.VisibleResults.length < allResults.length)
+                {
                     vm.VisibleResults.push(allResults[vm.CurrentIndex]);
                     vm.CurrentIndex++;
                 }
@@ -150,7 +165,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     /*
      * Loads the page initial data.
      */
-    function LoadPageInfo() {
+    function LoadPageInfo()
+    {
 
         var scrubText = vm.SearchSummary.ScrubedText;
         var productName = vm.SearchSummary.Keyword;
@@ -160,13 +176,16 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         vm.Class1Visible = (vm.SearchSummary.ClassICount);
         vm.Class2Visible = (vm.SearchSummary.ClassIICount);
         vm.Class3Visible = (vm.SearchSummary.ClassIIICount);
-      
+
         productservice.GetFDAResults(scrubText, region,
-            function(result) {
+            function (result)
+            {
 
-                if (angular.isObject(result) && angular.isObject(result.MapObjects)) {
+                if (angular.isObject(result) && angular.isObject(result.MapObjects))
+                {
 
-                    result.MapObjects.forEach(function(mapItem) {
+                    result.MapObjects.forEach(function (mapItem)
+                    {
 
                         vm.Markers.push(
                             {
@@ -207,6 +226,19 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 vm.DataLoading = false;
                 vm.IsChartReady = true;
 
+                // re-zoom and center based on the objects on the map
+                olData.getMap().then(function (map)
+                {
+
+                    var size = map.getSize();
+
+                    size = [size[0] * 2, size[1] * 2];
+
+                    var extent = map.getView().calculateExtent(map.getSize());
+                    map.getView().fitExtent(extent, size);
+
+                });
+
             }
         );
 
@@ -215,7 +247,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     /*
      * Initialize the chart.
      */
-    function LoadChartInfo() {
+    function LoadChartInfo()
+    {
 
         vm.lineOptions = {
             scaleShowGridLines: true,
