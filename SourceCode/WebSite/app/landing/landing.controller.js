@@ -284,6 +284,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
         vm.Class3Visible = false;
         vm.EventsVisible = false;
         vm.HasItems = false;
+        vm.CleanVisible = false;
 
         vm.shoppingList.forEach(function (product)
         {
@@ -305,6 +306,10 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
             if (product.HasEvents)
             {
                 vm.EventsVisible = true;
+            }
+            if (product.IsClean)
+            {
+                vm.CleanVisible = true;
             }
 
         });
