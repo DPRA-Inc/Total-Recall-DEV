@@ -1,13 +1,18 @@
 ﻿angular.module("TotalRecall").controller("angulikecontroller", AngulikeController);
 
-function AngulikeController()
+function AngulikeController($location, $sessionStorage)
 {
     var vm = this;
 
+    var keyword = $sessionStorage.SearchSummary.Keyword;
+    var region = $sessionStorage.SearchSummary.State;
+
+    var url = "https://dev.fdachallenge.com/dontextendmebro/#/index/product?Keyword=" + keyword + "&Region=" + region;
+
     vm.Model1 = {
         // These need to set to our info.  So they click go straight to Product page for info.
-        Url: 'http://www.ShopAware.com',
-        Name: "Shop Aware Developed by DPRA.", 
+        Url: url,
+        Name: "ShopAware Developed by DPRA.", 
         ImageUrl: ''
     };
    
