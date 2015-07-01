@@ -147,14 +147,32 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     if (angular.isString(links.Region)) vm.Region = links.Region;
 
     if (vm.Keyword.length > 0) {
-        landingservice.QuickSearch(vm.Keyword, vm.Region,
-            function (summary) {
-                $sessionStorage.SearchSummary = summary;
-                vm.SearchSummary = $sessionStorage.SearchSummary;
-                LoadPageInfo();
+        vm.SearchSummary = $sessionStorage.SearchSummary;
+
+        var doSummary = true;
+
+        if (angular.isObject(vm.SearchSummary)) {
+            if (vm.SearchSummary.Keyword === vm.Keyword) {
+                if (vm.SearchSummary.State === vm.Region) {
+                    doSummary = false;
+                }
             }
-        );
-    }
+        }
+
+        if (doSummary) {
+
+            landingservice.QuickSearch(vm.Keyword, vm.Region,
+                function (summary) {
+                    $sessionStorage.SearchSummary = summary;
+                    vm.SearchSummary = $sessionStorage.SearchSummary;
+                    LoadPageInfo();
+                }
+            );
+        }
+        else {
+            LoadPageInfo();
+        }
+     }
     else {
         vm.SearchSummary = $sessionStorage.SearchSummary;
 

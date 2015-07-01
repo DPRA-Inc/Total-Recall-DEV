@@ -272,7 +272,7 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
         if (!product.IsClean)
         {
             $sessionStorage.SearchSummary = product;
-            $location.path("/index/product");
+            $location.path("/index/product").search("Keyword", product.Keyword).search("Region", product.State);
         }
     };
 

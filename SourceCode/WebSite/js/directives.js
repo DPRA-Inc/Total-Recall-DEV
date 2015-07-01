@@ -247,7 +247,7 @@ function googlePlus($window) {
     };
 }
 
-function tweet($window, $location) {
+function tweet($window, $sessionStorage) {
     return {
         restrict: 'A',
         scope: {
@@ -279,7 +279,7 @@ function tweet($window, $location) {
                     });
                     return;
                 } else {
-                    element.html('<a href="https://twitter.com/share" class="twitter-share-button" data-text="' + scope.tweet + '" data-url="' + (scope.tweetUrl || $location.absUrl()) + '">Tweet</a>');
+                    element.html('<a href="https://twitter.com/share" class="twitter-share-button" data-text="' + scope.tweet + '" data-url="' + (scope.tweetUrl || $sessionStorage.AbsuloteURL) + '">Tweet</a>');
                     $window.twttr.widgets.load(element.parent()[0]);
                 }
             }
@@ -287,7 +287,7 @@ function tweet($window, $location) {
     };
 }
 
-function pinIt($window, $location) {
+function pinIt($window, $sessionStorage) {
     return {
         restrict: 'A',
         scope: {
@@ -332,7 +332,7 @@ function pinIt($window, $location) {
                     });
                     return;
                 } else {
-                    element.html('<a href="//www.pinterest.com/pin/create/button/?url=' + (scope.pinItUrl || $location.absUrl()) + '&media=' + scope.pinItImage + '&description=' + scope.pinIt + '" data-pin-do="buttonPin" data-pin-config="beside"></a>');
+                    element.html('<a href="//www.pinterest.com/pin/create/button/?url=' + (scope.pinItUrl || $sessionStorage.AbsuloteURL) + '&media=' + scope.pinItImage + '&description=' + scope.pinIt + '" data-pin-do="buttonPin" data-pin-config="beside"></a>');
                     $window.parsePins(element.parent()[0]);
                 }
             }
@@ -358,3 +358,9 @@ angular
     .directive('pinIt', pinIt)
     .directive('tweet', tweet)
     .directive('ngEnter', ngEnter);
+
+
+//.directive('fbLike', fbLike)
+//.directive('googlePlus', googlePlus)
+//.directive('pinIt', pinIt)
+//.directive('tweet', tweet)
