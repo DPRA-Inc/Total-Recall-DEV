@@ -203,6 +203,8 @@
     <Content Include="json\WV.geo.json.txt" />
     <Content Include="json\WY.geo.json.txt" />
     <Content Include="js\filters.js" />
+    <Content Include="plugins\angulike\angulike.js" />
+    <Content Include="plugins\angulike\angulike.controller.js" />
     <Content Include="plugins\openlayers\angular-openlayers-directive.css" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
