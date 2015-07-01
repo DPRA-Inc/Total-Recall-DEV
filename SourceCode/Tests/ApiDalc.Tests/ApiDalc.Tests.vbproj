@@ -130,12 +130,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Debug Helpers\open.fda.gov\ApiDalc\ApiDalc.vbproj">
-      <Project>{8c8e24de-d766-4abe-a176-c282040e3898}</Project>
-      <Name>ApiDalc</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Mocks\Data\DrugEventData_Augmentin_100.json" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Mocks\Data\DeviceEventData_50.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Projects\open.fda.gov\ApiDalc\ApiDalc.vbproj">
+      <Project>{8c8e24de-d766-4abe-a176-c282040e3898}</Project>
+      <Name>ApiDalc</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

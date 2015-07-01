@@ -75,7 +75,12 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Projects\open.fda.gov\ApiDalc\ApiDalc.vbproj">
+      <Project>{8c8e24de-d766-4abe-a176-c282040e3898}</Project>
+      <Name>ApiDalc</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -480,12 +485,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Debug Helpers\open.fda.gov\ApiDalc\ApiDalc.vbproj">
-      <Project>{8c8e24de-d766-4abe-a176-c282040e3898}</Project>
-      <Name>ApiDalc</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
