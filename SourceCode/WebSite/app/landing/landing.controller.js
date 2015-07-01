@@ -206,9 +206,9 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
                         if (product.ScrubedText === result.Keyword && product.State === result.State)
                         {
 
-                            product.ClassIDescription = result.ClassIDescription;
-                            product.ClassIIDescription = result.ClassIIDescription;
-                            product.ClassIIIDescription = result.ClassIIIDescription;
+                           // product.ClassIDescription = result.ClassIDescription;
+                           // product.ClassIIDescription = result.ClassIIDescription;
+                           // product.ClassIIIDescription = result.ClassIIIDescription;
 
                             if (result.EventCount > 0)
                             {
