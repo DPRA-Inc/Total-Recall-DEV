@@ -127,7 +127,7 @@ Public Module Utilities
     ''' <remarks></remarks>
     Public Function GetEnumDisplayName(ByVal enumConstant As [Enum]) As String
 
-        Dim displayName = String.Empty
+        Dim displayName As String = String.Empty
 
         If Not enumConstant Is Nothing Then
 
@@ -154,7 +154,7 @@ Public Module Utilities
     ''' <remarks></remarks>
     Public Function GetEnumDefaultValue(ByVal enumConstant As [Enum]) As String
 
-        Dim defaultValue = String.Empty
+        Dim defaultValue As String = String.Empty
 
         If enumConstant IsNot Nothing Then
 

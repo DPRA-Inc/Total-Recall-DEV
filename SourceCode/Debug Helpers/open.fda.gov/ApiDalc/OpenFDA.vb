@@ -132,7 +132,7 @@ Public Class OpenFda
 
             Dim jo As JObject = JObject.Parse(result)
 
-            _meta = jo.GetValue("meta") ' If the property doesn't exist, it returns null 
+            _meta = CType(jo.GetValue("meta"), JObject) ' If the property doesn't exist, it returns null 
             _results = jo("results")    ' If the property doesn't exist, it returns null 
 
         End If
@@ -274,7 +274,7 @@ Public Class OpenFda
         End If
 
         ' LIMIT the number of page request to a MAX of 5
-        Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+        Dim pageLimit As Integer = CInt(Decimal.Ceiling(CDec(dataSetSize / 100)))
         If pageLimit > 5 Then
             pageLimit = 5
         End If
@@ -340,11 +340,12 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-            Dim maxEventDate = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
+            ''''''''''''' #TODO: Fix these lines of code:
+            ' '' '' '' '' ''Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
 
-            If Not maxEventDate = Nothing Then
-                endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
-            End If
+            ' '' '' '' '' ''If Not maxEventDate = Nothing Then
+            ' '' '' '' '' ''    endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+            ' '' '' '' '' ''End If
 
 
         End If
@@ -432,9 +433,10 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-            Dim maxEventDate = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
+            ''''''''''''' #TODO: Fix these 2 lines of code
+            ' '' '' '' '' ''Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
 
-            endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+            ' '' '' '' '' ''endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
 
         End If
 
@@ -497,7 +499,7 @@ Public Class OpenFda
         End If
 
         ' LIMIT the number of page request to a MAX of 5
-        Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+        Dim pageLimit As Integer = CInt(Decimal.Ceiling(CDec(dataSetSize / 100)))
         If pageLimit > 5 Then
             pageLimit = 5
         End If
@@ -593,7 +595,7 @@ Public Class OpenFda
 
         Next
 
-        Dim tmpFilters = (From el In filters Where el.Length > 0 Select el).ToList()
+        Dim tmpFilters As List(Of String) = (From el In filters Where el.Length > 0 Select el).ToList()
 
         If Not tmpFilters.Count = filters.Count Then
 
@@ -719,7 +721,7 @@ Public Class OpenFda
 
                     Case FdaFilterTypes.RecallReason
 
-                        Dim keywordList As String() = tmp.Replace("""", String.Empty).Split("+")
+                        Dim keywordList As String() = tmp.Replace("""", String.Empty).Split(CChar("+"))
 
                         param = "(("
                         For Each itm In keywordList
@@ -826,7 +828,7 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-            Dim meta As JObject = jo.GetValue("meta")
+            Dim meta As JObject = CType(jo.GetValue("meta"), JObject)
 
             metaData = GetMetaResults(meta)
 
@@ -844,9 +846,9 @@ Public Class OpenFda
 
             With metaData
 
-                .Limit = meta("results")("limit")
-                .Skip = meta("results")("skip")
-                .Total = meta("results")("total")
+                .Limit = CInt(meta("results")("limit"))
+                .Skip = CInt(meta("results")("skip"))
+                .Total = CInt(meta("results")("total"))
 
             End With
 
@@ -879,7 +881,7 @@ Public Class OpenFda
 
         For Each itm In stateArray
 
-            tmpEnumValue = DirectCast([Enum].Parse(GetType(States), itm), States)
+            tmpEnumValue = DirectCast([Enum].Parse(GetType(States), CStr(itm)), States)
 
             Dim state As New StateData With {.name = GetEnumDescription(tmpEnumValue), .abbreviation = tmpEnumValue.ToString}
 
@@ -920,7 +922,7 @@ Public Class OpenFda
 
     Private Function RemoveSpecialCharactersFromKeyword(ByVal keyword As String) As String
 
-        Dim tmpitm = Regex.Replace(keyword, "\s+", " ")
+        Dim tmpitm As String = Regex.Replace(keyword, "\s+", " ")
         tmpitm = Regex.Replace(tmpitm, "[\^\[\-\$\{\*\(\\\+\)\|\?\<\>!@#%&;]", " ")
         keyword = Regex.Replace(tmpitm, " {2,}", " ")
 

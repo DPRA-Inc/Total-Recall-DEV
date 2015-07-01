@@ -37,11 +37,11 @@ Namespace DataObjects
 
                 With tmp
 
-                    .PatientSequenceNumber = obj("patient_sequence_number")
-                    .TextTypeCode = obj("text_type_code")
-                    .Text = obj("text")
-                    .MdrTextKey = obj("mdr_text_key")
-                    .DateReceived = obj("date_received")
+                    .PatientSequenceNumber = CStr(obj("patient_sequence_number"))
+                    .TextTypeCode = CStr(obj("text_type_code"))
+                    .Text = CStr(obj("text"))
+                    .MdrTextKey = CStr(obj("mdr_text_key"))
+                    .DateReceived = CStr(obj("date_received"))
 
                 End With
 

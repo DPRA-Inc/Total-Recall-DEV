@@ -37,11 +37,11 @@ Namespace DataObjects
 
                 With tmp
 
-                    .PatientSequenceNumber = obj("patient_sequence_number")
-                    .DateReceived = obj("date_received")
-                    .SequenceNumberTreatment = obj("sequence_number_treatment")
+                    .PatientSequenceNumber = CStr(obj("patient_sequence_number"))
+                    .DateReceived = CStr(obj("date_received"))
+                    .SequenceNumberTreatment = CStr(obj("sequence_number_treatment"))
                     For Each itm In obj("sequence_number_outcome")
-                        .SequenceNumberOutcome.Add(itm)
+                        .SequenceNumberOutcome.Add(CStr(itm))
                     Next
 
                     '.MdrText = DeviceEventMdrTextData.CnvJsonDataToList(obj("mdr_text"))

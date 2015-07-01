@@ -124,29 +124,37 @@ Public Class ShopAwareService
         searchResultLocal.Results.AddRange(drugs)
 
         'Sort for most recient at the top of the list
-        searchResultLocal.Results = (From el In searchResultLocal.Results Select el Order By CDate(el.SortDate) Descending).ToList()
+        ''''''''''''' #TODO: Re-sort the searchresultslocal list 
+        ''''''''''''' searchResultLocal.Results = (From el In searchResultLocal.Results Select el Order By CDate(el.SortDate) Descending).ToList()
 
         ' Now that the data is combined and sorted, Process data for maps and graphs
         For Each itm As Object In searchResultLocal.Results
+
+            Dim classification As String = String.Empty
+            Dim reportDate As String = String.Empty
 
             ' Map Processing first
             Select Case itm.GetType.ToString
 
                 Case "ApiDalc.DataObjects.SearchResultItem"
-                    ProcessResultRecordForRecall(itm, mapList)
+                    ProcessResultRecordForRecall(CType(itm, SearchResultItem), mapList)
+                    classification = CType(itm, SearchResultItem).Classification
+                    reportDate = CType(itm, SearchResultItem).ReportDate
 
                 Case "ApiDalc.DataObjects.SearchResultDrugEvent"
-                    ProcessResultRecordForDrugEvent(itm, mapList)
+                    ProcessResultRecordForDrugEvent(CType(itm, SearchResultDrugEvent), mapList)
+                    classification = CType(itm, SearchResultDrugEvent).Classification
+                    reportDate = CType(itm, SearchResultItem).ReportDate
 
             End Select
 
             ' Now process graph data
-            Dim tmpReportDate As DateTime = DateTime.ParseExact(itm.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
+            Dim tmpReportDate As DateTime = DateTime.ParseExact(reportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
 
             Dim dateForReport As String = tmpReportDate.ToString("MMM-yyyy")
             Dim found As Boolean = False
 
-            Select Case itm.Classification
+            Select Case classification
 
                 Case "Class I"
 
@@ -365,7 +373,7 @@ Public Class ShopAwareService
             ' if total records int the Search request exceeds the max of 100 records per request
             ' then page through the data
             ' LIMIT the number of page request to a MAX of 5
-            Dim pageLimit As Integer = CInt(Decimal.Ceiling(dataSetSize / 100))
+            Dim pageLimit As Integer = CInt(Decimal.Ceiling(CDec(dataSetSize / 100)))
             If pageLimit > 5 Then
                 pageLimit = 5
             End If
@@ -397,7 +405,7 @@ Public Class ShopAwareService
             End If
         Next
 
-        Dim sortedResultList = (From el In resultList Select el Order By el.Recall_Initiation_Date Descending).ToList()
+        Dim sortedResultList As List(Of ResultRecall) = (From el In resultList Select el Order By el.Recall_Initiation_Date Descending).ToList()
 
         Return sortedResultList
 
@@ -464,16 +472,18 @@ Public Class ShopAwareService
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-            Dim countResults As JArray = jo("results")
+            Dim countResults As JArray = CType(jo("results"), JArray)
 
             Dim termCountFound As Boolean = False
             Dim termCount As Integer
 
             For Each itm In countResults
 
-                termCount = itm("count")
+                termCount = CInt(itm("count"))
 
-                Select Case itm("term")
+                Dim termClassification As String = CStr(itm("term"))
+
+                Select Case termClassification
 
                     Case "Class I"
 
@@ -520,7 +530,7 @@ Public Class ShopAwareService
                 Dim stEnum As Reflection.FieldInfo = GetType(States).GetField(state)
                 Dim stateName As DescriptionAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DescriptionAttribute), False)(0), DescriptionAttribute)
                 Dim stateCoords As DefaultValueAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DefaultValueAttribute), False)(0), DefaultValueAttribute)
-                Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(";").ToList
+                Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(CChar(";")).ToList
 
                 If check.Contains(state) Or check.ToUpper.Contains(stateName.Description.ToUpper) Or nationwide Then
 
@@ -612,7 +622,7 @@ Public Class ShopAwareService
                 Dim stEnum As Reflection.FieldInfo = GetType(States).GetField(state)
                 Dim stateName As DescriptionAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DescriptionAttribute), False)(0), DescriptionAttribute)
                 Dim stateCoords As DefaultValueAttribute = DirectCast(stEnum.GetCustomAttributes(GetType(DefaultValueAttribute), False)(0), DefaultValueAttribute)
-                Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(";").ToList
+                Dim coordPair As List(Of String) = stateCoords.Value.ToString.Split(CChar(";")).ToList
 
                 If check.Contains(state) Or check.ToUpper.Contains(stateName.Description.ToUpper) Or nationwide Then
 

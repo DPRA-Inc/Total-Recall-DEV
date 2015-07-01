@@ -13,7 +13,7 @@ Public Class RestClient
     Public Function Execute(url As String) As String Implements IRestClient.Execute
 
         Dim result As String = String.Empty
-        Dim webClient = New Net.WebClient()
+        Dim webClient As New Net.WebClient()
 
         webClient.Headers.Clear()
 
@@ -48,7 +48,7 @@ Public Class RestClient
                     Case HttpStatusCode.BadRequest ' 400 Bad Request.  
                         'Throw (New Exception("Bad Request to OpenFda's WebApi"))
                         Throw New Exception(ex.Message)
-                    Case 429 ' 429 Too Many Requests.  
+                    Case CType(429, HttpStatusCode) ' 429 Too Many Requests.  
                         'Throw (New Exception("Bad Request to OpenFda's WebApi"))
                         Throw New Exception(ex.Message)
 

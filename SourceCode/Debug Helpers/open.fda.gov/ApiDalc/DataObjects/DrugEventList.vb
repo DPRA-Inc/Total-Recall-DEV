@@ -5,8 +5,8 @@ Public Class DrugEventList
 
     Public Sub New(jsonString As String)
 
-        Dim x = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(jsonString)
-        Dim listing = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(x("results").ToString)
+        Dim x As Dictionary(Of String, Object) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(jsonString)
+        Dim listing As List(Of Dictionary(Of String, Object)) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(x("results").ToString)
 
         For Each item In listing
 

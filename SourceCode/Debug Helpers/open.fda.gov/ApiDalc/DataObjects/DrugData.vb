@@ -79,36 +79,52 @@ Namespace DataObjects
 
                     Dim obj As New DrugData
 
-                    Integer.TryParse(drug("actiondrug"), obj.ActionDrug)
-                    Integer.TryParse(drug("drugrecurreadministration"), obj.DrugRecurreAdministration)
+                    Dim actionDrug As Integer = CInt(obj.ActionDrug)
+                    Dim drugRecurreAdministraton As Integer = CInt(obj.DrugRecurreAdministration)
+                    Dim drugIntervalDosageDefinition As Integer = CInt(obj.DrugIntervalDosageDefinition)
+                    Dim drugTreatmentDurationUnit As Integer = CInt(obj.DrugTreatmentDurationUnit)
+                    Dim drugCumulativeDosageUnit As Integer = CInt(obj.DrugCumulativeDosageUnit)
+                    Dim drugCharacterization As Integer = CInt(obj.DrugCharacterization)
 
-                    obj.DrugIntervalDosageUnitNumb = drug("drugintervaldosageunitnumb")
-                    Integer.TryParse(drug("drugintervaldosagedefinition"), obj.DrugIntervalDosageDefinition)
+                    Integer.TryParse(CStr(drug("actiondrug")), actionDrug)
+                    obj.ActionDrug = CType(actionDrug, Enumerations.ActionDrug)
 
-                    obj.DrugTreatmentDuration = drug("drugtreatmentduration")
-                    Integer.TryParse(drug("drugtreatmentdurationunit"), obj.DrugTreatmentDurationUnit)
+                    Integer.TryParse(CStr(drug("drugrecurreadministration")), drugRecurreAdministraton)
+                    obj.DrugRecurreAdministration = CType(drugRecurreAdministraton, Enumerations.DrugRecurreAdministration)
 
-                    obj.DrugCumulativeDosageNumb = drug("drugcumulativedosagenumb")
-                    Integer.TryParse(drug("drugcumulativedosageunit"), obj.DrugCumulativeDosageUnit)
+                    obj.DrugIntervalDosageUnitNumb = CStr(drug("drugintervaldosageunitnumb"))
 
+                    Integer.TryParse(CStr(drug("drugintervaldosagedefinition")), drugIntervalDosageDefinition)
+                    obj.DrugIntervalDosageDefinition = CType(drugIntervalDosageDefinition, Enumerations.DrugIntervalDosageDefinition)
 
-                    Integer.TryParse(drug("drugcharacterization"), obj.DrugCharacterization)
+                    obj.DrugTreatmentDuration = CStr(drug("drugtreatmentduration"))
 
-                    obj.DrugAdditional = drug("drugadditional")
+                    Integer.TryParse(CStr(drug("drugtreatmentdurationunit")), drugTreatmentDurationUnit)
+                    obj.DrugTreatmentDurationUnit = CType(drugTreatmentDurationUnit, Enumerations.DrugTreatmentDurationUnit)
 
-                    obj.DrugAuthorizationNumb = drug("drugauthorizationnumb")
+                    obj.DrugCumulativeDosageNumb = CStr(drug("drugcumulativedosagenumb"))
 
-                    obj.DrugIndication = drug("drugindication")
-                    obj.MedicinalProduct = drug("medicinalproduct")
-                    obj.Drugadministrationroute = drug("drugadministrationroute")
-                    obj.DrugDosageText = drug("drugdosagetext")
+                    Integer.TryParse(CStr(drug("drugcumulativedosageunit")), drugCumulativeDosageUnit)
+                    obj.DrugCumulativeDosageUnit = CType(drugCumulativeDosageUnit, Enumerations.DrugCumulativeDosageUnit)
 
-                    obj.DrugStartDate = drug("drugstartdate")
-                    obj.DrugStartDateFormat = drug("drugstartdateformat")
-                    obj.DrugEndDate = drug("drugenddate")
-                    obj.DrugEndDateFormat = drug("drugenddateformat")
+                    Integer.TryParse(CStr(drug("drugcharacterization")), drugCharacterization)
+                    obj.DrugCharacterization = CType(drugCharacterization, Enumerations.DrugCharacterization)
 
-                    obj.DrugDosageForm = drug("drugdosageform")
+                    obj.DrugAdditional = CStr(drug("drugadditional"))
+
+                    obj.DrugAuthorizationNumb = CStr(drug("drugauthorizationnumb"))
+
+                    obj.DrugIndication = CStr(drug("drugindication"))
+                    obj.MedicinalProduct = CStr(drug("medicinalproduct"))
+                    obj.Drugadministrationroute = CStr(drug("drugadministrationroute"))
+                    obj.DrugDosageText = CStr(drug("drugdosagetext"))
+
+                    obj.DrugStartDate = CStr(drug("drugstartdate"))
+                    obj.DrugStartDateFormat = CStr(drug("drugstartdateformat"))
+                    obj.DrugEndDate = CStr(drug("drugenddate"))
+                    obj.DrugEndDateFormat = CStr(drug("drugenddateformat"))
+
+                    obj.DrugDosageForm = CStr(drug("drugdosageform"))
 
 
                     'obj.drugcharacterization = drug("drugcharacterization")

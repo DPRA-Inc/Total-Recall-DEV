@@ -106,6 +106,8 @@ Namespace DataObjects
 
 #End Region
 
+#Region " Private Methods "
+
         Private Shared Function ConvertJTokenToList(jToken As JToken) As List(Of String)
 
             Dim result As New List(Of String)
@@ -113,7 +115,7 @@ Namespace DataObjects
             If IsJTokenValid(jToken) Then
 
                 For Each itm In jToken
-                    result.Add(itm)
+                    result.Add(CStr(itm))
                 Next
 
             End If
@@ -121,6 +123,8 @@ Namespace DataObjects
             Return result
 
         End Function
+
+#End Region
 
     End Class
 

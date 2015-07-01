@@ -118,39 +118,39 @@ Namespace DataObjects
 
                 With tmp
 
-                    .DeviceSequenceNumber = obj("device_sequence_number")
-                    .DeviceEventKey = obj("device_event_key")
-                    .DateReceived = obj("date_received")
+                    .DeviceSequenceNumber = CStr(obj("device_sequence_number"))
+                    .DeviceEventKey = CStr(obj("device_event_key"))
+                    .DateReceived = CStr(obj("date_received"))
 
-                    .BrandName = obj("brand_name")
-                    .GenericName = obj("generic_name")
-                    .DeviceReportProductCode = obj("device_report_product_code")
+                    .BrandName = CStr(obj("brand_name"))
+                    .GenericName = CStr(obj("generic_name"))
+                    .DeviceReportProductCode = CStr(obj("device_report_product_code"))
 
-                    .ModelNumber = obj("model_number")
-                    .CatalogNumber = obj("catalog_number")
-                    .LotNumber = obj("device.")
-                    .OtherIdNumber = obj("other_id_number")
+                    .ModelNumber = CStr(obj("model_number"))
+                    .CatalogNumber = CStr(obj("catalog_number"))
+                    .LotNumber = CStr(obj("device."))
+                    .OtherIdNumber = CStr(obj("other_id_number"))
 
-                    .ExpirationDateOfDevice = obj("expiration_date_of_device")
-                    .DeviceAgeText = obj("device_age_text")
+                    .ExpirationDateOfDevice = CStr(obj("expiration_date_of_device"))
+                    .DeviceAgeText = CStr(obj("device_age_text"))
 
-                    .DeviceAvailability = obj("device_availability")
-                    .DateReturnedToManufacturer = obj("date_returned_to_manufacturer")
-                    .DeviceEvaluatedByManufacturer = obj("device_evaluated_by_manufacturer")
+                    .DeviceAvailability = CStr(obj("device_availability"))
+                    .DateReturnedToManufacturer = CStr(obj("date_returned_to_manufacturer"))
+                    .DeviceEvaluatedByManufacturer = CStr(obj("device_evaluated_by_manufacturer"))
 
-                    .DeviceOperator = obj("device_operator")
-                    .ImplantFlag = obj("implant_flag")
-                    .DateRemovedFlag = obj("date_removed_flag")
+                    .DeviceOperator = CStr(obj("device_operator"))
+                    .ImplantFlag = CStr(obj("implant_flag"))
+                    .DateRemovedFlag = CStr(obj("date_removed_flag"))
 
-                    .ManufacturerName = obj("manufacturer_d_name")
-                    .ManufacturerAddress1 = obj("manufacturer_d_address_1")
-                    .ManufacturerAddress2 = obj("manufacturer_d_address_2")
-                    .ManufacturerCity = obj("manufacturer_d_city")
-                    .ManufacturerState = obj("manufacturer_d_state")
-                    .ManufacturerCountry = obj("manufacturer_d_country")
-                    .ManufacturerZipCode = obj("manufacturer_d_zip_code")
-                    .ManufacturerZipCodeExt = obj("manufacturer_d_zip_code_ext")
-                    .ManufacturerPostalCode = obj("manufacturer_d_postal_code")
+                    .ManufacturerName = CStr(obj("manufacturer_d_name"))
+                    .ManufacturerAddress1 = CStr(obj("manufacturer_d_address_1"))
+                    .ManufacturerAddress2 = CStr(obj("manufacturer_d_address_2"))
+                    .ManufacturerCity = CStr(obj("manufacturer_d_city"))
+                    .ManufacturerState = CStr(obj("manufacturer_d_state"))
+                    .ManufacturerCountry = CStr(obj("manufacturer_d_country"))
+                    .ManufacturerZipCode = CStr(obj("manufacturer_d_zip_code"))
+                    .ManufacturerZipCodeExt = CStr(obj("manufacturer_d_zip_code_ext"))
+                    .ManufacturerPostalCode = CStr(obj("manufacturer_d_postal_code"))
 
                 End With
 

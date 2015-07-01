@@ -20,9 +20,6 @@ Public Class DrugEventItem
     Public Property BrandNames As New List(Of String)
     Public Property GenericNames As New List(Of String)
 
-
-
-
     Public Shared Function Fill(item As Dictionary(Of String, Object)) As DrugEventItem
 
         Return New DrugEventItem(item)
@@ -36,19 +33,26 @@ Public Class DrugEventItem
     Private Sub CheckKeys(key As String, value As Object)
 
         Select Case key
-            Case "safetyreportid" : SafetyReportID = value.ToString
-            Case "receivedate" : ReceivedDateString = value.ToString
-            Case "senderorganization" : SenderOrganization = value.ToString
-            Case "patientonsetage" : PatientAge = value.ToString
-            Case "patientweight" : PatientWeight = value.ToString
+
+            Case "safetyreportid"
+                SafetyReportID = value.ToString
+            Case "receivedate"
+                ReceivedDateString = value.ToString
+            Case "senderorganization"
+                SenderOrganization = value.ToString
+            Case "patientonsetage"
+                PatientAge = value.ToString
+            Case "patientweight"
+                PatientWeight = value.ToString
                 '            Case "medicinalproduct" : Drug = value.ToString
-            Case "manufacturer_name" : Manufactures = value
-            Case "brand_name" : BrandNames = value
-            Case "drugstartdate" : DrugStartDate = value.ToString
-            Case "drugenddate" : DrugEndDate = value.ToString
-
-
-
+            Case "manufacturer_name"
+                Manufactures = CType(value, Global.System.Collections.Generic.List(Of String))
+            Case "brand_name"
+                BrandNames = CType(value, Global.System.Collections.Generic.List(Of String))
+            Case "drugstartdate"
+                DrugStartDate = value.ToString
+            Case "drugenddate"
+                DrugEndDate = value.ToString
 
         End Select
 
@@ -62,18 +66,19 @@ Public Class DrugEventItem
     Private Sub Fetch(jsonItem As Dictionary(Of String, Object))
 
         For Each item As KeyValuePair(Of String, Object) In jsonItem
+
             Dim key As String = item.Key
             Dim value As Object = Nothing
 
             If item.Value IsNot Nothing Then
 
-                value = item.Value.ToString
+                Dim checkValue As String = item.Value.ToString
 
-                If value.StartsWith("{") Then
+                If checkValue.StartsWith("{") Then
 
                     value = MakeDictionaryObject(item.Value.ToString)
 
-                ElseIf value.StartsWith("[") Then
+                ElseIf checkValue.StartsWith("[") Then
 
                     value = MakeListObject(item.Value.ToString)
 
@@ -86,64 +91,15 @@ Public Class DrugEventItem
 
         Next
 
-
-
     End Sub
-
-    'Private Function MakeListObject(data As String) As List(Of Dictionary(Of String, Object))
-
-    '    Dim completeObject As New List(Of Dictionary(Of String, Object))
-    '    'Dim obj = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(data)
-    '    Dim obj As Newtonsoft.Json.Linq.JArray = Newtonsoft.Json.JsonConvert.DeserializeObject(data)
-
-
-
-
-
-    '    For i As Integer = 0 To obj.Count - 1
-    '        Dim ele = obj(i)
-
-    '        Dim listItem As New Dictionary(Of String, Object)
-
-    '        For Each item As KeyValuePair(Of String, Object) In ele
-    '            Dim key As String = item.Key
-    '            Dim value As Object = Nothing
-
-    '            If item.Value IsNot Nothing Then
-
-    '                value = item.Value.ToString
-
-    '                If value.StartsWith("{") Then
-
-    '                    value = MakeDictionaryObject(item.Value.ToString)
-
-    '                ElseIf value.StartsWith("[") Then
-
-    '                    value = MakeListObject(item.Value.ToString)
-
-    '                End If
-
-    '            End If
-
-    '            listItem.Add(key, value)
-
-    '        Next
-
-    '        completeObject.Add(listItem)
-
-    '    Next
-
-    '    Return completeObject
-
-    'End Function
 
     Private Function MakeListObject(data As String) As List(Of Object)
 
         Dim completeObject As New List(Of Object)
-        Dim obj As Newtonsoft.Json.Linq.JArray = Newtonsoft.Json.JsonConvert.DeserializeObject(data)
+        Dim obj As Newtonsoft.Json.Linq.JArray = CType(Newtonsoft.Json.JsonConvert.DeserializeObject(data), Newtonsoft.Json.Linq.JArray)
 
         For i As Integer = 0 To obj.Count - 1
-            Dim item = obj(i).ToString
+            Dim item As String = obj(i).ToString
             Dim value As Object = Nothing
 
             If item.StartsWith("{") Then
@@ -167,21 +123,22 @@ Public Class DrugEventItem
     Private Function MakeDictionaryObject(data As String) As Dictionary(Of String, Object)
 
         Dim completeObject As New Dictionary(Of String, Object)
-        Dim obj = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(data)
+        Dim obj As Dictionary(Of String, Object) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(data)
 
         For Each item As KeyValuePair(Of String, Object) In obj
+
             Dim key As String = item.Key
             Dim value As Object = Nothing
 
             If item.Value IsNot Nothing Then
 
-                value = item.Value.ToString
+                Dim checkValue = item.Value.ToString
 
-                If value.StartsWith("{") Then
+                If checkValue.StartsWith("{") Then
 
                     value = MakeDictionaryObject(item.Value.ToString)
 
-                ElseIf value.StartsWith("[") Then
+                ElseIf checkValue.StartsWith("[") Then
 
                     value = MakeListObject(item.Value.ToString)
 

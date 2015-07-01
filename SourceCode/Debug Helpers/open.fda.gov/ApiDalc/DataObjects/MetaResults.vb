@@ -56,14 +56,14 @@ Namespace DataObjects
         Public Shared Function CnvJsonData(jsondata As JObject) As MetaResults
 
             Dim metaData As New MetaResults
-            Dim obj = jsondata.GetValue("meta")
+            Dim obj As JToken = jsondata.GetValue("meta")
 
             If obj("results") IsNot Nothing Then
 
                 With metaData
-                    .Limit = obj("results")("limit")
-                    .Skip = obj("results")("skip")
-                    .Total = obj("results")("total")
+                    .Limit = CInt(obj("results")("limit"))
+                    .Skip = CInt(obj("results")("skip"))
+                    .Total = CInt(obj("results")("total"))
                 End With
 
             End If

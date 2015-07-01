@@ -53,8 +53,8 @@ Namespace DataObjects
 
             If IsJTokenValid(jToken) Then
 
-                data.PatientOnSetAge = jToken("patientonsetage")
-                data.PatientOnSetAgeUnit = jToken("patientonsetageunit")
+                data.PatientOnSetAge = CStr(jToken("patientonsetage"))
+                data.PatientOnSetAgeUnit = CStr(jToken("patientonsetageunit"))
                 '        patient.patientonsetageunit()
                 'string
                 'The unit of measurement for the patient.patientonsetage field.
@@ -65,8 +65,10 @@ Namespace DataObjects
                 '804 = Day
                 '805 = Hour
 
+                Dim patientSex As Integer = CInt(data.PatientSex)
 
-                Integer.TryParse(jToken("patientsex"), data.PatientSex)
+                Integer.TryParse(CStr(jToken("patientsex")), patientSex)
+                data.PatientSex = CType(patientSex, Enumerations.PatientSex)
 
                 'data.patientsex = jToken("patientsex")
                 '        patient.patientsex()
@@ -76,11 +78,11 @@ Namespace DataObjects
                 '1 = Male
                 '2 = Female
 
-                data.PatientWeight = jToken("patientweight") ' KiloGrams
+                data.PatientWeight = CStr(jToken("patientweight")) ' KiloGrams
 
                 If IsJTokenValid(jToken("patientdeath")) Then
                     'data.PatientDeathDate = ConvertDateStringToDate(jToken("patientdeath")("patientdeathdate"), "yyyyMMdd")
-                    data.PatientDeathDate = DateTime.ParseExact(jToken("patientdeath")("patientdeathdate"), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
+                    data.PatientDeathDate = DateTime.ParseExact(CStr(jToken("patientdeath")("patientdeathdate")), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture)
                 End If
 
                 'data.patientdeath = jToken("patientdeath")

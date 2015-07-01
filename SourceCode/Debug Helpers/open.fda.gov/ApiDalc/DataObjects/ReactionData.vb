@@ -39,9 +39,13 @@ Namespace DataObjects
 
                     Dim obj As New ReactionData
 
-                    obj.ReactionMedDrapt = reaction("reactionmeddrapt")
-                    obj.ReactionMeddraversionPt = reaction("reactionmeddraversionpt")
-                    Integer.TryParse(reaction("reactionoutcome"), obj.ReactionOutcome)
+                    obj.ReactionMedDrapt = CStr(reaction("reactionmeddrapt"))
+                    obj.ReactionMeddraversionPt = CStr(reaction("reactionmeddraversionpt"))
+
+                    Dim reactionOutcome As Integer = obj.ReactionOutcome
+
+                    Integer.TryParse(CStr(reaction("reactionoutcome")), reactionOutcome)
+                    obj.ReactionOutcome = CType(reactionOutcome, Enumerations.ReactionOutcome)
 
                     data.Add(obj)
 

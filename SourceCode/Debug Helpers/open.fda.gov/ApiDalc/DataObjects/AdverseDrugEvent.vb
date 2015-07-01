@@ -91,26 +91,26 @@ Namespace DataObjects
 
                 Dim tmp As New AdverseDrugEvent
 
-                tmp.CompanyNumb = obj("companynumb")
-                tmp.SafetyReportId = obj("safetyreportid")
-                tmp.FulfillExpediteCriteria = obj("fulfillexpeditecriteria")
-                tmp.ReceiveDateFormat = obj("receivedateformat")
-                tmp.ReceiptDateFormat = obj("receiptdateformat")
+                tmp.CompanyNumb = CStr(obj("companynumb"))
+                tmp.SafetyReportId = CStr(obj("safetyreportid"))
+                tmp.FulfillExpediteCriteria = CStr(obj("fulfillexpeditecriteria"))
+                tmp.ReceiveDateFormat = CStr(obj("receivedateformat"))
+                tmp.ReceiptDateFormat = CStr(obj("receiptdateformat"))
                 tmp.PrimarySource = obj("primarysource")
-                tmp.ReceiveDate = obj("receivedate")
-                tmp.OccurCountry = obj("occurcountry")
+                tmp.ReceiveDate = CStr(obj("receivedate"))
+                tmp.OccurCountry = CStr(obj("occurcountry"))
 
 
-                tmp.Serious = obj("serious")
-                tmp.SeriousnessCongenitalAnomali = obj("seriousnesscongenitalanomali")
-                tmp.SeriousnessDeath = obj("seriousnessdeath")
-                tmp.SeriousnessDisabling = obj("seriousnessdisabling")
-                tmp.SeriousnessHospitalization = obj("seriousnesshospitalization")
-                tmp.SeriousnessLifeThreatening = obj("seriousnesslifethreatening")
-                tmp.SeriousnessOther = obj("seriousnessother")
+                tmp.Serious = CStr(obj("serious"))
+                tmp.SeriousnessCongenitalAnomali = CStr(obj("seriousnesscongenitalanomali"))
+                tmp.SeriousnessDeath = CStr(obj("seriousnessdeath"))
+                tmp.SeriousnessDisabling = CStr(obj("seriousnessdisabling"))
+                tmp.SeriousnessHospitalization = CStr(obj("seriousnesshospitalization"))
+                tmp.SeriousnessLifeThreatening = CStr(obj("seriousnesslifethreatening"))
+                tmp.SeriousnessOther = CStr(obj("seriousnessother"))
 
-                tmp.SafetyReportId = obj("safetyreportid")
-                tmp.SafetyReportVersion = obj("safetyreportversion")
+                tmp.SafetyReportId = CStr(obj("safetyreportid"))
+                tmp.SafetyReportVersion = CStr(obj("safetyreportversion"))
 
 
                 tmp.Patient = PatientData.ConvertJsonDate(obj("patient"))
