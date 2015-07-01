@@ -33,7 +33,7 @@
             <div class="col-md-6">
 
                 <h1 class="pull-left">
-                    Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
+                    Search Results: <strong>{{vm.Keyword}}</strong>
                 </h1>
 
                 <p class="pull-right v-align-bottom" style="padding-right:15px;" ng-class="vm.fontSizeClass">(Newest first)</p>
@@ -53,7 +53,7 @@
 
             <div class="col-md-6 animated bounceInLeft" ng-class="vm.fontSizeClass">
 
-                <h1 ng-if="vm.DataLoading" class="text-center m-b-lg m-t-lg">
+                <h1 ng-show="vm.DataLoading" class="text-center m-b-lg m-t-lg">
                     <i class="fa fa-spinner fa-spin"></i>
                     Loading More Information...
                 </h1>
@@ -73,11 +73,11 @@
                                         <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Product:</strong> <span ng-bind-html="::item.ProductDescription | highlight:vm.SearchSummary.Keyword"></span>
+                                            <strong>Product:</strong> <span ng-bind-html="::item.ProductDescription | highlight:vm.Keyword"></span>
                                         </p>
 
                                         <p>
-                                            <strong>Reason:</strong> <span ng-bind-html="::item.ContentTruncated | highlight:vm.SearchSummary.Keyword"></span>
+                                            <strong>Reason:</strong> <span ng-bind-html="::item.ContentTruncated | highlight:vm.Keyword"></span>
                                         </p>
 
                                         <p>
@@ -98,7 +98,7 @@
                                             <strong>Seriousness:</strong> {{::item.Seriousness}}
                                         </p>
 
-                                        <p><strong>Source:</strong> <span ng-bind-html="::item.PrimarySource | highlight:vm.SearchSummary.Keyword"></span></p>
+                                        <p><strong>Source:</strong> <span ng-bind-html="::item.PrimarySource | highlight:vm.Keyword"></span></p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
@@ -111,10 +111,10 @@
                                         <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Products:</strong> <span ng-bind-html="::item.DrugItem[0].BrandNamesString | highlight:vm.SearchSummary.Keyword"></span>
+                                            <strong>Products:</strong> <span ng-bind-html="::item.DrugItem[0].BrandNamesString | highlight:vm.Keyword"></span>
                                         </p>
                                         <p>
-                                            <strong>Generic Name:</strong> <span ng-bind-html="::item.DrugItem[0].GenericNamesString | highlight:vm.SearchSummary.Keyword"></span>
+                                            <strong>Generic Name:</strong> <span ng-bind-html="::item.DrugItem[0].GenericNamesString | highlight:vm.Keyword"></span>
                                         </p>
 
                                         <p><strong>Seriousness:</strong> {{::item.SeriousnessString}}</p>

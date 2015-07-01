@@ -33,6 +33,11 @@ function LandingService($http, $log) {
         }).
             success(function (result) {
 
+                result.IsLoading = true; // Indicates we are waiting on Return From Service.
+                result.HasClassI = false; // Indicates there is some Class I Data to show.
+                result.HasClassII = false;
+                result.HasClassIII = false;
+
                 if (!angular.isObject(result)) return;
 
                 if (result.EventCount > 0) {

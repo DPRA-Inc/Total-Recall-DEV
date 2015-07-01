@@ -4,6 +4,9 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 {
     var vm = this;
 
+    vm.DataLoading = true;
+
+    vm.SearchSummary = [];
     vm.SearchResult = [];
     vm.Keyword = [];
     vm.Region = [];
@@ -13,7 +16,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
     vm.lineData2 = [];
     vm.lineData3 = [];
     vm.lineDataE = [];
-    vm.DataLoading = true;
+
     vm.Markers = [];
     vm.CurrentIndex = 0;
     vm.VisibleResults = [];
@@ -138,6 +141,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
     });
 
+    LoadDefaultSummary();    
     LoadChartInfo();
 
     // Check if we have a query
@@ -163,8 +167,9 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
             landingservice.QuickSearch(vm.Keyword, vm.Region,
                 function (summary) {
-                    $sessionStorage.SearchSummary = summary;
-                    vm.SearchSummary = $sessionStorage.SearchSummary;
+                    summary.IsLoading = false;
+                    vm.SearchSummary = summary;
+                    $sessionStorage.SearchSummary = vm.SearchSummary;                    
                     LoadPageInfo();
                 }
             );
@@ -520,5 +525,26 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             ]
         };
 
+    }
+
+    function LoadDefaultSummary() {
+
+        var item = [];
+        item.ScrubedText = ""; // Product name
+        item.Keyword = "";
+        item.State = "";
+        item.Rank = ""; // How Bad is it, Color Code.
+        item.IsLoading = true; // Indicates we are waiting on Return From Service.
+        item.HasClassI = false; // Indicates there is some Class I Data to show.
+        item.HasClassII = false;
+        item.HasClassIII = false;
+        item.HasEvents = false;
+        item.ClassICount = 0;
+        item.ClassIICount = 0;
+        item.ClassIIICount = 0;
+        item.EventCount = 0;
+        item.IsClean = false;
+
+        vm.SearchSummary = item;
     }
 }

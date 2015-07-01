@@ -3,9 +3,17 @@
 function AngulikeController($location, $sessionStorage)
 {
     var vm = this;
+    var region = "";
+    var keyword = "";
 
-    var keyword = $sessionStorage.SearchSummary.ScrubedText;
-    var region = $sessionStorage.SearchSummary.State;
+    // Check if we have a query
+    var links = $location.search();
+
+    if (angular.isString(links.Keyword)) keyword = links.Keyword;
+    if (angular.isString(links.Region)) region = links.Region;
+
+    //var keyword = $sessionStorage.SearchSummary.ScrubedText;
+    //var region = $sessionStorage.SearchSummary.State;
 
     //var mainUrl = "https://www.fdachallenge.com";
     var mainUrl = "https://dev.fdachallenge.com/dontextendmebro";
