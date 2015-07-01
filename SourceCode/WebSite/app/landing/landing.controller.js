@@ -78,25 +78,26 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
      */
     function LoadPageInfo()
     {
+        WarmUp();
 
         landingservice.GetStates(
-        function (result)
-        {
-            vm.states = result;
+            function (result)
+            {
+                vm.states = result;
 
-            if (angular.isString($localStorage.selectedState))
-            {
-                // Set to the previously selected value if available.
-                vm.selectedState = $localStorage.selectedState;
-            } else
-            {
-                vm.selectedState = "All";
+                if (angular.isString($localStorage.selectedState))
+                {
+                    // Set to the previously selected value if available.
+                    vm.selectedState = $localStorage.selectedState;
+                } else
+                {
+                    vm.selectedState = "All";
+                }
+
             }
-
-        });
+        );
 
         StartupRSS();
-        WarmUp();
         BuildLegend();
 
     }
@@ -117,8 +118,6 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
     LoadPageInfo();
 
-    if (vm.shoppingList.length === 0) WarmUp();
-
     //********************************
 
     /*
@@ -131,11 +130,10 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
         var disallowedChars = /[^a-zA-Z0-9 :]/g;
 
-        if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").length > 0)
+        if (angular.isString(vm.textValue) && vm.textValue.replace(disallowedChars, "").trim().length > 0)
         {
 
-            var value = vm.textValue.replace(disallowedChars, " ");
-            value = value.replace("  ", "").trim();
+            var value = vm.textValue;
             var region = vm.selectedState;
 
             var doesExist = false;
@@ -174,10 +172,12 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
             var item = {};
 
+            item.IsLoading = true; // Set to true to show that information about the item is loading.
+
             item.ScrubedText = value; // Product name
             item.Keyword = vm.textValue;
             item.State = region;
-            item.Rank = "success"; // How Bad is it, Color Code.
+            item.Rank = ""; // How Bad is it, Color Code.
             item.IsLoading = true; // Indicates we are waiting on Return From Service.
             item.HasClassI = false; // Indicates there is some Class I Data to show.
             item.HasClassII = false;
@@ -187,76 +187,68 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
             item.ClassIICount = 0;
             item.ClassIIICount = 0;
             item.EventCount = 0;
-            item.IsClean = true;
+            item.IsClean = false;
 
             vm.shoppingList.push(item);
 
-            item.IsLoading = true; // Set to true to show that information about the item is loading.
+            vm.HasItems = true;
 
-            vm.textValue = "";
+            vm.textValue = ""; // reset input
 
             landingservice.QuickSearch(value, region,
                 function (result)
                 {
 
-                    // Search for the Keyword in our list.
-                    vm.shoppingList.forEach(function (product)
+                    var isClean = true;
+
+                    if (result.EventCount > 0)
                     {
+                        vm.EventsVisible = true;
+                        isClean = false;
+                    }
 
-                        if (product.ScrubedText === result.Keyword && product.State === result.State)
+                    if (result.ClassIIICount > 0)
+                    {
+                        vm.Class3Visible = true;
+                        isClean = false;
+                    }
+
+                    if (result.ClassIICount > 0)
+                    {
+                        vm.Class2Visible = true;
+                        isClean = false;
+                    }
+
+                    if (result.ClassICount > 0)
+                    {
+                        vm.Class1Visible = true;
+                        isClean = false;
+                    }
+
+                    result.IsLoading = false;
+
+                    result.IsClean = isClean;
+
+                    var index = 0;
+
+                    while (vm.shoppingList.length > index)
+                    {
+                        var product = vm.shoppingList[index];
+
+                        if (product.Keyword === result.Keyword && product.State === result.State)
                         {
-
-                           // product.ClassIDescription = result.ClassIDescription;
-                           // product.ClassIIDescription = result.ClassIIDescription;
-                           // product.ClassIIIDescription = result.ClassIIIDescription;
-
-                            if (result.EventCount > 0)
-                            {
-                                product.HasEvents = true;
-                                product.EventCount = result.EventCount;
-                                product.IsClean = false;
-                                product.Rank = "events";
-                                vm.EventsVisible = true;
-                            }
-
-                            if (result.ClassIIICount > 0)
-                            {
-                                product.HasClassIII = true;
-                                product.ClassIIICount = result.ClassIIICount;
-                                product.IsClean = false;
-                                product.Rank = "classiii";
-                                vm.Class3Visible = true;
-                            }
-
-                            if (result.ClassIICount > 0)
-                            {
-                                product.HasClassII = true;
-                                product.ClassIICount = result.ClassIICount;
-                                product.IsClean = false;
-                                product.Rank = "classii";
-                                vm.Class2Visible = true;
-                            }
-
-                            if (result.ClassICount > 0)
-                            {
-                                product.HasClassI = true;
-                                product.ClassICount = result.ClassICount;
-                                product.IsClean = false;
-                                product.Rank = "classi";
-                                vm.Class1Visible = true;
-                            }
-
-                            product.IsLoading = false;
+                            vm.shoppingList[index] = result;
                         }
 
-                        $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
-                    });
+                        index++;
+                    }
+
+                    $localStorage.cart = angular.toJson(vm.shoppingList); // Save cart to local storage.
+
+                    BuildLegend();
                 }
             );
         }
-
-        BuildLegend();
-
     };
 
     /*
@@ -352,4 +344,55 @@ function landingcontroller($location, $sessionStorage, $localStorage, landingser
 
         });
     }
+
+    vm.ThumbsUp = function ()
+    {
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-bottom-left",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        toastr["success"]("Your feedback is valuable to us.  Thank you for submitting your opinion!", "Thank You!");
+
+    }
+
+    vm.ThumbsDown = function ()
+    {
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-bottom-left",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        toastr["success"]("Your feedback is valuable to us.  Thank you for submitting your opinion!", "Thanks!");
+
+    }
+
 }
