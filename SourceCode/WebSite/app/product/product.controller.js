@@ -1,19 +1,12 @@
 ﻿angular.module("TotalRecall").controller("productcontroller", ProductController);
 
-function ProductController($scope, $location, $sessionStorage, $localStorage, $http, $modal, productservice, olData)
+function ProductController($scope, $location, $sessionStorage, $localStorage, $http, $modal, productservice, olData, landingservice)
 {
     var vm = this;
 
     vm.SearchResult = [];
-
-    vm.SearchSummary = $sessionStorage.SearchSummary;
-
-    if (!angular.isObject(vm.SearchSummary))
-    {
-        $location.path("/index");
-        return;
-    }
-
+    vm.Keyword = [];
+    vm.Region = [];
     vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData1 = [];
@@ -145,17 +138,158 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
     });
 
-    //if (!angular.isObject(GlobalsModule.SearchResult)) GlobalsModule.SearchResult = [];
-    //vm.SearchResult = GlobalsModule.SearchResult;
-
-    if (!angular.isObject(GlobalsModule.SearchResultItem)) GlobalsModule.SearchResultItem = [];
-    vm.SearchResultItem = GlobalsModule.SearchResultItem;
-
     LoadChartInfo();
-    LoadPageInfo();
+
+    // Check if we have a query
+    var links = $location.search();
+
+    if (angular.isString(links.Keyword)) vm.Keyword = links.Keyword;
+    if (angular.isString(links.Region)) vm.Region = links.Region;
+
+    if (vm.Keyword.length > 0) {
+        landingservice.QuickSearch(vm.Keyword, vm.Region,
+            function (summary) {
+                $sessionStorage.SearchSummary = summary;
+                vm.SearchSummary = $sessionStorage.SearchSummary;
+                LoadPageInfo();
+            }
+        );
+    }
+    else {
+        vm.SearchSummary = $sessionStorage.SearchSummary;
 
 
+        if (!angular.isObject(vm.SearchSummary)) {
+            $location.path("/index");
+            return;
+        }
+        else {
+            vm.Keyword = vm.SearchSummary.Keyword;
+            vm.Region = vm.SearchSummary.State;
+        }
+
+        LoadPageInfo();
+    }
+   
     //*******************************************
+
+     /*
+     * Loads the page initial data.
+     */
+    function LoadPageInfo() {
+        var scrubText = vm.SearchSummary.ScrubedText;
+        var productName = vm.SearchSummary.Keyword;
+        var region = vm.SearchSummary.State;
+
+        vm.EventsVisible = (vm.SearchSummary.EventCount);
+        vm.Class1Visible = (vm.SearchSummary.ClassICount);
+        vm.Class2Visible = (vm.SearchSummary.ClassIICount);
+        vm.Class3Visible = (vm.SearchSummary.ClassIIICount);
+
+        productservice.GetFDAResults(scrubText, region,
+            function (result) {
+                var classiStates = [];
+                var classiiStates = [];
+                var classiiiStates = [];
+                var eventStates = [];
+
+                if (angular.isObject(result) && angular.isObject(result.MapObjects)) {
+                    result.MapObjects.forEach(function (mapItem) {
+                        switch (mapItem.Rank) {
+                            case 1:
+                                classiStates.push(mapItem.State)
+                                break;
+                            case 2:
+                                classiiStates.push(mapItem.State)
+                                break;
+                            case 3:
+                                classiiiStates.push(mapItem.State)
+                                break;
+                            default:
+                                eventStates.push(mapItem.State)
+                                break;
+                        }
+
+                        vm.Markers.push(
+                            {
+                                lat: parseFloat(mapItem.Latitude),
+                                lon: parseFloat(mapItem.Longitude),
+                                label: {
+                                    message: "",
+                                    show: false,
+                                    showOnMouseOver: true
+
+                                },
+                                style: {
+                                    image: {
+                                        icon: mapItem.icon
+                                    }
+                                }
+                            }
+                        );
+
+                    });
+                }
+
+                vm.lineData1.labels = result.GraphObjects.Labels;
+                vm.lineData1.datasets[0].data = result.GraphObjects.Data1;
+
+                vm.lineData2.labels = result.GraphObjects.Labels;
+                vm.lineData2.datasets[0].data = result.GraphObjects.Data2;
+
+                vm.lineData3.labels = result.GraphObjects.Labels;
+                vm.lineData3.datasets[0].data = result.GraphObjects.Data3;
+
+                vm.lineDataE.labels = result.GraphObjects.Labels;
+                vm.lineDataE.datasets[0].data = result.GraphObjects.DataE;
+
+                GlobalsModule.SearchResult = result;
+
+                vm.SearchResult = result;
+                vm.DisplayNext(5);
+                vm.DataLoading = false;
+                vm.IsChartReady = true;
+
+                productservice.GetRegionsJson(classiStates, function (jsonData) {
+                    $scope.class1.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(classiiStates, function (jsonData) {
+                    $scope.class2.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(classiiiStates, function (jsonData) {
+                    $scope.class3.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                productservice.GetRegionsJson(eventStates, function (jsonData) {
+                    $scope.events.source.geojson = {
+                        object: jsonData
+                    }
+                });
+
+                // re-zoom and center based on the objects on the map
+                olData.getMap().then(function (map) {
+
+                    var size = map.getSize();
+
+                    size = [size[0] * 2, size[1] * 2];
+
+                    var extent = map.getView().calculateExtent(map.getSize());
+                    map.getView().fitExtent(extent, size);
+
+                });
+
+            }
+        );
+
+    }
 
     /*
      * Displays additional information about an reult item.
@@ -282,134 +416,6 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
             }
         }
     };
-
-    /*
-     * Loads the page initial data.
-     */
-    function LoadPageInfo()
-    {
-        var scrubText = vm.SearchSummary.ScrubedText;
-        var productName = vm.SearchSummary.Keyword;
-        var region = vm.SearchSummary.State;
-
-        vm.EventsVisible = (vm.SearchSummary.EventCount);
-        vm.Class1Visible = (vm.SearchSummary.ClassICount);
-        vm.Class2Visible = (vm.SearchSummary.ClassIICount);
-        vm.Class3Visible = (vm.SearchSummary.ClassIIICount);
-
-        productservice.GetFDAResults(scrubText, region,
-            function (result)
-            {
-                var classiStates = [];
-                var classiiStates = [];
-                var classiiiStates = [];
-                var eventStates = [];
-
-                if (angular.isObject(result) && angular.isObject(result.MapObjects))
-                {
-                    result.MapObjects.forEach(function (mapItem)
-                    {
-                        switch (mapItem.Rank)
-                        {
-                            case 1:
-                                classiStates.push(mapItem.State)
-                                break;
-                            case 2:
-                                classiiStates.push(mapItem.State)
-                                break;
-                            case 3:
-                                classiiiStates.push(mapItem.State)
-                                break;
-                            default:
-                                eventStates.push(mapItem.State)
-                                break;
-                        }
-
-                        vm.Markers.push(
-                            {
-                                lat: parseFloat(mapItem.Latitude),
-                                lon: parseFloat(mapItem.Longitude),
-                                label: {
-                                    message: "",
-                                    show: false,
-                                    showOnMouseOver: true
-
-                                },
-                                style: {
-                                    image: {
-                                        icon: mapItem.icon
-                                    }
-                                }
-                            }
-                        );
-
-                    });
-                }
-
-                vm.lineData1.labels = result.GraphObjects.Labels;
-                vm.lineData1.datasets[0].data = result.GraphObjects.Data1;
-
-                vm.lineData2.labels = result.GraphObjects.Labels;
-                vm.lineData2.datasets[0].data = result.GraphObjects.Data2;
-
-                vm.lineData3.labels = result.GraphObjects.Labels;
-                vm.lineData3.datasets[0].data = result.GraphObjects.Data3;
-
-                vm.lineDataE.labels = result.GraphObjects.Labels;
-                vm.lineDataE.datasets[0].data = result.GraphObjects.DataE;
-
-                GlobalsModule.SearchResult = result;
-
-                vm.SearchResult = result;
-                vm.DisplayNext(5);
-                vm.DataLoading = false;
-                vm.IsChartReady = true;
-
-                productservice.GetRegionsJson(classiStates, function (jsonData)
-                {
-                    $scope.class1.source.geojson = {
-                        object: jsonData
-                    }
-                });
-
-                productservice.GetRegionsJson(classiiStates, function (jsonData)
-                {
-                    $scope.class2.source.geojson = {
-                        object: jsonData
-                    }
-                });
-
-                productservice.GetRegionsJson(classiiiStates, function (jsonData)
-                {
-                    $scope.class3.source.geojson = {
-                        object: jsonData
-                    }
-                });
-
-                productservice.GetRegionsJson(eventStates, function (jsonData)
-                {
-                    $scope.events.source.geojson = {
-                        object: jsonData
-                    }
-                });
-
-                // re-zoom and center based on the objects on the map
-                olData.getMap().then(function (map)
-                {
-
-                    var size = map.getSize();
-
-                    size = [size[0] * 2, size[1] * 2];
-
-                    var extent = map.getView().calculateExtent(map.getSize());
-                    map.getView().fitExtent(extent, size);
-
-                });
-
-            }
-        );
-
-    }
 
     /*
      * Initialize the chart.

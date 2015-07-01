@@ -1,6 +1,6 @@
 ﻿angular.module("TotalRecall").factory("productservice", ProductService);
 
-function ProductService($http, $log) {
+function ProductService($http, $log, $sessionStorage) {
 
     var service = {
         GetProductResults: GetProductResults,
@@ -92,4 +92,51 @@ function ProductService($http, $log) {
 
 
     }
+
+    //function GetSummaryData(callback) {
+
+    //    var links = $location.search();
+    //    var keyword = "";
+    //    var region = "";
+
+    //    if (angular.isString(links.Keyword)) keyword = links.Keyword;
+    //    if (angular.isString(links.Region)) region = links.Region;
+
+    //    if (keyword.length > 0) {
+    //        landingservice.QuickSearch(keyword, region,
+    //            function (summary) {
+    //                $sessionStorage.SearchSummary = summary;
+    //                callback(summary);                        
+    //            }
+    //        );
+    //    }
+
+    //}
+
+    //function LoadPageInfo(callback) {
+
+    //    // See if we have a query.
+    //    var links = $location.search();
+    //    var keyword = "";
+    //    var region = "";
+
+    //    if (angular.isString(links.Keyword)) keyword = links.Keyword;
+    //    if (angular.isString(links.Region)) region = links.Region;
+
+    //    if (keyword.length > 0) {
+    //        landingservice.QuickSearch(keyword, region,
+    //            function (summary) {
+    //                $sessionStorage.SearchSummary = summary;
+    //                callback(summary);
+    //            }
+    //        );
+    //    }
+    //    else {
+
+    //    }
+
+
+
+    //}
+
 }
