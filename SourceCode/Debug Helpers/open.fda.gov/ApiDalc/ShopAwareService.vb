@@ -144,7 +144,7 @@ Public Class ShopAwareService
                 Case "ApiDalc.DataObjects.SearchResultDrugEvent"
                     ProcessResultRecordForDrugEvent(CType(itm, SearchResultDrugEvent), mapList)
                     classification = CType(itm, SearchResultDrugEvent).Classification
-                    reportDate = CType(itm, SearchResultItem).ReportDate
+                    reportDate = CType(itm, SearchResultDrugEvent).ReportDate
 
             End Select
 
