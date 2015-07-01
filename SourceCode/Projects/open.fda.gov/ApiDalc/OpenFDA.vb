@@ -341,9 +341,12 @@ Public Class OpenFda
 
         If Not String.IsNullOrEmpty(searchResults) Then
 
+            Dim maxEventDate As Date
             Dim jo As JObject = JObject.Parse(searchResults)
 
-            Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time").ToString, "yyyyMMdd")).Max()
+            If jo("results").Contains("time") Then
+                maxEventDate = (From el In jo("results") Select ConvertDateStringToDate(el("time").ToString, "yyyyMMdd")).Max()
+            End If
 
             If Not maxEventDate = Nothing Then
                 endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
