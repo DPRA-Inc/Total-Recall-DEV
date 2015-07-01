@@ -8,8 +8,11 @@ Imports Newtonsoft.Json.Linq ' OpenSource
 Namespace DataObjects
 
     Public Class SearchResultDrugEvent
+        Inherits SearchResultItemBase
 
-        Public Property Classification As String = "Event"
+#Region " Public Properties "
+
+        'Public Property Classification As String = "Event"
         Public Property Rank As String = "events"
 
         Public Property IsEvent As Boolean = True
@@ -43,45 +46,52 @@ Namespace DataObjects
 
         Public Property PrimarySource As String
 
-        ''' <summary>
-        ''' Date that the report was first received by FDA. If this report has multiple versions, this will be the date the first version was received by FDA.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property DateStarted As String
+        ' ''' <summary>
+        ' ''' Date that the report was first received by FDA. If this report has multiple versions, this will be the date the first version was received by FDA.
+        ' ''' </summary>
+        ' ''' <value></value>
+        ' ''' <returns></returns>
+        ' ''' <remarks></remarks>
+        'Public Property DateStarted As String
 
-        Private _reportDate As String = String.Empty
+        ' ''' <summary>
+        ' ''' Date that most recent information in the report was received by FDA.
+        ' ''' </summary>
+        ' ''' <value></value>
+        ' ''' <returns></returns>
+        ' ''' <remarks></remarks>
+        'Public Property ReportDate As String
+        '    Get
+        '        If _reportDate.Length = 0 Then
+        '            Return Me.DateStarted
+        '        Else
+        '            Return _reportDate
+        '        End If
+        '    End Get
+        '    Set(value As String)
+        '        _reportDate = value
+        '    End Set
+        'End Property
 
-        ''' <summary>
-        ''' Date that most recent information in the report was received by FDA.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property ReportDate As String
-            Get
-                If _reportDate.Length = 0 Then
-                    Return Me.DateStarted
-                Else
-                    Return _reportDate
-                End If
-            End Get
-            Set(value As String)
-                _reportDate = value
-            End Set
-        End Property
-
-        Public ReadOnly Property SortDate As DateTime
-            Get
-                Return DateTime.ParseExact(Me.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
-            End Get
-        End Property
+        'Public ReadOnly Property SortDate As DateTime
+        '    Get
+        '        Return DateTime.ParseExact(Me.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
+        '    End Get
+        'End Property
 
         Public Property Sender As String
         Public Property Receiver As String
 
         Public Property DrugItem As New List(Of SearchResultDrugEventItem)
+
+#End Region
+
+#Region " Constructors "
+        Public Sub New()
+            Classification = "Event"
+        End Sub
+
+#End Region
 
 #Region " Public Methods "
 

@@ -312,6 +312,8 @@ Public Class OpenFda
         'Dim tmpAdverseDeviceEventList As List(Of AdverseDeviceEvent)
         Dim tmpSearchResultDeviceEvent As List(Of SearchResultDrugEvent) = AdverseDeviceEvent.CnvDeviceEventsToResultDrugEvents(deviceEventList)
 
+        'Dim sortedResult = (From el In tmpSearchResultDeviceEvent Select el Order By el.ReportDate Descending).ToList()
+
         Return tmpSearchResultDeviceEvent
 
     End Function
@@ -340,13 +342,12 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-            ''''''''''''' #TODO: Fix these lines of code:
-            ' '' '' '' '' ''Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
 
-            ' '' '' '' '' ''If Not maxEventDate = Nothing Then
-            ' '' '' '' '' ''    endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
-            ' '' '' '' '' ''End If
+            Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time").ToString, "yyyyMMdd")).Max()
 
+            If Not maxEventDate = Nothing Then
+                endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+            End If
 
         End If
 
@@ -433,10 +434,12 @@ Public Class OpenFda
         If Not String.IsNullOrEmpty(searchResults) Then
 
             Dim jo As JObject = JObject.Parse(searchResults)
-            ''''''''''''' #TODO: Fix these 2 lines of code
-            ' '' '' '' '' ''Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time"), "yyyyMMdd")).Max()
 
-            ' '' '' '' '' ''endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+            Dim maxEventDate As Date = (From el In jo("results") Select ConvertDateStringToDate(el("time").ToString, "yyyyMMdd")).Max()
+
+            If Not maxEventDate = Nothing Then
+                endDate = String.Format("{0:yyyyMMdd}", maxEventDate.AddYears(yearCheck))
+            End If
 
         End If
 
@@ -532,6 +535,8 @@ Public Class OpenFda
         End If
 
         tmpSearchResultDrugEvent = SearchResultDrugEvent.ConvertJsonData(drugEventList)
+
+        'Dim sortedResult = (From el In tmpSearchResultDrugEvent Select el Order By el.ReportDate Descending).ToList()
 
         Return tmpSearchResultDrugEvent
 

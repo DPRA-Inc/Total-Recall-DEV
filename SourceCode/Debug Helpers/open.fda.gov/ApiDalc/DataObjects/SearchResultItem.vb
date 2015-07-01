@@ -8,8 +8,11 @@ Imports Newtonsoft.Json.Linq ' OpenSource
 Namespace DataObjects
 
     Public Class SearchResultItem
+        Inherits SearchResultItemBase
 
-        Public Property Classification As String
+#Region " Public Properties "
+
+        'Public Property Classification As String
 
         Public Property Rank As String
             Get
@@ -22,7 +25,7 @@ Namespace DataObjects
         Public Property IsEvent As Boolean = False
         Public Property IsProduct As Boolean = True
 
-        Public Property DateStarted As String 'recall_initiation_date
+        'Public Property DateStarted As String 'recall_initiation_date
 
         Public Property Content As String ' reason_for_recall  + code_info
         Public ReadOnly Property ContentTruncated As String
@@ -50,13 +53,15 @@ Namespace DataObjects
         Public Property EventId As String 'event_id
         Public Property ProductQuantity As String ' product_quantity
         Public Property Country As String ' country
-        Public Property ReportDate As String ' report_date
-        Public ReadOnly Property SortDate As DateTime
-            Get
-                Return DateTime.ParseExact(Me.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
-            End Get
-        End Property
+        'Public Property ReportDate As String ' report_date
+        'Public ReadOnly Property SortDate As DateTime
+        '    Get
+        '        Return DateTime.ParseExact(Me.ReportDate, "ddMMMyyyy", System.Globalization.CultureInfo.InvariantCulture)
+        '    End Get
+        'End Property
         Public Property CodeInfo As String ' code_info
+
+#End Region
 
     End Class
 

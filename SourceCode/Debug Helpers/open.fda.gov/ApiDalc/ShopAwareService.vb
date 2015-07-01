@@ -123,9 +123,10 @@ Public Class ShopAwareService
         drugs = drugee.GetDeviceEventByDescription(keyWord)
         searchResultLocal.Results.AddRange(drugs)
 
-        'Sort for most recient at the top of the list
-        ''''''''''''' #TODO: Re-sort the searchresultslocal list 
-        ''''''''''''' searchResultLocal.Results = (From el In searchResultLocal.Results Select el Order By CDate(el.SortDate) Descending).ToList()
+        ''Sort for most recient at the top of the list
+
+        ' searchResultLocal.Results cannot be sorted because 
+        searchResultLocal.Results = (From el In searchResultLocal.Results Select el Order By CDate(el.SortDate) Descending).ToList()
 
         ' Now that the data is combined and sorted, Process data for maps and graphs
         For Each itm As Object In searchResultLocal.Results
@@ -138,13 +139,13 @@ Public Class ShopAwareService
 
                 Case "ApiDalc.DataObjects.SearchResultItem"
                     ProcessResultRecordForRecall(CType(itm, SearchResultItem), mapList)
-                    classification = CType(itm, SearchResultItem).Classification
-                    reportDate = CType(itm, SearchResultItem).ReportDate
+                    classification = CType(itm, SearchResultItemBase).Classification
+                    reportDate = CType(itm, SearchResultItemBase).ReportDate
 
                 Case "ApiDalc.DataObjects.SearchResultDrugEvent"
                     ProcessResultRecordForDrugEvent(CType(itm, SearchResultDrugEvent), mapList)
-                    classification = CType(itm, SearchResultDrugEvent).Classification
-                    reportDate = CType(itm, SearchResultItem).ReportDate
+                    classification = CType(itm, SearchResultItemBase).Classification
+                    reportDate = CType(itm, SearchResultItemBase).ReportDate
 
             End Select
 
