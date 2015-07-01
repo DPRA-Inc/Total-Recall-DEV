@@ -11,12 +11,12 @@ function AngulikeController($location, $sessionStorage)
 
     if (angular.isString(links.Keyword)) keyword = links.Keyword;
     if (angular.isString(links.Region)) region = links.Region;
-
+    
     //var keyword = $sessionStorage.SearchSummary.ScrubedText;
     //var region = $sessionStorage.SearchSummary.State;
 
-    //var mainUrl = "https://www.fdachallenge.com";
-    var mainUrl = "https://dev.fdachallenge.com/dontextendmebro";
+    var mainUrl = "https://www.fdachallenge.com";
+    //var mainUrl = "https://dev.fdachallenge.com/dontextendmebro";
     
     var url = mainUrl + "/#/index/product?Keyword=" + keyword + "&Region=" + region;
     var imageURl = mainUrl + "/img/logo.png";

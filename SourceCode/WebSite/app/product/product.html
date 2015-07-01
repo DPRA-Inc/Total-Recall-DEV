@@ -42,7 +42,7 @@
             <div class="col-md-6 " ng-controller="angulikecontroller as angulike">
                 <span class="pull-right">
                     <i fb-like="angulike.Model1.Url"></i>
-                    <!--<i tweet="angulike.Model1.Name" tweet-url="angulike.Model1.Url></i>-->
+                    <i tweet="angulike.Model1.Name" tweeturl="angulike.Model1.Url></i>
                     <i google-plus="angulike.Model1.Url"></i>
                     <i pin-it="angulike.Model1.Name" pin-it-image="angulike.Model1.ImageUrl"></i>
                 </span>
@@ -73,11 +73,11 @@
                                         <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Product:</strong> <span ng-bind-html="::item.ProductDescription | highlight:vm.Keyword"></span>
+                                            <strong>Product:</strong> <span ng-bind-html="::item.ProductDescription | highlight:vm.ScrubedText"></span>
                                         </p>
 
                                         <p>
-                                            <strong>Reason:</strong> <span ng-bind-html="::item.ContentTruncated | highlight:vm.Keyword"></span>
+                                            <strong>Reason:</strong> <span ng-bind-html="::item.ContentTruncated | highlight:vm.ScrubedText"></span>
                                         </p>
 
                                         <p>
@@ -98,7 +98,7 @@
                                             <strong>Seriousness:</strong> {{::item.Seriousness}}
                                         </p>
 
-                                        <p><strong>Source:</strong> <span ng-bind-html="::item.PrimarySource | highlight:vm.Keyword"></span></p>
+                                        <p><strong>Source:</strong> <span ng-bind-html="::item.PrimarySource | highlight:vm.ScrubedText"></span></p>
 
                                         <div class="pull-right btn btn-xs btn-white">More Information</div>
 
@@ -111,10 +111,10 @@
                                         <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
 
                                         <p>
-                                            <strong>Products:</strong> <span ng-bind-html="::item.DrugItem[0].BrandNamesString | highlight:vm.Keyword"></span>
+                                            <strong>Products:</strong> <span ng-bind-html="::item.DrugItem[0].BrandNamesString | highlight:vm.ScrubedText"></span>
                                         </p>
                                         <p>
-                                            <strong>Generic Name:</strong> <span ng-bind-html="::item.DrugItem[0].GenericNamesString | highlight:vm.Keyword"></span>
+                                            <strong>Generic Name:</strong> <span ng-bind-html="::item.DrugItem[0].GenericNamesString | highlight:vm.ScrubedText"></span>
                                         </p>
 
                                         <p><strong>Seriousness:</strong> {{::item.SeriousnessString}}</p>

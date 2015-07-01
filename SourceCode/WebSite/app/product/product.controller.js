@@ -8,8 +8,9 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
     vm.SearchSummary = [];
     vm.SearchResult = [];
-    vm.Keyword = [];
-    vm.Region = [];
+    vm.ScrubedText = "";
+    vm.Keyword = "";
+    vm.Region = "";
     vm.fontSizeClass = "";
     vm.lineOptions = [];
     vm.lineData1 = [];
@@ -152,7 +153,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
 
     if (vm.Keyword.length > 0) {
         vm.SearchSummary = $sessionStorage.SearchSummary;
-
+        
         var doSummary = true;
 
         if (angular.isObject(vm.SearchSummary)) {
@@ -169,6 +170,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
                 function (summary) {
                     summary.IsLoading = false;
                     vm.SearchSummary = summary;
+                    vm.ScrubedText = summary.ScrubedText;
                     $sessionStorage.SearchSummary = vm.SearchSummary;                    
                     LoadPageInfo();
                 }
@@ -200,7 +202,8 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
      * Loads the page initial data.
      */
     function LoadPageInfo() {
-        var scrubText = vm.SearchSummary.ScrubedText;
+        vm.ScrubedText = vm.SearchSummary.ScrubedText;
+
         var productName = vm.SearchSummary.Keyword;
         var region = vm.SearchSummary.State;
 
@@ -209,7 +212,7 @@ function ProductController($scope, $location, $sessionStorage, $localStorage, $h
         vm.Class2Visible = (vm.SearchSummary.ClassIICount);
         vm.Class3Visible = (vm.SearchSummary.ClassIIICount);
 
-        productservice.GetFDAResults(scrubText, region,
+        productservice.GetFDAResults(vm.ScrubedText, region,
             function (result) {
                 var classiStates = [];
                 var classiiStates = [];
