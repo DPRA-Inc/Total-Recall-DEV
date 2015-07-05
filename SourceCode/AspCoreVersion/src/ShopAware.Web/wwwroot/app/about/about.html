@@ -1,0 +1,73 @@
+﻿<div data-ng-controller="aboutcontroller as vm">
+    <div class="wrapper wrapper-content animated fadeInDown">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div>
+                        <ul class="nav nav-pills" role="tablist">
+                            <li role="presentation" class="active">
+                                <span class="badge {{vm.PillNormal}}" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
+                            </li>
+                            <li role="presentation">
+                                <span class="badge {{vm.PillBig}}" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
+                            </li>
+                            <li role="presentation">
+                                <span class="badge {{vm.PillBigger}}" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#/index/landing">Home</a>
+                        </li>
+                        <li class="active">
+                            <strong>About Us</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h1>About Us</h1>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-class="vm.fontSizeClass">
+
+                        <div class="pull-right" style="padding:15px;">
+                            <img src="img/GroceryStoresConsumers.jpg" />
+                        </div>
+
+                        <h2>Protecting Your Health through Information! </h2>
+
+                        <p><img src="img/FdaLogo.png" style="width:200px;" /></p>
+
+                        <p><strong>ShopAware.gov</strong> is a FDA sponsored shopping list service to provide information on food and drug recalls and other adverse effects. </p>
+
+                        <p class="font-bold" style="padding-top:15px;">Mission</p>
+
+                        <p>ShopAware.gov’s mission is to provide timely information to educate and therefore inform the user on the safety of the products they and their family are consuming to empower them to make wise choices. </p>
+
+                        <p class="font-bold" style="padding-top:15px;">Vision</p>
+
+                        <p>In a world that is becoming increasing global, it is more important than ever for the individual to have information about products they consume; products that could be sourced in areas thousands of miles from their local market. Bringing the information to the user is a key component of the ShopAware.gov vision. Our users are parents, siblings, grandparents, and friends that care about the items they put in their shopping cart. No longer will an individual have to search for information through various government websites. ShopAware.gov brings them awareness by providing the information in a single place. We continue to build strong public/private partnerships to meet our vision of protecting your health through information!</p>
+
+                        <p class="font-bold" style="padding-top:15px;">Disclaimer</p>
+
+                        <p>ShopAware.gov is a prototype website application created by DPRA Incorporated as a submission to the Agile Services Blanket Purchase Agreement RFQ. The data is obtained via open source FDA application programming interfaces (APIs). The data provided is not for clinical or production use. DPRA Inc. is not responsible for the accuracy of the data or that access to this website will be continuous or uninterrupted. DPRA accepts no liability for the content of the data presented on this website or for the consequences of any actions taken on the basis of information provided. </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

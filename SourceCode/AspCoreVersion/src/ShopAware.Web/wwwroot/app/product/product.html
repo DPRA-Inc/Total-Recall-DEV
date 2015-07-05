@@ -1,0 +1,315 @@
+<div class="wrapper wrapper-content animated fadeInDown" data-ng-controller="productcontroller as vm">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div>
+                    <ul class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="active">
+                            <span class="badge {{vm.PillNormal}}" ng-click="vm.ChangeFontSize('')"><span class="font-size-button">A</span></span>
+                        </li>
+                        <li role="presentation">
+                            <span class="badge {{vm.PillBig}}" ng-click="vm.ChangeFontSize('big')"><span class="font-size-button big">A</span></span>
+                        </li>
+                        <li role="presentation">
+                            <span class="badge {{vm.PillBigger}}" ng-click="vm.ChangeFontSize('bigger')"><span class="font-size-button bigger">A</span></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#/index/landing">Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Product Details</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <h1 class="pull-left">
+                    Search Results: <strong>{{vm.SearchSummary.Keyword}}</strong>
+                </h1>
+
+                <p class="pull-right v-align-bottom" style="padding-right:15px;" ng-class="vm.fontSizeClass">(Newest first)</p>
+
+            </div>
+            <div class="col-md-6 ">
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 animated bounceInLeft" ng-class="vm.fontSizeClass">
+
+                <h1 ng-if="vm.DataLoading" class="text-center m-b-lg m-t-lg">
+                    <i class="fa fa-spinner fa-spin"></i>
+                    Loading More Information...
+                </h1>
+
+                <div ng-hide="vm.DataLoading">
+
+                    <div class="ibox-content no-padding">
+
+                        <div>
+
+                            <ul class="sortable-list connectList agile-list" infinite-scroll="vm.DisplayNext(10)" infinite-scroll-distance="2">
+
+                                <li class="{{::item.Rank}}-element" ng-repeat="item in vm.VisibleResults" ng-click="vm.ShowMoreInformation(item)">
+
+                                    <div ng-if="::item.IsProduct">
+
+                                        <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
+
+                                        <p>
+                                            <strong>Product:</strong> <span ng-bind-html="::item.ProductDescription | highlight:vm.SearchSummary.Keyword"></span>
+                                        </p>
+
+                                        <p>
+                                            <strong>Reason:</strong> <span ng-bind-html="::item.ContentTruncated | highlight:vm.SearchSummary.Keyword"></span>
+                                        </p>
+
+                                        <p>
+                                            <strong>Distribution:</strong> {{::item.DistributionPattern}}
+                                        </p>
+
+                                        <div class="pull-right btn btn-xs btn-white">More Information</div>
+
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{::item.DateStarted}}    &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{::item.ReportDate}}
+
+                                    </div>
+
+                                    <div ng-if="::item.IsEvent">
+
+                                        <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
+
+                                        <p>
+                                            <strong>Seriousness:</strong> {{::item.Seriousness}}
+                                        </p>
+
+                                        <p><strong>Source:</strong> <span ng-bind-html="::item.PrimarySource | highlight:vm.SearchSummary.Keyword"></span></p>
+
+                                        <div class="pull-right btn btn-xs btn-white">More Information</div>
+
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{::item.DateStarted}} &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{::item.ReportDate}}
+
+                                    </div>
+
+                                    <div ng-if="::item.IsDeviceEvent">
+
+                                        <div class="pull-right"><img src="img/identifiers/{{::item.Rank}}.png" /></div>
+
+                                        <p>
+                                            <strong>Products:</strong> <span ng-bind-html="::item.DrugItem[0].BrandNamesString | highlight:vm.SearchSummary.Keyword"></span>
+                                        </p>
+                                        <p>
+                                            <strong>Generic Name:</strong> <span ng-bind-html="::item.DrugItem[0].GenericNamesString | highlight:vm.SearchSummary.Keyword"></span>
+                                        </p>
+
+                                        <p><strong>Seriousness:</strong> {{::item.SeriousnessString}}</p>
+
+                                        <div class="pull-right btn btn-xs btn-white">More Information</div>
+
+                                        <strong>Started:</strong> <i class="fa fa-clock-o"></i> {{::item.DateStarted}} &nbsp;&nbsp;&nbsp;&nbsp;  <strong>Report Date:</strong> <i class="fa fa-clock-o"></i> {{::item.ReportDate}}
+
+                                    </div>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInDown" ng-class="vm.fontSizeClass">
+
+                <h2>Shopping List Result Legend</h2>
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="classi-element" ng-if="vm.Class1Visible" style="min-height:72px; cursor:default;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classi.png" alt="Class 1" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.ClassICount}}) Recall which indicate dangerous or defective products that predictably could cause serious health problems or death.</strong>
+                    </li>
+                    <li class="classii-element" ng-if="vm.Class2Visible" style="min-height:72px; cursor:default;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classii.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.ClassIICount}}) Recall which indicate products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</strong>
+                    </li>
+                    <li class="classiii-element" ng-if="vm.Class3Visible" style="min-height:72px; cursor:default;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/classiii.png" alt="Class 3" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.ClassIIICount}}) Recall which indicate products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.</strong>
+                    </li>
+                    <li class="events-element" ng-if="vm.EventsVisible" style="min-height:72px; cursor:default;">
+                        <div class="pull-right">
+                            <img src="./img/identifiers/events.png" alt="Event" style="width:48px;height:48px;" />
+                        </div>
+                        <strong>({{vm.SearchSummary.EventCount}}) Events occured with a drug or device.</strong>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="feed-element">
+
+                        <h3>Distribution States Detected in Reports</h3>
+
+                        <div>
+
+                            <openlayers id="map" ol-center="center" ol-defaults="defaults" custom-layers="true" style="height: 480px; width: 100%; min-width: 320px;">
+
+                                <ol-marker ol-marker-properties="item" ng-repeat="item in vm.Markers"></ol-marker>
+                                <ol-layer ol-layer-properties="class1"></ol-layer>
+                                <ol-layer ol-layer-properties="class2"></ol-layer>
+                                <ol-layer ol-layer-properties="class3"></ol-layer>
+                                <ol-layer ol-layer-properties="events"></ol-layer>
+                                <ol-layer ol-layer-properties="osm"></ol-layer>
+
+                            </openlayers>
+
+                        </div>
+
+                        <div class="row" style="padding-top:5px;">
+                            <span class="col-xs-12"><span class="badge badge-danger">1</span> Recall which indicate dangerous or defective products that predictably could cause serious health problems or death.</span>
+                        </div>
+
+                        <div class="row" style="padding-top:5px;">
+                            <span class="col-xs-12"><span class="badge badge-warning">2</span> Recall which indicate products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</span>
+                        </div>
+
+                        <div class="row" style="padding-top:5px;">
+                            <span class="col-xs-12"><span class="badge badge-success">3</span> Recall which indicate products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws.</span>
+                        </div>
+
+                        <div class="row" style="padding-top: 5px;">
+                            <span class="col-xs-12"><span class="badge badge-info">E</span> Events occured with a drug or device.</span>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass" ng-if="vm.Class1Visible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="classi-element">
+
+                        <div class="">
+                            <img src="./img/identifiers/classi.png" alt="Class 1" style="width:48px;height:48px;" />
+                        </div>
+
+                        <h3>Number of Reports by Class 1</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData1" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass" ng-if="vm.Class2Visible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="classii-element">
+
+                        <div class="">
+                            <img src="./img/identifiers/classii.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
+
+                        <h3>Number of Reports by Class 2</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData2" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass" ng-if="vm.Class3Visible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="classiii-element">
+
+                        <div class="">
+                            <img src="./img/identifiers/classiii.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
+
+                        <h3>Number of Reports by Class 3</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineData3" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-6 animated bounceInUp" ng-class="vm.fontSizeClass" ng-if="vm.EventsVisible">
+
+                <ul class="sortable-list connectList agile-list">
+
+                    <li class="events-element">
+
+                        <div class="">
+                            <img src="./img/identifiers/events.png" alt="Class 2" style="width:48px;height:48px;" />
+                        </div>
+
+                        <h3>Number of Reports by Event</h3>
+
+                        <div>
+                            <h1 ng-hide="vm.IsChartReady"><i class="fa fa-spinner fa-spin"></i></h1>
+                            <canvas class="ng-isolate-scope" style="height: 480px; width: 100%; min-width: 320px;" options="vm.lineOptions" data="vm.lineDataE" responsive="true" linechart=""></canvas>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

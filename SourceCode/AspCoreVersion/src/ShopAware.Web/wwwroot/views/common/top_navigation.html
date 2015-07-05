@@ -1,0 +1,56 @@
+<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="#/index/landing">
+                    <img class="navbar-logo" src="img/logo.png" alt="ShopAware.org"/>
+                </a>
+            </div>
+            <button type="button" class="navbar-toggle navbar-toggle-adjusted" data-toggle="collapse" data-target=".navbar-menubuilder">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+            <ul class="nav navbar-nav navbar-right" ng-if="$state.current.name === 'index.landing' || $state.current.name === 'index.product'">
+                <li>
+                    <a href="#/index/privacy" class="navbar-item-font">
+                        Privacy Policy
+                    </a>
+                </li>
+                <li>
+                    <a href="#/index/about" class="navbar-item-font">
+                        About Us
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-if="$state.current.name === 'index.about'">
+                <li>
+                    <a href="#/index/landing" class="navbar-item-font">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#/index/privacy" class="navbar-item-font">
+                        Privacy Policy
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-if="$state.current.name === 'index.privacy'">
+                <li>
+                    <a href="#/index/landing" class="navbar-item-font">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#/index/about" class="navbar-item-font">
+                        About Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
