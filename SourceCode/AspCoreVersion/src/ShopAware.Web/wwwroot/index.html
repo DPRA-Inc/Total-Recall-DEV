@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html ng-app="TotalRecall">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title set in pageTitle directive -->
+    <title page-title></title>
+
+    <!-- Fonts -->
+    <link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Bootstrap and Fonts -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Main TotalRecall CSS files -->
+    <link href="css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="css/style.css" rel="stylesheet">
+
+    <link href="css/navbar.css" rel="stylesheet" />
+    <link href="css/mobile.css" rel="stylesheet" />
+
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Global controller that is presented in all Applications -->
+<body ng-controller="GlobalsModule as globals">
+
+    <!-- Main view, using UI-View -->
+    <div ui-view></div>
+
+    <!-- jQuery and Bootstrap -->
+    <script src="js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- MetsiMenu -->
+    <script src="plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- SlimScroll -->
+    <script src="plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Peace JS -->
+    <script src="plugins/pace/pace.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/TotalRecall.js"></script>
+
+    <!-- Main Angular scripts-->
+    <script src="js/angular/angular.min.js"></script>
+    <script src="plugins/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="plugins/infinitescroll/ng-infinite-scroll.min.js"></script>
+    <script src="js/angular/angular-sanitize.min.js"></script>
+    <script src="js/ui-router/angular-ui-router.min.js"></script>
+    <script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="js/ngstorage/ngstorage.min.js"></script>
+
+    <!-- ToastR http://codeseven.github.io/toastr/ -->
+    <link href="plugins/toastr/toastr.min.css" rel="stylesheet" />
+    <script src="plugins/toastr/toastr.min.js"></script>
+
+    <!-- Open Layers 3 Map -->
+    <link href="plugins/openlayers/ol.css" rel="stylesheet" />
+    <link href="plugins/openlayers/angular-openlayers-directive.css" rel="stylesheet" />
+    <script src="plugins/openlayers/ol.js"></script>
+    <script src="plugins/openlayers/angular-openlayers-directive.min.js"></script>
+
+    <!-- Anglar App Script -->
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/filters.js"></script>
+
+    <script src="app/landing/rss.service.js"></script>
+
+    <script src="app/globals/sitecomments.controller.js"></script>
+    <script src="app/globals/globals.js"></script>
+
+    <script src="app/landing/landing.service.js"></script>
+    <script src="app/landing/landing.controller.js"></script>
+
+    <script src="app/product/productFullDetails.modal.controller.js"></script>
+    <script src="app/product/drugeventFullDetails.modal.controller.js"></script>
+    <script src="app/product/deviceEventFullDetails.modal.controller.js"></script>
+
+    <script src="app/product/product.service.js"></script>
+    <script src="app/product/product.controller.js"></script>
+
+    <script src="app/about/about.controller.js"></script>
+
+    <script src="app/privacy/privacy.controller.js"></script>
+
+    <!--Future Enhancements
+    <script src="APP/Notify/notify.controller.js"></script>
+    <script src="APP/Notify/notify.service.js"></script>
+    -->
+
+</body>
+</html>
