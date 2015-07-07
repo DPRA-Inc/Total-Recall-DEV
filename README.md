@@ -4,7 +4,7 @@ A prototype application designed to provide users FDA health alerts specific to 
 | Node | URL |
 |-------|---------|
 | Production | https://www.fdachallenge.com |
-| Development | https://dev.fdachallenge.com/master |
+| Development | https://dev.fdachallenge.com <br />The branch for eval is master |
 | CI Production | https://www.fdachallenge.com/ccnet |
 | CI Development | https://dev.fdachallenge.com/ccnet |
 
