@@ -63,9 +63,13 @@ Finally, the extra time allowed by the extension was used to construct an additi
 
 See Team Roster Document in Total-Recall-DEV / Documentation <br /><br />Phil Cerasoli has over 28 years of experience developing software models and systems as a technical team management.  As a principal and Chief Technology Officer for DPRA, Phil is responsible for the development of all information technology applications and the management of over 30 technical personnel. This includes responsibility for long-range planning, technical analysis and design, policy and procedure development, programming standards, configuration management, quality assurance, technical documentation, staffing, supervision of team leaders, maintaining knowledge of emerging technologies, and serving as lead engineer on selected projects.
 
+---
+
 > B.  Assembled a multidisciplinary and collaborative team including a minimum of 5 labor categories from the Development Pool labor categories to design and develop the prototype
 
 See Team Roster Document in Total-Recall-DEV / Documentation<br />See the “Issues” page in GitHub<br /><br />DPRA used 10 of the 13 full stack labor categories for this effort. The agile process that we used included documenting the Meeting Minutes and daily standups. We used GitHub collaboratively by using Issues and inserting comments on the Issues. See the “Issues” page in GitHub for a record of all issues, and their related conversations.
+
+---
 
 > C.  Understand what people need, by including people in the prototype development and design process 
 
@@ -77,53 +81,138 @@ See Total-Recall-DEV / Usability Testing <br /><br />We used two non-technical r
 
 See Document “Human Centered Design” in Total-Recall-DEV / Documentation<br /><br />The techniques and tools used are as follows: <br /><br />1. Identified the people that would use the website and what they would use it for. We targeted primarily a 30+ demographic, parents and elderly that are concerned with their health and the health of the family. The Shopping List “item check” idea was conceived to attract the parent that would be the primary shopper and purchase items for the family and elderly that might have a larger concern with medication and medical devices. <br /><br />2. Identified the goals of the website. The goal was to bring the FDA supplied recall and adverse event data to the user instead of the user having to search for the information they were interested in. Allowing the users to enter items quickly and know immediately if the products they use have any recalls or events associated with them. The users’ general location would also be collected so the information would be specific to their area of the country.   <br /><br />3. Design solutions to meet the website goals and appeal to the website demographic. <br /><br />DPRA used 15 techniques that supported human centered design. See the referenced document for details.
 
+---
+
 > E. Created or used a design style guide and/or a pattern library 
 
 See Total-Recall-DEV / SourceCode<br /><br />We used Bootstrap to enforce the design style. <br /><br />Bootstrap is an open source design framework. DPRA selected a template that had been built that was closest to our design team’s vision. This framework is a part of the source code. 
+
+---
 
 > F. Performed usability tests with people 
 
 See Total-Recall-DEV / Usability Testing<br /><br />The usability tester coordinated tests with the focus group twice throughout development cycle. The folder referenced contains the survey questions, results, feedback, and other relevant documents. 
 
+---
+
 > G. Used an iterative approach, where feedback informed subsequent work or versions of the prototype 
 
 See Total-Recall-DEV / Meeting Minutes <br />See the “Issues” page in GitHub<br />See the 1500 word description for in depth process<br /><br />We relied on feedback from developers, designers, testers, and “the public” throughout this process in order to develop our work list. The product was reviewed daily in order to solicit feedback from the team and “the public.” 
+
+---
 
 > H. Created a prototype that works on multiple devices, and presents a responsive design 
 
 See https://www.fdachallenge.com<br /><br />The prototype works on multiple browsers, and is configured to be easy to use on mobile devices of various sizes. It was tested on multiple browsers (Chrome, IE, FireFox, etc) and devices (Apple IPADs, Iphones, Android phones, PCs, etc). 
 
+---
+
 > I. Used at least five modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.) 
 
-We used the following tools and information sources in the design and development of our prototype. <br /><br />Freenetlaw (provided the privacy statement) <br /><br />http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Recalls/rss.xml (provided the news feed on the front page) <br /><br />CSS - Cascading Style Sheet<br />HTML - HyperText Markup Language <br />DOM - Document Object Model <br />JS – JavaScript<br />CI – Continuous Integration<br />JSON – JavaScript Object Notation<br />FDA – United States Food and Drug Administration<br /><br />http://sass-lang.com/<br />CSS preprocessor which allows more advanced directives and capabilities<br /><br />http://lesscss.org/<br />CSS preprocessor which allows more advanced directives and capabilities<br /><br />https://angularjs.org/<br />JS library which enables dynamic manipulation of the HTML DOM <br /><br />http://openlayers.org/<br />JS library for adding maps to websites <br /><br />http://getbootstrap.com/<br />A predefined, highly customizable, CSS for use in styling websites<br /><br />http://cruisecontrolnet.org/ <br />Automated CI build server<br /><br />https://github.com/tombatossals/angular-openlayers-directive<br />JS library which exposes the Open Layers library to AngularJS<br /><br />http://www.chartjs.org/<br />JS library for adding charts and graphs to a website<br /><br />https://sroze.github.io/ngInfiniteScroll/<br />JS library to enable “infinite scrolling,” which is dynamically appending content to a web page or control as needed<br /><br />http://jqueryui.com/ <br />JS library with predefined user controls and interactions<br /><br />https://github.com/onokumus/metisMenu<br />JS library enabling a customizable menu system<br /><br />https://oclazyload.readme.io/<br />AngularJS module which enables loading other modules only when needed<br /><br />http://github.hubspot.com/pace/<br />JS library and CSS definition for a progress bar<br /><br />https://github.com/benpickles/peity<br />JS library for adding charts and graphs to a website<br /><br />https://github.com/rochal/jQuery-slimScroll/<br />JS library which transforms “div” controls into “scroll-able” user controls<br /><br />https://github.com/CodeSeven/toastr<br />JS library to enable on-screen notifications to the user<br /><br />https://github.com/johan/world.geo.json<br />Annotated geo-files in JSON format for use in map controls<br /><br />https://github.com/cornflourblue/angulike<br />AngularJS directives for social sharing buttons - Facebook Like, Google+, Twitter and Pinterest <br /><br />https://spoon.net/<br />Application virtualization container which allow the application to run on any Windows machine without additional configuration or software installation<br /><br />https://open.fda.gov/<br />Public FDA data sharing portal 
+We used the following tools and information sources in the design and development of our prototype. 
+
+CSS - Cascading Style Sheet
+
+HTML - HyperText Markup Language 
+
+DOM - Document Object Model 
+
+JS – JavaScript
+
+CI – Continuous Integration
+
+JSON – JavaScript Object Notation
+
+FDA – United States Food and Drug Administration
+
+
+* Freenetlaw (provided the privacy statement) 
+
+* http://www.fda.gov/AboutFDA/ContactFDA/StayInformed/RSSFeeds/Recalls/rss.xml (provided the news feed on the front page) 
+
+* http://sass-lang.com/<br />CSS preprocessor which allows more advanced directives and capabilities
+
+* http://lesscss.org/<br />CSS preprocessor which allows more advanced directives and capabilities
+
+* https://angularjs.org/<br />JS library which enables dynamic manipulation of the HTML DOM 
+
+* http://openlayers.org/<br />JS library for adding maps to websites 
+
+* http://getbootstrap.com/<br />A predefined, highly customizable, CSS for use in styling websites
+
+* http://cruisecontrolnet.org/ <br />Automated CI build server
+
+* https://github.com/tombatossals/angular-openlayers-directive<br />JS library which exposes the Open Layers library to AngularJS
+
+* http://www.chartjs.org/<br />JS library for adding charts and graphs to a website
+
+* https://sroze.github.io/ngInfiniteScroll/<br />JS library to enable “infinite scrolling,” which is dynamically appending content to a web page or control as needed
+
+* http://jqueryui.com/ <br />JS library with predefined user controls and interactions
+
+* https://github.com/onokumus/metisMenu<br />JS library enabling a customizable menu system
+
+* https://oclazyload.readme.io/<br />AngularJS module which enables loading other modules only when needed
+
+* http://github.hubspot.com/pace/<br />JS library and CSS definition for a progress bar
+
+* https://github.com/benpickles/peity<br />JS library for adding charts and graphs to a website
+
+* https://github.com/rochal/jQuery-slimScroll/<br />JS library which transforms “div” controls into “scroll-able” user controls
+
+* https://github.com/CodeSeven/toastr<br />JS library to enable on-screen notifications to the user
+
+* https://github.com/johan/world.geo.json<br />Annotated geo-files in JSON format for use in map controls
+
+* https://github.com/cornflourblue/angulike<br />AngularJS directives for social sharing buttons - Facebook Like, Google+, Twitter and Pinterest 
+
+* https://spoon.net/<br />Application virtualization container which allow the application to run on any Windows machine without additional configuration or software installation
+
+* https://open.fda.gov/<br />Public FDA data sharing portal 
+
+---
 
 > J. Deployed the prototype on an Infrastructure as a Service (iaas) or Platform as a Service (paas) provider, and indicated which provider they used 
 
 We used Microsoft Azure cloud environment, which acts as an IaaS. <br /> <br /> “IaaS is a managed compute service that gives complete control of the OS and the application platform stack to the application developers and IT Professional which is analogous to Hyper-V and other virtualization platforms. The unit of deployment is at the granularity of a virtual machine. Developers with the help of IT Professionals deploy virtual machines, application bits and the associated data to the target compute infrastructure. Even though developers get complete control of the stack at the design time, the deployment still needs to consider the systemic qualities of the application influenced by the storage, virtual networking and the managed services ecosystem that surrounds it. While IaaS gives design time portability, in due course the application may take advantage of the managed services (e.g. Azure Storage, cache) that will impact its overall portability. Similar to the analysis of PaaS, we will take look at the advantages and disadvantages of IaaS from both business and technology angles.” <br /><br />http://blogs.msdn.com/b/hanuk/archive/2013/12/03/which-windows-azure-cloud-architecture-paas-or-iaas.aspx 
 
+---
+
 > K. Wrote unit tests for their code 
 
 See Total-Recall-DEV / SourceCode / Tests / ApiDalc.Tests<br /><br />Automated unit tests (NUnit) were developed that ran automatically within the integrated development environment (IDE), and results were appended as part of the automated build process. 
+
+---
 
 > L. Set up or used a continuous integration system to automate the running of tests and continuously deployed their code to their iaas or paas provider 
 
 See Total-Recall-DEV / Documentation / Build and Continuous Integration Server<br />See Total-Recall-DEV / Build<br /><br />CruiseControl was used for continuous integration. In addition an email alert was sent to the product manager and usability tester after each automated deployment. The document referenced is our instructions for replicating a CruiseControl installation. The “Build” folder referenced is the node configuration for CruiseControl along with all tools necessary to build, email, unit test, and deploy. 
 
+---
+
 > M. Set up or used configuration management 
 
 See the “Issues” page in GitHub<br /><br />We used GitHub “Issues” to track and approve work. The product manager had final approval of all proposed software changes. DPRA has an existing CM process that it has developed in conjunction with its Federal work. We used this CM process for the development of this application. 
+
+---
 
 > N. Set up or used continuous monitoring 
 
 See Continuous Monitoring document in Total-Recall-DEV / Documentation<br /><br />The document referenced goes into detail on our cyber and physical security processes.  
 
+---
+
 > O. Deploy their software in a container (i.e., utilized operating-system-level virtualization) 
 
 See Run Prototype Locally document in Total-Recall-DEV / Documentation<br /><br />We used Spoon (the open source tool) as the container for easy deployment. The document referenced describes how to run the application in a virtual container on a PC. 
 
+---
+
 > P. Provided sufficient documentation to install and run their prototype on another machine 
 
 See Run Prototype Locally document in Total-Recall-DEV / Documentation<br /><br />See Install and Debug Prototype document in Total-Recall-DEV / Documentation<br /><br />In addition to the virtual deployment document, we have included a document on building, running, and publishing the prototype (Insall and Debug Prototype document). 
+
+---
 
 > Q. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge 
 
