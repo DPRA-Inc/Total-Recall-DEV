@@ -59,7 +59,7 @@ Finally, the extra time allowed by the extension was used to construct an additi
 
 ##Criteria and Evidence
 
-| _ | Criteria | Evidence |
+| A | Criteria | Evidence |
 | - | ------ | ----------------- |
 | A | Assigned one leader, gave that person authority and responsibility, and held that person accountable for the quality of the prototype submitted | See Team Roster Document in Total-Recall-DEV / Documentation <br /><br />Phil Cerasoli has over 28 years of experience developing software models and systems as a technical team management.  As a principal and Chief Technology Officer for DPRA, Phil is responsible for the development of all information technology applications and the management of over 30 technical personnel. This includes responsibility for long-range planning, technical analysis and design, policy and procedure development, programming standards, configuration management, quality assurance, technical documentation, staffing, supervision of team leaders, maintaining knowledge of emerging technologies, and serving as lead engineer on selected projects. |
 | B | Assembled a multidisciplinary and collaborative team including a minimum of 5 labor categories from the Development Pool labor categories to design and develop the prototype | See Team Roster Document in Total-Recall-DEV / Documentation<br />See the “Issues” page in GitHub<br /><br />DPRA used 10 of the 13 full stack labor categories for this effort. The agile process that we used included documenting the Meeting Minutes and daily standups. We used GitHub collaboratively by using Issues and inserting comments on the Issues. See the “Issues” page in GitHub for a record of all issues, and their related conversations. |
