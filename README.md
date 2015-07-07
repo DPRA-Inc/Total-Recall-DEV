@@ -59,7 +59,7 @@ Finally, the extra time allowed by the extension was used to construct an additi
 
 ##Criteria and Evidence
 
-| # | Criteria | Evidence |
+| _ | Criteria | Evidence |
 
 | - | ------ | ----------------- |
 
