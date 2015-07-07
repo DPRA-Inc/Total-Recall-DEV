@@ -1,10 +1,10 @@
 ﻿# ShopAware
-A prototype application designed to provide users FDA health alerts specific to each item in their shopping list as the list is created.
+A prototype application designed to provide users FDA health alerts specific to their shopping list.
 
 | Node | URL |
 |-------|---------|
 | Production | https://www.fdachallenge.com |
-| Development | https://dev.fdachallenge.com <br />The branch for eval is master |
+| Development | https://dev.fdachallenge.com <br />The branch for evaluation is master |
 | CI Production | https://www.fdachallenge.com/ccnet |
 | CI Development | https://dev.fdachallenge.com/ccnet |
 
