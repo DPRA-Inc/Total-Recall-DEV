@@ -1,0 +1,1110 @@
+{
+  "meta": {
+    "disclaimer": "openFDA is a beta research project and not for clinical use. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated.",
+    "license": "http://open.fda.gov/license",
+    "last_updated": "2015-05-31",
+    "results": {
+      "skip": 0,
+      "limit": 25,
+      "total": 1688
+    }
+  },
+  "results": [
+    {
+      "recall_number": "D-414-2013",
+      "reason_for_recall": "Lack of Assurance of Sterility: all sterile products compounded, repackaged, and distributed by this compounding pharmacy due to lack of sterility assurance and concerns associated with the quality control processes.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "70 vials",
+      "recall_initiation_date": "20130410",
+      "state": "NV",
+      "event_id": "64879",
+      "product_type": "Drugs",
+      "product_description": "Thiamine Hydrochloride Injection, all strengths and all presentations including a) Thiamine 100 mg/30 mL, b) Thiamine Hydrochloride 100 mg/mL with preservative 30 mL, c) Thiamine Hydrochloride 50 mg/mL with preservative 30 mL, d) Thiamine Hydrochloride 100 mg/mL preservative free 10 mL and 30 mL, Rx only, Green Valley Drugs, 1850 Whitney Mesa, #180, Henderson, NV  89014.",
+      "country": "US",
+      "city": "Henderson",
+      "recalling_firm": "FVS Holdings, Inc. dba. Green Valley Drugs",
+      "report_date": "20130522",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot #: a) Thiamine 100 mg/30 mL: 20130130-G, Exp 4/30/2013",
+      "@id": "00132aeec88ef5a53d610cc6924c0d3965384831361e1a1a0345113c35d81c57",
+      "openfda": {},
+      "initial_firm_notification": "Press Release"
+    },
+    {
+      "recall_number": "D-609-2013",
+      "reason_for_recall": "Presence of Particulate Matter: Firm is recalling a small number of vials with very small reflective flakes consistent with delamination of the glass vial.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "898,900 Vials",
+      "recall_initiation_date": "20130604",
+      "state": "MI",
+      "event_id": "65275",
+      "product_type": "Drugs",
+      "product_description": "Cleocin Phosphate (clindamycin Injection), USP, a) 600 mg/4mL (150 mg/mL) ADD-Vantage Vial, b) 900 mg/6mL (150 mg/mL) ADD-Vantage Vial, Rx Only, For Intravenous Use Only, Use Only with the ADD-Vantage diluent container, Distributed by Pharmacia & Upjohn Co, Division of Pfizer Inc, NY, NY 10017, NDC a) 0009-3124-03 and b) 0009-3447-03",
+      "country": "US",
+      "city": "Kalamazoo",
+      "recalling_firm": "Pharmacia & Upjohn LLC",
+      "report_date": "20130626",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lots: a) G34908, Exp 06/14; G53479, Exp 09/14; G63442, G58347, Exp 10/14; G80133, Exp 12/14; and b) G34910, Exp 06/14; G36879, G41005, Exp 07/14; G53478, Exp 09/14; G63444, Exp 10/14; G76317, Exp 11/14.",
+      "@id": "00171f18d8cb43cc762010ec99a8636631470e6bee678b7decbfd9a1789425af",
+      "openfda": {
+        "unii": [
+          "3U02EL437C"
+        ],
+        "spl_id": [
+          "a5785df9-aedf-4fcc-9f48-4ff0490e52db"
+        ],
+        "product_ndc": [
+          "0009-0775",
+          "0009-3124",
+          "0009-0728",
+          "0009-0902",
+          "0009-0870",
+          "0009-3381",
+          "0009-3382",
+          "0009-3375",
+          "0009-3447"
+        ],
+        "substance_name": [
+          "CLINDAMYCIN PHOSPHATE"
+        ],
+        "rxcui": [
+          "685576",
+          "685574",
+          "205964",
+          "706461",
+          "685578",
+          "309336",
+          "309335",
+          "309339"
+        ],
+        "spl_set_id": [
+          "05a75685-0af5-407c-ac57-e380c882b49d"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "pharm_class_cs": [
+          "Lincosamides [Chemical/Ingredient]"
+        ],
+        "manufacturer_name": [
+          "Pharmacia and Upjohn Company"
+        ],
+        "brand_name": [
+          "CLEOCIN PHOSPHATE"
+        ],
+        "pharm_class_pe": [
+          "Decreased Sebaceous Gland Activity [PE]"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "INTRAMUSCULAR",
+          "INTRAVENOUS"
+        ],
+        "nui": [
+          "N0000009982",
+          "N0000175442",
+          "N0000175443"
+        ],
+        "package_ndc": [
+          "0009-3375-02",
+          "0009-0728-05",
+          "0009-3375-01",
+          "0009-0728-09",
+          "0009-0775-26",
+          "0009-3381-02",
+          "0009-0775-20",
+          "0009-3382-01",
+          "0009-3124-01",
+          "0009-0902-18",
+          "0009-3124-03",
+          "0009-0870-21",
+          "0009-0870-26",
+          "0009-3382-02",
+          "0009-3447-03",
+          "0009-0902-11",
+          "0009-3447-01",
+          "0009-3381-01"
+        ],
+        "pharm_class_epc": [
+          "Lincosamide Antibacterial [EPC]"
+        ],
+        "generic_name": [
+          "CLINDAMYCIN PHOSPHATE"
+        ],
+        "application_number": [
+          "NDA050441"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-535-2013",
+      "reason_for_recall": "CGMP Deviations: Products are underdosed or have an incorrect dosage regime.",
+      "status": "Ongoing",
+      "distribution_pattern": "FL, MS, SC, LA  and TX",
+      "product_quantity": "12,120 - 16 ounce bottles",
+      "recall_initiation_date": "20130130",
+      "state": "FL",
+      "event_id": "64188",
+      "product_type": "Drugs",
+      "product_description": "Mesehist DM,  Antihistamine, Antitussive, Decongestant, 16 fl oz. bottle, OTC, Manufactured for: Trigen Laboratories, Sayreville, NJ,08872\n\nNDC 13811-0085-16",
+      "country": "US",
+      "city": "Brooksville",
+      "recalling_firm": "TG United, Inc.",
+      "report_date": "20130612",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot# 11CQ010 Exp 02/13; Lot# 11EQ003 Exp. 04/13; Lot# 11FQ002  Exp. 05/13; Lot# 11FQ003  Exp. 05/13; Lot# 12HQ009  Exp. 07/14.",
+      "@id": "005fe3af65c35e917ff5001f726b5a7c8f92be52b326873bb5808493db316d80",
+      "openfda": {},
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-928-2013",
+      "reason_for_recall": "Lack of Assurance of Sterility: The required reduction of endotoxin was not met during the annual revalidation of the vial washer.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "780 vials",
+      "recall_initiation_date": "20130813",
+      "state": "PA",
+      "event_id": "65959",
+      "product_type": "Drugs",
+      "product_description": "CARBOplatin Injection, 600 mg/60ml, MultiDose, Rx only, Teva Parenteral Medicines, Inc., Irvine, CA 92618 NDC 0703-3249-11",
+      "country": "US",
+      "city": "Sellersville",
+      "recalling_firm": "Teva Pharmaceuticals USA, Inc.",
+      "report_date": "20130911",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot  31314458B, 31314459B exp.08/14,  31315794 exp. 10/14, 31315982B exp.11/14",
+      "@id": "006c6806db9eea98840bd56c54e7c96366fe8e0c3502e14e923deeabd79c643b",
+      "openfda": {
+        "unii": [
+          "BG3F62OND5"
+        ],
+        "spl_id": [
+          "670b25ff-ff6d-4311-8750-ad462eae168d"
+        ],
+        "product_ndc": [
+          "0703-3249"
+        ],
+        "substance_name": [
+          "CARBOPLATIN"
+        ],
+        "rxcui": [
+          "597195"
+        ],
+        "spl_set_id": [
+          "bdb0b6dd-91d3-4896-be6e-313ea907d8bb"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "pharm_class_cs": [
+          "Platinum-containing Compounds [Chemical/Ingredient]"
+        ],
+        "manufacturer_name": [
+          "Teva Parenteral Medicines, Inc."
+        ],
+        "brand_name": [
+          "CARBOPLATIN"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "INTRAVENOUS"
+        ],
+        "nui": [
+          "N0000175073",
+          "N0000175413"
+        ],
+        "package_ndc": [
+          "0703-3249-11"
+        ],
+        "pharm_class_epc": [
+          "Platinum-based Drug [EPC]"
+        ],
+        "generic_name": [
+          "CARBOPLATIN"
+        ],
+        "application_number": [
+          "ANDA077139"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-1506-2012",
+      "reason_for_recall": "Lack of Assurance of Sterility: Franck's Lab Inc. initiated a recall of all Sterile Human Drugs distributed between 11/21/2011 and 05/21/2012 because FDA environmental sampling revealed the presence of microorganisms and fungal growth in the clean room where sterile products were prepared.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide, Bahamas, Columbia, Dominican Republic, Grand Cayman, Guatemala, Poland, Santo Domingo, Venezuela, and West Indies",
+      "product_quantity": "8 units",
+      "recall_initiation_date": "20120525",
+      "state": "FL",
+      "event_id": "62416",
+      "product_type": "Drugs",
+      "product_description": "DMSO/HEPARIN 50%/20,000U/25ML SOLUTION 100 ML, 25 ML; DMSO/HEPARIN 50%/5000U/50ML SOLUTION 300 ML, 400 ML (4 DIFFERENT PRODUCTS)",
+      "country": "US",
+      "city": "Ocala",
+      "recalling_firm": "Franck's Lab Inc., d.b.a. Franck's Compounding Lab",
+      "report_date": "20120822",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Rx #'s:  0405376\n  0386923\n\n\n\n  0397004\n\n  0397004",
+      "@id": "009ceb92ddbdb4bc9d2c05a34684754efec39bb1430fcf26289ef92bb8629dae",
+      "openfda": {},
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-025-2013",
+      "reason_for_recall": "Microbial Contamination of Non-Sterile Products: Product is being recalled due to possible microbial contamination by C. difficile discovered in the raw material.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "48,120 bottles",
+      "recall_initiation_date": "20120904",
+      "state": "NJ",
+      "event_id": "63384",
+      "product_type": "Drugs",
+      "product_description": "Up&Up Psyllium Fiber Supplement, 100% natural psyllium husk, Fiber Therapy for Regularity/Fiber Supplement, 160 capsules per bottle,  Distributed by: Target Corp., Minneapolis, MN 55403, Made in USA,  NDC 11673-059-87, UPC 3-68163-11926-8.",
+      "country": "US",
+      "city": "East Brunswick",
+      "recalling_firm": "Raritan Pharmaceuticals, Inc.",
+      "report_date": "20121031",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Item 119160TGT; Lots15952, Exp 06/15; 16459, 16460, 16463, Exp 07/15; 16475, Exp 08/15",
+      "@id": "00bcfeb2cff353218846888f875390c3eed004538498b51410ffd3574ae78408",
+      "openfda": {},
+      "initial_firm_notification": "E-Mail"
+    },
+    {
+      "recall_number": "D-1038-2013",
+      "reason_for_recall": "Lack of Assurance of Sterility: Leiter Pharmacy is recalling due bacterial contamination found after investigation at contract testing laboratory discovered that OOS results were reported to customers as passing.  Hence the sterility of these products cannot be assured.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "56 vials",
+      "recall_initiation_date": "20130826",
+      "state": "CA",
+      "event_id": "66103",
+      "product_type": "Drugs",
+      "product_description": "Dextrose 50% Preservative Free SDV Injection Solution,\n50 mL Single dose vial, IV Administration, Compounded by Leiter's Compounding Pharmacy, 1700 Park Ave., # 30, San Jose, CA 95126",
+      "country": "US",
+      "city": "San Jose",
+      "recalling_firm": "Leiter's Pharmacy",
+      "report_date": "20130925",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot 06072013@49, Exp 9/5/13",
+      "@id": "00ef61cbf6c2d7b366500d06f7e58801239ffce64c3bd6c49ec0ba83b9844b00",
+      "openfda": {},
+      "initial_firm_notification": "Two or more of the following: Email, Fax, Letter, Press Release, Telephone, Visit"
+    },
+    {
+      "recall_number": "D-534-2013",
+      "reason_for_recall": "CGMP Deviations: Products are underdosed or have an incorrect dosage regime.",
+      "status": "Ongoing",
+      "distribution_pattern": "FL, MS, SC, LA  and TX",
+      "product_quantity": "26,315 - 30 mL bottles.",
+      "recall_initiation_date": "20130130",
+      "state": "FL",
+      "event_id": "64188",
+      "product_type": "Drugs",
+      "product_description": "CPM / PSE DM Drops, Antihistamine, Cough Suppressant  Decongestant, 1 fl oz. bottle, OTC, Manufactured for: Trigen Laboratories, Sayreville, NJ,08872 NDC 13811-072-30",
+      "country": "US",
+      "city": "Brooksville",
+      "recalling_firm": "TG United, Inc.",
+      "report_date": "20130612",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot# 11EQ007 Exp 04/13; Lot# 12BQ001  Exp. 01/14..",
+      "@id": "00f19052b645d290ae0b220f588ba3c44f33bf2143fc1351ed83288593630072",
+      "openfda": {},
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-527-2013",
+      "reason_for_recall": "CGMP Deviations: Products are underdosed or have an incorrect dosage regime.",
+      "status": "Ongoing",
+      "distribution_pattern": "FL, MS, SC, LA  and TX",
+      "product_quantity": "19,728 bottles - 20 mL and 20,016 bottles - 16 ounce.",
+      "recall_initiation_date": "20130130",
+      "state": "FL",
+      "event_id": "64188",
+      "product_type": "Drugs",
+      "product_description": "BroveX PSB DM LIQUID, Antihistamine, Decongestant, a) 16 fl oz. bottle, OTC, NDC 58605-151-01  b) 20 ml NDC 58605-151-02,  Manufactured for: Pernix Therapeutics, Gonzales, LA 70737",
+      "country": "US",
+      "city": "Brooksville",
+      "recalling_firm": "TG United, Inc.",
+      "report_date": "20130612",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot# 11AQ004  Exp. 12/12; Lot# 11AQ005  Exp. 12/12; Lot # 11AQ006  Exp. 12/12; Lot# 11AQ007  Exp. 12/12; Lot # 11BQ012  Exp. 01/13; Lot# 11LQ003  Exp. 10/13; Lot# 11LQ004  Exp. 10/13; Lot# 11LQ005 Exp 10/13; Lot# 11LQ006 Exp. 10/2013.",
+      "@id": "00ffe37ba227e2c20e7a563ae99ac82e615007bd410246a48a3057f995278768",
+      "openfda": {
+        "unii": [
+          "7355X3ROTS"
+        ],
+        "spl_id": [
+          "b652e5a8-f339-4e39-b410-9e0857ffba3a"
+        ],
+        "product_ndc": [
+          "58605-151"
+        ],
+        "substance_name": [
+          "BROMPHENIRAMINE MALEATE",
+          "PSEUDOEPHEDRINE HYDROCHLORIDE",
+          "DEXTROMETHORPHAN HYDROBROMIDE"
+        ],
+        "rxcui": [
+          "1356840",
+          "1356838"
+        ],
+        "spl_set_id": [
+          "5a6f21f8-651f-4559-98d8-bb2646a216ca"
+        ],
+        "product_type": [
+          "HUMAN OTC DRUG"
+        ],
+        "upc": [
+          "0358605151017"
+        ],
+        "manufacturer_name": [
+          "MCR American Pharmaceuticals, Inc."
+        ],
+        "brand_name": [
+          "BROVEX PSB DM"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "nui": [
+          "N0000181821",
+          "N0000181819",
+          "N0000182149",
+          "N0000182147"
+        ],
+        "pharm_class_moa": [
+          "Uncompetitive NMDA Receptor Antagonists [MoA]",
+          "Sigma-1 Receptor Agonists [MoA]"
+        ],
+        "package_ndc": [
+          "58605-151-02",
+          "58605-151-01"
+        ],
+        "pharm_class_epc": [
+          "Sigma-1 Agonist [EPC]",
+          "Uncompetitive N-methyl-D-aspartate Receptor Antagonist [EPC]"
+        ],
+        "generic_name": [
+          "PSEUDOEPHEDRINE HYDROCHLORIDE, BROMPHENIRAMINE MALEATE, AND DEXTROMETHORPHAN HYDROBROMIDE"
+        ],
+        "application_number": [
+          "part341"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-202-2013",
+      "reason_for_recall": "Failed Tablet/Capsule Specifications: Pharmacist complaint of an excessive amount of broken and/or chipped tablets in the bottle.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide.",
+      "product_quantity": "13,320 bottles",
+      "recall_initiation_date": "20130305",
+      "state": "NJ",
+      "event_id": "64604",
+      "product_type": "Drugs",
+      "product_description": "Venlafaxine Hydrochloride Tablets, 75 mg*, 100-count tablets per bottle, Rx only, Manufactured by: Cadila Healthcare Ltd., Ahmedabad, India; Distributed by: Zydus Pharmaceuticals USA Inc., Pennington, NJ 08534, NDC 68382-021-01.",
+      "country": "US",
+      "city": "Pennington",
+      "recalling_firm": "Zydus Pharmaceuticals USA Inc",
+      "report_date": "20130403",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot #: MM8490, Exp 09/14",
+      "@id": "01141c6878711ac03d4d3ef95a7c55236cb5d1b013cda827ea561238733a567b",
+      "openfda": {
+        "unii": [
+          "GRZ5RCB1QG"
+        ],
+        "spl_id": [
+          "de566363-6eed-4877-b796-fbafcf5a6bfa"
+        ],
+        "product_ndc": [
+          "68382-101",
+          "68382-018",
+          "68382-019",
+          "68382-021",
+          "68382-020"
+        ],
+        "substance_name": [
+          "VENLAFAXINE HYDROCHLORIDE"
+        ],
+        "rxcui": [
+          "313582",
+          "313580",
+          "313586",
+          "314277",
+          "313584"
+        ],
+        "spl_set_id": [
+          "72efad5f-0909-46a5-aa13-ac24fe015fe6"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "manufacturer_name": [
+          "Zydus Pharmaceuticals (USA) Inc."
+        ],
+        "brand_name": [
+          "VENLAFAXINE"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "nui": [
+          "N0000175749",
+          "N0000000109",
+          "N0000000102"
+        ],
+        "pharm_class_moa": [
+          "Norepinephrine Uptake Inhibitors [MoA]",
+          "Serotonin Uptake Inhibitors [MoA]"
+        ],
+        "package_ndc": [
+          "68382-019-06",
+          "68382-019-05",
+          "68382-018-05",
+          "68382-018-06",
+          "68382-018-01",
+          "68382-020-01",
+          "68382-020-06",
+          "68382-020-05",
+          "68382-019-01",
+          "68382-101-01",
+          "68382-021-05",
+          "68382-021-06",
+          "68382-101-05",
+          "68382-021-01",
+          "68382-101-06",
+          "68382-019-14",
+          "68382-019-16",
+          "68382-018-10",
+          "68382-019-10",
+          "68382-018-16",
+          "68382-018-14",
+          "68382-020-10",
+          "68382-020-14",
+          "68382-020-16",
+          "68382-101-16",
+          "68382-021-16",
+          "68382-101-14",
+          "68382-021-14",
+          "68382-101-10",
+          "68382-021-10"
+        ],
+        "pharm_class_epc": [
+          "Serotonin and Norepinephrine Reuptake Inhibitor [EPC]"
+        ],
+        "generic_name": [
+          "VENLAFAXINE"
+        ],
+        "application_number": [
+          "ANDA077653"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-361-2014",
+      "reason_for_recall": "Labeling: Label Error on Declared Strength; the label states that the product contains 62% ethyl alcohol, but the ethyl alcohol content is 20%.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "20,167 bottles",
+      "recall_initiation_date": "20130621",
+      "state": "OH",
+      "event_id": "66233",
+      "product_type": "Drugs",
+      "product_description": "I MUSTACHE YOU TO BE MY BFF Justice, COTTON CANDY scent anti bac, Ethyl Alcohol, Net Wt. 1 fl oz, Distr by Tween Brands New Albany, OH 43054 Toronto, ON L6T 3R5",
+      "country": "US",
+      "city": "New Albany",
+      "recalling_firm": "Tween Brands Inc",
+      "report_date": "20131226",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class III",
+      "code_info": "Style #191273",
+      "@id": "01170fd2fb467eee3009e8d6f9b132cea8fa9b29691ddbdcff60e37bbd152c61",
+      "openfda": {},
+      "initial_firm_notification": "E-Mail"
+    },
+    {
+      "recall_number": "D-1646-2012",
+      "reason_for_recall": "Subpotent; fluocinolone acetonide",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "161,064 bottles",
+      "recall_initiation_date": "20120508",
+      "state": "FL",
+      "event_id": "62607",
+      "product_type": "Drugs",
+      "product_description": "Derma-Smoothe/FS (Fluocinolone Acetonide) 0.01% Topical Oil (Scalp Oil), 4 fl oz (118.28mL) bottle, Rx only, FOR TOPICAL USE ONLY NOT, Manufactured and Distributed by: Hill Dermaceuticals, Inc. SANFORD, FLORIDA ---  NDC 28105-149-04",
+      "country": "US",
+      "city": "Sanford",
+      "recalling_firm": "Hill Dermaceuticals, Inc.",
+      "report_date": "20120822",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class III",
+      "code_info": "Lot Numbers: \n-Scalp Oil: H100084 (exp 08/12), H100086 (08/12), J100093 (exp 08/12), J100094 (exp 09/12), J100097 (exp 09/12), K100101 (exp 09/12), K100103 (exp 10/12), K100104 (exp 10/12), K100108 (exp 10/12), K100112 (exp 10/12), L100860 (exp 11/12), L100890 (exp 11/12), L100910 (exp 11/12).",
+      "@id": "01319f8e4eee9192f1253f3747ae9664e1b764a7d6eccb144f945998688c8308",
+      "openfda": {
+        "unii": [
+          "0CD5FD6S2M"
+        ],
+        "spl_id": [
+          "19741b55-154b-4182-a408-1a2e312269aa"
+        ],
+        "product_ndc": [
+          "28105-149"
+        ],
+        "substance_name": [
+          "FLUOCINOLONE ACETONIDE"
+        ],
+        "rxcui": [
+          "1191309",
+          "1191307"
+        ],
+        "spl_set_id": [
+          "ab72c8d6-704a-4707-a7f8-0cb70f3ff093"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "manufacturer_name": [
+          "Hill Dermaceuticals, Inc."
+        ],
+        "brand_name": [
+          "DERMA-SMOOTHE/FS"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "TOPICAL"
+        ],
+        "nui": [
+          "N0000175576",
+          "N0000175450"
+        ],
+        "pharm_class_moa": [
+          "Corticosteroid Hormone Receptor Agonists [MoA]"
+        ],
+        "package_ndc": [
+          "28105-149-04"
+        ],
+        "pharm_class_epc": [
+          "Corticosteroid [EPC]"
+        ],
+        "generic_name": [
+          "FLUOCINOLONE ACETONIDE"
+        ],
+        "application_number": [
+          "NDA019452"
+        ]
+      },
+      "initial_firm_notification": "Two or more of the following: Email, Fax, Letter, Press Release, Telephone, Visit"
+    },
+    {
+      "recall_number": "D-826-2013",
+      "reason_for_recall": "Presence of Foriegn Substance:The manufacturer, West-ward Pharmaceutical, recalled product because of the presence of black spots on tablets. In response, the repackager initiated its own recall.",
+      "status": "Completed",
+      "distribution_pattern": "GA",
+      "product_quantity": "270 tablets",
+      "recall_initiation_date": "20130617",
+      "state": "OK",
+      "event_id": "65601",
+      "product_type": "Drugs",
+      "product_description": "Belladonna Alkaloids/PB (Belladonna Alkaloids / Phenobarbital) Tablets Phenobarbital USP 16.2 mg,\nHyoscyamine Sulfate 0.1037 mg,\nAtropine Sulfate 0.0194 mg,\nScopolamine Hydrobromide 0.0065 mg\n30-count bottle (NDC 54868-0031-04), Rx only, Repackaged and distributed by Physicians Total Care, Inc. Tulsa, OK 74146.",
+      "country": "US",
+      "city": "Tulsa",
+      "recalling_firm": "Physicians Total Care, Inc.",
+      "report_date": "20130807",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot# 6GP2; Exp 10/14\n\nWest-Ward Lot /WWCN 67331A",
+      "@id": "013f687abdc506aead5928e2a44d7f89d17d28a55b4dbec8aa99221d6f767d4c",
+      "openfda": {},
+      "initial_firm_notification": "FAX"
+    },
+    {
+      "recall_number": "D-480-2013",
+      "reason_for_recall": "Lack of Assurance of Sterility: FDA inspection findings resulted in concerns regarding quality control processes.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "7",
+      "recall_initiation_date": "20130422",
+      "state": "IN",
+      "event_id": "65019",
+      "product_type": "Drugs",
+      "product_description": "Hydroxycobalamin Inj 1000mcg/ml MDV: 10 ml, 15 ml, 20 ml, 30 ml\nSubcutaneous, 90 day expiration,",
+      "country": "US",
+      "city": "Indianapolis",
+      "recalling_firm": "Nora Apothecary and Alternative Therapies, Inc.",
+      "report_date": "20130605",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "All products within their expiration date including those dated 90 days prior to April 19, 2013 (Jan. 2013 to April 19, 2013).",
+      "@id": "015adaaa8a262266fc602f00bf267c9930eb8aa7cecca1e08bb8c22c9dddea39",
+      "openfda": {},
+      "initial_firm_notification": "Two or more of the following: Email, Fax, Letter, Press Release, Telephone, Visit"
+    },
+    {
+      "recall_number": "D-278-2014",
+      "reason_for_recall": "The firm received seven reports of adverse reactions in the form of skin abscesses potentially linked to compounded preservative-free methylprednisolone 80mg/ml 10 ml vials.",
+      "status": "Ongoing",
+      "distribution_pattern": "nationwide, specifically:  AK, AL, AZ, CA, CO, CT, DC, FL, GA, HI, IL, IN, KS, KY, LA, MA, MD, MN, MO, MS, NC, \nNE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, SC, TN, TX, UT, VA, WA, WI, and WV",
+      "product_quantity": "1 unit",
+      "recall_initiation_date": "20130528",
+      "state": "TN",
+      "event_id": "65479",
+      "product_type": "Drugs",
+      "product_description": "TCA 20% 30ml vial, Main Street Compounding Pharmacy, 126 East Main Street, Newbern, TN 38059, 888-658-6200",
+      "country": "US",
+      "city": "Newbern",
+      "recalling_firm": "Main Street Family Pharmacy, LLC",
+      "report_date": "20131211",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "all codes distributed prior to and including 05/23/2013",
+      "@id": "016037530602f9c685bb6802ffa1f6f0a3e940e2f67fe64502100656a29f5643",
+      "openfda": {},
+      "initial_firm_notification": "Telephone"
+    },
+    {
+      "recall_number": "D-019-2013",
+      "reason_for_recall": "Labeling; Correct labeled product miscart/mispack: Some Physician sample cartons were incorrectly labeled as Kombiglyze XR 2.5mg/1000mg on the external package carton, whereas the contents were Kombiglyze XR 5 mg/500 mg blister packaged tablets.  The individual blister units are labeled correctly.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": null,
+      "recall_initiation_date": "20120605",
+      "state": "NJ",
+      "event_id": "62898",
+      "product_type": "Drugs",
+      "product_description": "Kombiglyze XR (saxagliptin and metformin HCl extended-release) tablets, Physician Sample-Not For Sale, 7 Tablets per Carton, 5 mg/500 mg, Rx only, Manufactured By: Bristol-Myers Squibb Company, Princeton NJ 08543, USA, Marketed By: Bristol-Myers Squibb Company, Princeton NJ 08543, USA and AstraZeneca Pharmaceuticals LP, Wilmington DE 19850.",
+      "country": "US",
+      "city": "New Brunswick",
+      "recalling_firm": "Bristol-myers Squibb Company",
+      "report_date": "20121031",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot # 1J6024PA, 1J6025PA Exp. 09/13; 1K6049PA Exp. 10/13; 1L9015WA Exp. 11/13",
+      "@id": "01c7dcb95c7b6df21a56c1b4592f7db9347c07e1a0cfe4793e49bdb4f3887743",
+      "openfda": {},
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-374-2013",
+      "reason_for_recall": "Lack of Assurance of Sterility: all sterile products compounded, repackaged, and distributed by this compounding pharmacy due to lack of sterility assurance and concerns associated with the quality control processes.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "135 vials",
+      "recall_initiation_date": "20130410",
+      "state": "NV",
+      "event_id": "64879",
+      "product_type": "Drugs",
+      "product_description": "Hydroxocobalamin Injection, all strengths and all presentations including a) Hydroxocobalamin 1000 mcg/mL 30mL and b) Hydroxocobalamin 1000 mcg/mL 10 mL P.F., Rx only, Green Valley Drugs, 1850 Whitney Mesa, #180, Henderson, NV  89014.",
+      "country": "US",
+      "city": "Henderson",
+      "recalling_firm": "FVS Holdings, Inc. dba. Green Valley Drugs",
+      "report_date": "20130522",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot #: a) Hydroxocobalamin 1000 mcg/mL 30 mL: 20130321-C, Exp 6/21/2013; 20130404-H, Exp 7/3/2013; 20130225-H, Exp 5/25/2013",
+      "@id": "01cba866df9e69e13c8f59bcbe547831c185ed56c84c65d6d021307ce632d34e",
+      "openfda": {},
+      "initial_firm_notification": "Press Release"
+    },
+    {
+      "recall_number": "D-028-2014",
+      "reason_for_recall": "The firm received seven reports of adverse reactions in the form of skin abscesses potentially linked to compounded preservative-free methylprednisolone 80mg/ml 10 ml vials.",
+      "status": "Ongoing",
+      "distribution_pattern": "nationwide, specifically:  AK, AL, AZ, CA, CO, CT, DC, FL, GA, HI, IL, IN, KS, KY, LA, MA, MD, MN, MO, MS, NC, \nNE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, SC, TN, TX, UT, VA, WA, WI, and WV",
+      "product_quantity": "39 units",
+      "recall_initiation_date": "20130528",
+      "state": "TN",
+      "event_id": "65479",
+      "product_type": "Drugs",
+      "product_description": "Adenosine 35 mg/ml, 30ml, Main Street Compounding Pharmacy, 126 East Main Street, Newbern, TN 38059, 888-658-6200",
+      "country": "US",
+      "city": "Newbern",
+      "recalling_firm": "Main Street Family Pharmacy, LLC",
+      "report_date": "20131211",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "all codes distributed prior to and including 05/23/2013",
+      "@id": "01ec486d52c4d79728d8a2840cd88efd68d69458828f5a2b8b0590131d35b382",
+      "openfda": {},
+      "initial_firm_notification": "Telephone"
+    },
+    {
+      "recall_number": "D-045-2013",
+      "reason_for_recall": "Subpotent (Single Ingredient) Drug: This product was found to be subpotent for the benzoyl peroxide active ingredient.  Additionally, this product is mislabeled because the label either omits or erroneously added inactive ingredients to the label.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "619,029 tubes",
+      "recall_initiation_date": "20121015",
+      "state": "NJ",
+      "event_id": "63488",
+      "product_type": "Drugs",
+      "product_description": "AcneFree Original Strength Terminator (benzoyl peroxide 5% w/v), 1 oz. (28 g) tube, Dist. by: University Medical Pharmaceuticals Corp., Irvine, CA  92618, AFCS-0402, UPC 7 88521 12030 7.",
+      "country": "US",
+      "city": "Bridgewater",
+      "recalling_firm": "Valeant Pharmaceuticals",
+      "report_date": "20121114",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class III",
+      "code_info": "All lots with expiration dates between 10/10/12 through 10/10/14 of UPC 7 88521 12030 7",
+      "@id": "0236d30c0a64c4ee9d61c01956994d9686c0e40e0264b125dabd49eb4299b172",
+      "openfda": {},
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-1613-2012",
+      "reason_for_recall": "Lack of Assurance of Sterility: Franck's Lab Inc. initiated a recall of all Sterile Human Drugs distributed between 11/21/2011 and 05/21/2012. FDA environmental sampling revealed the presence of microorganisms and fungal growth in the clean room where sterile products were prepared.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide, Bahamas, Columbia, Dominican Republic, Grand Cayman, Guatemala, Poland, Santo Domingo, Venezuela, West Indies",
+      "product_quantity": "3 units",
+      "recall_initiation_date": "20120521",
+      "state": "FL",
+      "event_id": "62443",
+      "product_type": "Drugs",
+      "product_description": "RIBOFLAVIN SOLUTION 0.1% OPHTHALMIC   10 ML\n   5 ML;\nRIBOFLAVIN SOLUTION, P.F. 0.1% OPHTHALMIC   90 ML\n(3 DIFFERENT PRODUCTS)",
+      "country": "US",
+      "city": "Ocala",
+      "recalling_firm": "Franck's Lab Inc., d.b.a. Franck's Compounding Lab",
+      "report_date": "20120822",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Rx #'s:  0400853\n  0400853\n  0386510",
+      "@id": "024143434ab7f17440c0c05882b83ccf53bf6e64beb4722607c9a63b872e0fa0",
+      "openfda": {},
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-356-2014",
+      "reason_for_recall": "Labeling: Label Error on Declared Strength; the label states that the product contains 62% ethyl alcohol, but the ethyl alcohol content is 20%.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "21,201 bottles",
+      "recall_initiation_date": "20130621",
+      "state": "OH",
+      "event_id": "66233",
+      "product_type": "Drugs",
+      "product_description": "I love sleep overs Justice, Grape anti bac, Ethyl Alcohol, Net Wt. 1 fl oz, Distr by Tween Brands New Albany, OH 43054 Toronto, ON L6T 3R5",
+      "country": "US",
+      "city": "New Albany",
+      "recalling_firm": "Tween Brands Inc",
+      "report_date": "20131226",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class III",
+      "code_info": "Style #190845 & 190870",
+      "@id": "029595abd13ba00507da97b7979cbd909eef9fc086378aaca5037ee97eb9de1b",
+      "openfda": {},
+      "initial_firm_notification": "E-Mail"
+    },
+    {
+      "recall_number": "D-1417-2012",
+      "reason_for_recall": "Impurities/Degradation Products: High Out of Specification results for a known impurity resulted at the 12-month room temperature time point.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "73,746 bottles",
+      "recall_initiation_date": "20120706",
+      "state": "AL",
+      "event_id": "62495",
+      "product_type": "Drugs",
+      "product_description": "HYDROXYZINE HYDROCHLORIDE ORAL SOLUTION, USP, 10 mg/5 mL, 1 PINT (473 mL) bottle, Rx only, Mfg. for:  QUALITEST PHARMACEUTICALS, HUNTSVILLE, AL 35811, NDC 0603-1310-58, UPC 3 0603-1310-58 4.",
+      "country": "US",
+      "city": "Huntsville",
+      "recalling_firm": "Vintage Pharmaceuticals LLC DBA Qualitest Pharmaceuticals",
+      "report_date": "20120725",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class III",
+      "code_info": "Lot #s: L030F11A, L054F11A, Exp 05/13; L095E10A, Exp 06/13; L079J10A, L085K11A, L086K11A, L087G10A, L087K11A, L088K11A, Exp 10/13; L094L10A, Exp 12/13; and L100L10B, Exp 01/14",
+      "@id": "02a4051841bb8d47aea78cf78abd6c9a4b90400a4c10564a50b4fca6a59d2846",
+      "openfda": {
+        "unii": [
+          "30S50YM8OG"
+        ],
+        "spl_id": [
+          "dbca5110-4c62-4b65-85ad-e79c7c5d0e56"
+        ],
+        "product_ndc": [
+          "0603-1310"
+        ],
+        "substance_name": [
+          "HYDROXYZINE HYDROCHLORIDE"
+        ],
+        "rxcui": [
+          "995241"
+        ],
+        "spl_set_id": [
+          "7bcab9cd-2ed9-48c1-b2f5-953ec522e4fc"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "upc": [
+          "306031310584"
+        ],
+        "manufacturer_name": [
+          "Qualitest Pharmaceuticals"
+        ],
+        "brand_name": [
+          "HYDROXYZINE HYDROCHLORIDE"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "nui": [
+          "N0000000207",
+          "N0000175750"
+        ],
+        "pharm_class_moa": [
+          "Histamine Receptor Antagonists [MoA]"
+        ],
+        "package_ndc": [
+          "0603-1310-58"
+        ],
+        "pharm_class_epc": [
+          "Antihistamine [EPC]"
+        ],
+        "generic_name": [
+          "HYDROXYZINE HYDROCHLORIDE"
+        ],
+        "application_number": [
+          "ANDA040391"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-1437-2012",
+      "reason_for_recall": "Presence of Particulate Matter: This product is being recalled due to the discovery of particles in the stability samples and retain samples.",
+      "status": "Ongoing",
+      "distribution_pattern": "All lots were distributed throughout the US.",
+      "product_quantity": "a) 308,275 vials; b) 2,008,850 vials",
+      "recall_initiation_date": "20120413",
+      "state": "NJ",
+      "event_id": "62627",
+      "product_type": "Drugs",
+      "product_description": "Fosphenytoin Sodium Injection, USP, 100 mg PE per 2 mL (50 mg PE per mL), 2 mL Single Dose Vial, packaged in 25-count x 2 mL Single Dose Vials per carton, Rx only, Mfd. By: Hikma Farmaceutica (Portugal), S.A.; Dist. By: West-Ward Pharmaceutical Corp., Eatontown, NJ  07724 USA under the labels a) NOVAPLUS (NDC 0143-9704-25), b) West-Ward (NDC 0143-9788-25).",
+      "country": "US",
+      "city": "Eatontown",
+      "recalling_firm": "West-ward Pharmaceutical Corp.",
+      "report_date": "20120808",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "Lot #s: a) 113153.1, 113154.1, 113155.1, Exp 05/13; 113248.1, Exp 07/13; b) 103196.1, 103197.1, 103197.2, 103198.1, Exp 07/12; 103317.1, 103318.1, 103319.1, 103345.1, 103345.2, Exp 11/12; 103346.1, 103347.1, 103348.1, 103349.1, 103350.1, Exp 12/12; 113030.1, 113031.1, 113032.1, 113033.1, 113034.1, 113035.1, 113036.1, Exp 01/13; 113245.1, 113246.1, 113247.1, Exp 07/13",
+      "@id": "02bfc6157b9b7944b8d452b0b66a3fca9e42b3e0ddbfe2b9015c6dbeacbecb30",
+      "openfda": {
+        "unii": [
+          "6158TKW0C5"
+        ],
+        "spl_id": [
+          "4306f506-de2f-42e7-a0b6-5a1eb1d481c2"
+        ],
+        "product_ndc": [
+          "0143-9782",
+          "0143-9788"
+        ],
+        "substance_name": [
+          "FOSPHENYTOIN SODIUM"
+        ],
+        "rxcui": [
+          "855893"
+        ],
+        "spl_set_id": [
+          "c92df63b-5140-4213-8d43-8327ff6230b7"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "manufacturer_name": [
+          "West-ward Pharmaceutical Corp"
+        ],
+        "brand_name": [
+          "FOSPHENYTOIN SODIUM"
+        ],
+        "pharm_class_pe": [
+          "Decreased Central Nervous System Disorganized Electrical Activity [PE]"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "INTRAMUSCULAR",
+          "INTRAVENOUS"
+        ],
+        "nui": [
+          "N0000175753",
+          "N0000008486"
+        ],
+        "package_ndc": [
+          "0143-9788-25",
+          "0143-9782-10",
+          "0143-9704-25"
+        ],
+        "pharm_class_epc": [
+          "Anti-epileptic Agent [EPC]"
+        ],
+        "generic_name": [
+          "FOSPHENYTOIN SODIUM"
+        ],
+        "application_number": [
+          "ANDA078765"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    },
+    {
+      "recall_number": "D-304-2014",
+      "reason_for_recall": "The firm received seven reports of adverse reactions in the form of skin abscesses potentially linked to compounded preservative-free methylprednisolone 80mg/ml 10 ml vials.",
+      "status": "Ongoing",
+      "distribution_pattern": "nationwide, specifically:  AK, AL, AZ, CA, CO, CT, DC, FL, GA, HI, IL, IN, KS, KY, LA, MA, MD, MN, MO, MS, NC, \nNE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, SC, TN, TX, UT, VA, WA, WI, and WV",
+      "product_quantity": "107 units",
+      "recall_initiation_date": "20130528",
+      "state": "TN",
+      "event_id": "65479",
+      "product_type": "Drugs",
+      "product_description": "Testosterone Pellets 25mg, Main Street Compounding Pharmacy, 126 East Main Street, Newbern, TN 38059, 888-658-6200",
+      "country": "US",
+      "city": "Newbern",
+      "recalling_firm": "Main Street Family Pharmacy, LLC",
+      "report_date": "20131211",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class II",
+      "code_info": "all codes distributed prior to and including 05/23/2013",
+      "@id": "032f72f3bb58e829239ae12d2c677ba85e49d814a5bbf0268fb7a41afc1f1734",
+      "openfda": {},
+      "initial_firm_notification": "Telephone"
+    },
+    {
+      "recall_number": "D-823-2013",
+      "reason_for_recall": "Subpotent drug: Two lots of Oxycodone and Acetaminophen Capsules, USP 5/500 mg are being recalled due to low out of specification (OOS) assay result obtained at expiry (24 months) for the oxycodone portion of the product.",
+      "status": "Ongoing",
+      "distribution_pattern": "Nationwide",
+      "product_quantity": "1,260 bottles",
+      "recall_initiation_date": "20130719",
+      "state": "CA",
+      "event_id": "65747",
+      "product_type": "Drugs",
+      "product_description": "Oxycodone and Acetaminophen Capsules, USP 5mg/500 mg, packaged in a)100-count bottle (NDC 0591-0737-01), b) 500-count bottle (NDC 0591-0737-05), Rx only, Manufactured by Watson Laboratories, Inc., Corona, CA92880.",
+      "country": "US",
+      "city": "Corona",
+      "recalling_firm": "Watson Laboratories Inc",
+      "report_date": "20130731",
+      "@epoch": 1424553174.836488,
+      "voluntary_mandated": "Voluntary: Firm Initiated",
+      "classification": "Class III",
+      "code_info": "Lot # a) 444971A, Exp 8/13; b) 444973A, Exp 8/13",
+      "@id": "0339770dca94dfe33942de00ac9c3d81dbe0189b58c4d1e5e9f442100a14173d",
+      "openfda": {
+        "unii": [
+          "CD35PMG570"
+        ],
+        "spl_id": [
+          "e0af1c2e-6963-4c40-8d57-ce39fa3f36f0"
+        ],
+        "product_ndc": [
+          "0591-0737"
+        ],
+        "substance_name": [
+          "OXYCODONE HYDROCHLORIDE",
+          "ACETAMINOPHEN"
+        ],
+        "rxcui": [
+          "1049658"
+        ],
+        "spl_set_id": [
+          "a1df89be-8dbe-465b-9d52-a4e767ab7dc3"
+        ],
+        "product_type": [
+          "HUMAN PRESCRIPTION DRUG"
+        ],
+        "manufacturer_name": [
+          "Watson Laboratories, Inc."
+        ],
+        "brand_name": [
+          "OXYCODONE AND ACETAMINOPHEN"
+        ],
+        "is_original_packager": [
+          true
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "nui": [
+          "N0000175690",
+          "N0000175684"
+        ],
+        "pharm_class_moa": [
+          "Full Opioid Agonists [MoA]"
+        ],
+        "package_ndc": [
+          "0591-0737-01",
+          "0591-0737-05"
+        ],
+        "pharm_class_epc": [
+          "Opioid Agonist [EPC]"
+        ],
+        "generic_name": [
+          "OXYCODONE AND ACETAMINOPHEN"
+        ],
+        "application_number": [
+          "ANDA040234"
+        ]
+      },
+      "initial_firm_notification": "Letter"
+    }
+  ]
+}
